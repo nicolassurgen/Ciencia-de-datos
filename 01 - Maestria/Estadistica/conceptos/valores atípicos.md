@@ -41,7 +41,7 @@ Medidas como la **media** o la **varianza** usan **todos** los valores y los com
 No hay una regla única: depende de si el atípico es un error (se corrige o elimina, ver [[tratamiento primario]]) o un valor legítimo (se conserva, y conviene además reportar medidas robustas junto con las clásicas para no dar una imagen distorsionada).
 
 > [!note] En código
-> `sns.boxplot()` en Seaborn (ver [[06 - Variables categoricas (boxplot, violinplot, barplot)]]) ya marca los atípicos con el criterio 1.5·RIQ automáticamente. Para un chequeo más formal (IQR y z-score, con recomendaciones), la skill `statistical-analysis` instalada en este proyecto trae `detect_outliers()`.
+> `sns.boxplot()` en Seaborn (ver [[06 - Variables categoricas (boxplot, violinplot, barplot)]]) ya marca los atípicos con el criterio 1.5·RIQ automáticamente. .
 
 ## Relacionado
 - [[02 - El estudio de la variabilidad]]

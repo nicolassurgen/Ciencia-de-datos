@@ -308,6 +308,13 @@ Luego, ya con hipótesis formuladas, un **estudio confirmatorio** —diseñado e
 - [[variable de confusión]]
 - [[diseño de experimentos]]
 
+## Preguntas de repaso
+1. ¿Por qué el ciclo PPDAC se dibuja como circular y no como una lista de 5 pasos que se hacen una sola vez?
+2. "20 °C es el doble de calor que 10 °C" — ¿es una afirmación válida? ¿Por qué depende de la escala de medición?
+3. ¿Cuál es la diferencia entre un parámetro y un estadístico, y por qué usan notaciones distintas (griega vs. latina)?
+4. Una encuesta de opinión sobre cursos de posgrado entrevista solo a alumnos del posgrado en Calidad — ¿qué tipo de validez está en juego, y por qué?
+5. ¿Por qué "más muestra" no arregla necesariamente una muestra mal seleccionada? (pensar en el caso *Literary Digest* vs. Gallup)
+
 ## Preguntas que me quedaron
 -
 -

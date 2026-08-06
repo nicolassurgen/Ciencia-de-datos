@@ -354,6 +354,13 @@ Resume la distribución con **cinco números** (el *five-number summary*, que en
 - [[coeficiente de variación]]
 - [[causas comunes y causas especiales]]
 
+## Preguntas de repaso
+1. ¿Por qué no tiene sentido construir una distribución de frecuencias para datos que vienen a través del tiempo y no son estables?
+2. Un histograma es asimétrico a la derecha (cola larga hacia valores altos) — ¿la media es mayor o menor que la mediana? ¿Por qué?
+3. ¿Por qué se divide por $n-1$ y no por $n$ al calcular la varianza muestral?
+4. En el ejemplo de las imperfecciones por pieza (Q1 = 0, Q3 = 1, RIQ = 1), ¿a partir de cuántas imperfecciones un dato se considera atípico según el criterio del boxplot?
+5. Si una distribución tiene atípicos, ¿por qué conviene describirla con mediana + RIQ en vez de media + desvío estándar?
+
 ## Preguntas que me quedaron
 -
 -

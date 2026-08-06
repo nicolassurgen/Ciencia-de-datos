@@ -24,6 +24,9 @@ tags:
 > [!info] Puente con Estadística
 > Los tipos de Python se corresponden directo con los tipos de variable del otro curso: `int`/`float` → **cuantitativas** (discreta/continua), `str` → **cualitativas**, `bool` → **binarias**, `None` → **datos faltantes**. Representar bien los datos acá es la base para el [[tratamiento primario]] y el análisis descriptivo de allá. → [[variables|Variables y escalas]]
 
+> [!note] Convención de esta nota
+> Los callouts **"Puente con Estadística"** y **"Puente con Tecnologías"** (este de acá abajo incluido) son agregados míos para conectar con el resto de la maestría — no los dio la profesora. El resto sigue de cerca la clase.
+
 > [!info] Puente con Tecnologías
 > A propósito, esta clase **no usa NumPy ni Pandas** — la idea es entender qué hay "debajo" antes de usar la versión rápida (la segunda idea para llevarse, arriba). Cuando llegues a esas notas vas a reconocer todo esto con otro nombre: un `array` de NumPy es una [[listas, tuplas, diccionarios y conjuntos|lista]] con superpoderes (ver [[01 - Introduccion y arrays]]); un `DataFrame` de Pandas es, en el fondo, una [[lista de diccionarios y JSON|lista de diccionarios]] con índice (ver [[01 - Introduccion a Series y DataFrame]]); y la razón de ser de NumPy es precisamente evitar los loops de Python que hoy escribiste a mano (ver [[complejidad O(1) vs O(n)]] y [[03 - Ufuncs y operaciones vectorizadas]]).
 
@@ -542,6 +545,13 @@ Aparecieron dispersos en la clase; conviene tenerlos juntos porque los vas a ver
 - [[complejidad O(1) vs O(n)]]
 - [[datos faltantes y None]]
 - [[lista de diccionarios y JSON]]
+
+## Preguntas de repaso
+1. ¿Por qué `0.1 + 0.2 == 0.3` da `False` en Python, y cuál es la forma correcta de comparar dos `float`?
+2. ¿Qué diferencia hay entre `int(39.9)` y `round(39.9)`?
+3. Si hacés `b = a` con `a` una lista y después modificás `b`, ¿qué pasa con `a`? ¿Cómo se copia una lista de verdad?
+4. ¿Por qué las claves de un diccionario tienen que ser inmutables (hashables)?
+5. ¿Por qué buscar un elemento en un `set` es $O(1)$ y en una `list` es $O(n)$? Si necesito preguntar "¿está esto?" muchas veces, ¿qué estructura conviene?
 
 ## Preguntas que me quedaron
 -
