@@ -1,0 +1,31 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {"id":"title","type":"text","x":80,"y":90,"width":500,"height":30,"text":"El ciclo estadístico (PPDAC)","originalText":"El ciclo estadístico (PPDAC)","fontSize":22,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#1e40af","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":1,"version":1,"versionNonce":1,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+
+    {"id":"n1","type":"text","x":80,"y":200,"width":160,"height":26,"text":"Problema","originalText":"Problema","fontSize":18,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#3b82f6","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":2,"version":1,"versionNonce":2,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+    {"id":"a1","type":"arrow","x":250,"y":213,"width":60,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":3,"version":1,"versionNonce":3,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[60,0]],"startArrowhead":null,"endArrowhead":"arrow"},
+
+    {"id":"n2","type":"text","x":320,"y":200,"width":210,"height":26,"text":"Planificación","originalText":"Planificación","fontSize":18,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#3b82f6","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":4,"version":1,"versionNonce":4,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+    {"id":"a2","type":"arrow","x":540,"y":213,"width":60,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":5,"version":1,"versionNonce":5,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[60,0]],"startArrowhead":null,"endArrowhead":"arrow"},
+
+    {"id":"n3","type":"text","x":610,"y":200,"width":120,"height":26,"text":"Datos","originalText":"Datos","fontSize":18,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#3b82f6","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":6,"version":1,"versionNonce":6,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+    {"id":"a3","type":"arrow","x":720,"y":213,"width":60,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":7,"version":1,"versionNonce":7,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[60,0]],"startArrowhead":null,"endArrowhead":"arrow"},
+
+    {"id":"n4","type":"text","x":790,"y":200,"width":150,"height":26,"text":"Análisis","originalText":"Análisis","fontSize":18,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#3b82f6","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":8,"version":1,"versionNonce":8,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+    {"id":"a4","type":"arrow","x":890,"y":213,"width":60,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":9,"version":1,"versionNonce":9,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[60,0]],"startArrowhead":null,"endArrowhead":"arrow"},
+
+    {"id":"n5","type":"text","x":960,"y":200,"width":220,"height":26,"text":"Conclusiones","originalText":"Conclusiones","fontSize":18,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#047857","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":10,"version":1,"versionNonce":10,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+
+    {"id":"loopback","type":"arrow","x":1040,"y":240,"width":960,"height":110,"strokeColor":"#c2410c","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"dashed","roughness":0,"opacity":100,"angle":0,"seed":11,"version":1,"versionNonce":11,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[0,90],[-960,90],[-960,5]],"startArrowhead":null,"endArrowhead":"arrow"},
+
+    {"id":"loopabel","type":"text","x":420,"y":345,"width":260,"height":25,"text":"nuevas preguntas","originalText":"nuevas preguntas","fontSize":16,"fontFamily":3,"textAlign":"center","verticalAlign":"top","strokeColor":"#c2410c","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":12,"version":1,"versionNonce":12,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false}
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": 20
+  },
+  "files": {}
+}

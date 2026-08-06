@@ -1,0 +1,10 @@
+.DS_Store
+
+# Python virtual environments (regenerable via uv sync)
+.venv/
+__pycache__/
+*.pyc
+
+# Obsidian local UI state (not portable config)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json

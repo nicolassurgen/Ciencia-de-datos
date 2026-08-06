@@ -1,0 +1,17 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {"id":"n1","type":"text","x":80,"y":100,"width":420,"height":28,"text":"Exploratorio\n(genero hipótesis)","originalText":"Exploratorio (genero hipótesis)","fontSize":18,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#3b82f6","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":1,"version":1,"versionNonce":1,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+
+    {"id":"a1","type":"arrow","x":420,"y":114,"width":90,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":2,"version":1,"versionNonce":2,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[90,0]],"startArrowhead":null,"endArrowhead":"arrow"},
+
+    {"id":"n2","type":"text","x":530,"y":100,"width":440,"height":28,"text":"Confirmatorio\n(pruebo hipótesis)","originalText":"Confirmatorio (pruebo hipótesis)","fontSize":18,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#047857","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":3,"version":1,"versionNonce":3,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false}
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": 20
+  },
+  "files": {}
+}

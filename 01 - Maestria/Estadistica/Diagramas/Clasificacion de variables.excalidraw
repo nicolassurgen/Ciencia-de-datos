@@ -1,0 +1,29 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+    {"id":"root","type":"text","x":100,"y":70,"width":300,"height":28,"text":"VARIABLES","originalText":"VARIABLES","fontSize":20,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#1e40af","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":1,"version":1,"versionNonce":1,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+
+    {"id":"trunk","type":"line","x":130,"y":105,"width":0,"height":205,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":2,"version":1,"versionNonce":2,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[0,205]]},
+
+    {"id":"tick1","type":"line","x":130,"y":140,"width":30,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":3,"version":1,"versionNonce":3,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[30,0]]},
+    {"id":"txt1","type":"text","x":170,"y":128,"width":250,"height":25,"text":"Cualitativas","originalText":"Cualitativas","fontSize":17,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#3b82f6","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":4,"version":1,"versionNonce":4,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+
+    {"id":"tick2","type":"line","x":130,"y":210,"width":30,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":5,"version":1,"versionNonce":5,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[30,0]]},
+    {"id":"txt2","type":"text","x":170,"y":198,"width":250,"height":25,"text":"Cuantitativas","originalText":"Cuantitativas","fontSize":17,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#3b82f6","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":6,"version":1,"versionNonce":6,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+
+    {"id":"stub","type":"line","x":190,"y":220,"width":0,"height":80,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":7,"version":1,"versionNonce":7,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[0,80]]},
+
+    {"id":"tickD","type":"line","x":190,"y":260,"width":30,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":8,"version":1,"versionNonce":8,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[30,0]]},
+    {"id":"txtD","type":"text","x":230,"y":248,"width":220,"height":25,"text":"Discretas","originalText":"Discretas","fontSize":15,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":9,"version":1,"versionNonce":9,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false},
+
+    {"id":"tickC","type":"line","x":190,"y":300,"width":30,"height":0,"strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":10,"version":1,"versionNonce":10,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false,"points":[[0,0],[30,0]]},
+    {"id":"txtC","type":"text","x":230,"y":288,"width":220,"height":25,"text":"Continuas","originalText":"Continuas","fontSize":15,"fontFamily":3,"textAlign":"left","verticalAlign":"top","strokeColor":"#64748b","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":1,"strokeStyle":"solid","roughness":0,"opacity":100,"angle":0,"seed":11,"version":1,"versionNonce":11,"isDeleted":false,"groupIds":[],"boundElements":null,"link":null,"locked":false}
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": 20
+  },
+  "files": {}
+}
