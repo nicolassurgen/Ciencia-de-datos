@@ -30,6 +30,9 @@ Cada fila es una observación (una mesa), cada columna una variable (`total_bill
 
 ```python
 sns.relplot(data=tips, x="total_bill", y="tip", hue="smoker")
+# Qué genera: el mismo scatter de cuenta vs. propina, pero ahora con dos colores distintos
+# según si la persona fuma o no (hue="smoker") -> permite ver de un vistazo si el patrón
+# cuenta/propina difiere entre los dos grupos.
 ```
 
 ## La forma opuesta: *wide-form*

@@ -23,6 +23,7 @@ ax.set_title("Título del gráfico")
 ax.set_xlabel("x label")
 ax.set_ylabel("y label")
 ```
+**Qué genera:** el mismo gráfico de línea de siempre, pero ahora con un título centrado arriba y nombres en los ejes X e Y — la diferencia entre un gráfico que solo vos entendés y uno que se explica solo.
 
 Los tres métodos devuelven un objeto `Text`, así que se pueden personalizar con los mismos parámetros que cualquier texto:
 
@@ -71,6 +72,7 @@ ax.annotate('máximo local', xy=(2, 1), xytext=(3, 1.5),
             arrowprops=dict(facecolor='black', shrink=0.05))
 ax.set_ylim(-2, 2)
 ```
+**Qué genera:** la curva de coseno de siempre, con una flecha negra que sale del texto "máximo local" (ubicado más arriba y a la derecha) y apunta exactamente al pico de la curva en `x=2` — el patrón clásico para señalar un punto de interés sin que el texto tape la curva.
 
 - `xy=` → el punto exacto al que apunta la flecha (en coordenadas de datos).
 - `xytext=` → dónde va el texto.
@@ -86,6 +88,7 @@ ax.plot(x, datos1, label='serie 1')
 ax.plot(x, datos2, label='serie 2')
 ax.legend()
 ```
+**Qué genera:** dos líneas de colores distintos y, superpuesto sobre el gráfico (por defecto en la esquina que menos tapa a los datos), un recuadro con los nombres "serie 1" y "serie 2" junto a una muestra del color/estilo de cada línea.
 
 > [!tip] Si algún `ax.plot()` no lleva `label=`, no aparece en la leyenda
 > Es una forma útil de "ocultar" a propósito una serie auxiliar (por ejemplo, una línea de referencia) de la leyenda: simplemente no le pongas `label`.

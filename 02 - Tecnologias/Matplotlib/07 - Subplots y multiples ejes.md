@@ -30,6 +30,7 @@ axs[1, 1].hist(datos)
 
 plt.show()
 ```
+**Qué genera:** una figura dividida en 4 cuadrantes (2 filas × 2 columnas), cada uno con un tipo de gráfico distinto: línea arriba-izquierda (con su título), dispersión arriba-derecha, barras abajo-izquierda, histograma abajo-derecha — cuatro `Axes` independientes conviviendo en una sola `Figure`.
 
 `axs` se indexa como una matriz de NumPy: `axs[fila, columna]`.
 
@@ -86,6 +87,7 @@ ax2.set_ylabel('escala 2')
 
 ax2.legend([l1, l2], ['serie 1 (izq.)', 'serie 2 (der.)'])
 ```
+**Qué genera:** un solo gráfico con dos curvas superpuestas que comparten el eje X, pero con **dos escalas de eje Y distintas** — una a la izquierda (para `serie_pequeña`) y otra a la derecha (para `serie_grande`) — así una serie con valores chicos no se aplasta contra el eje cuando se la compara con una de valores mucho más grandes.
 
 `twinx()` crea un `Axes` **nuevo** que comparte el eje X con el original pero tiene su propio eje Y a la derecha (`twiny()` es el equivalente para compartir el eje Y y tener un segundo eje X).
 

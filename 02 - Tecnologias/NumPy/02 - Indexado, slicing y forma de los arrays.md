@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/indexado
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte II"
+fuente: "NumPy — Indexing on ndarrays (numpy.org/doc/stable/user/basics.indexing.html); Python Data Science Handbook (Jake VanderPlas) — Parte II"
 ---
 
 # Indexado, slicing y forma de los arrays
@@ -65,6 +65,9 @@ El array resultante debe tener la **misma cantidad total de elementos** que el o
 
 ```python
 np.arange(12).reshape(3, -1)   # NumPy calcula que la otra dimensión es 4
+# array([[ 0,  1,  2,  3],
+#        [ 4,  5,  6,  7],
+#        [ 8,  9, 10, 11]])
 ```
 
 ## Concatenar y dividir arrays
@@ -84,6 +87,9 @@ Para 2D específicamente, `np.vstack` (apilar verticalmente) y `np.hstack` (hori
 
 ```python
 np.vstack([x, grid])    # agrega x como una fila nueva arriba
+# array([[1, 2, 3],
+#        [1, 2, 3],
+#        [4, 5, 6]])
 ```
 
 `np.split()` (y las variantes `np.hsplit`, `np.vsplit`) hacen la operación inversa: cortar un array en varios.

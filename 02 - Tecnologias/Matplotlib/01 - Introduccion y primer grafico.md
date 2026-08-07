@@ -45,6 +45,7 @@ fig, ax = plt.subplots()          # crea una Figura con un solo Axes
 ax.plot([1, 2, 3, 4], [1, 4, 2, 3])   # dibuja los datos sobre ese Axes
 plt.show()                        # muestra la figura
 ```
+**Qué genera:** una línea quebrada que conecta 4 puntos en zigzag: sube de (1,1) a (2,4), baja a (3,2), y vuelve a subir a (4,3) — una imagen simple, sin título ni etiquetas todavía (eso viene en [[06 - Titulos, etiquetas, leyendas y anotaciones]]).
 
 Tres líneas, tres ideas distintas:
 
@@ -88,6 +89,7 @@ Este es el orden pensado para ir de cero a poder armar tus propios gráficos:
 6. [[06 - Titulos, etiquetas, leyendas y anotaciones]] — hacer que un gráfico se entienda solo.
 7. [[07 - Subplots y multiples ejes]] — más de un gráfico por figura.
 8. [[08 - Escalas, ticks y guardar figuras]] — escala log, ticks manuales, `savefig()`.
+9. [[09 - Colorbars y mapas de color]] — codificar una tercera variable continua con color.
 
 ## Relacionado
 - [[02 - Anatomia de una figura]]

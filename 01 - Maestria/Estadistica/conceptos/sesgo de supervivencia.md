@@ -39,3 +39,4 @@ Datos faltantes  = aviones derribados (justamente los más informativos)
 ## Relacionado
 - [[01 - Como dar sentido a los datos]]
 - [[validez externa]]
+- [[sesgo de autoselección]]

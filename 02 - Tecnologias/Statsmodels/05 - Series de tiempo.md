@@ -22,7 +22,8 @@ Esta es la nota de statsmodels con el puente **más directo** hacia Estadística
 ```python
 from statsmodels.tsa.stattools import adfuller
 
-estadistico, p_valor, *_ = adfuller(serie)
+estadistico, p_valor, *_ = adfuller(ventas_mensuales)
+p_valor   # 0.62 -> p > 0.05: no se puede rechazar que la serie NO es estacionaria (tiene tendencia)
 ```
 
 El test de Dickey-Fuller aumentado (ADF) evalúa si una serie es **estacionaria** (su media y varianza no cambian con el tiempo) — la versión formal de preguntar si la serie tiene solo [[causas comunes y causas especiales|causas comunes]] actuando, o si hay una tendencia/quiebre (causas especiales) que la hace no estacionaria.
@@ -32,9 +33,11 @@ El test de Dickey-Fuller aumentado (ADF) evalúa si una serie es **estacionaria*
 ```python
 from statsmodels.tsa.seasonal import STL
 
-resultado = STL(serie, period=12).fit()
-resultado.trend, resultado.seasonal, resultado.resid
+resultado = STL(ventas_mensuales, period=12).fit()   # period=12 -> estacionalidad anual, datos mensuales
+resultado.plot()
 ```
+
+Devuelve tres series del mismo largo que la original: `resultado.trend` (la tendencia de fondo, sin el vaivén mensual), `resultado.seasonal` (el patrón que se repite cada 12 meses) y `resultado.resid` (lo que queda después de sacar ambas — el ruido).
 
 Separa una serie en tres componentes: **tendencia** (el promedio móvil que ya se calcula con `.rolling()` de Pandas, ver [[series de tiempo]]), **estacionalidad** (el patrón que se repite cada `period` observaciones) y **residuo** (lo que sobra, análogo a los residuos de una regresión).
 
@@ -43,8 +46,8 @@ Separa una serie en tres componentes: **tendencia** (el promedio móvil que ya s
 ```python
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
-plot_acf(serie)    # autocorrelación
-plot_pacf(serie)   # autocorrelación parcial
+plot_acf(ventas_mensuales)    # ¿el valor de este mes se parece al de 1, 2, 3... meses atrás?
+plot_pacf(ventas_mensuales)   # lo mismo, pero descontando el efecto de los lags intermedios
 ```
 
 Mide qué tan correlacionado está cada valor de la serie con sus propios valores pasados (*lags*) — información clave para elegir cuántos términos autorregresivos necesita un modelo ARIMA.
@@ -54,8 +57,11 @@ Mide qué tan correlacionado está cada valor de la serie con sus propios valore
 ```python
 from statsmodels.tsa.arima.model import ARIMA
 
-modelo = ARIMA(serie, order=(1, 1, 1)).fit()   # (AR, diferenciación, MA)
-modelo.forecast(steps=12)
+modelo = ARIMA(ventas_mensuales, order=(1, 1, 1)).fit()   # (AR, diferenciación, MA)
+modelo.forecast(steps=3)
+# 2027-01    418.2
+# 2027-02    422.7
+# 2027-03    425.1
 ```
 
 `ARIMA` combina autoregresión (el valor depende de valores pasados), diferenciación (para volver estacionaria una serie que no lo es) y promedio móvil de errores pasados. `ExponentialSmoothing` y `AutoReg` son alternativas más simples cuando no hace falta tanta flexibilidad.

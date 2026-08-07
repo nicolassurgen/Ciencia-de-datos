@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/vectorizacion
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte II"
+fuente: "NumPy — Universal functions (numpy.org/doc/stable/reference/ufuncs.html); Python Data Science Handbook (Jake VanderPlas) — Parte II"
 ---
 
 # Ufuncs y operaciones vectorizadas
@@ -43,13 +43,14 @@ Esto funciona, pero es **lento** sobre arrays grandes: cada vuelta del loop paga
 Todo esto ya es vectorizado — no hace falta ningún import ni sintaxis especial:
 
 ```python
-x = np.arange(4)
+x = np.arange(4)   # array([0, 1, 2, 3])
+
 x + 5    # array([5, 6, 7, 8])
-x - 5
-x * 2
-x / 2
-x ** 2
-x % 2
+x - 5    # array([-5, -4, -3, -2])
+x * 2    # array([0, 2, 4, 6])
+x / 2    # array([0. , 0.5, 1. , 1.5])
+x ** 2   # array([0, 1, 4, 9])
+x % 2    # array([0, 1, 0, 1])
 ```
 
 Cada operador de Python (`+`, `-`, `*`, `/`) es en realidad un atajo para una ufunc de NumPy (`np.add`, `np.subtract`, `np.multiply`, `np.divide`). Escribir `x + 5` o `np.add(x, 5)` da exactamente el mismo resultado.
@@ -57,11 +58,12 @@ Cada operador de Python (`+`, `-`, `*`, `/`) es en realidad un atajo para una uf
 ## Ufuncs comunes
 
 ```python
-np.abs(x)          # valor absoluto
-np.sqrt(x)         # raíz cuadrada
-np.exp(x)          # e^x
-np.log(x)          # logaritmo natural
-np.sin(x), np.cos(x), np.tan(x)   # trigonométricas
+x = np.array([1, 4, 9, 16])
+
+np.abs(np.array([-2, -1, 0, 1]))   # array([2, 1, 0, 1])
+np.sqrt(x)                          # array([1., 2., 3., 4.])
+np.exp(np.array([0, 1, 2]))         # array([1.        , 2.71828183, 7.3890561 ])
+np.log(x)                           # array([0.        , 1.38629436, 2.19722458, 2.77258872])
 ```
 
 ## Especificar dónde va el resultado
@@ -69,8 +71,9 @@ np.sin(x), np.cos(x), np.tan(x)   # trigonométricas
 Para ahorrar memoria con arrays grandes, se puede escribir el resultado directo en un array existente en vez de crear uno nuevo:
 
 ```python
-y = np.empty(5)
+y = np.empty(4)
 np.multiply(x, 10, out=y)
+print(y)   # [ 10.  40.  90. 160.]  -> escribió directo en y, sin crear un array nuevo
 ```
 
 ## Relacionado

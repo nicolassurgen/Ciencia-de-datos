@@ -34,6 +34,10 @@ Para variables categóricas (`smoker`, `species`, `day`). Los colores varían en
 sns.color_palette("deep")       # la paleta por defecto, 10 colores distintos
 sns.color_palette("Set2")       # ColorBrewer, buena para pocas categorías
 sns.color_palette("colorblind") # segura para daltonismo — buen default si no estás seguro
+# Qué genera cada línea: una franja de swatches de color (se ve así en un notebook, sin
+# necesidad de plt.show()) — "deep" da colores saturados y distintos entre sí, "Set2" da
+# tonos pastel más suaves, "colorblind" prioriza que los colores se distingan aun con
+# daltonismo (evita, por ejemplo, poner rojo y verde uno al lado del otro).
 ```
 
 ### Cuantitativa continua → paleta *sequential*

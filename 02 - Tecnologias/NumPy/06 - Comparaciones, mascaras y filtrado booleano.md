@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/filtrado
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte II"
+fuente: "NumPy — Boolean array indexing (numpy.org/doc/stable/user/basics.indexing.html); Python Data Science Handbook (Jake VanderPlas) — Parte II"
 ---
 
 # Comparaciones, máscaras y filtrado booleano
@@ -21,7 +21,7 @@ x = np.array([1, 2, 3, 4, 5])
 
 x < 3     # array([ True,  True, False, False, False])
 x == 3    # array([False, False,  True, False, False])
-x >= 3
+x >= 3    # array([False, False,  True,  True,  True])
 ```
 
 Igual que `+` o `*` (ver [[03 - Ufuncs y operaciones vectorizadas]]), cada operador de comparación aplica **elemento a elemento** sobre todo el array y devuelve un array de `bool` del mismo tamaño.
@@ -48,9 +48,10 @@ x[x < 3]     # array([1, 2])   -> solo los elementos que cumplen x < 3
 
 ```python
 lluvia = np.array([0, 5, 12, 0, 0, 3, 20])   # mm de lluvia por día
-lluvia[lluvia > 0]              # solo los días que llovió
-lluvia[lluvia > 0].mean()       # promedio de lluvia, contando SOLO los días de lluvia
-np.sum(lluvia == 0)             # cantidad de días secos
+
+lluvia[lluvia > 0]              # array([ 5, 12,  3, 20])  -> solo los días que llovió
+lluvia[lluvia > 0].mean()       # 10.0  -> promedio SOLO entre los días de lluvia
+np.sum(lluvia == 0)             # 3  -> cantidad de días secos
 ```
 
 > [!important] Esto es exactamente lo que hacías "a mano" en Algoritmos
@@ -59,9 +60,9 @@ np.sum(lluvia == 0)             # cantidad de días secos
 ## Combinar condiciones: `&`, `|`, `~` (no `and`, `or`, `not`)
 
 ```python
-(lluvia > 0) & (lluvia < 10)    # Y lógico, elemento a elemento
-(lluvia == 0) | (lluvia > 15)   # O lógico
-~(lluvia > 0)                    # negación
+(lluvia > 0) & (lluvia < 10)    # array([False,  True, False, False, False,  True, False])
+(lluvia == 0) | (lluvia > 15)   # array([ True, False, False,  True,  True, False,  True])
+~(lluvia > 0)                    # array([ True, False, False,  True,  True, False, False])
 ```
 
 > [!warning] `and`/`or`/`not` de Python NO funcionan elemento a elemento

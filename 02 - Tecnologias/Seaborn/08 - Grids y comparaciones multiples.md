@@ -21,6 +21,8 @@ Todo lo visto hasta acá comparaba variables **dentro** de un mismo gráfico (co
 
 ```python
 g = sns.FacetGrid(tips, col="time")
+# Qué genera: dos paneles lado a lado, uno para "Lunch" y otro para "Dinner" (los valores de
+# la columna time), cada uno con su propio histograma de tip una vez que se llama g.map(...).
 g.map(sns.histplot, "tip")
 ```
 
@@ -38,6 +40,9 @@ Cuatro variables (`total_bill`, `tip`, `smoker`, `time`, `sex` — cinco, en rea
 
 ```python
 sns.pairplot(iris, hue="species")
+# Qué genera: una grilla cuadrada con un scatter por cada par de variables numéricas del
+# dataset (y un histograma/KDE en la diagonal, donde la variable se compararía consigo misma),
+# coloreado por especie — de un vistazo se ve qué pares de variables separan mejor las especies.
 ```
 
 Arma automáticamente una **matriz** de gráficos: cada variable numérica contra cada otra (scatterplots fuera de la diagonal) y la distribución de cada variable consigo misma (histogramas en la diagonal). Es la forma más rápida de hacer un primer barrido exploratorio de un dataset con varias variables cuantitativas — el punto de partida típico antes de decidir qué [[07 - Regresion y relaciones estadisticas|regresión]] tiene sentido investigar más a fondo.
@@ -60,6 +65,7 @@ import numpy as np
 corr = df.select_dtypes("number").corr()   # matriz de correlación, ver [[06 - Agregacion y groupby|Pandas]]
 sns.heatmap(corr, annot=True, cmap="coolwarm", center=0)
 ```
+**Qué genera:** una grilla cuadrada de celdas coloreadas (rojo para correlación positiva, azul para negativa, blanco cerca de 0 — ver [[09 - Colorbars y mapas de color]] de Matplotlib) con el valor numérico de cada correlación escrito adentro de la celda (`annot=True`).
 
 > [!tip] Por qué `center=0` importa acá
 > Una correlación va de $-1$ a $1$, con $0$ como punto neutro genuino (sin relación lineal). Usar una paleta **divergente** centrada en 0 (ver [[09 - Estilo, paletas de color y temas]]) es lo que hace que el heatmap se lea de un vistazo: los tonos cálidos y fríos separan visualmente correlación positiva de negativa, y el centro pálido resalta lo que **no** está relacionado.

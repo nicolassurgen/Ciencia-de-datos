@@ -66,6 +66,7 @@ tips = sns.load_dataset("tips")
 sns.relplot(data=tips, x="total_bill", y="tip")
 plt.show()
 ```
+**Qué genera:** una nube de puntos con fondo gris y grilla blanca (el tema por defecto de `set_theme()`), cuenta total (`total_bill`) en el eje X y propina (`tip`) en el eje Y — se ve una tendencia clara: a mayor cuenta, mayor propina, con más dispersión en las cuentas altas.
 
 Comparalo con lo que hacía falta en Matplotlib puro para un scatter equivalente ([[04 - Tipos de graficos basicos|Tipos de gráficos básicos]]): acá no armaste `fig, ax` a mano, no llamaste `ax.scatter()`, no pusiste labels — Seaborn tomó los nombres de columna (`total_bill`, `tip`) y los usó directo como etiquetas de los ejes.
 

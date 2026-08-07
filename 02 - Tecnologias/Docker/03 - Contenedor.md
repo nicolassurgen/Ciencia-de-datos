@@ -6,6 +6,7 @@ tags:
   - docker
   - tecnologias
   - tema/contenedores
+fuente: "Docker Docs — What is a container? (docs.docker.com/get-started/docker-concepts/the-basics/what-is-a-container); Guía Docker Pabpereza"
 ---
 
 # Docker - Contenedor

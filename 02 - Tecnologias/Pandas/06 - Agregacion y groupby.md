@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/agregacion
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
+fuente: "pandas — Group by: split-apply-combine (pandas.pydata.org/docs/user_guide/groupby.html); Python Data Science Handbook (Jake VanderPlas) — Parte III"
 ---
 
 # Agregación y groupby
@@ -48,20 +48,34 @@ No es un conjunto de DataFrames ni el resultado final — es un objeto `GroupBy`
 ## Agregaciones más comunes
 
 ```python
-df.groupby('key').sum()
 df.groupby('key').mean()      # ver [[medidas de posición]]
-df.groupby('key').std()        # ver [[medidas de dispersión]]
-df.groupby('key').count()      # cantidad de valores no nulos por grupo
-df.groupby('key').size()       # cantidad de FILAS por grupo (a diferencia de count, cuenta también los NaN)
-df.groupby('key')['data'].mean()   # agregación sobre UNA sola columna del grupo
+#      data
+# key
+# A     1.5
+# B     2.5
+# C     3.5
+
+df.groupby('key')['data'].mean()   # agregación sobre UNA sola columna del grupo -> misma tabla, como Series
+# key
+# A    1.5
+# B    2.5
+# C    3.5
+# Name: data, dtype: float64
 ```
 
 ## `.agg()`: varias agregaciones a la vez
 
 ```python
-df.groupby('key').agg(['mean', 'std', 'count'])
-df.groupby('key').agg({'data': 'sum', 'otra_columna': 'mean'})   # una función distinta por columna
+df.groupby('key').agg(['mean', 'std'])
+#      data
+#      mean       std
+# key
+# A     1.5  2.121320
+# B     2.5  2.121320
+# C     3.5  2.121320
 ```
+
+También acepta un dict para aplicar una función **distinta por columna**: `df.groupby('key').agg({'data': 'sum', 'otra_columna': 'mean'})`.
 
 ## `.describe()` por grupo: el resumen de Estadística, agrupado
 
@@ -77,7 +91,16 @@ Para quedarte solo con los grupos que cumplen alguna condición **sobre el grupo
 
 ```python
 df.groupby('key').filter(lambda g: g['data'].std() > 1)
+#   key  data
+# 0   A     0
+# 1   B     1
+# 2   C     2
+# 3   A     3
+# 4   B     4
+# 5   C     5
 ```
+
+En este ejemplo los 3 grupos tienen `std() = 2.12 > 1`, así que `filter()` devuelve el DataFrame completo — la utilidad real aparece cuando **algunos** grupos no cumplen la condición y quedan afuera enteros (no fila por fila).
 
 ## Relacionado
 - [[01 - Introduccion a Series y DataFrame]]

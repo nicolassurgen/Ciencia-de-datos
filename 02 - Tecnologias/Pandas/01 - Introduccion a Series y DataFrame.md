@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/introduccion
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
+fuente: "pandas — Intro to data structures (pandas.pydata.org/docs/user_guide/dsintro.html); Python Data Science Handbook (Jake VanderPlas) — Parte III"
 ---
 
 # Introducción a Series y DataFrame
@@ -41,6 +41,10 @@ Una forma muy natural de pensar una `Series`: es como un **diccionario de Python
 
 ```python
 pd.Series({'California': 39538223, 'Texas': 29145505, 'Florida': 21538187})
+# California    39538223
+# Texas         29145505
+# Florida       21538187
+# dtype: int64
 ```
 
 ### DataFrame — varias Series que comparten el mismo Index
@@ -49,6 +53,11 @@ pd.Series({'California': 39538223, 'Texas': 29145505, 'Florida': 21538187})
 area = pd.Series({'California': 423967, 'Texas': 695662, 'Florida': 170312})
 
 estados = pd.DataFrame({'population': poblacion, 'area': area})
+estados
+#             population    area
+# California    39538223  423967
+# Texas         29145505  695662
+# Florida       21538187  170312
 ```
 
 Como muestra el diagrama: **cada columna de un DataFrame es una Series**, y todas comparten el mismo `Index` (las etiquetas de fila). Esto es exactamente la [[01 - Como dar sentido a los datos|matriz de datos]] de Estadística: individuos en las filas, variables en las columnas — con la diferencia de que acá las filas y columnas tienen **nombre**, no solo posición.
@@ -65,23 +74,29 @@ estados.columns     # Index(['population', 'area'])
 ## Crear un DataFrame: las formas más comunes
 
 ```python
-pd.DataFrame({'population': poblacion, 'area': area})     # desde un dict de Series (o listas)
+pd.DataFrame({'population': poblacion, 'area': area})     # desde un dict de Series (o listas) -> el mismo resultado de arriba
 
 pd.DataFrame(np.random.rand(3, 2), columns=['a', 'b'], index=['x', 'y', 'z'])  # desde un array de NumPy
+#           a         b
+# x  0.548814  0.715189
+# y  0.602763  0.544883
+# z  0.423655  0.645894
 
-pd.read_csv('archivo.csv')     # desde un archivo — la forma más común en la práctica
+pd.read_csv('archivo.csv')     # desde un archivo — la forma más común en la práctica (el resultado depende del CSV)
 ```
 
 ## Primera exploración de un DataFrame
 
 ```python
-df.head()        # primeras 5 filas
-df.info()        # tipos de dato y cantidad de valores no nulos por columna
-df.describe()    # resumen de 5 números + media + std de cada columna numérica (ver [[medidas de posición]])
-df.shape         # (filas, columnas)
-df.columns       # nombres de las columnas
-df.dtypes        # tipo de cada columna
+estados.shape         # (3, 2)  -> (filas, columnas)
+estados.columns       # Index(['population', 'area'], dtype='object')
+estados.dtypes
+# population    int64
+# area          int64
+# dtype: object
 ```
+
+Sobre un `df` más grande (leído con `pd.read_csv`), además: `df.head()` (primeras 5 filas), `df.info()` (tipos y cantidad de no-nulos por columna) y `df.describe()` — resumen de 5 números + media + std de cada columna numérica de una sola vez (ver [[medidas de posición]]).
 
 `df.describe()` es, en una sola línea, el resumen de [[medidas de posición]] y [[medidas de dispersión]] de Estadística aplicado a **todas** las columnas numéricas a la vez.
 
@@ -96,6 +111,8 @@ df.dtypes        # tipo de cada columna
 7. [[07 - Tablas dinamicas (pivot_table)]] — resúmenes cruzados de dos variables.
 8. [[08 - Series de tiempo]] — trabajar con fechas.
 9. [[09 - Indices jerarquicos (MultiIndex)]] — más de un nivel de índice.
+10. [[10 - Operaciones de texto vectorizadas]] — limpiar y transformar columnas de texto.
+11. [[11 - Alto rendimiento (eval y query)]] — evitar arrays intermedios en DataFrames grandes.
 
 ## Relacionado
 - [[01 - Introduccion y arrays]]

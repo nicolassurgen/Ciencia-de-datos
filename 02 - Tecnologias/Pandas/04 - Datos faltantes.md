@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/datos-faltantes
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
+fuente: "pandas — Working with missing data (pandas.pydata.org/docs/user_guide/missing_data.html); Python Data Science Handbook (Jake VanderPlas) — Parte III"
 ---
 
 # Datos faltantes
@@ -33,9 +33,18 @@ pd.Series([1, np.nan, 3, None])
 ## Detectar faltantes
 
 ```python
-df.isnull()          # DataFrame de True/False, mismo shape que df
-df.isnull().sum()    # cantidad de faltantes POR COLUMNA -> lo primero que hay que mirar en cualquier dataset nuevo
-df.notnull()          # el opuesto
+df = pd.DataFrame({"especie": ["Adelie", "Gentoo", None], "masa_g": [3750, None, 4500]})
+
+df.isnull()
+#    especie  masa_g
+# 0    False   False
+# 1    False    True
+# 2     True   False
+
+df.isnull().sum()
+# especie    1
+# masa_g     1
+# dtype: int64
 ```
 
 `df.isnull().sum()` es, en la práctica, el primer comando que corrés después de un `pd.read_csv()`. Te da, columna por columna, exactamente lo que en Algoritmos calculabas con `sum(1 for p in pinguinos if p["masa_g"] is None)` — pero para todas las columnas a la vez, sin loop.
@@ -44,8 +53,13 @@ df.notnull()          # el opuesto
 
 ```python
 df.dropna()                    # elimina toda FILA que tenga al menos un NaN
+#   especie  masa_g
+# 0  Adelie  3750.0   -> es la única fila sin ningún faltante
+
 df.dropna(axis='columns')       # elimina toda COLUMNA que tenga al menos un NaN
-df.dropna(thresh=3)              # solo elimina filas con MENOS de 3 valores no nulos
+# Empty DataFrame
+# Columns: []
+# Index: [0, 1, 2]              -> acá las DOS columnas tienen algún faltante, no queda ninguna
 ```
 
 > [!warning] `dropna()` por defecto es agresivo
@@ -54,10 +68,19 @@ df.dropna(thresh=3)              # solo elimina filas con MENOS de 3 valores no 
 ## Rellenar faltantes en vez de eliminarlos
 
 ```python
-df.fillna(0)                        # rellena con un valor fijo
-df['col'].fillna(df['col'].mean())  # rellena con la media de la columna (ver [[medidas de posición]])
-df.fillna(method='ffill')            # propaga el último valor válido hacia adelante (típico en series de tiempo)
+df['masa_g'].fillna(df['masa_g'].mean())
+# 0    3750.0
+# 1    4125.0   -> el NaN se reemplazó por la media de los valores presentes (ver [[medidas de posición]])
+# 2    4500.0
+
+df['masa_g'].ffill()
+# 0    3750.0
+# 1    3750.0   -> el NaN toma el último valor válido de arriba
+# 2    4500.0
 ```
+
+> [!warning] `fillna(method='ffill')` está deprecado
+> En versiones viejas de Pandas (y en varios libros/tutoriales) esto se escribía `df.fillna(method='ffill')`. Ese parámetro `method=` está deprecado desde Pandas 2.1 y **eliminado en Pandas 3.0** — la forma correcta y actual son los métodos separados `ffill()`/`bfill()`.
 
 > [!important] Qué hacer con los faltantes es una decisión del analista, no de la herramienta
 > Mismo principio que ya viste en Algoritmos: **nunca** reemplaces un faltante por 0 "porque sí" si en realidad significa "no medido" — el promedio te va a quedar sesgado exactamente como en el ejemplo de `masa_g` de los pingüinos. La opción correcta (eliminar, imputar con la media/mediana, propagar el valor anterior) depende de **por qué** falta el dato, no de cuál es más fácil de escribir.

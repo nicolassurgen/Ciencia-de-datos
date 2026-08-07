@@ -39,7 +39,7 @@ fecha: 2026-08-03
 > Un cálculo impecable sobre datos mal diseñados no salva la conclusión. El diseño experimental es la etapa de **Planificación** del [[el ciclo estadístico (PPDAC)|ciclo PPDAC]]: se decide **antes** de recolectar datos, y de ella depende si después va a ser posible aislar el efecto que se busca.
 
 > [!note] Cómo se analiza el resultado
-> Diseñar bien el experimento (esta nota) es la mitad del trabajo; la otra mitad es decidir si la diferencia observada entre tratamientos es real o puede deberse al azar. Eso es exactamente lo que hacen las pruebas de hipótesis — todavía no vistas en la clase, pero cubiertas por la skill `statistical-analysis` instalada en este proyecto (`references/test_selection_guide.md` ayuda a elegir cuál corresponde según el diseño) y por SciPy:
+> Diseñar bien el experimento (esta nota) es la mitad del trabajo; la otra mitad es decidir si la diferencia observada entre tratamientos es real o puede deberse al azar. Eso es exactamente lo que hacen las pruebas de hipótesis — todavía no vistas en la clase, pero ya cubiertas por SciPy:
 > ```python
 > from scipy import stats
 > stats.ttest_ind(tratamiento_a, tratamiento_b)        # 2 tratamientos

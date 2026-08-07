@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/operaciones
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
+fuente: "pandas — Essential basic functionality, arithmetic/data alignment (pandas.pydata.org/docs/user_guide/basics.html); Python Data Science Handbook (Jake VanderPlas) — Parte III"
 ---
 
 # Operaciones y alineación de datos
@@ -17,9 +17,11 @@ fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
 Todo lo que ya sabés de [[03 - Ufuncs y operaciones vectorizadas]] se traslada directo:
 
 ```python
-np.exp(poblacion)
-np.sqrt(area)
 poblacion / 1_000_000    # población en millones, vectorizado
+# California    39.538223
+# Texas         29.145505
+# Florida       21.538187
+# dtype: float64
 ```
 
 ## La diferencia clave: alineación automática por índice
@@ -47,6 +49,9 @@ Si preferís un valor por defecto en vez de `NaN` cuando falta una etiqueta de u
 
 ```python
 a.add(b, fill_value=0)
+# California    3.995790e+07
+# Florida       2.153819e+07   <- ahora usa el valor de b (21538187) en vez de NaN
+# Texas         2.984117e+07
 ```
 
 Cada operador tiene su versión "método" equivalente, que acepta `fill_value`: `+` → `.add()`, `-` → `.sub()`, `*` → `.mul()`, `/` → `.div()`.
@@ -54,15 +59,23 @@ Cada operador tiene su versión "método" equivalente, que acepta `fill_value`: 
 ## Operaciones entre DataFrame y Series: broadcasting por fila
 
 ```python
-df = pd.DataFrame(np.random.randint(10, size=(3, 4)), columns=list('ABCD'))
+df = pd.DataFrame([[6, 9, 2, 6], [7, 4, 3, 7], [7, 2, 5, 4]], columns=list('ABCD'))
 
 df - df.iloc[0]     # resta la PRIMERA FILA a cada fila del DataFrame
+#    A  B  C  D
+# 0  0  0  0  0
+# 1  1 -5  1  1
+# 2  1 -7  3 -2
 ```
 
 Es el mismo [[05 - Broadcasting|broadcasting]] de NumPy: por defecto, la operación se alinea **por columna** y se repite fila por fila. Si necesitás que sea **por fila** en cambio, hay que ser explícito con `axis`:
 
 ```python
 df.subtract(df['A'], axis=0)    # resta la columna 'A' a cada columna, fila por fila
+#    A  B   C  D
+# 0  0  3  -4  0
+# 1  0 -3  -4  0
+# 2  0 -5  -2 -3
 ```
 
 Mismo parámetro `axis` que ya conocés de [[04 - Agregaciones y estadistica descriptiva]] en NumPy: `axis=0` señala la dirección de las filas.

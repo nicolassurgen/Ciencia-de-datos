@@ -42,6 +42,7 @@ Esto **es** el [[coeficiente de variación]] de Estadística, calculado en una s
 ```python
 stats.trim_mean(x, proportiontocut=0.1)   # promedio truncado: descarta 10% de cada extremo
 stats.iqr(x)                               # rango intercuartílico (RIQ)
+stats.median_abs_deviation(x)              # MAD: el robusto más resistente de todos
 stats.gmean(x)                             # media geométrica
 ```
 

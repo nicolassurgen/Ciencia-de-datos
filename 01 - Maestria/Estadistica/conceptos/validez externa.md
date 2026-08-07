@@ -27,7 +27,7 @@ fecha: 2026-08-03
 
 - Se estudió la efectividad de una vacuna **solo en varones adultos**. ¿Puedo hablar de su efectividad para **toda** la población?
 - Encuesta de opinión sobre cursos de posgrado, pero se entrevista **solo a los alumnos del posgrado en Calidad**. ¿Es la opinión de **todos** los alumnos de posgrado?
-- Analizar datos de personas que **respondieron voluntariamente** a una encuesta (**sesgo de autoselección**): quienes responden pueden diferir sistemáticamente de quienes no lo hacen.
+- Analizar datos de personas que **respondieron voluntariamente** a una encuesta ([[sesgo de autoselección]]): quienes responden pueden diferir sistemáticamente de quienes no lo hacen.
 
 ## Validez externa vs. validez interna
 
@@ -41,5 +41,5 @@ Un estudio puede tener alta validez interna (comparación limpia) y baja validez
 ## Relacionado
 - [[01 - Como dar sentido a los datos]]
 - [[población y muestra]]
-- [[sesgo de supervivencia]]
+- [[sesgo de supervivencia]] · [[sesgo de autoselección]]
 - [[validez interna]]

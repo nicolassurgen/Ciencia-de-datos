@@ -6,6 +6,7 @@ tags:
   - docker
   - tecnologias
   - tema/introduccion
+fuente: "Docker Docs — Docker overview (docs.docker.com/get-started/docker-overview); Guía Docker Pabpereza"
 ---
 
 # Introducción a Docker

@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/indexado
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
+fuente: "pandas — Indexing and selecting data (pandas.pydata.org/docs/user_guide/indexing.html); Python Data Science Handbook (Jake VanderPlas) — Parte III"
 ---
 
 # Indexado y selección (loc, iloc)
@@ -59,8 +59,13 @@ El último ejemplo de `.loc` combina indexado con una [[06 - Comparaciones, masc
 ## Acceder a una columna: el atajo
 
 ```python
-estados['area']       # siempre funciona
-estados.area           # atajo, funciona SI el nombre de columna es un identificador válido de Python
+estados['area']
+# California    423967
+# Texas         695662
+# Florida       170312
+# Name: area, dtype: int64
+
+estados.area   # mismo resultado -> atajo, funciona SI el nombre de columna es un identificador válido de Python
 ```
 
 > [!tip] Preferí `estados['area']` sobre `estados.area`
@@ -70,6 +75,11 @@ estados.area           # atajo, funciona SI el nombre de columna es un identific
 
 ```python
 estados['densidad'] = estados['population'] / estados['area']
+estados
+#             population    area   densidad
+# California    39538223  423967  93.257815
+# Texas         29145505  695662  41.898474
+# Florida       21538187  170312 126.462153
 ```
 
 Operación vectorizada (ver [[03 - Ufuncs y operaciones vectorizadas]] de NumPy): se calcula fila por fila sin ningún loop explícito, y crea la columna si no existía o la reemplaza si ya existía.

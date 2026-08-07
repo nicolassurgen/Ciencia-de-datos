@@ -47,6 +47,25 @@ normal.rvs(size=100, random_state=42)   # 100 valores simulados con esa distribu
 > [!tip] `ppf` es exactamente un percentil teórico
 > `normal.ppf(0.75)` responde la misma pregunta que un [[medidas de posición|percentil]] de Estadística ($q_3$: el valor que acumula el 75 % de los datos) — la diferencia es que acá el 75 % se calcula sobre la **curva teórica**, no contando datos de una muestra.
 
+## Ejemplo completo: una pregunta de punta a punta
+
+Si la altura de un grupo se modela como $N(170, 10)$ (media 170 cm, desvío 10 cm), **¿qué proporción mide más de 180 cm?**
+
+```python
+altura = stats.norm(loc=170, scale=10)
+
+p_hasta_180 = altura.cdf(180)        # 0.8413 -> 84.13% mide 180 cm o menos
+p_mas_de_180 = 1 - p_hasta_180        # 0.1587 -> ~16% mide más de 180 cm
+```
+
+Y la pregunta inversa: **¿a partir de qué altura está el 10 % más alto del grupo?**
+
+```python
+altura.ppf(0.90)   # 182.8 -> el 10% más alto mide más de 182.8 cm
+```
+
+Ninguno de estos dos números viene de contar datos reales — salen enteros de la curva teórica, una vez que se fijan `loc` y `scale`.
+
 ## Distribuciones más usadas
 
 ```python

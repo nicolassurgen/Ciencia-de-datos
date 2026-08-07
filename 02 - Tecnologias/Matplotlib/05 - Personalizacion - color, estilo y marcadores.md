@@ -23,6 +23,7 @@ fig, ax = plt.subplots()
 ax.plot(x, y, color='blue')
 ax.scatter(x2, y2, facecolor='C0', edgecolor='k')
 ```
+**Qué genera:** una línea azul (`color='blue'`) y, superpuestos en los mismos ejes, puntos con relleno celeste (`'C0'`, el primer color del ciclo por defecto de Matplotlib) y borde negro — el contorno negro hace que cada punto se distinga incluso si se superpone con otro del mismo color.
 
 > [!note] Formas válidas de especificar un color
 > - Nombre: `'blue'`, `'red'`, `'black'`...

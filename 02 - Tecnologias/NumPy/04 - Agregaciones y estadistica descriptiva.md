@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/estadistica-descriptiva
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte II"
+fuente: "NumPy — Aggregation functions (numpy.org/doc/stable/reference/routines.statistics.html); Python Data Science Handbook (Jake VanderPlas) — Parte II"
 ---
 
 # Agregaciones y estadística descriptiva
@@ -17,22 +17,22 @@ Esta nota es, en el fondo, el capítulo de [[02 - El estudio de la variabilidad|
 ## Las agregaciones básicas
 
 ```python
-x = np.random.random(100)
+largos_pico = np.array([39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2])
 
-np.sum(x)       # o x.sum()      -> suma total
-np.min(x)       # o x.min()      -> mínimo
-np.max(x)       # o x.max()      -> máximo
-np.mean(x)      # o x.mean()     -> media (ver [[medidas de posición]])
-np.median(x)                     # mediana
-np.std(x)       # o x.std()      -> desvío estándar (ver [[medidas de dispersión]])
-np.var(x)                        # varianza
-np.percentile(x, 25)              # percentil 25 (= q1, ver [[medidas de posición]])
+np.sum(largos_pico)       # 272.99999999999994 -> suma total (los .999 son error de punto flotante)
+np.min(largos_pico)       # 36.7
+np.max(largos_pico)       # 40.3
+np.mean(largos_pico)      # 39.0  -> media (ver [[medidas de posición]])
+np.median(largos_pico)    # 39.2  -> mediana
+np.std(largos_pico)       # 1.043  -> desvío estándar (ver [[medidas de dispersión]])
+np.var(largos_pico)       # 1.089  -> varianza
+np.percentile(largos_pico, 25)   # 39.0  -> percentil 25 (= q1, ver [[medidas de posición]])
 ```
 
 > [!warning] `np.std()` divide por $n$, no por $n-1$
 > Esta es la trampa que ya viste en [[coeficiente de variación]] de Estadística: por defecto, `np.std()` y `np.var()` calculan la varianza **poblacional** (dividen por $n$). Para la varianza **muestral** (dividir por $n-1$, ver [[grados de libertad]]) hay que pasar `ddof=1` explícitamente:
 > ```python
-> np.std(x, ddof=1)   # ahora sí divide por n-1
+> np.std(largos_pico, ddof=1)   # 1.126 -> ahora sí divide por n-1 (compará con 1.043 de arriba)
 > ```
 > Si tu profesora te pasa un resultado calculado en R (donde `sd()` siempre usa $n-1$) y lo querés reproducir en Python, este parámetro es el que marca la diferencia.
 
@@ -58,11 +58,16 @@ M.sum(axis=1)       # array([6, 15])     -> suma "hacia el costado": colapsa las
 ## Todo junto: el resumen de 5 números
 
 ```python
-print(f"Mínimo: {x.min()}")
-print(f"Q1: {np.percentile(x, 25)}")
-print(f"Mediana: {np.median(x)}")
-print(f"Q3: {np.percentile(x, 75)}")
-print(f"Máximo: {x.max()}")
+print(f"Mínimo: {largos_pico.min()}")
+print(f"Q1: {np.percentile(largos_pico, 25)}")
+print(f"Mediana: {np.median(largos_pico)}")
+print(f"Q3: {np.percentile(largos_pico, 75)}")
+print(f"Máximo: {largos_pico.max()}")
+# Mínimo: 36.7
+# Q1: 39.0
+# Mediana: 39.2
+# Q3: 39.4
+# Máximo: 40.3
 ```
 
 Es exactamente el [[boxplot|five-number summary]] de Estadística — en Pandas esto se obtiene directo con `serie.describe()` (ver la nota de Pandas sobre [[01 - Introduccion a Series y DataFrame]]).

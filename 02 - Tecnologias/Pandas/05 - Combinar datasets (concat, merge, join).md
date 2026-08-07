@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/combinar-datos
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
+fuente: "pandas — Merge, join, concatenate and compare (pandas.pydata.org/docs/user_guide/merging.html); Python Data Science Handbook (Jake VanderPlas) — Parte III"
 ---
 
 # Combinar datasets: concat, merge, join
@@ -33,10 +33,17 @@ Es la versión de Pandas de [[02 - Indexado, slicing y forma de los arrays|np.co
 Para cuando dos tablas describen **entidades relacionadas** a través de una columna clave (ej.: una tabla de empleados y otra de departamentos, unidas por `depto_id`):
 
 ```python
+empleados = pd.DataFrame({'nombre': ['Ana', 'Bruno', 'Caro'], 'depto_id': [1, 2, 1]})
+departamentos = pd.DataFrame({'depto_id': [1, 2, 3], 'depto': ['Datos', 'Ventas', 'RRHH']})
+
 pd.merge(empleados, departamentos, on='depto_id')
+#   nombre  depto_id   depto
+# 0    Ana         1   Datos
+# 1  Bruno         2  Ventas
+# 2   Caro         1   Datos
 ```
 
-Pandas detecta automáticamente qué filas corresponden entre sí según los valores de la columna en común — no hace falta que estén en el mismo orden ni tengan la misma cantidad de filas.
+Pandas detecta automáticamente qué filas corresponden entre sí según los valores de la columna en común — no hace falta que estén en el mismo orden ni tengan la misma cantidad de filas. Nota que **"RRHH" no aparece**: ningún empleado tiene `depto_id = 3`, y el join por defecto (`'inner'`) solo conserva lo que matchea en ambas tablas.
 
 ### Los 4 tipos de join
 
@@ -50,7 +57,13 @@ Pandas detecta automáticamente qué filas corresponden entre sí según los val
 
 ```python
 pd.merge(empleados, departamentos, on='depto_id', how='left')
+#   nombre  depto_id   depto
+# 0    Ana         1   Datos
+# 1  Bruno         2  Ventas
+# 2   Caro         1   Datos
 ```
+
+En este caso da igual que `'inner'` porque los 3 empleados sí tienen `depto_id` válido — la diferencia se nota cuando algún empleado tiene un `depto_id` que no está en `departamentos`: con `'left'` esa fila se conserva igual, con `depto = NaN`.
 
 > [!tip] Cómo elegir `how`
 > Preguntate: *"¿qué tabla es la que no quiero recortar?"* Si es la izquierda (por ejemplo, no querés perder ningún empleado aunque le falte el departamento), usá `'left'`. Si necesitás **todo**, sin perder nada de ninguna tabla, `'outer'`. `'inner'` (el default) es el más restrictivo: solo te quedás con lo que aparece en las dos.
@@ -58,13 +71,27 @@ pd.merge(empleados, departamentos, on='depto_id', how='left')
 ### Cuando las columnas clave se llaman distinto
 
 ```python
+izq = pd.DataFrame({'id_empleado': [1, 2], 'nombre': ['Ana', 'Bruno']})
+der = pd.DataFrame({'id': [1, 2], 'sueldo': [50000, 62000]})
+
 pd.merge(izq, der, left_on='id_empleado', right_on='id')
+#   id_empleado nombre  id  sueldo
+# 0            1    Ana   1   50000
+# 1            2  Bruno   2   62000
 ```
+
+Quedan **las dos columnas clave** (`id_empleado` e `id`), porque no se llaman igual — a diferencia de `on=`, acá Pandas no sabe que representan lo mismo.
 
 ## `.join()`: como `merge`, pero por índice
 
 ```python
+df1 = pd.DataFrame({'poblacion': [39538223, 29145505]}, index=['California', 'Texas'])
+df2 = pd.DataFrame({'area': [423967, 695662]}, index=['California', 'Texas'])
+
 df1.join(df2)
+#             poblacion    area
+# California   39538223  423967
+# Texas        29145505  695662
 ```
 
 Atajo de `merge` para el caso específico de combinar **por el índice** en vez de por una columna — útil cuando ya tenés dos DataFrames con el mismo tipo de índice (por ejemplo, ambos indexados por fecha, ver [[08 - Series de tiempo]]).

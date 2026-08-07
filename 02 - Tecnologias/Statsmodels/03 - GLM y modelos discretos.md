@@ -34,7 +34,13 @@ modelo = smf.glm('exito ~ dosis', data=df, family=sm.families.Binomial()).fit()
 
 ```python
 modelo = smf.logit('aprobado ~ horas_estudio', data=df).fit()
-modelo.predict(pd.DataFrame({'horas_estudio': [5]}))   # probabilidad estimada
+
+modelo.params
+# Intercept         -4.08
+# horas_estudio      0.85    -> cada hora extra de estudio aumenta el "log-odds" de aprobar
+
+modelo.predict(pd.DataFrame({'horas_estudio': [5]}))
+# 0  0.61   -> con 5 horas de estudio, el modelo estima 61% de probabilidad de aprobar
 ```
 
 Modela la **probabilidad** de un resultado binario (aprobado/no aprobado, defectuoso/no defectuoso) en función de una o más predictoras. Conecta directo con las variables **binarias** vistas en [[tipos primitivos en Python]] de Algoritmos (`bool`) y con la escala **nominal** de [[escalas de medición]].
@@ -42,7 +48,11 @@ Modela la **probabilidad** de un resultado binario (aprobado/no aprobado, defect
 ## Poisson y modelos de conteo
 
 ```python
-modelo = smf.poisson('cant_imperfecciones ~ turno + maquina', data=df).fit()
+modelo = smf.poisson('cant_imperfecciones ~ turno', data=df).fit()
+
+modelo.params
+# Intercept        0.34
+# turno[T.noche]   0.62   -> en el turno noche se espera exp(0.62) ≈ 1.86 veces más imperfecciones
 ```
 
 Para variables de respuesta que son **conteos** (cuántas veces ocurre algo) — el caso de las "imperfecciones por pieza" de la [[02 - El estudio de la variabilidad|clase 2 de Estadística]], que es una variable **cuantitativa discreta** que surge de contar. `NegativeBinomial` es la alternativa cuando el conteo tiene más variabilidad de la que Poisson permite (sobredispersión).

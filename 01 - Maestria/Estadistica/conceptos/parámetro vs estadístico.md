@@ -39,7 +39,7 @@ Esta distinción es el corazón de la **inferencia estadística**: casi todo lo 
 > Cuando trabajamos con una muestra en lugar de un censo, no conocemos el parámetro: solo tenemos el estadístico. La inferencia estadística (intervalos de confianza, pruebas de hipótesis) se ocupa precisamente de **cuantificar qué tan bien** el estadístico estima al parámetro, y con qué margen de error.
 
 > [!note] En código
-> `np.mean(muestra)`, `np.std(muestra, ddof=1)` (ver [[04 - Agregaciones y estadistica descriptiva]]) calculan el **estadístico**. El **parámetro** poblacional casi nunca se calcula — es lo que se busca estimar. Cuando llegue la inferencia formal (intervalos de confianza, pruebas de hipótesis), la skill `statistical-analysis` instalada en este proyecto cubre justamente eso, igual que [[06 - Tests de hipotesis - una y dos muestras]] y [[08 - Metodos de remuestreo]] de SciPy.
+> `np.mean(muestra)`, `np.std(muestra, ddof=1)` (ver [[04 - Agregaciones y estadistica descriptiva]]) calculan el **estadístico**. El **parámetro** poblacional casi nunca se calcula — es lo que se busca estimar. Cuando llegue la inferencia formal (intervalos de confianza, pruebas de hipótesis), esas herramientas viven en [[06 - Tests de hipotesis - una y dos muestras]] y [[08 - Metodos de remuestreo]] de SciPy.
 
 ## Relacionado
 - [[01 - Como dar sentido a los datos]]

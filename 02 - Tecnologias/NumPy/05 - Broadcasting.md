@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/vectorizacion
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte II"
+fuente: "NumPy — Broadcasting (numpy.org/doc/stable/user/basics.broadcasting.html); Python Data Science Handbook (Jake VanderPlas) — Parte II"
 ---
 
 # Broadcasting
@@ -60,9 +60,14 @@ Acá `a` (shape `(3,)`) se rellena a `(1, 3)` por la regla 1, y por la regla 2 s
 Es lo que te permite, por ejemplo, **centrar datos** (restarle la media a cada columna) sin loops:
 
 ```python
-datos = np.random.random((10, 3))   # 10 observaciones, 3 variables
-medias = datos.mean(axis=0)          # shape (3,) -> una media por columna
-datos_centrados = datos - medias     # broadcasting: resta la media de cada columna a toda la columna
+medidas = np.array([[39.1, 18.7], [39.5, 17.4], [40.3, 18.0], [36.7, 19.3]])   # 4 pingüinos, 2 variables
+
+medias = medidas.mean(axis=0)          # array([38.9 , 18.35])  -> una media por columna
+medidas_centradas = medidas - medias   # broadcasting: resta la media de cada columna a toda la columna
+# array([[ 0.2 ,  0.35],
+#        [ 0.6 , -0.95],
+#        [ 1.4 , -0.35],
+#        [-2.2 ,  0.95]])
 ```
 
 Esta es exactamente la operación detrás de estandarizar variables antes de un análisis (ver [[medidas de posición]] y [[medidas de dispersión]] de Estadística) — y gracias al broadcasting se escribe en una sola línea, sin recorrer filas a mano.

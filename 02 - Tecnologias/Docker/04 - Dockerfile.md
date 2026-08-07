@@ -6,6 +6,7 @@ tags:
   - docker
   - tecnologias
   - tema/dockerfile
+fuente: "Docker Docs — Dockerfile reference (docs.docker.com/reference/dockerfile); Guía Docker Pabpereza"
 ---
 
 # Docker - Dockerfile

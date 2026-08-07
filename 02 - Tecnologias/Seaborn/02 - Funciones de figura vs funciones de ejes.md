@@ -46,6 +46,10 @@ sns.catplot(data=tips, x="day", y="total_bill", kind="box")      # -> por dentro
 f, axs = plt.subplots(1, 2, figsize=(8, 4))
 sns.scatterplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", ax=axs[0])
 sns.histplot(data=penguins, x="species", ax=axs[1])
+# Qué genera: dos paneles lado a lado dentro de la MISMA figura de Matplotlib -> a la
+# izquierda un scatter, a la derecha un histograma de conteo por especie. Esto solo es
+# posible porque scatterplot/histplot son funciones de EJES (aceptan ax=); no funcionaría
+# con relplot/displot, que son funciones de FIGURA y exigen ser dueñas de toda la figura.
 
 # Figure-level: Seaborn arma la figura por vos
 sns.displot(data=penguins, x="flipper_length_mm", kind="kde")

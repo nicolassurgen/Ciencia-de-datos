@@ -267,8 +267,8 @@ Se habla de **validez** en dos sentidos:
 - Encuesta de opinión sobre cursos de posgrado, pero se entrevista **solo a los alumnos del posgrado en Calidad**. ¿Es la opinión de **todos** los alumnos de posgrado? 🤔
 - ¿Qué pasa si analizo datos de personas que **respondieron voluntariamente**? (sesgo de autoselección) 🤔
 
-> [!definition] Sesgo de autoselección (*self-selection bias*)
-> Ocurre cuando quienes terminan formando parte de la muestra lo hacen por una decisión **propia** (responder una encuesta, inscribirse a algo), y esa decisión está relacionada con lo que se quiere medir — por lo que la muestra deja de representar a la población. Es un caso particular de **sesgo de muestra** (*sample bias*): una muestra que difiere de la población de forma sistemática, no solo por azar. El ejemplo clásico es la encuesta de *Literary Digest* de 1936: encuestó a más de 10 millones de personas (sus propios suscriptores, de nivel socioeconómico alto) y predijo mal la elección presidencial de EE. UU.; la encuesta de Gallup, con solo 2.000 personas pero bien seleccionadas, acertó. Más muestra no compensa una muestra sesgada. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 2.*
+> [!info] Material complementario (no visto en clase) — [[sesgo de autoselección]]
+> Ocurre cuando quienes forman parte de la muestra lo hacen por una decisión **propia** (responder una encuesta, escribir una reseña), y esa decisión está relacionada con lo que se quiere medir. El ejemplo clásico: la encuesta de *Literary Digest* de 1936 encuestó a más de 10 millones de personas y predijo mal la elección presidencial de EE. UU.; Gallup, con solo 2.000 personas bien seleccionadas, acertó. Desarrollo completo en la nota aparte. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 2.*
 
 **Ejemplo para pensar la validez interna (¿la comparación es limpia?):**
 - Una empresa fabrica el mismo producto en dos plantas de **localidades distintas**. Usa materia prima del proveedor **A en una planta** y del **B en la otra**, y compara la calidad resultante. ¿Puede concluir que un proveedor es mejor? **No limpiamente**: la localidad, la maquinaria y otros factores están **confundidos** con el proveedor. La diferencia observada podría deberse a la planta, no a la materia prima. → [[variable de confusión]]
@@ -304,7 +304,7 @@ Luego, ya con hipótesis formuladas, un **estudio confirmatorio** —diseñado e
 - [[validez externa]] · [[validez interna]]
 - [[parámetro vs estadístico]]
 - [[escalas de medición]]
-- [[sesgo de supervivencia]]
+- [[sesgo de supervivencia]] · [[sesgo de autoselección]]
 - [[variable de confusión]]
 - [[diseño de experimentos]]
 

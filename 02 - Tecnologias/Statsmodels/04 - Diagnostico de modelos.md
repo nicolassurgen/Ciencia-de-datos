@@ -22,8 +22,11 @@ Un `R^2` alto no garantiza que el modelo sea confiable: puede haber problemas en
 ## Mirar los residuos
 
 ```python
-modelo.resid              # los residuos del modelo ajustado
-modelo.resid.describe()    # ¿se centran en 0? ¿qué dispersión tienen?
+modelo.resid.describe()
+# mean      -0.00   -> los residuos se centran en 0, como se espera
+# std      612.30
+# min    -1420.10
+# max     1680.40
 ```
 
 > [!important] Los residuos deberían "no decir nada"
@@ -34,7 +37,8 @@ modelo.resid.describe()    # ¿se centran en 0? ¿qué dispersión tienen?
 ```python
 from statsmodels.stats.diagnostic import het_breuschpagan
 
-het_breuschpagan(modelo.resid, modelo.model.exog)
+lm_stat, lm_pvalue, f_stat, f_pvalue = het_breuschpagan(modelo.resid, modelo.model.exog)
+lm_pvalue   # 0.03 -> p < 0.05: hay evidencia de heterocedasticidad, convendría WLS
 ```
 
 Comprueba si la [[medidas de dispersión|dispersión]] de los residuos es la misma en todo el rango de las predictoras (homocedasticidad) o si varía (heterocedasticidad) — en cuyo caso conviene `WLS` en vez de `OLS` (ver [[02 - Regresion lineal (OLS y WLS)]]).
@@ -44,7 +48,7 @@ Comprueba si la [[medidas de dispersión|dispersión]] de los residuos es la mis
 ```python
 from statsmodels.stats.stattools import durbin_watson
 
-durbin_watson(modelo.resid)   # cerca de 2 = sin autocorrelación
+durbin_watson(modelo.resid)   # 1.98 -> muy cerca de 2, sin evidencia de autocorrelación
 ```
 
 Chequea si un residuo está correlacionado con el siguiente — algo esperable si los datos tienen estructura temporal no capturada (ver [[05 - Series de tiempo]]) y que invalida los supuestos de independencia de `OLS`.
@@ -57,7 +61,11 @@ Chequea si un residuo está correlacionado con el siguiente — algo esperable s
 ```python
 from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-variance_inflation_factor(X.values, i)   # por cada predictora i
+X = pinguinos[["largo_pico_mm", "ancho_pico_mm"]]
+for i, columna in enumerate(X.columns):
+    print(columna, variance_inflation_factor(X.values, i))
+# largo_pico_mm   1.2
+# ancho_pico_mm   1.2   -> ambos bajos (<10): no hay problema de multicolinealidad
 ```
 
 Si dos predictoras están muy correlacionadas entre sí, sus coeficientes individuales se vuelven inestables y difíciles de interpretar. Un VIF alto (regla de dedo: > 10) señala ese problema.

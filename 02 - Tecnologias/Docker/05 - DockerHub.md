@@ -6,6 +6,7 @@ tags:
   - docker
   - tecnologias
   - tema/dockerhub
+fuente: "Docker Docs — Docker Hub overview (docs.docker.com/docker-hub/); Guía Docker Pabpereza"
 ---
 
 # Docker - Docker Hub

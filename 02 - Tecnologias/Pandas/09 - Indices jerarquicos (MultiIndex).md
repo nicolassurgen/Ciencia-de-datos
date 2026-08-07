@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/indexado
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte III"
+fuente: "pandas — MultiIndex / advanced indexing (pandas.pydata.org/docs/user_guide/advanced.html); Python Data Science Handbook (Jake VanderPlas) — Parte III"
 ---
 
 # Índices jerárquicos (MultiIndex)
@@ -47,10 +47,17 @@ Es exactamente el resultado que viste en [[07 - Tablas dinamicas (pivot_table)|l
 ## Indexar un MultiIndex
 
 ```python
-poblacion['California']              # todas las filas del primer nivel 'California'
-poblacion['California', 2010]        # una celda puntual
-poblacion.loc['California':'Texas']  # rango, por etiqueta (ver [[02 - Indexado y seleccion (loc, iloc)]])
-poblacion[:, 2010]                    # todos los estados, solo el año 2010
+poblacion['California']
+# 2010    37253956
+# 2020    39538223
+# dtype: int64
+
+poblacion['California', 2010]    # 37253956  -> una celda puntual
+
+poblacion[:, 2010]                # todos los estados, solo el año 2010
+# California    37253956
+# Texas         25145561
+# dtype: int64
 ```
 
 ## `unstack()` / `stack()`: pasar de "apilado" a "en grilla" y viceversa

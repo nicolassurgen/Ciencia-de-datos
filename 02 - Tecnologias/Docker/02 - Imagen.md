@@ -6,6 +6,7 @@ tags:
   - docker
   - tecnologias
   - tema/imagenes
+fuente: "Docker Docs — What is an image? (docs.docker.com/get-started/docker-concepts/the-basics/what-is-an-image); Guía Docker Pabpereza"
 ---
 
 # Docker - Imagen

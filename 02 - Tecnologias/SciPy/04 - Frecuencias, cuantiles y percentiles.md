@@ -17,15 +17,17 @@ fuente: "SciPy Reference Guide — scipy.stats (docs.scipy.org/doc/scipy/referen
 ```python
 from scipy import stats
 
-stats.scoreatpercentile(x, 75)   # el valor que acumula el 75% -> q3
+largos_pico = [39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2]   # largo de pico (mm), 7 pingüinos
+
+stats.scoreatpercentile(largos_pico, 75)   # 39.4 -> el valor que acumula el 75% (q3)
 ```
 
-Hace lo mismo que `np.percentile(x, 75)` (ver [[medidas de posición]]): ambas devuelven un [[medidas de posición|percentil]]. La diferencia práctica es de dónde viven — este vive junto al resto de las herramientas de `scipy.stats`.
+Hace lo mismo que `np.percentile(largos_pico, 75)` (ver [[medidas de posición]]): ambas devuelven un [[medidas de posición|percentil]]. La diferencia práctica es de dónde viven — este vive junto al resto de las herramientas de `scipy.stats`.
 
 ## La pregunta inversa: `percentileofscore`
 
 ```python
-stats.percentileofscore(x, 39.5)   # ¿qué percentil ocupa el valor 39.5 dentro de x?
+stats.percentileofscore(largos_pico, 39.5)   # 71.4 -> 39.5 mm deja atrás al 71.4% de los demás pingüinos
 ```
 
 Mientras que un percentil responde *"¿qué valor acumula el 75 % de los datos?"*, `percentileofscore` responde la pregunta al revés: *"este valor puntual, ¿qué proporción de los datos deja por debajo?"* — es la $F(x^{*})$ de la notación de la [[02 - El estudio de la variabilidad|clase de Estadística]], evaluada en un punto concreto en vez de despejada.
@@ -33,19 +35,23 @@ Mientras que un percentil responde *"¿qué valor acumula el 75 % de los datos?"
 ## Frecuencias acumuladas
 
 ```python
-resultado = stats.cumfreq(x, numbins=5)
-resultado.cumcount        # array con las frecuencias absolutas acumuladas por bin
+resultado = stats.cumfreq(largos_pico, numbins=5)
+resultado.cumcount        # array([1., 3., 4., 6., 7.]) -> frecuencia absoluta acumulada, bin a bin
 ```
 
-Construye exactamente la columna $F_i$ de una [[distribución de frecuencias]] agrupada en intervalos — lo mismo que arma "a mano" la tabla de frecuencias de la clase, pero para datos agrupados en bins en vez de valores/categorías puntuales. Es la base numérica de la **ojiva** (el polígono de frecuencias acumuladas).
+`cumcount` es exactamente la columna $F_i$ de una [[distribución de frecuencias]] agrupada en intervalos: en el primer bin (los valores más chicos) ya cayó 1 pingüino, en el segundo hay 3 acumulados, y así hasta llegar a los 7 totales. Es lo mismo que arma "a mano" la tabla de frecuencias de la clase, pero para datos agrupados en bins en vez de valores/categorías puntuales — la base numérica de la **ojiva**.
 
 ## Estadísticos por bin: `binned_statistic`
 
 ```python
-stats.binned_statistic(x, valores, statistic='mean', bins=5)
+# ¿cuál es la masa promedio de los pingüinos, agrupados por rango de largo de pico?
+masas = [3750, 3800, 3250, 3450, 3650, 3625, 3475]
+
+stats.binned_statistic(largos_pico, masas, statistic='mean', bins=3)
+# BinnedStatisticResult(statistic=array([3625., 3450., 3625.]), ...)
 ```
 
-Agrupa `x` en intervalos (como un histograma) y calcula un estadístico (media, mediana, conteo, o una función propia) **por intervalo**, en vez de sobre el conjunto completo. Es útil cuando además de la frecuencia por intervalo interesa, por ejemplo, el promedio de otra variable dentro de cada uno — una versión continua de [[estratificación|estratificar]] por rangos de una variable numérica.
+Agrupa `largos_pico` en 3 intervalos (como un histograma) y calcula el promedio de `masas` **dentro de cada intervalo**, en vez de sobre el conjunto completo — responde "¿los pingüinos con pico más largo también pesan más, en promedio?" sin armar el agrupamiento a mano. Es una versión continua de [[estratificación|estratificar]] por rangos de una variable numérica.
 
 ## Relacionado
 - [[01 - Introduccion a SciPy.stats]]

@@ -53,3 +53,4 @@ Ver el detalle en [[medidas de posición]].
 - [[parámetro vs estadístico]]
 - [[01 - Introduccion a Series y DataFrame]]
 - [[07 - Correlacion y tests de asociacion]]
+- [[09 - Colorbars y mapas de color]]

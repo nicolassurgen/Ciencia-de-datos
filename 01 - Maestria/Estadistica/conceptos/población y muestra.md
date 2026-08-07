@@ -39,5 +39,5 @@ De la definición de la población depende la [[validez externa]] de las conclus
 ## Relacionado
 - [[01 - Como dar sentido a los datos]]
 - [[parámetro vs estadístico]]
-- [[validez externa]]
+- [[validez externa]] · [[sesgo de autoselección]]
 - [[08 - Metodos de remuestreo]]

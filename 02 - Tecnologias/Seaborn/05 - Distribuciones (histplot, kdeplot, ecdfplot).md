@@ -22,6 +22,7 @@ Esta nota es, directamente, el capítulo de [[histograma|Estadística sobre dist
 ```python
 sns.displot(data=penguins, x="flipper_length_mm", bins=20)
 ```
+**Qué genera:** 20 barras azules pegadas mostrando la distribución del largo de aleta — la forma es **bimodal** (dos "jorobas"): un grupo de pingüinos con aletas más cortas (~190mm) y otro con aletas más largas (~215mm), reflejando que hay más de una especie mezclada en los datos (ver [[estratificación]]).
 
 Es, literalmente, el [[histograma]] que ya conocés: agrupa los datos en intervalos de clase ([[distribución de frecuencias]]) y dibuja una barra por cada uno.
 
@@ -38,6 +39,7 @@ Es, literalmente, el [[histograma]] que ya conocés: agrupa los datos en interva
 ```python
 sns.displot(data=penguins, x="flipper_length_mm", kind="kde", bw_adjust=.25)
 ```
+**Qué genera:** la versión curva y suave del histograma de arriba — sin barras, una línea continua con dos picos bien marcados (por el `bw_adjust=.25`, que muestra más detalle) en las mismas dos zonas donde el histograma tenía sus dos grupos.
 
 > [!definition] KDE (*Kernel Density Estimation*)
 > En vez de agrupar en intervalos rígidos como el histograma, estima una **curva continua** de densidad de probabilidad a partir de los datos. `bw_adjust` controla el suavizado: valores chicos (`0.25`) muestran más detalle (y más ruido); valores grandes (`2`) simplifican la forma.
@@ -50,6 +52,7 @@ sns.displot(data=penguins, x="flipper_length_mm", kind="kde", bw_adjust=.25)
 ```python
 sns.displot(data=penguins, x="flipper_length_mm", kind="ecdf")
 ```
+**Qué genera:** una curva escalonada creciente que va de 0 a 1 — se lee directamente "qué proporción de pingüinos tiene una aleta más corta que X mm" para cualquier punto del eje X, sin las barras ni la curva suavizada de los dos gráficos anteriores.
 
 > [!definition] ECDF (función de distribución acumulada empírica)
 > Para cada valor de X, muestra qué **proporción** de los datos es menor o igual a ese valor — el eje Y va de 0 a 1. Es exactamente la $H_i$ (frecuencia relativa acumulada) que ya calculaste a mano en [[distribución de frecuencias]] de Estadística.

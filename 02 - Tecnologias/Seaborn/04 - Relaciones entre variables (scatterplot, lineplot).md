@@ -28,6 +28,7 @@ Cada punto es una observación (una fila del DataFrame, ver [[03 - Forma de los 
 ```python
 sns.relplot(data=dowjones, x="Date", y="Price", kind="line")
 ```
+**Qué genera:** una línea continua que recorre el precio del Dow Jones a lo largo del tiempo — a diferencia de un scatter, acá el orden de los puntos importa y se ve la trayectoria (subidas, bajadas, tendencia general), no solo una nube dispersa.
 
 Usalo cuando el eje X tiene un **orden natural** — típicamente tiempo. Es la versión Seaborn de lo que en Estadística llamamos [[series de tiempo]]: **no** tiene sentido tratar esos datos como una nube de puntos sin conexión, porque perdés la información de la trayectoria.
 

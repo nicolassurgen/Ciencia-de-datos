@@ -22,6 +22,7 @@ Esta es la primera nota de la guía donde el gráfico no solo **describe** los d
 ```python
 sns.lmplot(data=tips, x="total_bill", y="tip")
 ```
+**Qué genera:** el scatter de siempre (cuenta vs. propina) con una **recta ajustada** superpuesta y una banda gris alrededor mostrando el intervalo de confianza de esa recta — más angosta en el centro de los datos, más ancha hacia los extremos donde hay menos observaciones.
 
 Ambas funciones dibujan un scatterplot de `x` e `y`, ajustan el modelo $y = \beta_0 + \beta_1 x$ y grafican la recta resultante junto con una **banda de confianza del 95 %**. `regplot` es de ejes; `lmplot` es de figura (ver [[02 - Funciones de figura vs funciones de ejes]]) — y solo `lmplot` acepta `hue`/`col`/`row`, porque por dentro usa un `FacetGrid` (ver [[08 - Grids y comparaciones multiples]]).
 

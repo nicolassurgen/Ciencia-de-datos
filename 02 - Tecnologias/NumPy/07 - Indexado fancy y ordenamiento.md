@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/indexado
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte II"
+fuente: "NumPy — Advanced indexing / Sorting (numpy.org/doc/stable/user/basics.indexing.html, numpy.org/doc/stable/reference/routines.sort.html); Python Data Science Handbook (Jake VanderPlas) — Parte II"
 ---
 
 # Indexado fancy y ordenamiento
@@ -29,6 +29,7 @@ También funciona en 2D, y también sirve para **modificar** varios elementos pu
 
 ```python
 x[[0, 1, 2]] = 0   # pone en 0 las tres primeras posiciones, en un solo paso
+print(x)   # [ 0  0  0 71 60 20 82 86 74 74]
 ```
 
 ## Combinar fancy indexing con máscaras booleanas
@@ -36,9 +37,12 @@ x[[0, 1, 2]] = 0   # pone en 0 las tres primeras posiciones, en un solo paso
 Fancy indexing y las [[06 - Comparaciones, mascaras y filtrado booleano|máscaras booleanas]] se combinan naturalmente:
 
 ```python
-tabla = np.random.randint(100, size=(4, 3))
-fila_mask = tabla[:, 0] > 50    # condición sobre la primera columna
-tabla[fila_mask]                 # solo las filas que cumplen
+tabla = np.array([[65, 12, 40], [30, 88, 55], [72, 5, 91], [20, 44, 18]])
+
+fila_mask = tabla[:, 0] > 50    # array([ True, False,  True, False]) -> condición sobre la 1ª columna
+tabla[fila_mask]
+# array([[65, 12, 40],
+#        [72,  5, 91]])
 ```
 
 Este es, básicamente, el mecanismo interno detrás de `df[df['columna'] > 50]` en Pandas — cuando llegues a la [[01 - Introduccion a Series y DataFrame|nota de Pandas]] vas a reconocer el mismo patrón.
@@ -73,8 +77,19 @@ x[indices_orden]                  # array([1, 2, 3, 4, 5])  -> mismo resultado q
 ### Ordenar por filas o columnas
 
 ```python
-tabla.sort(axis=0)   # ordena cada COLUMNA de forma independiente
-tabla.sort(axis=1)   # ordena cada FILA de forma independiente
+tabla2 = np.array([[65, 12, 40], [30, 88, 55], [72, 5, 91], [20, 44, 18]])
+
+tabla2.sort(axis=0)   # ordena cada COLUMNA de forma independiente
+# array([[20,  5, 18],
+#        [30, 12, 40],
+#        [65, 44, 55],
+#        [72, 88, 91]])
+
+tabla3 = np.array([[65, 12, 40], [30, 88, 55], [72, 5, 91]])
+tabla3.sort(axis=1)   # ordena cada FILA de forma independiente
+# array([[12, 40, 65],
+#        [30, 55, 88],
+#        [ 5, 72, 91]])
 ```
 
 Mismo `axis` que ya viste en [[04 - Agregaciones y estadistica descriptiva]]: `axis=0` opera "hacia abajo" (columna por columna), `axis=1` opera "hacia el costado" (fila por fila).

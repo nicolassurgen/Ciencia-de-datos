@@ -178,7 +178,7 @@ También importa el **número de modas** (picos): unimodal (uno), bimodal (dos),
 
 ## 6. La distribución frente a especificaciones (valores de referencia)
 
-Un histograma cobra más sentido cuando se lo mira **contra lo que se pretende** (los límites de especificación). En el ejemplo de los **pesos de un producto**, se grafican los datos junto a las líneas de referencia para ver si el proceso cumple.
+Un histograma cobra más sentido cuando se lo mira **contra lo que se pretende** (los límites de especificación). En el ejemplo de la clase, los **pesos de un producto** (entre 205 y 235, con límites de referencia marcados en el gráfico) se grafican junto a esas líneas para ver si el proceso cumple.
 
 > [!tip] Estratificar para encontrar la causa
 > Los "datos globales" pueden ocultar comportamientos distintos. Al **estratificar** (separar) los mismos pesos **por máquina**, aparece que cada máquina tiene su propio centro y dispersión. La estratificación es clave para pasar de "hay variabilidad" a "**esta** es la fuente de la variabilidad". → [[estratificación]]
@@ -279,6 +279,19 @@ Con la **misma lógica de la mediana** se definen otros cortes de la distribuci�
 
 > [!tip] Combiná centro + dispersión coherentes
 > Si describís con la **media**, acompañala con el **desvío estándar**. Si usás la **mediana** (porque hay atípicos o asimetría), acompañala con el **RIQ**. Mezclar media con RIQ o mediana con desvío es menos coherente.
+
+> [!example] Todas las medidas juntas, sobre el diámetro de la clase
+> ```python
+> import numpy as np
+> from scipy import stats
+>
+> np.std(Datos["Diametro"], ddof=1)   # 5.205162 -> desvío estándar muestral (ddof=1, ver n-1 arriba)
+> CV = np.std(Datos["Diametro"], ddof=1) * 100 / np.mean(Datos["Diametro"])
+> print(CV)                            # 5.169545
+> stats.iqr(Datos["Diametro"])        # 7.442181
+> Datos["Diametro"].min(), Datos["Diametro"].max()   # (89.22963, 112.90296)
+> ```
+> Un CV de ~5,2 % es bajo: el diámetro varía poco en relación a su propia media (~100,7 mm) — el proceso es bastante estable. (La clase lo calculó en R; acá está el mismo cálculo, mismos números, en Python.)
 
 > [!info] Ver también (no visto en clase)
 > [[medidas de dispersión]] agrega el **MAD** (desviación absoluta mediana): un robusto de dispersión todavía más resistente a atípicos que el RIQ.

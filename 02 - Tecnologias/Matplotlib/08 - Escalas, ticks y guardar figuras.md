@@ -35,6 +35,7 @@ axs[1].plot(x, datos_exponenciales)
 axs[1].set_yscale('log')
 axs[1].set_title('Escala logarítmica')
 ```
+**Qué genera:** dos paneles lado a lado con los mismos datos exponenciales — a la izquierda la curva se dispara casi vertical y aplasta los valores chicos contra el eje X; a la derecha (escala log), la misma curva se ve como una línea mucho más recta y legible, con los valores chicos ahora distinguibles.
 
 Atajos directos cuando **ambos** ejes necesitan log: `ax.loglog()`. Para uno solo: `ax.semilogx()` / `ax.semilogy()`.
 

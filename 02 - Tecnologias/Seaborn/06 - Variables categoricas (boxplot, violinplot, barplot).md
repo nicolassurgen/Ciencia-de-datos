@@ -24,6 +24,9 @@ Seaborn organiza los gráficos categóricos en **tres familias**, según qué ta
 
 ```python
 sns.catplot(data=tips, x="day", y="total_bill")                    # stripplot (default): jitter aleatorio
+# Qué genera: una nube de puntos por cada día (jue/vie/sáb/dom) en el eje X, con un pequeño
+# desplazamiento horizontal aleatorio ("jitter") para que los puntos con el mismo total_bill
+# no queden apilados exactamente en la misma línea vertical.
 sns.catplot(data=tips, x="day", y="total_bill", kind="swarm")      # swarmplot: acomoda los puntos para que no se toquen
 ```
 

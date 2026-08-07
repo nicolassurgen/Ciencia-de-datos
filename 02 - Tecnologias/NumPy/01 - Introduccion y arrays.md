@@ -7,7 +7,7 @@ tags:
   - tecnologias
   - python
   - tema/introduccion
-fuente: "Python Data Science Handbook (Jake VanderPlas) — Parte II"
+fuente: "NumPy — Array creation (numpy.org/doc/stable/user/basics.creation.html); Python Data Science Handbook (Jake VanderPlas) — Parte II"
 ---
 
 # Introducción y arrays
@@ -45,13 +45,19 @@ np.array([1, 4, 2, 5, 3])
 **Desde cero, sin partir de una lista** (mucho más común en la práctica):
 
 ```python
-np.zeros(10, dtype=int)              # array de 10 ceros
-np.ones((3, 5), dtype=float)         # matriz 3x5 de unos
-np.full((3, 5), 3.14)                # matriz 3x5 llena de 3.14
+np.zeros(10, dtype=int)
+# array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+
 np.arange(0, 20, 2)                  # como range() de Python, pero devuelve un array
+# array([ 0,  2,  4,  6,  8, 10, 12, 14, 16, 18])
+
 np.linspace(0, 1, 5)                 # 5 valores equiespaciados entre 0 y 1
-np.random.random((3, 3))             # valores aleatorios uniformes en [0, 1)
+# array([0.  , 0.25, 0.5 , 0.75, 1.  ])
+
 np.eye(3)                            # matriz identidad 3x3 (ver [[02 - Matrices]] de Matemática)
+# array([[1., 0., 0.],
+#        [0., 1., 0.],
+#        [0., 0., 1.]])
 ```
 
 ## Atributos de un array

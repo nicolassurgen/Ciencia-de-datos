@@ -31,6 +31,7 @@ ax.set_ylabel('y label')
 ax.set_title("Simple Plot")
 ax.legend()
 ```
+**Qué genera:** tres curvas crecientes desde el origen — la lineal (recta), la cuadrática y la cúbica se separan cada vez más a medida que `x` crece, con una leyenda identificando cuál es cuál.
 
 > [!definition] Estilo pyplot (implícito)
 > Nunca creás `ax` a mano: dejás que `pyplot` mantenga una figura y un `Axes` "actuales" por detrás de escena, y llamás **funciones sueltas** del módulo `plt`.
