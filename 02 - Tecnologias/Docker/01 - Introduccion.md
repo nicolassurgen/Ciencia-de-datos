@@ -11,6 +11,8 @@ fuente: "Docker Docs — Docker overview (docs.docker.com/get-started/docker-ove
 
 # Introducción a Docker
 
+Un mismo proyecto suele fallar con el clásico "en mi máquina funciona": distintas versiones de librerías, de sistema operativo, o dependencias instaladas manualmente que nadie documentó. Ejecutar la aplicación junto con **todo su entorno**, empaquetado y reproducible, elimina esa fuente de errores — ese es el problema que resuelven los contenedores.
+
 ## ¿Qué es un contenedor?
 
 > [!definition] Contenedor

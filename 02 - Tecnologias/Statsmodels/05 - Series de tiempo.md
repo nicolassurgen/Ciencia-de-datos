@@ -39,6 +39,9 @@ resultado.plot()
 
 Devuelve tres series del mismo largo que la original: `resultado.trend` (la tendencia de fondo, sin el vaivén mensual), `resultado.seasonal` (el patrón que se repite cada 12 meses) y `resultado.resid` (lo que queda después de sacar ambas — el ruido).
 
+> [!tip] Qué mirar en `resultado.plot()`
+> El método dibuja **cuatro paneles apilados**, todos con el mismo eje x (tiempo) y cada uno con su propia escala en el eje y: la serie original arriba, después `trend`, después `seasonal`, y `resid` abajo. Leerlos de arriba hacia abajo es leer "cuánto de la serie original queda explicado en cada paso": si `trend` sube sostenidamente, hay una tendencia real de fondo; si `seasonal` muestra un patrón que se repite idéntico cada 12 puntos, la estacionalidad es fuerte y estable; y si `resid` se ve como ruido disperso alrededor de cero, sin ningún patrón visible, la descomposición capturó bien la estructura — un patrón que **todavía** se nota en el residuo (otra tendencia, otra estacionalidad) significa que `period` o el modelo elegido no alcanzan para explicar toda la serie.
+
 Separa una serie en tres componentes: **tendencia** (el promedio móvil que ya se calcula con `.rolling()` de Pandas, ver [[series de tiempo]]), **estacionalidad** (el patrón que se repite cada `period` observaciones) y **residuo** (lo que sobra, análogo a los residuos de una regresión).
 
 ## Autocorrelación: ¿un valor depende de los anteriores?
@@ -51,6 +54,12 @@ plot_pacf(ventas_mensuales)   # lo mismo, pero descontando el efecto de los lags
 ```
 
 Mide qué tan correlacionado está cada valor de la serie con sus propios valores pasados (*lags*) — información clave para elegir cuántos términos autorregresivos necesita un modelo ARIMA.
+
+> [!tip] Qué mirar en un correlograma (ACF/PACF)
+> El eje x es el **lag** (cuántos períodos atrás: 1, 2, 3 meses...); el eje y es el coeficiente de correlación (entre -1 y 1) entre la serie y su versión desplazada ese lag. Cada barra vertical es la autocorrelación en ese lag específico, y el **área sombreada horizontal** alrededor de cero es la banda de significancia (aprox. 95%): una barra que sobresale de la banda indica una autocorrelación estadísticamente distinta de cero en ese lag; una barra dentro de la banda es indistinguible de ruido.
+> - Si el **ACF decae lentamente** (muchos lags seguidos fuera de la banda, cayendo poco a poco) y el **PACF corta abruptamente** después de un lag $p$ (nada significativo después), es la firma típica de un proceso **AR(p)**.
+> - Si es al revés —el **PACF decae lentamente** y el **ACF corta** después de un lag $q$—, es la firma típica de un proceso **MA(q)**.
+> - Picos regulares cada 12 lags (con datos mensuales) son la marca de estacionalidad anual todavía sin remover — la misma que separa `STL` en `seasonal`.
 
 ## Modelar y pronosticar: ARIMA
 

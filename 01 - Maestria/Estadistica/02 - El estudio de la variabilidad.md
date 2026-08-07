@@ -251,10 +251,12 @@ Con la **misma lógica de la mediana** se definen otros cortes de la distribuci�
 > $$\text{RIQ} = q_3 - q_1$$
 > Amplitud del **50 % central** de los datos. **Robusto**: al ignorar el 25 % de cada extremo, no lo afectan los atípicos. Es el compañero natural de la mediana.
 
+Promediar directamente los desvíos $y_i - \bar{y}$ no sirve como medida de dispersión: por construcción de la media, los desvíos positivos y negativos se cancelan y esa suma da siempre cero, sin importar cuánto varíen los datos. Elevar cada desvío al **cuadrado** antes de sumarlo resuelve el problema (el resultado ya no se cancela, y además penaliza más los desvíos grandes) — a costa de dejar el resultado en unidades al cuadrado, algo que después corrige la raíz cuadrada. (Desarrollo completo de este razonamiento en [[medidas de dispersión]].)
+
 > [!definition] Varianza y desvío estándar
 > La **varianza** es (casi) el promedio de los **desvíos al cuadrado** respecto de la media:
 > $$s^{2} = \frac{\sum_{i=1}^{n}(y_i - \bar{y})^{2}}{n-1}$$
-> El **desvío (o desviación) estándar** es su raíz, y tiene las **mismas unidades que la variable**:
+> El **desvío (o desviación) estándar** es su raíz, y tiene las **mismas unidades que la variable** (deshace el efecto de haber elevado al cuadrado):
 > $$s = \sqrt{s^{2}}$$
 > Se interpreta como un "promedio" de cuánto se aparta cada dato de la media. Es **NO robusto** (se calcula a partir de la media y de cuadrados, que amplifican los extremos).
 

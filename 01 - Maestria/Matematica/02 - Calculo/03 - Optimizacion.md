@@ -18,6 +18,8 @@ tags:
 
 $$\mathbf{w}^{*} = \arg\min_{\mathbf{w}} J(\mathbf{w})$$
 
+donde $\arg\min$ ("el argumento que minimiza") no es el valor mínimo de $J$, sino **el valor de $\mathbf{w}$** que produce ese mínimo — la pregunta no es "¿cuál es el costo más bajo posible?" sino "¿con qué parámetros se logra ese costo más bajo?". $\mathbf{w}^*$ es, entonces, el conjunto de parámetros óptimo que se busca al entrenar un modelo.
+
 ## Puntos críticos y tipos de mínimo
 
 Un **punto crítico** es donde el [[02 - Derivadas|gradiente]] se anula: $\nabla J(\mathbf{w}) = 0$. Ahí la función no crece ni decrece en ninguna dirección — puede ser un mínimo, un máximo o un **punto de silla**.
@@ -29,6 +31,17 @@ Un **punto crítico** es donde el [[02 - Derivadas|gradiente]] se anula: $\nabla
 
 > [!warning]
 > En la práctica de deep learning casi nunca se garantiza llegar al mínimo global; se busca un mínimo local **suficientemente bueno**.
+
+## Por qué no alcanza con resolver $\nabla J(\mathbf{w}) = 0$ directamente
+
+La sección anterior dice que el mínimo está donde el gradiente se anula — en principio, entonces, "resolver la optimización" sería plantear esa ecuación y despejar $\mathbf{w}$ analíticamente, como se hace con una parábola en el colegio. Para algunos problemas eso funciona: la regresión lineal por mínimos cuadrados tiene una solución cerrada exacta ($\hat{\beta} = (X^TX)^{-1}X^Ty$, ver [[02 - Matrices]]).
+
+Pero en la mayoría de los modelos de Machine Learning eso deja de ser viable por dos razones concretas:
+
+1. **No hay forma cerrada.** $J(\mathbf{w})$ suele ser una composición de muchas funciones no lineales (capas de una red neuronal, funciones de activación, ver [[01 - Funciones]]) — al plantear $\nabla J(\mathbf{w}) = 0$ se obtiene un sistema de ecuaciones que, en general, no tiene una fórmula algebraica que lo despeje.
+2. **La escala lo hace imposible aunque existiera.** Un modelo puede tener millones de parámetros; incluso si hubiera una forma cerrada, resolverla exigiría invertir matrices de un tamaño que ninguna computadora maneja en un tiempo razonable.
+
+La alternativa es no intentar saltar directo al mínimo, sino **acercarse a él de a pasos**, usando el gradiente en el punto actual como guía de hacia dónde moverse. Eso es exactamente lo que hace el descenso por gradiente.
 
 ## Descenso por gradiente (*gradient descent*)
 

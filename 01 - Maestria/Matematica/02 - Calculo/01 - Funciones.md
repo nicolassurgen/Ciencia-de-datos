@@ -33,7 +33,7 @@ En ML conviene distinguir según qué tipo de salida (y de entrada) tiene la fun
 | Escalar de varias variables | $f: \mathbb{R}^n \rightarrow \mathbb{R}$ | Una función de costo $J(\mathbf{w})$ que toma un vector de pesos y devuelve un número |
 | Vectorial (varias salidas) | $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$ | Una capa de red neuronal: toma un [[01 - Vectores\|vector]] de entrada y devuelve un vector de salida |
 
-> [!info] Conexión clave
+> [!tip] Conexión clave
 > Cuando una función mapea un vector a otro vector (no a un escalar), su comportamiento local — cómo cambia la salida ante pequeños cambios en cada componente de la entrada — se describe con una **matriz Jacobiana**: la generalización del concepto de derivada a funciones vectoriales. Ver [[02 - Derivadas]] para el caso escalar (la base) antes de llegar ahí.
 
 ## Composición de funciones

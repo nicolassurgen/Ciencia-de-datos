@@ -125,7 +125,7 @@ sexo = None               # dato faltante
 ```
 
 ### Tipado dinámico
-Í
+
 No hay que **declarar** el tipo: Python lo deduce del valor, y una misma variable puede cambiar de tipo. Es cómodo, pero también una fuente clásica de errores.
 
 ```python
@@ -558,7 +558,7 @@ Aparecieron dispersos en la clase; conviene tenerlos juntos porque los vas a ver
 -
 
 ## Para la próxima clase
-**Clase 2 — Programación imperativa:** condicionales, bucles, funciones propias y **recursión**. Con eso se pueden escribir algoritmos de verdad, no solo manipular datos.
+**[[02 - Programacion imperativa|Clase 2 — Programación imperativa]]:** condicionales, bucles, funciones propias y **recursión**. Con eso se pueden escribir algoritmos de verdad, no solo manipular datos.
 
 ## Actividad
 Consigna en **`Actividad_Clase1.ipynb`** (aula de Moodle). Se entrega **antes de la clase 2**.

@@ -29,8 +29,15 @@ fuente: "SciPy Reference Guide — scipy.stats (docs.scipy.org/doc/scipy/referen
 ```python
 from scipy import stats
 
-r, p_valor = stats.pearsonr(diametro, peso)   # r entre -1 y 1, p_valor de la hipótesis r=0
+diametro = [100.0, 101.5, 98.6, 95.5, 97.7, 95.0, 100.3, 106.7, 97.5, 96.9, 102.4, 101.8]
+peso     = [185.6, 182.1, 182.4, 181.2, 172.8, 173.3, 174.1, 189.3, 169.5, 178.0, 181.8, 189.8]
+
+r, p_valor = stats.pearsonr(diametro, peso)
+print(r, p_valor)
+# 0.664 0.0186
 ```
+
+$r=0.664$: una correlación lineal **positiva y moderada-fuerte** entre diámetro y peso (por convención, $|r|$ cercano a 0.1 se considera débil, cercano a 0.5 moderado, cercano a 0.8 o más fuerte). El p-valor (0.0186) está por debajo de 0.05: hay evidencia de que esa asociación no es simple ruido de muestreo — pero, como en cualquier test, esto no dice nada sobre la magnitud del efecto por sí solo; $r$ es, acá, tanto el estadístico descriptivo como su propio tamaño de efecto.
 
 ## Correlación no es causalidad — y acá aparece explícito
 

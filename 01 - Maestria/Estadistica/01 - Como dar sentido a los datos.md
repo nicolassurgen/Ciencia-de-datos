@@ -230,19 +230,18 @@ Con la matriz armada **comienza la etapa de análisis**. (Nota: se usa $n$ para 
 
 Se realizan muchas tareas, en capas:
 
-> [!note]+ Tratamiento primario
+> [!definition] Tratamiento primario
 > Se analiza la **calidad** de los datos: se corrigen datos erróneos, se transforman si es necesario, se eliminan **outliers**, se completan **datos faltantes**, etc.
 
-> [!note]+ Análisis descriptivo
+> [!definition] Análisis descriptivo
 > Se construyen **gráficos y tablas** y se obtienen **medidas de resumen** (indicadores) para describir el conjunto.
 > - Si se trabajó con **toda la población** → las conclusiones son **definitivas**.
 > - Si se trabajó con una **muestra** → hace falta pasar a herramientas inferenciales.
 >
 > *En código*: las medidas de resumen se calculan con [[04 - Agregaciones y estadistica descriptiva|NumPy]] o `df.describe()` de [[01 - Introduccion a Series y DataFrame|Pandas]]; los gráficos, con [[01 - Introduccion y primer grafico|Matplotlib]] o [[01 - Introduccion a Seaborn|Seaborn]] (más directo para esto último, ver [[02 - El estudio de la variabilidad]]).
 
-> [!note]+ Análisis inferencial
+> [!definition] Análisis inferencial
 > Se aplican herramientas como **intervalos de confianza** y **pruebas de hipótesis** para extender las conclusiones **de la muestra a toda la población**.
->
 
 
 > [!tip] Consistencia de los datos

@@ -87,7 +87,7 @@ probabilidades_de_clase = [0.80, 0.18, 0.02]ᵀ
 
 → 80% spam, 18% clickbait, 2% buen video.
 
-> [!info] Conexión con redes neuronales
+> [!tip] Conexión con redes neuronales
 > Esta lógica de "vector de entrada → [[01 - Funciones|función]] → vector de salida" es exactamente lo que hace una capa de una red neuronal, y se generaliza con [[03 - Transformaciones lineales|transformaciones lineales]] cuando trabajamos con varias salidas a la vez (de ahí la conexión directa con [[02 - Matrices|matrices]]).
 
 ## Norma de un vector
@@ -166,7 +166,7 @@ u · v = Σᵢ uᵢ × vᵢ
 - El signo del producto escalar indica si el ángulo entre vectores es agudo (positivo), obtuso (negativo) o recto (cero).
 - Es la operación base detrás de la **similitud coseno**, ampliamente usada para comparar embeddings de texto, usuarios o productos.
 
-> [!info] Conexión clave con MLOps/ML
+> [!tip] Conexión clave con MLOps/ML
 > El producto escalar es el "ladrillo" con el que se construye la multiplicación de [[02 - Matrices|matrices]]. Cuando una red neuronal calcula `W·x + b`, en el fondo está haciendo un producto escalar entre cada fila de la matriz de pesos `W` y el vector de entrada `x`. Esto es, en esencia, una [[03 - Transformaciones lineales|transformación lineal]] aplicada al vector de entrada.
 
 ## Por qué esto importa para Data Science y MLOps

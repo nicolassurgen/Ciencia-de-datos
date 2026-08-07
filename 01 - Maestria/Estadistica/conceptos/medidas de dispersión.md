@@ -20,12 +20,22 @@ Responden a la pregunta **¿cuánto se dispersa** la distribución?
 
 > [!definition] Rango intercuartílico (RIQ / IQR)
 > $$\text{RIQ} = q_3 - q_1$$
-> Amplitud del **50 % central** de los datos. **Robusto**: al ignorar el 25 % de cada extremo, no lo afectan los atípicos. Es el compañero natural de la mediana (ver [[medidas de posición]]) y es el largo de la caja en un [[boxplot]].
+> donde $q_1$ (primer cuartil) es el valor que deja el 25 % de los datos por debajo, y $q_3$ (tercer cuartil) el que deja el 75 % por debajo — ver [[medidas de posición]] para su definición completa. El RIQ es la amplitud del **50 % central** de los datos. **Robusto**: al ignorar el 25 % de cada extremo, no lo afectan los atípicos. Es el compañero natural de la mediana (ver [[medidas de posición]]) y es el largo de la caja en un [[boxplot]].
+
+### Construyendo la varianza desde cero
+
+El rango y el RIQ resumen la dispersión mirando solo un par de puntos (los extremos, o los cuartiles). Una medida más completa debería usar **todos** los datos: la distancia de cada observación a la media, $y_i - \bar{y}$ (el **desvío**).
+
+El primer intento natural sería promediar esos desvíos. Pero eso no funciona: por cómo se define la media, los desvíos positivos y negativos se cancelan exactamente, y el promedio da **siempre cero** — sin importar cuánto varíen realmente los datos:
+
+$$\sum_{i=1}^{n}(y_i - \bar{y}) = 0 \quad \text{siempre}$$
+
+Elevar cada desvío al cuadrado resuelve ese problema: $(y_i - \bar{y})^2$ es siempre positivo, así que ya no se cancela, y además **penaliza más los desvíos grandes** que los chicos (un dato que se aparta el doble de la media pesa cuatro veces más en la suma). Esa suma de cuadrados, promediada, es la varianza:
 
 > [!definition] Varianza y desvío estándar
 > $$s^{2} = \frac{\sum_{i=1}^{n}(y_i - \bar{y})^{2}}{n-1}$$
 > $$s = \sqrt{s^{2}}$$
-> El desvío estándar se interpreta como un "promedio" de cuánto se aparta cada dato de la media, y tiene las **mismas unidades** que la variable. Es **NO robusto** (se calcula a partir de la media y de cuadrados, que amplifican los extremos). Sobre el $n-1$ del denominador, ver [[grados de libertad]].
+> $s^2$ queda en **unidades al cuadrado** de la variable original (si $y$ está en mm, $s^2$ está en mm²) — una consecuencia directa de haber elevado al cuadrado, y por eso no es fácil de interpretar directamente. Sacar la raíz cuadrada, el **desvío estándar** $s$, devuelve el resultado a las unidades originales, y se interpreta como un "promedio" de cuánto se aparta cada dato de la media. Es **NO robusto** (se calcula a partir de la media y de cuadrados, que amplifican los extremos). Sobre el $n-1$ del denominador (en vez de $n$), ver [[grados de libertad]].
 
 > [!definition] Coeficiente de variación (CV)
 > Ver nota aparte: [[coeficiente de variación]].

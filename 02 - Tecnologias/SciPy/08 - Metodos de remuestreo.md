@@ -35,6 +35,9 @@ resultado.confidence_interval
 
 `bootstrap()` toma la muestra, saca miles de "remuestras" del mismo tamaño **con reposición** (el mismo dato puede salir elegido más de una vez), calcula el estadístico de interés (acá la media) en cada una, y con esa distribución de estadísticos simulados arma un intervalo de confianza. Es una forma directa de responder "¿qué tan preciso es mi estadístico?" sin necesitar los supuestos de un test paramétrico clásico.
 
+> [!warning] "95% de confianza" no significa "95% de probabilidad de que el parámetro esté ahí"
+> La frase del comentario de arriba ("con 95% de confianza, la media poblacional está entre 38.4 y 39.7") es la forma habitual de decirlo, pero **interpretada literalmente es incorrecta**: la media poblacional es un valor fijo (aunque desconocido) — no una variable aleatoria que "tenga" un 95% de probabilidad de caer en un rango. Lo que el 95% describe es el **procedimiento**: si se repitiera el muestreo y el cálculo del intervalo muchas veces, aproximadamente el 95% de los intervalos construidos así contendrían a la verdadera media poblacional. Cualquier intervalo particular (como este) ya sea contiene al parámetro, ya sea no lo contiene — el 95% no es una propiedad de este intervalo puntual, sino del método que lo generó.
+
 ## Test de permutación: ¿la diferencia entre grupos es real?
 
 ```python
