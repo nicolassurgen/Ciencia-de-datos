@@ -2298,10 +2298,10 @@ Finally, unlike Python lists, which are always one-dimensional sequences, NumPy 
 
 ```
 In [11]: # Nested lists result in multidimensional arrays
-np.array([range(i, i+3) foriin [2, 4, 6]])
-Out[11]: array([[2, 3, 4],
+np.array([range(i, i+3) foriin [2, 4, 6] ])
+Out[11]: array([ [2, 3, 4],
                 [4, 5, 6],
-                [6, 7, 8]])
+                [6, 7, 8] ])
 ```
 
 The inner lists are treated as rows of the resulting two-dimensional array. 
@@ -2319,17 +2319,17 @@ Out[12]: array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
 ```
 In [13]: # Create a 3x5 floating-point array filled with 1s
 np.ones((3, 5), dtype=float)
-Out[13]: array([[1., 1., 1., 1., 1.],
+Out[13]: array([ [1., 1., 1., 1., 1.],
                 [1., 1., 1., 1., 1.],
-                [1., 1., 1., 1., 1.]])
+                [1., 1., 1., 1., 1.] ])
 ```
 
 ```
 In [14]: # Create a 3x5 array filled with 3.14
 np.full((3, 5), 3.14)
-Out[14]: array([[3.14, 3.14, 3.14, 3.14, 3.14],
+Out[14]: array([ [3.14, 3.14, 3.14, 3.14, 3.14],
                 [3.14, 3.14, 3.14, 3.14, 3.14],
-                [3.14, 3.14, 3.14, 3.14, 3.14]])
+                [3.14, 3.14, 3.14, 3.14, 3.14] ])
 ```
 
 ```
@@ -2350,36 +2350,36 @@ Out[16]: array([0.  , 0.25, 0.5 , 0.75, 1.  ])
 In [17]: # Create a 3x3 array of uniformly distributed
 # pseudorandom values between 0 and 1
 np.random.random((3, 3))
-Out[17]: array([[0.09610171, 0.88193001, 0.70548015],
+Out[17]: array([ [0.09610171, 0.88193001, 0.70548015],
 ```
 
 **40 | Chapter 4: Understanding Data Types in Python** 
 
 ```
                 [0.35885395, 0.91670468, 0.8721031 ],
-                [0.73237865, 0.09708562, 0.52506779]])
+                [0.73237865, 0.09708562, 0.52506779] ])
 ```
 
 ```
 In [18]: # Create a 3x3 array of normally distributed pseudorandom
 # values with mean 0 and standard deviation 1
 np.random.normal(0, 1, (3, 3))
-Out[18]: array([[-0.46652655, -0.59158776, -1.05392451],
+Out[18]: array([ [-0.46652655, -0.59158776, -1.05392451],
                 [-1.72634268,  0.03194069, -0.51048869],
-                [ 1.41240208,  1.77734462, -0.43820037]])
+                [ 1.41240208,  1.77734462, -0.43820037] ])
 ```
 
 ```
 In [19]: # Create a 3x3 array of pseudorandom integers in the interval [0, 10)
 np.random.randint(0, 10, (3, 3))
-Out[19]: array([[4, 3, 8],
+Out[19]: array([ [4, 3, 8],
                 [6, 5, 0],
-                [1, 1, 4]])
+                [1, 1, 4] ])
 In [20]: # Create a 3x3 identity matrix
 np.eye(3)
-Out[20]: array([[1., 0., 0.],
+Out[20]: array([ [1., 0., 0.],
                 [0., 1., 0.],
-                [0., 0., 1.]])
+                [0., 0., 1.] ])
 ```
 
 ```
@@ -2523,9 +2523,9 @@ In a multidimensional array, items can be accessed using a comma-separated `(` _
 
 ```
 In [8]: x2
-Out[8]: array([[3, 1, 3, 7],
+Out[8]: array([ [3, 1, 3, 7],
                [4, 0, 2, 3],
-               [0, 0, 6, 9]])
+               [0, 0, 6, 9] ])
 In [9]: x2[0, 0]
 Out[9]: 3
 In [10]: x2[2, 0]
@@ -2539,9 +2539,9 @@ Values can also be modified using any of the preceding index notation:
 ```
 In [12]: x2[0, 0] =12
 x2
-Out[12]: array([[12,  1,  3,  7],
+Out[12]: array([ [12,  1,  3,  7],
                 [ 4,  0,  2,  3],
-                [ 0,  0,  6,  9]])
+                [ 0,  0,  6,  9] ])
 ```
 
 Keep in mind that, unlike Python lists, NumPy arrays have a fixed type. This means, for example, that if you attempt to insert a floating-point value into an integer array, the value will be silently truncated. Don’t be caught unaware by this behavior! 
@@ -2601,20 +2601,20 @@ Multidimensional slices work in the same way, with multiple slices separated by 
 
 ```
 In [22]: x2
-Out[22]: array([[12,  1,  3,  7],
+Out[22]: array([ [12,  1,  3,  7],
                 [ 4,  0,  2,  3],
-                [ 0,  0,  6,  9]])
+                [ 0,  0,  6,  9] ])
 In [23]: x2[:2, :3]  # first two rows & three columns
-Out[23]: array([[12,  1,  3],
-                [ 4,  0,  2]])
+Out[23]: array([ [12,  1,  3],
+                [ 4,  0,  2] ])
 In [24]: x2[:3, ::2]  # three rows, every second column
-Out[24]: array([[12,  3],
+Out[24]: array([ [12,  3],
                 [ 4,  2],
-                [ 0,  6]])
+                [ 0,  6] ])
 In [25]: x2[::-1, ::-1]  # all rows & columns, reversed
-Out[25]: array([[ 9,  6,  0,  0],
+Out[25]: array([ [ 9,  6,  0,  0],
                 [ 3,  2,  0,  4],
-                [ 7,  3,  1, 12]])
+                [ 7,  3,  1, 12] ])
 ```
 
 One commonly needed routine is accessing single rows or columns of an array. This can be done by combining indexing and slicing, using an empty slice marked by a single colon ( `:` ): 
@@ -2644,9 +2644,9 @@ Unlike Python list slices, NumPy array slices are returned as _views_ rather tha
 
 ```
 In [29]: print(x2)
-Out[29]: [[12137]
+Out[29]: [ [12137]
           [ 4023]
-          [ 0069]]
+          [ 0069] ]
 ```
 
 Let’s extract a 2 × 2 subarray from this: 
@@ -2654,8 +2654,8 @@ Let’s extract a 2 × 2 subarray from this:
 ```
 In [30]: x2_sub=x2[:2, :2]
 print(x2_sub)
-Out[30]: [[121]
-          [ 40]]
+Out[30]: [ [121]
+          [ 40] ]
 ```
 
 Now if we modify this subarray, we’ll see that the original array is changed! Observe: 
@@ -2663,12 +2663,12 @@ Now if we modify this subarray, we’ll see that the original array is changed! 
 ```
 In [31]: x2_sub[0, 0] =99
 print(x2_sub)
-Out[31]: [[991]
-          [ 40]]
+Out[31]: [ [991]
+          [ 40] ]
 In [32]: print(x2)
-Out[32]: [[99137]
+Out[32]: [ [99137]
           [ 4023]
-          [ 0069]]
+          [ 0069] ]
 ```
 
 Some users may find this surprising, but it can be advantageous: for example, when working with large datasets, we can access and process pieces of these datasets without the need to copy the underlying data buffer. 
@@ -2680,8 +2680,8 @@ Despite the features of array views, it’s sometimes useful to instead explicit
 ```
 In [33]: x2_sub_copy=x2[:2, :2].copy()
 print(x2_sub_copy)
-Out[33]: [[991]
-          [ 40]]
+Out[33]: [ [991]
+          [ 40] ]
 ```
 
 **Array Slicing: Accessing Subarrays | 47** 
@@ -2691,12 +2691,12 @@ If we now modify this subarray, the original array is not touched:
 ```
 In [34]: x2_sub_copy[0, 0] =42
 print(x2_sub_copy)
-Out[34]: [[421]
-          [ 40]]
+Out[34]: [ [421]
+          [ 40] ]
 In [35]: print(x2)
-Out[35]: [[99137]
+Out[35]: [ [99137]
           [ 4023]
-          [ 0069]]
+          [ 0069] ]
 ```
 
 ##### **Reshaping of Arrays** 
@@ -2706,9 +2706,9 @@ Another useful type of operation is reshaping of arrays, which can be done with 
 ```
 In [36]: grid=np.arange(1, 10).reshape(3, 3)
 print(grid)
-Out[36]: [[123]
+Out[36]: [ [123]
           [456]
-          [789]]
+          [789] ]
 ```
 
 Note that for this to work, the size of the initial array must match the size of the reshaped array, and in most cases the `reshape` method will return a no-copy view of the initial array. 
@@ -2718,22 +2718,22 @@ A common reshaping operation is converting a one-dimensional array into a twodim
 ```
 In [37]: x=np.array([1, 2, 3])
 x.reshape((1, 3))  # row vector via reshape
-Out[37]: array([[1, 2, 3]])
+Out[37]: array([ [1, 2, 3] ])
 In [38]: x.reshape((3, 1))  # column vector via reshape
-Out[38]: array([[1],
+Out[38]: array([ [1],
                 [2],
-                [3]])
+                [3] ])
 ```
 
 A convenient shorthand for this is to use `np.newaxis` in the slicing syntax: 
 
 ```
 In [39]: x[np.newaxis, :]  # row vector via newaxis
-Out[39]: array([[1, 2, 3]])
+Out[39]: array([ [1, 2, 3] ])
 In [40]: x[:, np.newaxis]  # column vector via newaxis
-Out[40]: array([[1],
+Out[40]: array([ [1],
                 [2],
-                [3]])
+                [3] ])
 ```
 
 This is a pattern that we will utilize often throughout the remainder of the book. 
@@ -2766,21 +2766,21 @@ Out[42]: [ 123321999999]
 And it can be used for two-dimensional arrays: 
 
 ```
-In [43]: grid=np.array([[1, 2, 3],
-                          [4, 5, 6]])
+In [43]: grid=np.array([ [1, 2, 3],
+                          [4, 5, 6] ])
 In [44]: # concatenate along the first axis
 np.concatenate([grid, grid])
-Out[44]: array([[1, 2, 3],
+Out[44]: array([ [1, 2, 3],
                 [4, 5, 6],
                 [1, 2, 3],
-                [4, 5, 6]])
+                [4, 5, 6] ])
 ```
 
 ```
 In [45]: # concatenate along the second axis (zero-indexed)
 np.concatenate([grid, grid], axis=1)
-Out[45]: array([[1, 2, 3, 1, 2, 3],
-                [4, 5, 6, 4, 5, 6]])
+Out[45]: array([ [1, 2, 3, 1, 2, 3],
+                [4, 5, 6, 4, 5, 6] ])
 ```
 
 For working with arrays of mixed dimensions, it can be clearer to use the `np.vstack` (vertical stack) and `np.hstack` (horizontal stack) functions: 
@@ -2788,23 +2788,23 @@ For working with arrays of mixed dimensions, it can be clearer to use the `np.vs
 ```
 In [46]: # vertically stack the arrays
 np.vstack([x, grid])
-Out[46]: array([[1, 2, 3],
+Out[46]: array([ [1, 2, 3],
                 [1, 2, 3],
-                [4, 5, 6]])
+                [4, 5, 6] ])
 ```
 
 ```
 In [47]: # horizontally stack the arrays
-y=np.array([[99],
-                       [99]])
+y=np.array([ [99],
+                       [99] ])
 np.hstack([grid, y])
 ```
 
 **Array Concatenation and Splitting | 49** 
 
 ```
-Out[47]: array([[ 1,  2,  3, 99],
-                [ 4,  5,  6, 99]])
+Out[47]: array([ [ 1,  2,  3, 99],
+                [ 4,  5,  6, 99] ])
 ```
 
 Similarly, for higher-dimensional arrays, `np.dstack` will stack arrays along the third axis. 
@@ -2825,28 +2825,28 @@ Notice that _N_ split points leads to _N_ + 1 subarrays. The related functions `
 ```
 In [49]: grid=np.arange(16).reshape((4, 4))
 grid
-Out[49]: array([[ 0,  1,  2,  3],
+Out[49]: array([ [ 0,  1,  2,  3],
                 [ 4,  5,  6,  7],
                 [ 8,  9, 10, 11],
-                [12, 13, 14, 15]])
+                [12, 13, 14, 15] ])
 In [50]: upper, lower=np.vsplit(grid, [2])
 print(upper)
 print(lower)
-Out[50]: [[0123]
-          [4567]]
-         [[ 891011]
-          [12131415]]
+Out[50]: [ [0123]
+          [4567] ]
+         [ [ 891011]
+          [12131415] ]
 In [51]: left, right=np.hsplit(grid, [2])
 print(left)
 print(right)
-Out[51]: [[ 01]
+Out[51]: [ [ 01]
           [ 45]
           [ 89]
-          [1213]]
-         [[ 23]
+          [1213] ]
+         [ [ 23]
           [ 67]
           [1011]
-          [1415]]
+          [1415] ]
 ```
 
 Similarly, for higher-dimensional arrays, `np.dsplit` will split arrays along the third axis. 
@@ -2923,9 +2923,9 @@ And ufunc operations are not limited to one-dimensional arrays. They can act on 
 ```
 In [6]: x=np.arange(9).reshape((3, 3))
 2**x
-Out[6]: array([[  1,   2,   4],
+Out[6]: array([ [  1,   2,   4],
                [  8,  16,  32],
-               [ 64, 128, 256]])
+               [ 64, 128, 256] ])
 ```
 
 Computations using vectorization through ufuncs are nearly always more efficient than their counterparts implemented using Python loops, especially as the arrays grow in size. Any time you see such a loop in a NumPy script, you should consider whether it can be replaced with a vectorized expression. 
@@ -3210,11 +3210,11 @@ Finally, any ufunc can compute the output of all pairs of two different inputs u
 ```
 In [30]: x=np.arange(1, 6)
 np.multiply.outer(x, x)
-Out[30]: array([[ 1,  2,  3,  4,  5],
+Out[30]: array([ [ 1,  2,  3,  4,  5],
                 [ 2,  4,  6,  8, 10],
                 [ 3,  6,  9, 12, 15],
                 [ 4,  8, 12, 16, 20],
-                [ 5, 10, 15, 20, 25]])
+                [ 5, 10, 15, 20, 25] ])
 ```
 
 The `ufunc.at` and `ufunc.reduceat` methods are useful as well, and we will explore them in Chapter 10. 
@@ -3318,14 +3318,14 @@ One common type of aggregation operation is an aggregate along a row or column. 
 ```
 In [9]: M=rng.integers(0, 10, (3, 4))
 print(M)
-Out[9]: [[0312]
+Out[9]: [ [0312]
 ```
 
 **Minimum and Maximum | 61** 
 
 ```
          [1970]
-         [4837]]
+         [4837] ]
 ```
 
 NumPy aggregations will apply across all elements of a multidimensional array: 
@@ -3480,13 +3480,13 @@ We can similarly extend this idea to arrays of higher dimension. Observe the res
 ```
 In [4]: M=np.ones((3, 3))
 M
-Out[4]: array([[1., 1., 1.],
+Out[4]: array([ [1., 1., 1.],
                [1., 1., 1.],
-               [1., 1., 1.]])
+               [1., 1., 1.] ])
 In [5]: M+a
-Out[5]: array([[1., 2., 3.],
+Out[5]: array([ [1., 2., 3.],
                [1., 2., 3.],
-               [1., 2., 3.]])
+               [1., 2., 3.] ])
 ```
 
 Here the one-dimensional array `a` is stretched, or broadcasted, across the second dimension in order to match the shape of `M` . 
@@ -3499,13 +3499,13 @@ b=np.arange(3)[:, np.newaxis]
 print(a)
 print(b)
 Out[6]: [012]
-        [[0]
+        [ [0]
          [1]
-         [2]]
+         [2] ]
 In [7]: a+b
-Out[7]: array([[0, 1, 2],
+Out[7]: array([ [0, 1, 2],
                [1, 2, 3],
-               [2, 3, 4]])
+               [2, 3, 4] ])
 ```
 
 Just as before we stretched or broadcasted one value to match the shape of the other, here we’ve stretched _both_ `a` and `b` to match a common shape, and the result is a twodimensional array! The geometry of these examples is visualized in Figure 8-1. 
@@ -3550,8 +3550,8 @@ The shapes now match, and we see that the final shape will be `(2, 3)` :
 
 ```
 In [9]: M+a
-Out[9]: array([[1., 2., 3.],
-               [1., 2., 3.]])
+Out[9]: array([ [1., 2., 3.],
+               [1., 2., 3.] ])
 ```
 
 ###### **Broadcasting Example 2** 
@@ -3587,9 +3587,9 @@ Because the results match, these shapes are compatible. We can see this here:
 
 ```
 In [11]: a+b
-Out[11]: array([[0, 1, 2],
+Out[11]: array([ [0, 1, 2],
                 [1, 2, 3],
-                [2, 3, 4]])
+                [2, 3, 4] ])
 ```
 
 ###### **Broadcasting Example 3** 
@@ -3637,18 +3637,18 @@ you can do this explicitly by reshaping the array (we’ll use the `np.newaxis` 
 In [14]: a[:, np.newaxis].shape
 Out[14]: (3, 1)
 In [15]: M+a[:, np.newaxis]
-Out[15]: array([[1., 1.],
+Out[15]: array([ [1., 1.],
                 [2., 2.],
-                [3., 3.]])
+                [3., 3.] ])
 ```
 
 While we’ve been focusing on the `+` operator here, these broadcasting rules apply to _any_ binary ufunc. For example, here is the `logaddexp(a, b)` function, which com‐ putes `log(exp(a) + exp(b))` with more precision than the naive approach: 
 
 ```
 In [16]: np.logaddexp(M, a[:, np.newaxis])
-Out[16]: array([[1.31326169, 1.31326169],
+Out[16]: array([ [1.31326169, 1.31326169],
                 [1.69314718, 1.69314718],
-                [2.31326169, 2.31326169]])
+                [2.31326169, 2.31326169] ])
 ```
 
 For more information on the many available universal functions, refer to Chapter 6. 
@@ -3836,13 +3836,13 @@ Just as in the case of arithmetic ufuncs, these will work on arrays of any size 
 In [12]: rng=np.random.default_rng(seed=1701)
 x=rng.integers(10, size=(3, 4))
 x
-Out[12]: array([[9, 4, 0, 3],
+Out[12]: array([ [9, 4, 0, 3],
                 [8, 6, 3, 1],
-                [3, 7, 4, 0]])
+                [3, 7, 4, 0] ])
 In [13]: x<6
-Out[13]: array([[False,  True,  True,  True],
+Out[13]: array([ [False,  True,  True,  True],
                 [False, False,  True,  True],
-                [ True, False,  True,  True]])
+                [ True, False,  True,  True] ])
 ```
 
 In each case, the result is a Boolean array, and NumPy provides a number of straight‐ forward patterns for working with these Boolean results. 
@@ -3853,9 +3853,9 @@ Given a Boolean array, there are a host of useful operations you can do. We’ll
 
 ```
 In [14]: print(x)
-Out[14]: [[9403]
+Out[14]: [ [9403]
           [8631]
-          [3740]]
+          [3740] ]
 ```
 
 **74 | Chapter 9: Comparisons, Masks, and Boolean Logic** 
@@ -3991,18 +3991,18 @@ In the preceding section we looked at aggregates computed directly on Boolean ar
 
 ```
 In [26]: x
-Out[26]: array([[9, 4, 0, 3],
+Out[26]: array([ [9, 4, 0, 3],
                 [8, 6, 3, 1],
-                [3, 7, 4, 0]])
+                [3, 7, 4, 0] ])
 ```
 
 Suppose we want an array of all values in the array that are less than, say, 5. We can obtain a Boolean array for this condition easily, as we’ve already seen: 
 
 ```
 In [27]: x<5
-Out[27]: array([[False,  True,  True,  True],
+Out[27]: array([ [False,  True,  True,  True],
                 [False, False,  True,  True],
-                [ True, False,  True,  True]])
+                [ True, False,  True,  True] ])
 ```
 
 Now, to _select_ these values from the array, we can simply index on this Boolean array; this is known as a _masking_ operation: 
@@ -4142,7 +4142,7 @@ Out[1]: [9040930806739153379]
 Suppose we want to access three different elements. We could do it like this: 
 
 ```
-In [2]: [x[3], x[7], x[2]]
+In [2]: [x[3], x[7], x[2] ]
 Out[2]: [30, 15, 9]
 ```
 
@@ -4159,11 +4159,11 @@ When using arrays of indices, the shape of the result reflects the shape of the 
 **80** 
 
 ```
-In [4]: ind=np.array([[3, 7],
-                        [4, 5]])
+In [4]: ind=np.array([ [3, 7],
+                        [4, 5] ])
 x[ind]
-Out[4]: array([[30, 15],
-               [80, 67]])
+Out[4]: array([ [30, 15],
+               [80, 67] ])
 ```
 
 Fancy indexing also works in multiple dimensions. Consider the following array: 
@@ -4171,9 +4171,9 @@ Fancy indexing also works in multiple dimensions. Consider the following array:
 ```
 In [5]: X=np.arange(12).reshape((3, 4))
 X
-Out[5]: array([[ 0,  1,  2,  3],
+Out[5]: array([ [ 0,  1,  2,  3],
                [ 4,  5,  6,  7],
-               [ 8,  9, 10, 11]])
+               [ 8,  9, 10, 11] ])
 ```
 
 Like with standard indexing, the first index refers to the row, and the second to the column: 
@@ -4189,18 +4189,18 @@ Notice that the first value in the result is `X[0, 2]` , the second is `X[1, 1]`
 
 ```
 In [7]: X[row[:, np.newaxis], col]
-Out[7]: array([[ 2,  1,  3],
+Out[7]: array([ [ 2,  1,  3],
                [ 6,  5,  7],
-               [10,  9, 11]])
+               [10,  9, 11] ])
 ```
 
 Here, each row value is matched with each column vector, exactly as we saw in broad‐ casting of arithmetic operations. For example: 
 
 ```
 In [8]: row[:, np.newaxis] *col
-Out[8]: array([[0, 0, 0],
+Out[8]: array([ [0, 0, 0],
                [2, 1, 3],
-               [4, 2, 6]])
+               [4, 2, 6] ])
 ```
 
 It is always important to remember with fancy indexing that the return value reflects the _broadcasted shape of the indices_ , rather than the shape of the array being indexed. 
@@ -4211,9 +4211,9 @@ For even more powerful operations, fancy indexing can be combined with the other
 
 ```
 In [9]: print(X)
-Out[9]: [[ 0123]
+Out[9]: [ [ 0123]
          [ 4567]
-         [ 891011]]
+         [ 891011] ]
 ```
 
 **Combined Indexing | 81** 
@@ -4221,16 +4221,16 @@ Out[9]: [[ 0123]
 We can combine fancy and simple indices: 
 
 ```
-In [10]: X[2, [2, 0, 1]]
+In [10]: X[2, [2, 0, 1] ]
 Out[10]: array([10,  8,  9])
 ```
 
 We can also combine fancy indexing with slicing: 
 
 ```
-In [11]: X[1:, [2, 0, 1]]
-Out[11]: array([[ 6,  4,  5],
-                [10,  8,  9]])
+In [11]: X[1:, [2, 0, 1] ]
+Out[11]: array([ [ 6,  4,  5],
+                [10,  8,  9] ])
 ```
 
 And we can combine fancy indexing with masking: 
@@ -4238,9 +4238,9 @@ And we can combine fancy indexing with masking:
 ```
 In [12]: mask=np.array([True, False, True, False])
 X[row[:, np.newaxis], mask]
-Out[12]: array([[ 0,  2],
+Out[12]: array([ [ 0,  2],
                 [ 4,  6],
-                [ 8, 10]])
+                [ 8, 10] ])
 ```
 
 All of these indexing options combined lead to a very flexible set of operations for efficiently accessing and modifying array values. 
@@ -4251,8 +4251,8 @@ One common use of fancy indexing is the selection of subsets of rows from a matr
 
 ```
 In [13]: mean= [0, 0]
-cov= [[1, 2],
-                [2, 5]]
+cov= [ [1, 2],
+                [2, 5] ]
 X=rng.multivariate_normal(mean, cov, 100)
 X.shape
 Out[13]: (100, 2)
@@ -4443,13 +4443,13 @@ A useful feature of NumPy’s sorting algorithms is the ability to sort along sp
 In [8]: rng=np.random.default_rng(seed=42)
 X=rng.integers(0, 10, (4, 6))
 print(X)
-Out[8]: [[076448]
+Out[8]: [ [076448]
          [062059]
          [777751]
-         [845319]]
+         [845319] ]
 In [9]: # sort each column of X
 np.sort(X, axis=0)
-Out[9]: array([[0, 4, 2, 0, 1, 1],
+Out[9]: array([ [0, 4, 2, 0, 1, 1],
                [0, 6, 5, 3, 4, 8],
 ```
 
@@ -4457,13 +4457,13 @@ Out[9]: array([[0, 4, 2, 0, 1, 1],
 
 ```
                [7, 7, 6, 4, 5, 9],
-               [8, 7, 7, 7, 5, 9]])
+               [8, 7, 7, 7, 5, 9] ])
 In [10]: # sort each row of X
 np.sort(X, axis=1)
-Out[10]: array([[0, 4, 4, 6, 7, 8],
+Out[10]: array([ [0, 4, 4, 6, 7, 8],
                 [0, 0, 2, 5, 6, 9],
                 [1, 5, 7, 7, 7, 7],
-                [1, 3, 4, 5, 8, 9]])
+                [1, 3, 4, 5, 8, 9] ])
 ```
 
 Keep in mind that this treats each row or column as an independent array, and any relationships between the row or column values will be lost! 
@@ -4484,10 +4484,10 @@ Similarly to sorting, we can partition along an arbitrary axis of a multidimensi
 
 ```
 In [12]: np.partition(X, 2, axis=1)
-Out[12]: array([[0, 4, 4, 7, 6, 8],
+Out[12]: array([ [0, 4, 4, 7, 6, 8],
                 [0, 0, 2, 6, 5, 9],
                 [1, 5, 7, 7, 7, 7],
-                [1, 3, 4, 5, 8, 9]])
+                [1, 3, 4, 5, 8, 9] ])
 ```
 
 The result is an array where the first two slots in each row contain the smallest values from that row, with the remaining values filling the remaining slots. 
@@ -4528,7 +4528,7 @@ With the pairwise square distances converted, we can now use `np.argsort` to sor
 ```
 In [20]: nearest=np.argsort(dist_sq, axis=1)
 print(nearest)
-Out[20]: [[0935481627]
+Out[20]: [ [0935481627]
           [1726483095]
           [2716438095]
           [3045961287]
@@ -4537,7 +4537,7 @@ Out[20]: [[0935481627]
           [6421730598]
           [7216438095]
           [8019347265]
-          [9053486127]]
+          [9053486127] ]
 ```
 
 Notice that the first column gives the numbers 0 through 9 in order: this is due to the fact that each point’s closest neighbor is itself, as we would expect. 
@@ -4712,10 +4712,10 @@ In [14]: tp=np.dtype([('id', 'i8'), ('mat', 'f8', (3, 3))])
 X=np.zeros(1, dtype=tp)
 print(X[0])
 print(X['mat'][0])
-Out[14]: (0, [[0., 0., 0.], [0., 0., 0.], [0., 0., 0.]])
-         [[0.0.0.]
+Out[14]: (0, [ [0., 0., 0.], [0., 0., 0.], [0., 0., 0.] ])
+         [ [0.0.0.]
           [0.0.0.]
-          [0.0.0.]]
+          [0.0.0.] ]
 ```
 
 Now each element in the `X` array consists of an `id` and a 3 × 3 matrix. Why would you use this rather than a simple multidimensional array, or perhaps a Python dictionary? One reason is that this NumPy `dtype` directly maps onto a C structure definition, so the buffer containing the array content can be accessed directly within an appropri‐ ately written C program. If you find yourself writing a Python interface to a legacy C or Fortran library that manipulates structured data, structured arrays can provide a powerful interface. 
@@ -5231,7 +5231,7 @@ Out[38]: Int64Index([1, 2, 9, 11], dtype='int64')
 
 ### **CHAPTER 14 Data Indexing and Selection** 
 
-In Part II, we looked in detail at methods and tools to access, set, and modify values in NumPy arrays. These included indexing (e.g., `arr[2, 1]` ), slicing (e.g., `arr[:, 1:5]` ), masking (e.g., `arr[arr > 0]` ), fancy indexing (e.g., `arr[0, [1, 5]]` ), and combinations thereof (e.g., `arr[:, [1, 5]]` ). Here we’ll look at similar means of accessing and modifying values in Pandas `Series` and `DataFrame` objects. If you have used the NumPy patterns, the corresponding patterns in Pandas will feel very famil‐ iar, though there are a few quirks to be aware of. 
+In Part II, we looked in detail at methods and tools to access, set, and modify values in NumPy arrays. These included indexing (e.g., `arr[2, 1]` ), slicing (e.g., `arr[:, 1:5]` ), masking (e.g., `arr[arr > 0]` ), fancy indexing (e.g., `arr[0, [1, 5] ]` ), and combinations thereof (e.g., `arr[:, [1, 5] ]` ). Here we’ll look at similar means of accessing and modifying values in Pandas `Series` and `DataFrame` objects. If you have used the NumPy patterns, the corresponding patterns in Pandas will feel very famil‐ iar, though there are a few quirks to be aware of. 
 
 We’ll start with the simple case of the one-dimensional `Series` object, and then move on to the more complicated two-dimensional `DataFrame` object. 
 
@@ -5306,7 +5306,7 @@ Out[9]: b0.50
 c0.75
 dtype: float64
 In [10]: # fancy indexing
-data[['a', 'e']]
+data[ ['a', 'e'] ]
 Out[10]: a0.25
 e1.25
 dtype: float64
@@ -5449,11 +5449,11 @@ As mentioned previously, we can also view the `DataFrame` as an enhanced twodime
 
 ```
 In [23]: data.values
-Out[23]: array([[4.23967000e+05, 3.95382230e+07, 9.32577842e+01],
+Out[23]: array([ [4.23967000e+05, 3.95382230e+07, 9.32577842e+01],
                 [6.95662000e+05, 2.91455050e+07, 4.18960717e+01],
                 [1.70312000e+05, 2.15381870e+07, 1.26463121e+02],
                 [1.41297000e+05, 2.02012490e+07, 1.42970120e+02],
-                [1.19280000e+05, 1.30027000e+07, 1.09009893e+02]])
+                [1.19280000e+05, 1.30027000e+07, 1.09009893e+02] ])
 ```
 
 With this picture in mind, many familiar array-like operations can be done on the `DataFrame` itself. For example, we can transpose the full `DataFrame` to swap rows and columns: 
@@ -5510,7 +5510,7 @@ Florida17031221538187
 Any of the familiar NumPy-style data access patterns can be used within these index‐ ers. For example, in the `loc` indexer we can combine masking and fancy indexing as follows: 
 
 ```
-In [29]: data.loc[data.density>120, ['pop', 'density']]
+In [29]: data.loc[data.density>120, ['pop', 'density'] ]
 Out[29]:                popdensity
 Florida21538187126.463121
 NewYork20201249142.970120
@@ -5755,18 +5755,18 @@ When performing operations between a `DataFrame` and a `Series` , the index and 
 ```
 In [15]: A=rng.integers(10, size=(3, 4))
 A
-Out[15]: array([[4, 4, 2, 0],
+Out[15]: array([ [4, 4, 2, 0],
                 [5, 8, 0, 8],
-                [8, 2, 6, 1]])
+                [8, 2, 6, 1] ])
 ```
 
 **Ufuncs: Operations Between DataFrames and Series | 121** 
 
 ```
 In [16]: A-A[0]
-Out[16]: array([[ 0,  0,  0,  0],
+Out[16]: array([ [ 0,  0,  0,  0],
                 [ 1,  4, -2,  8],
-                [ 4, -2,  4,  1]])
+                [ 4, -2,  4,  1] ])
 ```
 
 According to NumPy’s broadcasting rules (see Chapter 8), subtraction between a twodimensional array and one of its rows is applied row-wise. 
@@ -6065,9 +6065,9 @@ dtype: object
 For a `DataFrame` , there are more options. Consider the following `DataFrame` : 
 
 ```
-In [19]: df=pd.DataFrame([[1,      np.nan, 2],
+In [19]: df=pd.DataFrame([ [1,      np.nan, 2],
                             [2,      3,      5],
-                            [np.nan, 4,      6]])
+                            [np.nan, 4,      6] ])
 df
 Out[19]:      012
 01.0NaN2
@@ -6257,7 +6257,7 @@ dtype: int64
 But the convenience ends there. For example, if you need to select all values from 2010, you’ll need to do some messy (and potentially slow) munging to make it happen: 
 
 ```
-In [4]: pop[[iforiinpop.indexifi[1] ==2010]]
+In [4]: pop[ [iforiinpop.indexifi[1] ==2010] ]
 Out[4]: (California, 2010)    37253956
         (NewYork, 2010)      19378102
         (Texas, 2010)         25145561
@@ -6372,7 +6372,7 @@ The most straightforward way to construct a multiply indexed `Series` or `DataFr
 
 ```
 In [12]: df=pd.DataFrame(np.random.rand(4, 2),
-index=[['a', 'a', 'b', 'b'], [1, 2, 1, 2]],
+index=[ ['a', 'a', 'b', 'b'], [1, 2, 1, 2] ],
 columns=['data1', 'data2'])
 df
 Out[12]:         data1data2
@@ -6410,7 +6410,7 @@ Nevertheless, it is sometimes useful to explicitly create a `MultiIndex` ; we’
 For more flexibility in how the index is constructed, you can instead use the con‐ structor methods available in the `pd.MultiIndex` class. For example, as we did before, you can construct a `MultiIndex` from a simple list of arrays giving the index values within each level: 
 
 ```
-In [14]: pd.MultiIndex.from_arrays([['a', 'a', 'b', 'b'], [1, 2, 1, 2]])
+In [14]: pd.MultiIndex.from_arrays([ ['a', 'a', 'b', 'b'], [1, 2, 1, 2] ])
 Out[14]: MultiIndex([('a', 1),
                      ('a', 2),
                      ('b', 1),
@@ -6434,7 +6434,7 @@ Out[15]: MultiIndex([('a', 1),
 You can even construct it from a Cartesian product of single indices: 
 
 ```
-In [16]: pd.MultiIndex.from_product([['a', 'b'], [1, 2]])
+In [16]: pd.MultiIndex.from_product([ ['a', 'b'], [1, 2] ])
 Out[16]: MultiIndex([('a', 1),
                      ('a', 2),
                      ('b', 1),
@@ -6445,8 +6445,8 @@ Out[16]: MultiIndex([('a', 1),
 Similarly, you can construct a `MultiIndex` directly using its internal encoding by passing `levels` (a list of lists containing available index values for each level) and `codes` (a list of lists that reference these labels): 
 
 ```
-In [17]: pd.MultiIndex(levels=[['a', 'b'], [1, 2]],
-codes=[[0, 0, 1, 1], [0, 1, 0, 1]])
+In [17]: pd.MultiIndex(levels=[ ['a', 'b'], [1, 2] ],
+codes=[ [0, 0, 1, 1], [0, 1, 0, 1] ])
 Out[17]: MultiIndex([('a', 1),
                      ('a', 2),
                      ('b', 1),
@@ -6486,10 +6486,10 @@ In [19]: # hierarchical indices and columns
 ```
 
 ```
-index=pd.MultiIndex.from_product([[2013, 2014], [1, 2]],
+index=pd.MultiIndex.from_product([ [2013, 2014], [1, 2] ],
 names=['year', 'visit'])
-columns=pd.MultiIndex.from_product([['Bob', 'Guido', 'Sue'],
-                                              ['HR', 'Temp']],
+columns=pd.MultiIndex.from_product([ ['Bob', 'Guido', 'Sue'],
+                                              ['HR', 'Temp'] ],
 names=['subject', 'type'])
 ```
 
@@ -6610,7 +6610,7 @@ dtype: int64
 Selection based on fancy indexing also works: 
 
 ```
-In [27]: pop[['California', 'Texas']]
+In [27]: pop[ ['California', 'Texas'] ]
 Out[27]: stateyear
 California201037253956
 202039538223
@@ -6685,7 +6685,7 @@ You could get around this by building the desired slice explicitly using Python�
 
 ```
 In [33]: idx=pd.IndexSlice
-health_data.loc[idx[:, 1], idx[:, 'HR']]
+health_data.loc[idx[:, 1], idx[:, 'HR'] ]
 Out[33]: subjectBobGuidoSue
 typeHRHRHR
 yearvisit
@@ -6708,7 +6708,7 @@ Earlier I briefly mentioned a caveat, but I should emphasize it more here. _Many
 We’ll start by creating some simple multiply indexed data where the indices are _not lexographically sorted_ : 
 
 ```
-In [34]: index=pd.MultiIndex.from_product([['a', 'c', 'b'], [1, 2]])
+In [34]: index=pd.MultiIndex.from_product([ ['a', 'c', 'b'], [1, 2] ])
 data=pd.Series(np.random.rand(6), index=index)
 data.index.names= ['char', 'int']
 data
@@ -6903,11 +6903,11 @@ Out[4]: array([1, 2, 3, 4, 5, 6, 7, 8, 9])
 The first argument is a list or tuple of arrays to concatenate. Additionally, in the case of multidimensional arrays, it takes an `axis` keyword that allows you to specify the axis along which the result will be concatenated: 
 
 ```
-In [5]: x= [[1, 2],
-             [3, 4]]
+In [5]: x= [ [1, 2],
+             [3, 4] ]
 np.concatenate([x, x], axis=1)
-Out[5]: array([[1, 2, 1, 2],
-               [3, 4, 3, 4]])
+Out[5]: array([ [1, 2, 1, 2],
+               [3, 4, 3, 4] ])
 ```
 
 **146 | Chapter 18: Combining Datasets: concat and append** 
@@ -8274,7 +8274,7 @@ As the output shows, this contains a number of data points on each passenger on 
 To start learning more about this data, we might begin by grouping according to sex, survival status, or some combination thereof. If you read the previous chapter, you might be tempted to apply a `groupby` operation—for example, let’s look at survival rate by sex: 
 
 ```
-In [3]: titanic.groupby('sex')[['survived']].mean()
+In [3]: titanic.groupby('sex')[ ['survived'] ].mean()
 Out[3]:         survived
 sex
 female0.742038
@@ -11067,7 +11067,7 @@ Let’s take a look at a few of the datasets and plot types available in Seaborn
 Often in statistical data visualization, all you want is to plot histograms and joint dis‐ tributions of variables. We have seen that this is relatively straightforward in Matplot‐ lib (see Figure 36-1). 
 
 ```
-In [2]: data=np.random.multivariate_normal([0, 0], [[5, 2], [2, 2]], size=2000)
+In [2]: data=np.random.multivariate_normal([0, 0], [ [5, 2], [2, 2] ], size=2000)
 data=pd.DataFrame(data, columns=['x', 'y'])
 ```
 
@@ -12056,10 +12056,10 @@ In this case, one proven technique is to use _one-hot encoding_ , which effectiv
 In [3]: fromsklearn.feature_extractionimportDictVectorizer
 vec=DictVectorizer(sparse=False, dtype=int)
 vec.fit_transform(data)
-Out[3]: array([[     0,      1,      0, 850000,      4],
+Out[3]: array([ [     0,      1,      0, 850000,      4],
                [     1,      0,      0, 700000,      3],
                [     0,      0,      1, 650000,      3],
-               [     1,      0,      0, 600000,      2]])
+               [     1,      0,      0, 600000,      2] ])
 ```
 
 Notice that the `neighborhood` column has been expanded into three separate col‐ umns representing the three neighborhood labels, and that each row has a 1 in the column associated with its neighborhood. With these categorical features thus enco‐ ded, you can proceed as normal with fitting a Scikit-Learn model. 
@@ -12182,11 +12182,11 @@ Another common need in feature engineering is handling of missing data. We dis�
 
 ```
 In [14]: fromnumpyimportnan
-X=np.array([[ nan, 0,   3  ],
+X=np.array([ [ nan, 0,   3  ],
                        [ 3,   7,   9  ],
                        [ 3,   5,   2  ],
                        [ 4,   nan, 6  ],
-                       [ 8,   8,   1  ]])
+                       [ 8,   8,   1  ] ])
 y=np.array([14, 16, -1,  8, -5])
 ```
 
@@ -12199,11 +12199,11 @@ In [15]: fromsklearn.imputeimportSimpleImputer
 imp=SimpleImputer(strategy='mean')
 X2=imp.fit_transform(X)
 X2
-Out[15]: array([[4.5, 0. , 3. ],
+Out[15]: array([ [4.5, 0. , 3. ],
                 [3. , 7. , 9. ],
                 [3. , 5. , 2. ],
                 [4. , 5. , 6. ],
-                [8. , 8. , 1. ]])
+                [8. , 8. , 1. ] ])
 ```
 
 We see that in the resulting data, the two missing values have been replaced with the mean of the remaining values in the column. This imputed data can then be fed directly into, for example, a `LinearRegression` estimator: 
@@ -12316,14 +12316,14 @@ A nice aspect of this Bayesian formalism is that it naturally allows for probabi
 ```
 In [6]: yprob=model.predict_proba(Xnew)
 yprob[-8:].round(2)
-Out[6]: array([[0.89, 0.11],
+Out[6]: array([ [0.89, 0.11],
                [1.  , 0.  ],
                [1.  , 0.  ],
                [1.  , 0.  ],
                [1.  , 0.  ],
                [1.  , 0.  ],
                [0.  , 1.  ],
-               [0.15, 0.85]])
+               [0.15, 0.85] ])
 ```
 
 The columns give the posterior probabilities of the first and second labels, respec‐ tively. If you are looking for estimates of uncertainty in your classification, Bayesian approaches like this can be a good place to start. 
@@ -12447,7 +12447,7 @@ The cool thing here is that we now have the tools to determine the category for 
 ```
 In [13]: defpredict_category(s, train=train, model=model):
 pred=model.predict([s])
-returntrain.target_names[pred[0]]
+returntrain.target_names[pred[0] ]
 ```
 
 Let’s try it out: 
@@ -12560,7 +12560,7 @@ In [6]: fromsklearn.preprocessingimportPolynomialFeatures
 x=np.array([2, 3, 4])
 poly=PolynomialFeatures(3, include_bias=False)
 poly.fit_transform(x[:, None])
-Out[6]: array([[ 2.,  4.,  8.],
+Out[6]: array([ [ 2.,  4.,  8.],
 ```
 
 **422 | Chapter 42: In Depth: Linear Regression** 
@@ -12646,7 +12646,7 @@ In [17]: daily=counts.resample('d').sum()
 
 ```
 daily['Total'] =daily.sum(axis=1)
-daily=daily[['Total']] # remove other columns
+daily=daily[ ['Total'] ] # remove other columns
 ```
 
 We saw previously that the patterns of use generally vary from day to day. Let’s account for this in our data by adding binary columns that indicate the day of the week: 
@@ -12654,7 +12654,7 @@ We saw previously that the patterns of use generally vary from day to day. Let�
 ```
 In [18]: days= ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 foriinrange(7):
-daily[days[i]] = (daily.index.dayofweek==i).astype(float)
+daily[days[i] ] = (daily.index.dayofweek==i).astype(float)
 ```
 
 Similarly, we might expect riders to behave differently on holidays; let’s add an indica‐ tor of this as well: 
@@ -12730,7 +12730,7 @@ daily['predicted'] =model.predict(X)
 Finally, we can compare the total and predicted bicycle traffic visually (see Figure 42-11). 
 
 ```
-In [25]: daily[['Total', 'predicted']].plot(alpha=0.5);
+In [25]: daily[ ['Total', 'predicted'] ].plot(alpha=0.5);
 ```
 
 **432 | Chapter 42: In Depth: Linear Regression** 
@@ -12930,7 +12930,7 @@ In [24]: fig, ax=plt.subplots(4, 6)
 fori, axiinenumerate(ax.flat):
 axi.imshow(Xtest[i].reshape(62, 47), cmap='bone')
 axi.set(xticks=[], yticks=[])
-axi.set_ylabel(faces.target_names[yfit[i]].split()[-1],
+axi.set_ylabel(faces.target_names[yfit[i] ].split()[-1],
 color='black'ifyfit[i] ==ytest[i] else'red')
 fig.suptitle('Predicted Names; Incorrect Labels in Red', size=14);
 ```
@@ -14208,7 +14208,7 @@ returnpatches
 
 ```
 negative_patches=np.vstack([extract_patches(im, 1000, scale)
-foriminimagesforscalein [0.5, 1.0, 2.0]])
+foriminimagesforscalein [0.5, 1.0, 2.0] ])
 negative_patches.shape
 Out[6]: (30000, 62, 47)
 ```

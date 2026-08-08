@@ -3441,14 +3441,14 @@ In numpy, matrices are typically represented as two-dimensional arrays,
 and vectors as one-dimensional arrays.1 We can create a two-dimensional
 array as follows.
 ```
-In [10]: x = np.array ([[1, 2], [3, 4]])
+In [10]: x = np.array ([ [1, 2], [3, 4] ])
 ```
 x
 ```
-Out[10]: array ([[1, 2],
+Out[10]: array ([ [1, 2],
 ```
 ```
-[3, 4]])
+[3, 4] ])
 ```
 The object x has several attributes, or associated objects. To access an attribute
 attribute of x, we type x.attribute, where we replace attribute with the
@@ -3479,7 +3479,7 @@ decimals, then we would have obtained an array of floating point numbers floatin
 point(i.e. real-valued numbers).
 ```
 ```
-In [13]: np.array ([[1, 2], [3.0, 4]]).dtype
+In [13]: np.array ([ [1, 2], [3.0, 4] ]).dtype
 ```
 ```
 Out[13]: dtype('float64 ')
@@ -3494,7 +3494,7 @@ This documentation indicates that we could create a floating point array
 by passing a dtype argument into np.array(). dtype
 ```
 ```
-In [15]: np.array ([[1, 2], [3, 4]], float).dtype
+In [15]: np.array ([ [1, 2], [3, 4] ], float).dtype
 ```
 ```
 Out[15]: dtype('float64 ')
@@ -3558,8 +3558,8 @@ print('reshaped x:\n', x_reshape)
 beginning x:
 [1 2 3 4 5 6]
 reshaped x:
-[[1 2 3]
-[4 5 6]]
+[ [1 2 3]
+[4 5 6] ]
 The previous output reveals that numpy arrays are specified as a sequence
 of rows. This is called row-major ordering, as opposed to column-major
 ordering.
@@ -3595,16 +3595,16 @@ print('x after we modify top left element of x_reshape :\n', x)
 Out[22]: x before we modify x_reshape:
 [1 2 3 4 5 6]
 x_reshape before we modify x_reshape:
-[[1 2 3]
-[4 5 6]]
+[ [1 2 3]
+[4 5 6] ]
 x_reshape after we modify its top left element:
-[[5 2 3]
+[ [5 2 3]
 2Like lists, tuples represent a sequence of objects. Why do we need more than one way
 to create a sequence? There are a few differences between tuples and lists, but perhaps
 the most important is that elements of a tuple cannot be modified, whereas elements of
 a list can be.
 2.3 Lab: Introduction to Python 45
-[4 5 6]]
+[4 5 6] ]
 x after we modify top left element of x_reshape:
 [5 2 3 4 5 6]
 Modifying x_reshape also modified x because the two objects occupy the
@@ -3631,17 +3631,17 @@ Out[24]: ((2, 3),
 ```
 2,
 ```
-array ([[5, 4],
+array ([ [5, 4],
 ```
 [2, 5],
 ```
-[3, 6]]))
+[3, 6] ]))
 ```
 ```
-Notice that the three individual outputs (2,3), 2, and array([[5, 4],[2,
+Notice that the three individual outputs (2,3), 2, and array([ [5, 4],[2,
 ```
 ```
-5], [3,6]]) are themselves output as a tuple.
+5], [3,6] ]) are themselves output as a tuple.
 ```
 We will often want to apply functions to arrays. For instance, we can
 ```
@@ -3722,10 +3722,10 @@ y. The off-diagonal elements give the correlation between x and y.
 In [30]: np.corrcoef(x, y)
 ```
 ```
-Out[30]: array ([[1. , 0.69] ,
+Out[30]: array ([ [1. , 0.69] ,
 ```
 ```
-[0.69 , 1. ]])
+[0.69 , 1. ] ])
 ```
 If you’re following along in your own Jupyter notebook, then you probably
 noticed that you got a different set of results when you ran the past few
@@ -3839,7 +3839,7 @@ In [36]: X = rng.standard_normal ((10, 3))
 ```
 X
 ```
-Out[36]: array ([[ 0.23, -0.35, -0.28],
+Out[36]: array ([ [ 0.23, -0.35, -0.28],
 ```
 [-0.67, -1.06, -0.39],
 [ 0.48, -0.24, 0.96] ,
@@ -3850,7 +3850,7 @@ Out[36]: array ([[ 0.23, -0.35, -0.28],
 [-0.29, 0.88, 0.58] ,
 [ 0.09, 0.67, -2.83],
 ```
-[ 1.02, -0.96, -1.67]])
+[ 1.02, -0.96, -1.67] ])
 ```
 48 2. Statistical Learning
 Since arrays are row-major ordered, the first axis, i.e. axis=0, refers to its
@@ -4181,12 +4181,12 @@ In [56]: A = np.array(np.arange (16)).reshape ((4, 4))
 ```
 A
 ```
-Out[56]: array ([[ 0, 1, 2, 3],
+Out[56]: array ([ [ 0, 1, 2, 3],
 ```
 [ 4, 5, 6, 7],
 [ 8, 9, 10, 11],
 ```
-[12, 13, 14, 15]])
+[12, 13, 14, 15] ])
 ```
 Typing A[1,2] retrieves the element corresponding to the second row and
 ```
@@ -4200,46 +4200,46 @@ the second number refers to the column.
 Indexing Rows, Columns, and Submatrices
 To select multiple rows at a time, we can pass in a list specifying our
 selection. For instance, [1,3] will retrieve the second and fourth rows:
-In [58]: A[[1 ,3]]
+In [58]: A[ [1 ,3] ]
 ```
-Out[58]: array ([[ 4, 5, 6, 7],
+Out[58]: array ([ [ 4, 5, 6, 7],
 ```
 ```
-[12, 13, 14, 15]])
+[12, 13, 14, 15] ])
 ```
 To select the first and third columns, we pass in [0,2] as the second ar-
 gument in the square brackets. In this case we need to supply the first
 ```
 argument : which selects all rows.
 ```
-In [59]: A[: ,[0 ,2]]
+In [59]: A[: ,[0 ,2] ]
 ```
-Out[59]: array ([[ 0, 2],
+Out[59]: array ([ [ 0, 2],
 ```
 [ 4, 6],
 [ 8, 10],
 ```
-[12, 14]])
+[12, 14] ])
 ```
 Now, suppose that we want to select the submatrix made up of the second
 and fourth rows as well as the first and third columns. This is where index-
 ing gets slightly tricky. It is natural to try to use lists to retrieve the rows
 and columns:
-In [60]: A[[1 ,3] ,[0 ,2]]
+In [60]: A[ [1 ,3] ,[0 ,2] ]
 ```
 Out[60]: array ([ 4, 14])
 ```
 Oops — what happened? We got a one-dimensional array of length two
 identical to
 ```
-In [61]: np.array ([A[1,0],A[3 ,2]])
+In [61]: np.array ([A[1,0],A[3 ,2] ])
 ```
 ```
 Out[61]: array ([ 4, 14])
 ```
 Similarly, the following code fails to extract the submatrix comprised of
 the second and fourth rows and the first, third, and fourth columns:
-In [62]: A[[1 ,3] ,[0 ,2 ,3]]
+In [62]: A[ [1 ,3] ,[0 ,2 ,3] ]
 ```
 IndexError: shape mismatch: indexing arrays could not be broadcast
 ```
@@ -4254,12 +4254,12 @@ However, that was not our intent, since we are looking for a submatrix.
 One easy way to do this is as follows. We first create a submatrix by
 subsetting the rows of A, and then on the fly we make a further submatrix
 by subsetting its columns.
-In [63]: A[[1 ,3]][: ,[0 ,2]]
+In [63]: A[ [1 ,3] ][: ,[0 ,2] ]
 ```
-Out[63]: array ([[ 4, 6],
+Out[63]: array ([ [ 4, 6],
 ```
 ```
-[12, 14]])
+[12, 14] ])
 ```
 There are more efficient ways of achieving the same result.
 ```
@@ -4276,10 +4276,10 @@ In [64]: idx = np.ix_ ([1 ,3] ,[0 ,2 ,3])
 ```
 A[idx]
 ```
-Out[64]: array ([[ 4, 6, 7],
+Out[64]: array ([ [ 4, 6, 7],
 ```
 ```
-[12, 14, 15]])
+[12, 14, 15] ])
 ```
 Alternatively, we can subset matrices efficiently using slices. The slice
 1:4:2 captures the second and fourth items of a sequence, while the slice
@@ -4291,10 +4291,10 @@ quence is the step size).
 ```
 In [65]: A[1:4:2 ,0:3:2]
 ```
-Out[65]: array ([[ 4, 6],
+Out[65]: array ([ [ 4, 6],
 ```
 ```
-[12, 14]])
+[12, 14] ])
 ```
 Why are we able to retrieve a submatrix directly using slices but not using
 lists? Its because they are different Python types, and are treated differently
@@ -4317,7 +4317,7 @@ keep_rows
 Out[66]: array ([False , False , False , False ])
 ```
 We now set two of the elements to True.
-In [67]: keep_rows [[1 ,3]] = True
+In [67]: keep_rows [ [1 ,3] ] = True
 keep_rows
 54 2. Statistical Learning
 ```
@@ -4350,21 +4350,21 @@ first, second, first, and second rows of A.
 In [69]: A[np.array ([0,1,0,1])]
 ```
 ```
-Out[69]: array ([[0, 1, 2, 3],
+Out[69]: array ([ [0, 1, 2, 3],
 ```
 [4, 5, 6, 7],
 [0, 1, 2, 3],
 ```
-[4, 5, 6, 7]])
+[4, 5, 6, 7] ])
 ```
 By contrast, keep_rows retrieves only the second and fourth rows of A —
 i.e. the rows for which the Boolean equals TRUE.
 In [70]: A[keep_rows]
 ```
-Out[70]: array ([[ 4, 5, 6, 7],
+Out[70]: array ([ [ 4, 5, 6, 7],
 ```
 ```
-[12, 13, 14, 15]])
+[12, 13, 14, 15] ])
 ```
 This example shows that Booleans and integers are treated differently by
 numpy.
@@ -4376,16 +4376,16 @@ time, we apply the function to Booleans, rather than lists.
 ```
 In [71]: keep_cols = np.zeros(A.shape [1], bool)
 ```
-keep_cols [[0, 2, 3]] = True
+keep_cols [ [0, 2, 3] ] = True
 ```
 idx_bool = np.ix_(keep_rows , keep_cols)
 ```
 A[idx_bool]
 ```
-Out[71]: array ([[ 4, 6, 7],
+Out[71]: array ([ [ 4, 6, 7],
 ```
 ```
-[12, 14, 15]])
+[12, 14, 15] ])
 ```
 We can also mix a list with an array of Booleans in the arguments to
 ```
@@ -4396,10 +4396,10 @@ In [72]: idx_mixed = np.ix_([1,3], keep_cols)
 ```
 A[idx_mixed]
 ```
-Out[72]: array ([[ 4, 6, 7],
+Out[72]: array ([ [ 4, 6, 7],
 ```
 ```
-[12, 14, 15]])
+[12, 14, 15] ])
 ```
 For more details on indexing in numpy, readers are referred to the numpy
 tutorial mentioned earlier.
@@ -4534,7 +4534,7 @@ In [82]: idx_80 = Auto['year '] > 80
 Auto[idx_80]
 However, if we pass in a list of strings to the [] method, then we obtain a
 data frame containing the corresponding set of columns.
-In [83]: Auto[['mpg', 'horsepower ']]
+In [83]: Auto[ ['mpg', 'horsepower '] ]
 Out[83]: mpg horsepower
 0 18.0 130.0
 1 15.0 165.0
@@ -4593,19 +4593,19 @@ amc rebel sst 16.0 8 304.0 150.0 ...
 ford torino 17.0 8 302.0 140.0 ...
 As an alternative to using the index name, we could retrieve the 4th and
 5th rows of Auto using the iloc[] method: .iloc[]
-In [88]: Auto_re.iloc [[3 ,4]]
+In [88]: Auto_re.iloc [ [3 ,4] ]
 We can also use it to retrieve the 1st, 3rd and and 4th columns of Auto_re:
-In [89]: Auto_re.iloc [:,[0,2,3]]
+In [89]: Auto_re.iloc [:,[0,2,3] ]
 We can extract the 4th and 5th rows, as well as the 1st, 3rd and 4th
 columns, using a single call to iloc[]:
-In [90]: Auto_re.iloc [[3 ,4] ,[0 ,2 ,3]]
+In [90]: Auto_re.iloc [ [3 ,4] ,[0 ,2 ,3] ]
 Out[90]: mpg displacement horsepower
 name
 amc rebel sst 16.0 304.0 150.0
 ford torino 17.0 302.0 140.0
 Index entries need not be unique: there are several cars in the data frame
 named ford galaxie 500.
-In [91]: Auto_re.loc['ford galaxie 500', ['mpg', 'origin ']]
+In [91]: Auto_re.loc['ford galaxie 500', ['mpg', 'origin '] ]
 Out[91]: mpg origin
 name
 ford galaxie 500 15.0 1
@@ -4617,12 +4617,12 @@ and origin of the subset of cars with year greater than 80 — i.e. those
 built after 1980. To do this, we first create a Boolean array that indexes
 the rows. The loc[] method allows for Boolean entries as well as strings:
 In [92]: idx_80 = Auto_re['year '] > 80
-Auto_re.loc[idx_80 , ['weight ', 'origin ']]
+Auto_re.loc[idx_80 , ['weight ', 'origin '] ]
 To do this more concisely, we can use an anonymous function called a
 ```
 lambda: lambda
 ```
-In [93]: Auto_re.loc[lambda df: df['year '] > 80, ['weight ', 'origin ']]
+In [93]: Auto_re.loc[lambda df: df['year '] > 80, ['weight ', 'origin '] ]
 The lambda call creates a function that takes a single argument, here df,
 and returns df['year']>80. Since it is created inside the loc[] method for
 2.3 Lab: Introduction to Python 59
@@ -4890,18 +4890,18 @@ In [110]: pd.plotting.scatter_matrix(Auto);
 ```
 We can also produce scatterplots for a subset of the variables.
 ```
-In [111]: pd.plotting.scatter_matrix(Auto[['mpg',
+In [111]: pd.plotting.scatter_matrix(Auto[ ['mpg',
 ```
 'displacement ',
 ```
-'weight ']]);
+'weight '] ]);
 ```
 ```
 The describe() method produces a numerical summary of each column in .describe()
 ```
 a data frame.
 ```
-In [112]: Auto[['mpg', 'weight ']]. describe ()
+In [112]: Auto[ ['mpg', 'weight '] ]. describe ()
 ```
 We can also produce a summary of just a single column.
 ```
@@ -8468,22 +8468,22 @@ We can produce confidence intervals for the predicted values.
 In [18]: new_predictions.conf_int(alpha =0.05)
 ```
 ```
-Out[18]: array ([[29.00741194 , 30.59977628] ,
+Out[18]: array ([ [29.00741194 , 30.59977628] ,
 ```
 [24.47413202 , 25.63256267] ,
 ```
-[19.73158815 , 20.87461299]])
+[19.73158815 , 20.87461299] ])
 ```
 Prediction intervals are computing by setting obs=True:
 ```
 In [19]: new_predictions.conf_int(obs=True , alpha =0.05)
 ```
 ```
-Out[19]: array ([[17.56567478 , 42.04151344] ,
+Out[19]: array ([ [17.56567478 , 42.04151344] ,
 ```
 [12.82762635 , 37.27906833] ,
 ```
-[ 8.0777421 , 32.52845905]])
+[ 8.0777421 , 32.52845905] ])
 ```
 For instance, the 95% confidence interval associated with an lstat value of
 ```
@@ -9508,13 +9508,13 @@ tunately mismeasured. We use the function np.concatenate() to np.conca-
 tenate()add this additional observation to each of x1, x2 and y.
 ```
 ```
-x1 = np.concatenate ([x1 , [0.1]])
+x1 = np.concatenate ([x1 , [0.1] ])
 ```
 ```
-x2 = np.concatenate ([x2 , [0.8]])
+x2 = np.concatenate ([x2 , [0.8] ])
 ```
 ```
-y = np.concatenate ([y, [6]])
+y = np.concatenate ([y, [6] ])
 ```
 ```
 Re-fit the linear models from (c) to (e) using this new data. What
@@ -14284,7 +14284,7 @@ We can also directly use the labels rather than the Boolean vectors y_train.
 ```
 In [23]: X_train , X_test = [M.drop(columns =['intercept '])
 ```
-for M in [X_train , X_test ]]
+for M in [X_train , X_test ] ]
 ```
 lda.fit(X_train , L_train)
 ```
@@ -14310,10 +14310,10 @@ the market increases, and a tendency for the previous days’ returns to be
 positive on days when the market declines.
 In [24]: lda.means_
 ```
-Out[24]: array ([[ 0.04, 0.03] ,
+Out[24]: array ([ [ 0.04, 0.03] ,
 ```
 ```
-[-0.04, -0.03]])
+[-0.04, -0.03] ])
 ```
 The estimated prior probabilities are stored in the priors_ attribute. The
 package sklearn typically uses this trailing _ to denote a quantity estimated
@@ -14334,10 +14334,10 @@ Out[26]: array ([0.492 , 0.508])
 The linear discriminant vectors can be found in the scalings_ attribute:
 In [27]: lda.scalings_
 ```
-Out[27]: array ([[ -0.642] ,
+Out[27]: array ([ [ -0.642] ,
 ```
 ```
-[ -0.513]])
+[ -0.513] ])
 ```
 These values provide the linear combination of Lag1 and Lag2 that are used
 to form the LDA decision rule. In other words, these are the multipliers of
@@ -14457,10 +14457,10 @@ The QDA() function will again compute means_ and priors_.
 ```
 In [34]: qda.means_ , qda.priors_
 ```
-Out[34]: (array ([[ 0.04279022 , 0.03389409] ,
+Out[34]: (array ([ [ 0.04279022 , 0.03389409] ,
 ```
 ```
-[ -0.03954635 , -0.03132544]]) ,
+[ -0.03954635 , -0.03132544] ]) ,
 ```
 ```
 array ([0.49198397 , 0.50801603]))
@@ -14471,10 +14471,10 @@ The QDA() classifier will estimate one covariance per class. Here is the
 estimated covariance in the first class:
 In [35]: qda.covariance_ [0]
 ```
-Out[35]: array ([[ 1.50662277 , -0.03924806] ,
+Out[35]: array ([ [ 1.50662277 , -0.03924806] ,
 ```
 ```
-[ -0.03924806 , 1.53559498]])
+[ -0.03924806 , 1.53559498] ])
 ```
 The output contains the group means. But it does not contain the coef-
 ficients of the linear discriminants, because the QDA classifier involves a
@@ -14540,19 +14540,19 @@ number of columns is equal to the number of features. We see below that
 the mean for feature Lag1 in the Down class is 0.043.
 In [41]: NB.theta_
 ```
-Out[41]: array ([[ 0.043 , 0.034] ,
+Out[41]: array ([ [ 0.043 , 0.034] ,
 ```
 ```
-[-0.040, -0.031]])
+[-0.040, -0.031] ])
 ```
 4.7 Lab: Logistic Regression, LDA, QDA, and KNN 183
 Its variance is 1.503.
 In [42]: NB.var_
 ```
-Out[42]: array ([[1.503 , 1.532] ,
+Out[42]: array ([ [1.503 , 1.532] ,
 ```
 ```
-[1.514 , 1.487]])
+[1.514 , 1.487] ])
 ```
 ```
 How do we know the names of these attributes? We use NB? (or ?NB).
@@ -14605,13 +14605,13 @@ each observation belongs to a particular class.
 In [46]: NB.predict_proba(X_test)[:5]
 ```
 ```
-Out[46]: array ([[0.4873 , 0.5127] ,
+Out[46]: array ([ [0.4873 , 0.5127] ,
 ```
 [0.4762 , 0.5238] ,
 [0.4653 , 0.5347] ,
 [0.4748 , 0.5252] ,
 ```
-[0.4902 , 0.5098]])
+[0.4902 , 0.5098] ])
 ```
 4.7.6 K-Nearest Neighbors
 ```
@@ -17727,11 +17727,11 @@ B = np.array ([2, 4])
 np.add.outer(A, B)
 ```
 ```
-Out[11]: array ([[ 5, 7],
+Out[11]: array ([ [ 5, 7],
 ```
 [ 7, 9],
 ```
-[11, 13]])
+[11, 13] ])
 ```
 In the CV example above, we used K = n, but of course we can also use
 ```
@@ -17882,7 +17882,7 @@ In [15]: Portfolio = load_data('Portfolio ')
 def alpha_func(D, idx):
 ```
 ```
-cov_ = np.cov(D[['X','Y']]. loc[idx], rowvar=False)
+cov_ = np.cov(D[ ['X','Y'] ]. loc[idx], rowvar=False)
 ```
 ```
 return ((cov_ [1,1] - cov_ [0 ,1]) /
@@ -18074,7 +18074,7 @@ rng.choice (392,
 replace=True)) for _ in range (10)])
 ```
 ```
-Out[22]: array ([[39.8806 , -0.1568] ,
+Out[22]: array ([ [39.8806 , -0.1568] ,
 ```
 [38.733 , -0.147 ],
 [38.3173 , -0.1444] ,
@@ -18085,7 +18085,7 @@ Out[22]: array ([[39.8806 , -0.1568] ,
 [39.0581 , -0.1495] ,
 [38.6669 , -0.1452] ,
 ```
-[39.6428 , -0.1556]])
+[39.6428 , -0.1556] ])
 ```
 5.3 Lab: Cross-Validation and the Bootstrap 223
 ```
@@ -21843,7 +21843,7 @@ to when a small value of λ is used. (Recall that the %2 norm is the square
 root of the sum of squared coefficient values.) We display the coefficients
 ```
 at the 40th step, where λ is 25.535.
-In [25]: beta_hat = soln_path.loc[soln_path.index [39]]
+In [25]: beta_hat = soln_path.loc[soln_path.index [39] ]
 lambdas [39], beta_hat
 ```
 Out[25]: (25.535 ,
@@ -21863,7 +21863,7 @@ In [26]: np.linalg.norm(beta_hat)
 Out[26]: 24.17
 In contrast, here is the %2 norm when λ is 2.44e-01. Note the much larger
 %2 norm of the coefficients associated with this smaller value of λ.
-In [27]: beta_hat = soln_path.loc[soln_path.index [59]]
+In [27]: beta_hat = soln_path.loc[soln_path.index [59] ]
 ```
 lambdas [59], np.linalg.norm(beta_hat)
 ```
@@ -25312,7 +25312,7 @@ alpha =0.5)
 for val , ls in zip([ preds.predicted_mean ,
 ```
 bands [:,0],
-bands [:,1]],
+bands [:,1] ],
 ```
 ['b','r--','r--']):
 ```
@@ -25555,7 +25555,7 @@ marker='|')
 for val , ls in zip([ preds.predicted_mean ,
 ```
 bands [:,0],
-bands [:,1]],
+bands [:,1] ],
 ```
 ['b','r--','r--']):
 ```
@@ -30942,7 +30942,7 @@ support vectors, because the margin is now wider. For linear kernels, we
 can extract the coefficients of the linear decision boundary as follows:
 In [8]: svm_linear.coef_
 ```
-Out[8]: array ([[1.173 , 0.7734]])
+Out[8]: array ([ [1.173 , 0.7734] ])
 ```
 Since the support vector machine is an estimator in sklearn, we can use
 the usual machinery to tune it.
@@ -35202,7 +35202,7 @@ download=True ,
 ```
 transform=ToTensor ())
 ```
-for train in [True , False ]]
+for train in [True , False ] ]
 mnist_train
 Out[33]: Dataset MNIST
 Number of datapoints: 60000
@@ -35591,7 +35591,7 @@ train=train ,
 ```
 download=True)
 ```
-for train in [True , False ]]
+for train in [True , False ] ]
 ```
 In [49]: transform = ToTensor ()
 ```
@@ -39140,7 +39140,7 @@ proportional hazards models. To begin, we consider a model that uses sex
 as the only predictor.
 In [10]: coxph = CoxPHFitter # shorthand
 ```
-sex_df = BrainCancer [['time ', 'status ', 'sex']]
+sex_df = BrainCancer [ ['time ', 'status ', 'sex'] ]
 ```
 ```
 model_df = MS(['time ', 'status ', 'sex'],
@@ -39156,7 +39156,7 @@ cox_fit = coxph ().fit(model_df ,
 'status ')
 ```
 ```
-cox_fit.summary [['coef ', 'se(coef)', 'p']]
+cox_fit.summary [ ['coef ', 'se(coef)', 'p'] ]
 ```
 ```
 Out[10]: coef se(coef) p
@@ -39214,7 +39214,7 @@ fit_all = coxph ().fit(all_df ,
 'status ')
 ```
 ```
-fit_all.summary [['coef ', 'se(coef)', 'p']]
+fit_all.summary [ ['coef ', 'se(coef)', 'p'] ]
 ```
 ```
 Out[12]: coef se(coef) p
@@ -39368,7 +39368,7 @@ posres_fit = coxph ().fit(posres_df ,
 'status ')
 ```
 ```
-posres_fit.summary [['coef ', 'se(coef)', 'p']]
+posres_fit.summary [ ['coef ', 'se(coef)', 'p'] ]
 ```
 ```
 Out[19]: coef se(coef) p
@@ -39388,7 +39388,7 @@ coxph ().fit(model.fit_transform(Publication),
 ```
 'time ',
 ```
-'status ').summary [['coef ', 'se(coef)', 'p']]
+'status ').summary [ ['coef ', 'se(coef)', 'p'] ]
 ```
 ```
 Out[20]: coef se(coef) p
@@ -39702,7 +39702,7 @@ X,
 'Failed ')
 ```
 ```
-fit_queuing.summary [['coef ', 'se(coef)', 'p']]
+fit_queuing.summary [ ['coef ', 'se(coef)', 'p'] ]
 ```
 ```
 Out[35]: coef se(coef) p
@@ -42676,12 +42676,12 @@ provides the principal component loadings: each row of pcaUS.components_
 contains the corresponding principal component loading vector.
 In [12]: pcaUS.components_
 ```
-Out[12]: array ([[ 0.53589947 , 0.58318363 , 0.27819087 , 0.54343209] ,
+Out[12]: array ([ [ 0.53589947 , 0.58318363 , 0.27819087 , 0.54343209] ,
 ```
 [ 0.41818087 , 0.1879856 , -0.87280619 , -0.16731864] ,
 [ -0.34123273 , -0.26814843 , -0.37801579 , 0.81777791] ,
 ```
-[ 0.6492278 , -0.74340748 , 0.13387773 , 0.08902432]])
+[ 0.6492278 , -0.74340748 , 0.13387773 , 0.08902432] ])
 ```
 The biplot is a common visualization method used with PCA. It is not
 built in as a standard part of sklearn, though there are python packages
@@ -42882,22 +42882,22 @@ to an unimportant sign flip). Using the full_matrices=False option ensures
 that for a tall matrix the shape of U is the same as the shape of X.
 In [22]: V
 ```
-Out[22]: array ([[ -0.53589947 , -0.58318363 , -0.27819087 , -0.54343209] ,
+Out[22]: array ([ [ -0.53589947 , -0.58318363 , -0.27819087 , -0.54343209] ,
 ```
 [ 0.41818087 , 0.1879856 , -0.87280619 , -0.16731864] ,
 [ -0.34123273 , -0.26814843 , -0.37801579 , 0.81777791] ,
 ```
-[ 0.6492278 , -0.74340748 , 0.13387773 , 0.08902432]])
+[ 0.6492278 , -0.74340748 , 0.13387773 , 0.08902432] ])
 ```
 540 12. Unsupervised Learning
 In [23]: pcaUS.components_
 ```
-Out[23]: array ([[ 0.53589947 , 0.58318363 , 0.27819087 , 0.54343209] ,
+Out[23]: array ([ [ 0.53589947 , 0.58318363 , 0.27819087 , 0.54343209] ,
 ```
 [ 0.41818087 , 0.1879856 , -0.87280619 , -0.16731864] ,
 [ -0.34123273 , -0.26814843 , -0.37801579 , 0.81777791] ,
 ```
-[ 0.6492278 , -0.74340748 , 0.13387773 , 0.08902432]])
+[ 0.6492278 , -0.74340748 , 0.13387773 , 0.08902432] ])
 ```
 The matrix U corresponds to a standardized version of the PCA score matrix
 ```
@@ -42911,19 +42911,19 @@ exactly (up to a meaningless sign flip).
 In [24]: (U * D[None ,:]) [:3]
 ```
 ```
-Out[24]: array ([[ -0.9856 , 1.1334 , -0.4443, 0.1563] ,
+Out[24]: array ([ [ -0.9856 , 1.1334 , -0.4443, 0.1563] ,
 ```
 [ -1.9501 , 1.0732 , 2.04 , -0.4386] ,
 ```
-[ -1.7632 , -0.746 , 0.0548 , -0.8347]])
+[ -1.7632 , -0.746 , 0.0548 , -0.8347] ])
 ```
 In [25]: scores [:3]
 ```
-Out[25]: array ([[ 0.9856 , -1.1334, -0.4443, 0.1563] ,
+Out[25]: array ([ [ 0.9856 , -1.1334, -0.4443, 0.1563] ,
 ```
 [ 1.9501 , -1.0732, 2.04 , -0.4386] ,
 ```
-[ 1.7632 , 0.746 , 0.0548 , -0.8347]])
+[ 1.7632 , 0.746 , 0.0548 , -0.8347] ])
 ```
 ```
 While it would be possible to carry out this lab using the PCA() estimator,
@@ -43422,11 +43422,11 @@ scipy.cluster.hierarchy:
 In [43]: cut_tree(linkage_comp , n_clusters =4).T
 ```
 ```
-Out[43]: array ([[0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1,
+Out[43]: array ([ [0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 2, 0, 0, 0, 1, 1, 0, 0, 1,
 ```
 0, 0, 2, 0, 2, 2, 3, 2, 3, 3, 3, 3, 2, 3, 3, 3, 3, 2, 3,
 ```
-3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3]])
+3, 3, 3, 2, 3, 3, 3, 3, 3, 3, 3, 3] ])
 ```
 ```
 This can also be achieved by providing an argument n_clusters to HClust();
@@ -43440,11 +43440,11 @@ to HClust() or height to cut_tree().
 In [44]: cut_tree(linkage_comp , height =5)
 ```
 ```
-Out[44]: array ([[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+Out[44]: array ([ [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
 ```
 0, 0, 1, 0, 1, 1, 2, 1, 2, 2, 2, 2, 1, 2, 2, 2, 2, 1, 2,
 ```
-2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2]])
+2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2] ])
 ```
 To scale the variables before performing hierarchical clustering of the
 ```
@@ -46331,7 +46331,7 @@ fig , ax = plt.subplots ()
 ```
 label=r'$\alpha =%s$' % str(alpha))
 ```
-for alpha in [0.05 , 0.01, 0.001]]
+for alpha in [0.05 , 0.01, 0.001] ]
 ```
 ax.set_xscale('log')
 ```
@@ -46492,7 +46492,7 @@ manager to which each return corresponds.
 In [15]: returns = np.hstack ([ fund_mini.iloc[:,i] for i in range (5)])
 ```
 ```
-managers = np.hstack ([[i+1]*50 for i in range (5)])
+managers = np.hstack ([ [i+1]*50 for i in range (5)])
 ```
 ```
 tukey = pairwise_tukeyhsd(returns , managers)
@@ -46688,10 +46688,10 @@ for 2,308 genes.
 In [23]: Khan = load_data('Khan ')
 ```
 ```
-D = pd.concat ([Khan['xtrain '], Khan['xtest ']])
+D = pd.concat ([Khan['xtrain '], Khan['xtest '] ])
 ```
 ```
-D['Y'] = pd.concat ([Khan['ytrain '], Khan['ytest ']])
+D['Y'] = pd.concat ([Khan['ytrain '], Khan['ytest '] ])
 ```
 ```
 D['Y']. value_counts ()
@@ -46750,7 +46750,7 @@ In [25]: B = 10000
 Tnull = np.empty(B)
 ```
 ```
-D_ = np.hstack ([D2[gene_11], D4[gene_11 ]])
+D_ = np.hstack ([D2[gene_11], D4[gene_11 ] ])
 ```
 ```
 n_ = D2[gene_11 ]. shape [0]
@@ -46861,7 +46861,7 @@ D4[col],
 equal_var=True).statistic
 ```
 ```
-D_ = np.hstack ([D2[col], D4[col ]])
+D_ = np.hstack ([D2[col], D4[col ] ])
 ```
 ```
 D_null = D_.copy()

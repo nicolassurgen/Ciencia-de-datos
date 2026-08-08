@@ -34,6 +34,17 @@ Las reseñas de restaurantes, hoteles o productos en sitios como Yelp o Google e
 > [!tip] Un matiz: sirve para comparar, no para medir el promedio real
 > El promedio de estrellas de un solo lugar puede estar sesgado (solo opina quien tuvo una experiencia extrema). Pero si el **mismo sesgo** afecta a dos lugares comparables, comparar sus promedios entre sí puede seguir siendo razonablemente confiable — el sesgo "se cancela" en la comparación, aunque no en el valor absoluto.
 
+## Sesgos relacionados, pero distintos
+
+> [!note] Autoselección es un caso particular de un problema más general: el sesgo de muestreo
+> El **sesgo de muestreo** (*sampling bias*) es la categoría general: cualquier mecanismo por el cual la forma de seleccionar la muestra la hace no representativa de la población. La autoselección es **una causa concreta** de sesgo de muestreo (la decide el propio individuo), pero no la única — un método de reclutamiento que sistemáticamente excluye a cierto grupo (p. ej. encuestar solo por teléfono fijo, que excluye a quien no tiene) es sesgo de muestreo sin que nadie se haya "autoseleccionado".
+
+> [!note] Sesgo de confirmación: un problema distinto, sobre qué se cuenta, no sobre quién participa
+> El **sesgo de confirmación** (*confirmation bias*) es un sesgo hermano pero conceptualmente distinto: quien ya cree una afirmación tiende a recordar y compartir los casos que la confirman, y a pasar por alto los que la contradicen. La diferencia con la autoselección es dónde ocurre el sesgo — en autoselección, el sesgo está en **quién termina en la muestra**; en confirmación, está en **qué anécdotas o casos se eligen contar**, incluso a partir de la misma población de eventos. *Fuente: [[Think Stats – Exploratory Data Analysis in Python]], cap. 1.*
+
+> [!info] A futuro: un mecanismo de sesgo con causa distinta (length-biased sampling)
+> Existe otro sesgo emparentado pero con un mecanismo propio: cuando la probabilidad de que una unidad **aparezca** en la muestra es proporcional a su propio tamaño (por ejemplo, preguntarles a estudiantes "¿cuántos alumnos tiene tu clase?" sobrerrepresenta a las clases grandes, porque hay más alumnos ahí para responder), el promedio observado sobreestima sistemáticamente el promedio real — sin que nadie haya decidido "autoseleccionarse" ni haya un error de medición de por medio. No se desarrolla en detalle acá por ser un mecanismo distinto; queda señalado como referencia si la materia lo trata más adelante.
+
 ## Relación con validez externa
 
 > [!important] Es la razón detrás del ejemplo de la clase

@@ -44,6 +44,18 @@ print(largos_pico[::-1])  # al revés (paso negativo)
 > [!important] La convención más importante de Python: el final del rango NO se incluye
 > `secuencia[0:4]` toma las posiciones 0, 1, 2, 3 — la posición 4 queda **afuera**. Vale para texto, listas, tuplas y, más adelante, para filas y columnas de un DataFrame de Pandas. Conviene que se vuelva automático, porque se repite en todo el lenguaje.
 
+## Slicing también sirve para asignar
+
+Un slice no solo **lee**: también se puede usar del lado izquierdo de un `=` para **reemplazar** un tramo de una lista por otra secuencia, incluso de distinta longitud:
+
+```python
+largos_pico = [39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2]
+largos_pico[1:3] = [99.9, 88.8, 77.7]   # reemplaza 2 elementos por 3
+print(largos_pico)   # [39.1, 99.9, 88.8, 77.7, 36.7, 39.3, 38.9, 39.2]
+```
+
+La lista se **achica o agranda** según haga falta para acomodar los nuevos valores — no hace falta que la parte reemplazada y el reemplazo tengan el mismo tamaño. *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+
 ## También aplica a texto
 
 ```python

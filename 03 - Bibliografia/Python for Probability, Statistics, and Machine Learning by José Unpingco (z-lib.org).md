@@ -533,7 +533,7 @@ over each of the elements in the array. That looping happens in the compiled np.
 function itself. Otherwise, we would have to do looping explicitly as in the following:
 ```
 ```
->>> from math import sin>>> [sin(i) for i in [1,2,3]] # list comprehension
+>>> from math import sin>>> [sin(i) for i in [1,2,3] ] # list comprehension
 ```
 [0.8414709848078965, 0.9092974268256817, 0.1411200080598672]
 Numpy uses common-sense casting rules to resolve the output types. For example,
@@ -579,22 +579,22 @@ You can also select sub-sections of arrays by using slicing as shown below.
 >>> x=np.array([ [1,2,3],[4,5,6] ])>>> x
 ```
 ```
-array([[1, 2, 3],[4, 5, 6]])
+array([ [1, 2, 3],[4, 5, 6] ])
 ```
 ```
->>> x[:,1:] # all rows, 1st thru last columnarray([[2, 3],
+>>> x[:,1:] # all rows, 1st thru last columnarray([ [2, 3],
 ```
 ```
-[5, 6]])>>> x[:,::2] # all rows, every other column
+[5, 6] ])>>> x[:,::2] # all rows, every other column
 ```
 ```
-array([[1, 3],[4, 6]])
+array([ [1, 3],[4, 6] ])
 ```
 ```
->>> x[:,::-1] # reverse order of columnsarray([[3, 2, 1],
+>>> x[:,::-1] # reverse order of columnsarray([ [3, 2, 1],
 ```
 ```
-[6, 5, 4]])
+[6, 5, 4] ])
 ```
 1.2.1 Numpy Arrays and Memory
 Some interpreted languages implicitly allocate memory. For example, in Matlab,
@@ -637,32 +637,32 @@ like the following
 >>> x = np.ones((3,3))>>> x
 ```
 ```
-array([[ 1., 1., 1.],[ 1., 1., 1.],
+array([ [ 1., 1., 1.],[ 1., 1., 1.],
 ```
 ```
-[ 1., 1., 1.]])>>> x[:,[0,1,2,2]] # notice duplicated last dimension
+[ 1., 1., 1.] ])>>> x[:,[0,1,2,2] ] # notice duplicated last dimension
 ```
 ```
-array([[ 1., 1., 1., 1.],[ 1., 1., 1., 1.],
+array([ [ 1., 1., 1., 1.],[ 1., 1., 1., 1.],
 ```
 ```
-[ 1., 1., 1., 1.]])>>> y=x[:,[0,1,2,2]] # same as above, but do assign it to y
+[ 1., 1., 1., 1.] ])>>> y=x[:,[0,1,2,2] ] # same as above, but do assign it to y
 ```
 Because of advanced indexing, the variable y has its own memory because the
 relevant parts of x were copied. To prove it, we assign a new element to x and see
 that y is not updated.
 >>> x[0,0]=999 # change element in x>>> x # changed
 ```
-array([[ 999., 1., 1.],[ 1., 1., 1.],
+array([ [ 999., 1., 1.],[ 1., 1., 1.],
 ```
 ```
-[ 1., 1., 1.]])>>> y # not changed!
+[ 1., 1., 1.] ])>>> y # not changed!
 ```
 ```
-array([[ 1., 1., 1., 1.],[ 1., 1., 1., 1.],
+array([ [ 1., 1., 1., 1.],[ 1., 1., 1., 1.],
 ```
 ```
-[ 1., 1., 1., 1.]])
+[ 1., 1., 1., 1.] ])
 ```
 ```
 However, if we start over and construct y by slicing (which makes it a view) as shown
@@ -674,13 +674,13 @@ the same memory.
 ```
 >>> x[0,0] = 999 # change value>>> x
 ```
-array([[ 999., 1., 1.], # see the change?[ 1., 1., 1.],
+array([ [ 999., 1., 1.], # see the change?[ 1., 1., 1.],
 ```
 ```
-[ 1., 1., 1.]])>>> y
+[ 1., 1., 1.] ])>>> y
 ```
 ```
-array([[ 999., 1.], # changed y also![ 1., 1.]])
+array([ [ 999., 1.], # changed y also![ 1., 1.] ])
 ```
 Note that if you want to explicitly force a copy without any indexing tricks, you
 ```
@@ -691,7 +691,7 @@ indexing versus slicing.
 >>> x = np.arange(5) # create array>>> x
 ```
 ```
-array([0, 1, 2, 3, 4])>>> y=x[[0,1,2]] # index by integer list to force copy
+array([0, 1, 2, 3, 4])>>> y=x[ [0,1,2] ] # index by integer list to force copy
 ```
 ```
 >>> yarray([0, 1, 2])
@@ -725,12 +725,12 @@ not actually consume additional memory,
 >>> y=as_strided(x,(7,4),(8,4)) # overlapped entries>>> y
 ```
 ```
-array([[ 0, 1, 2, 3],[ 2, 3, 4, 5],
+array([ [ 0, 1, 2, 3],[ 2, 3, 4, 5],
 ```
 [ 4, 5, 6, 7],[ 6, 7, 8, 9],
 [ 8, 9, 10, 11],[10, 11, 12, 13],
 ```
-[12, 13, 14, 15]])
+[12, 13, 14, 15] ])
 ```
 The above code creates a range of integers and then overlaps the entries to create a
 7 × 4 Numpy array. The final argument in the as_strided function are the strides,
@@ -755,7 +755,7 @@ array([99, 1, 99, 3, 99, 5, 99, 7, 99, 9, 99, 11, 99, 13, 99, 15])
 ```
 >>> y # the changes appear because y is a view
 ```
-array([[99, 1, 99, 3],
+array([ [99, 1, 99, 3],
 ```
 [99, 3, 99, 5],
 [99, 5, 99, 7],
@@ -763,7 +763,7 @@ array([[99, 1, 99, 3],
 [99, 9, 99, 11],
 [99, 11, 99, 13],
 ```
-[99, 13, 99, 15]])
+[99, 13, 99, 15] ])
 ```
 Bear in mind that as_strided does not check that you stay within memory block
 bounds. So, if the size of the target matrix is not filled by the available data, the
@@ -779,11 +779,11 @@ code,
 >>> k = 5 # desired number of rows>>> y = as_strided(x,(k,n-k+1),(x.itemsize,)*2)
 ```
 ```
->>> yarray([[0, 1, 2, 3],
+>>> yarray([ [0, 1, 2, 3],
 ```
 [1, 2, 3, 4],[2, 3, 4, 5],
 ```
-[3, 4, 5, 6],[4, 5, 6, 7]])
+[3, 4, 5, 6],[4, 5, 6, 7] ])
 ```
 1.2.2 Numpy Matrices
 Matrices in Numpy are similar to Numpy arrays but they can only have two dimen-
@@ -792,26 +792,26 @@ multiplication. If you have two matrices you want to multiply, you can either cr
 them directly or convert them from Numpy arrays. For example, the following shows
 how to create two matrices and multiply them.
 ```
->>> import numpy as np>>> A=np.matrix([[1,2,3],[4,5,6],[7,8,9]])
+>>> import numpy as np>>> A=np.matrix([ [1,2,3],[4,5,6],[7,8,9] ])
 ```
 ```
->>> x=np.matrix([[1],[0],[0]])>>> A*x
+>>> x=np.matrix([ [1],[0],[0] ])>>> A*x
 ```
 ```
-matrix([[1],[4],
+matrix([ [1],[4],
 ```
 ```
-[7]])
+[7] ])
 ```
 This can also be done using arrays as shown below,
 ```
->>> A=np.array([[1,2,3],[4,5,6],[7,8,9]])>>> x=np.array([[1],[0],[0]])
+>>> A=np.array([ [1,2,3],[4,5,6],[7,8,9] ])>>> x=np.array([ [1],[0],[0] ])
 ```
 ```
->>> A.dot(x)array([[1],
+>>> A.dot(x)array([ [1],
 ```
 ```
-[4],[7]])
+[4],[7] ])
 ```
 Numpy arrays support elementwise multiplication, not row-column multiplication.
 You must use Numpy matrices for this kind of multiplication unless use the inner
@@ -840,16 +840,16 @@ copy=False flag to matrix avoids the expense of making a copy.
 >>> A*x
 10 1 Getting Started with Scientific Python
 ```
-array([[ 1., 1., 1.],[ 1., 1., 1.],
+array([ [ 1., 1., 1.],[ 1., 1., 1.],
 ```
 ```
-[ 1., 1., 1.]])>>> np.matrix(A)*x # row-column multiplication
+[ 1., 1., 1.] ])>>> np.matrix(A)*x # row-column multiplication
 ```
 ```
-matrix([[ 3.],[ 3.],
+matrix([ [ 3.],[ 3.],
 ```
 ```
-[ 3.]])
+[ 3.] ])
 ```
 1.2.3 Numpy Broadcasting
 Numpy broadcasting is a powerful way to make implicit multidimensional grids for
@@ -860,13 +860,13 @@ unit square as shown below,
 >>> X,Y=np.meshgrid(np.arange(2),np.arange(2))>>> X
 ```
 ```
-array([[0, 1],[0, 1]])
+array([ [0, 1],[0, 1] ])
 ```
 ```
->>> Yarray([[0, 0],
+>>> Yarray([ [0, 0],
 ```
 ```
-[1, 1]])
+[1, 1] ])
 ```
 Numpy’s meshgrid creates two-dimensional grids. The X and Y arrays have
 ```
@@ -878,10 +878,10 @@ corresponding entries match the coordinates of the vertices of the unit square (
 as in X+Y shown below, The output is the sum of the vertex coordinates of the unit
 square.
 ```
->>> X+Yarray([[0, 1],
+>>> X+Yarray([ [0, 1],
 ```
 ```
-[1, 2]])
+[1, 2] ])
 ```
 Because the two arrays have compatible shapes, they can be added together element-
 wise. It turns out we can skip a step here and not bother with meshgrid to implicitly
@@ -896,13 +896,13 @@ obtain the vertex coordinates by using broadcasting as shown below
 >>> yarray([0, 1])
 ```
 ```
->>> x + y[:,None] # add broadcast dimensionarray([[0, 1],
+>>> x + y[:,None] # add broadcast dimensionarray([ [0, 1],
 ```
 ```
-[1, 2]])>>> X+Y
+[1, 2] ])>>> X+Y
 ```
 ```
-array([[0, 1],[1, 2]])
+array([ [0, 1],[1, 2] ])
 ```
 On line 7 the None Python singleton tells Numpy to make copies of y along this
 dimension to create a conformable calculation. Note that np.newaxis can be used
@@ -920,28 +920,28 @@ with a more complicated example where we have differing array shapes.
 >>> X,Y = np.meshgrid(x,y)>>> X
 ```
 ```
-array([[0, 1], # duplicate by row[0, 1],
+array([ [0, 1], # duplicate by row[0, 1],
 ```
 ```
-[0, 1]])>>> Y
+[0, 1] ])>>> Y
 ```
 ```
-array([[0, 0], # duplicate by column[1, 1],
+array([ [0, 0], # duplicate by column[1, 1],
 ```
 ```
-[2, 2]])>>> X+Y
+[2, 2] ])>>> X+Y
 ```
 ```
-array([[0, 1],[1, 2],
+array([ [0, 1],[1, 2],
 ```
 ```
-[2, 3]])>>> x+y[:,None] # same as with meshgrid
+[2, 3] ])>>> x+y[:,None] # same as with meshgrid
 ```
 ```
-array([[0, 1],[1, 2],
+array([ [0, 1],[1, 2],
 ```
 ```
-[2, 3]])
+[2, 3] ])
 ```
 In this example, the array shapes are different, so the addition of x and y is
 not possible without Numpy broadcasting. The last line shows that broadcasting
@@ -973,14 +973,14 @@ are great use-cases for broadcasting.
 >>> z = np.array([0,1,2,3])>>> x+y[:,None]+z[:,None,None]
 ```
 ```
-array([[[0, 1],[1, 2],
+array([ [ [0, 1],[1, 2],
 ```
-[2, 3]],[[1, 2],
-[2, 3],[3, 4]],
-[[2, 3],[3, 4],
-[4, 5]],[[3, 4],
+[2, 3] ],[ [1, 2],
+[2, 3],[3, 4] ],
+[ [2, 3],[3, 4],
+[4, 5] ],[ [3, 4],
 ```
-[4, 5],[5, 6]]])
+[4, 5],[5, 6] ] ])
 ```
 12 1 Getting Started with Scientific Python
 1.2.4 Numpy Masked Arrays
@@ -4372,7 +4372,7 @@ Now, we can use the pd.cut function to group the x values in the following,
 3 (0.333, 0.667]4 (0.333, 0.667]
 ```
 ```
-Name: x, dtype: categoryCategories (3, object): [(0, 0.333] < (0.333, 0.667] < (0.667, 1]]
+Name: x, dtype: categoryCategories (3, object): [(0, 0.333] < (0.333, 0.667] < (0.667, 1] ]
 ```
 ```
 Note that the head() call above is only to limit the printout shown. The categories
@@ -6261,11 +6261,11 @@ Now, we can use this function to create a Numpy array of intervals, as in the ex
 ```
 >>> intervals= np.vstack([make_interval(i) for i in range(1,5)])>>> print intervals
 ```
-[[ 0. 1. ][ 0. 0.5 ]
+[ [ 0. 1. ][ 0. 0.5 ]
 [ 0.5 1. ][ 0. 0.33333333]
 [ 0.33333333 0.66666667][ 0.66666667 1. ]
 [ 0. 0.25 ][ 0.25 0.5 ]
-[ 0.5 0.75 ][ 0.75 1. ]]
+[ 0.5 0.75 ][ 0.75 1. ] ]
 ```
 The following function computes the bit string in our example, {X1, X2, . . . , X n },
 ```
@@ -6281,13 +6281,13 @@ array([1, 0, 1, 0, 0, 1, 0, 0, 0, 1])
 Now that we have the individual bit strings, to show convergence we want to show
 that the probability of each entry goes to a limit. For example, using ten realizations,
 ```
->>> print np.vstack([bits(u.rvs()) for i in range(10)])[[1 1 0 1 0 0 0 1 0 0]
+>>> print np.vstack([bits(u.rvs()) for i in range(10)])[ [1 1 0 1 0 0 0 1 0 0]
 ```
 [1 1 0 1 0 0 0 1 0 0][1 1 0 0 1 0 0 1 0 0]
 [1 0 1 0 0 1 0 0 1 0][1 0 1 0 0 1 0 0 1 0]
 [1 1 0 0 1 0 0 1 0 0][1 1 0 1 0 0 1 0 0 0]
 [1 1 0 0 1 0 0 1 0 0][1 1 0 0 1 0 0 1 0 0]
-[1 1 0 1 0 0 1 0 0 0]]
+[1 1 0 1 0 0 1 0 0 0] ]
 We want the limiting probability of a one in each column to convert to a limit. We
 can estimate this over 1000 realizations using the following code,
 ```
@@ -8732,7 +8732,7 @@ and ˆy j . Let’s see how this works in the code sample below (Fig. 3.13).
 >>> # mean along sample dimension>>> yhat = np.array([y_0,y_1]).mean(axis=1)
 ```
 ```
->>> a_,b_=np.linalg.solve(np.array([[x0,1],... [xn,1]]),yhat)
+>>> a_,b_=np.linalg.solve(np.array([ [x0,1],... [xn,1] ]),yhat)
 ```
 Programming Tip
 The prior code uses the solve function in the Numpy linalg module,
@@ -10426,10 +10426,10 @@ target data, we define the relevant matrices below,
 Q = np.eye(3)*0.1 # error covariance matrix# this is what we are trying estimate
 ```
 ```
-beta = matrix(ones((2,1)))W = matrix([[1,2],
+beta = matrix(ones((2,1)))W = matrix([ [1,2],
 ```
 ```
-[2,3],[1,1]])
+[2,3],[1,1] ])
 ```
 Then, we generate the noise terms and create the simulated data, y,
 ```
@@ -10837,7 +10837,7 @@ widths to create a separate kernel density estimator based on the D1 data,
 ```
 >>> train,test,_,_=train_test_split(d,d,test_size=0.5)>>> kdes=[KernelDensity(bandwidth=i).fit(train)
 ```
-... for i in [.05,0.1,0.2,0.3]]
+... for i in [.05,0.1,0.2,0.3] ]
 186 3 Statistics
 Programming Tip
 Note that the single underscore symbol in Python refers to the last evaluated
@@ -11201,16 +11201,16 @@ We can get this S matrix from the knr object as in the following,
 ```
 The todense part reformats the sparse matrix that is returned into a regular Numpy
 matrix. The following shows a subsection of this S matrix,
->>> print S[:5,:5][[ 0.33333333 0.33333333 0.33333333 0. 0. ]
+>>> print S[:5,:5][ [ 0.33333333 0.33333333 0.33333333 0. 0. ]
 [ 0.33333333 0.33333333 0.33333333 0. 0. ][ 0. 0.33333333 0.33333333 0.33333333 0. ]
-[ 0. 0. 0.33333333 0.33333333 0.33333333][ 0. 0. 0. 0.33333333 0.33333333]]
+[ 0. 0. 0.33333333 0.33333333 0.33333333][ 0. 0. 0. 0.33333333 0.33333333] ]
 The sub-blocks show the windows of the y data that are being processed by the
 nearest neighbor estimator. For example,
 ```
->>> print np.hstack([knr.predict(xin[:5]),(S*y)[:5]])#columns match[[ 0.55781314 0.55781314]
+>>> print np.hstack([knr.predict(xin[:5]),(S*y)[:5] ])#columns match[ [ 0.55781314 0.55781314]
 ```
 [ 0.55781314 0.55781314][-0.09768138 -0.09768138]
-[-0.46686876 -0.46686876][-0.10877633 -0.10877633]]
+[-0.46686876 -0.46686876][-0.10877633 -0.10877633] ]
 Or, more concisely checking all entries for approximate equality,
 ```
 >>> print np.allclose(knr.predict(xin),S*y)True
@@ -11464,7 +11464,7 @@ values, which must be correspondingly shaped, as in the following,
 LinearRegression(copy_X=True, fit_intercept=True, normalize=False)>>> lr.coef_
 ```
 ```
-array([[ 0.94211853]])
+array([ [ 0.94211853] ])
 ```
 Programming Tip
 ```
@@ -11546,12 +11546,12 @@ Next, we have to create a transformation from X to a polynomial of X,
 ```
 >>> qfit = PolynomialFeatures(degree=2) # quadratic>>> Xq = qfit.fit_transform(X)
 ```
->>> print Xq[[ 1 0 0]
+>>> print Xq[ [ 1 0 0]
 [ 1 1 1][ 1 2 4]
 [ 1 3 9][ 1 4 16]
 [ 1 5 25][ 1 6 36]
 [ 1 7 49][ 1 8 64]
-[ 1 9 81]]
+[ 1 9 81] ]
 Note there is an automatic constant term in the output 0th column where fit_
 transform has mapped the single-column input into a set of columns representing
 the individual polynomial terms. The middle column has the linear term, and the last
@@ -12036,14 +12036,14 @@ x-data is the following,
 In this example, we took a random set of 10-bit integers. To group these into, say,
 ten intervals, we simply use Numpy reshape as in the following,
 ```
->>> train.x.reshape(10,-1)array([[ 15, 30, 45, 65, 76, 82, 115, 145, 147],
+>>> train.x.reshape(10,-1)array([ [ 15, 30, 45, 65, 76, 82, 115, 145, 147],
 ```
 [158, 165, 174, 175, 181, 209, 215, 217, 232],[233, 261, 271, 276, 284, 296, 318, 350, 376],
 [384, 407, 410, 413, 452, 464, 472, 511, 522],[525, 527, 531, 534, 544, 545, 548, 567, 567],
 [584, 588, 610, 610, 641, 645, 648, 659, 667],[676, 683, 684, 697, 701, 703, 733, 736, 750],
 [754, 755, 772, 776, 790, 794, 798, 804, 830],[831, 834, 861, 883, 910, 910, 911, 911, 937],
 ```
-[943, 946, 947, 955, 962, 962, 984, 989, 998]])
+[943, 946, 947, 955, 962, 962, 984, 989, 998] ])
 ```
 ```
 where every row is one of the groups. Note that the range of each group (i.e., length
@@ -12084,7 +12084,7 @@ So far, this defines the training. To predict using this method, we have to extr
 edges from each of the groups and then fill in with the group-wise mean we just
 computed for y. The following code extracts the edges of each group.
 ```
->>> le,re=train.x.reshape(10,-1)[:,[0,-1]].T>>> print le # left edge of group
+>>> le,re=train.x.reshape(10,-1)[:,[0,-1] ].T>>> print le # left edge of group
 ```
 [ 15 158 233 384 525 584 676 754 831 943]>>> print re # right edge of group
 [147 232 376 522 567 667 750 830 937 998]
@@ -12186,12 +12186,12 @@ matrix as shown in the next code block,
 ```
 >>> from sklearn.metrics import confusion_matrix>>> cmx=confusion_matrix(test.y.values,fi[test.x].values)
 ```
->>> print cmx[[ 1 0 0 0 0 0 0 0 0 0]
+>>> print cmx[ [ 1 0 0 0 0 0 0 0 0 0]
 [ 1 0 1 0 1 1 0 0 0 0][ 0 0 3 9 7 4 0 0 0 5]
 [ 1 0 3 23 19 6 6 0 2 0][ 0 0 1 26 27 14 27 2 2 0]
 [ 0 0 3 15 31 28 30 8 1 0][ 0 0 1 8 18 20 25 23 2 2]
 [ 1 0 1 10 5 13 7 19 3 6][ 4 0 1 2 0 2 2 7 4 3]
-[ 2 0 0 0 0 1 0 0 0 0]]
+[ 2 0 0 0 0 1 0 0 0 0] ]
 The rows of this 10×10 matrix show what the true class was and the columns indicate
 the class that the model predicted. The numbers in the matrix indicate the number of
 times that association was made. For example, the first row shows that there was one
@@ -12477,7 +12477,7 @@ the default automatic fitting of the intercept (Fig. 4.14).
 LinearRegression(copy_X=True, fit_intercept=False, normalize=False)>>> lr.coef_
 ```
 ```
-array([[ 2.0570357]])
+array([ [ 2.0570357] ])
 ```
 Programming Tip
 Note that we designed gen_sindata to return a tuple to use the automatic
@@ -12785,9 +12785,9 @@ Let’s also create some example data,
 ```
 >>> import numpy as np>>> M=np.fromfunction(lambda i,j:j>=2,(4,4)).astype(int)
 ```
->>> print M[[0 0 1 1]
+>>> print M[ [0 0 1 1]
 [0 0 1 1][0 0 1 1]
-[0 0 1 1]]
+[0 0 1 1] ]
 Programming Tip
 The fromfunction creates Numpy arrays using the indicies as inputs to a
 ```
@@ -12810,17 +12810,17 @@ Y = {0, 1} Now, let’s extract those elements and construct the training set.
 ```
 >>> y = j.reshape(-1,1)*0 # 0 elements>>> print x
 ```
-[[0 0][0 1]
+[ [0 0][0 1]
 [1 0][1 1]
 [2 0][2 1]
-[3 0][3 1]]
->>> print y[[0]
+[3 0][3 1] ]
+>>> print y[ [0]
 [0][0]
 [0][0]
 [0][0]
-[0]]
+[0] ]
 Thus, the elements of x are the two-dimensional indicies of the values of y. For
-example, M[x[0,0],x[0,1]] = y[0,0]. Likewise, to complete the training
+example, M[x[0,0],x[0,1] ] = y[0,0]. Likewise, to complete the training
 set, we just need to stack the rest of the data to cover all the cases,
 ```
 >>> i,j = np.where(M==1)>>> x=np.vstack([np.vstack([i,j]).T,x ]) # build nsamp x nfeatures
@@ -12902,8 +12902,8 @@ list in each of the nodes shows the distribution of elements in each category at
 node.
 To make this example more interesting, we can contaminate the data slightly,
 >>> M[1,0]=1 # put in different class>>> print M # now contaminated
-[[0 0 1 1][1 0 1 1]
-[0 0 1 1][0 0 1 1]]
+[ [0 0 1 1][1 0 1 1]
+[0 0 1 1][0 0 1 1] ]
 Now we have a 1 entry in the previously pure first column’s second row.
 ```
 >>> i,j = np.where(M==0)>>> x=np.vstack([i,j]).T
@@ -12937,24 +12937,24 @@ This makes the Gini coefficient for the 0th node equal to 716
 0.492. As before, the root node splits on X[1] ≤ 1.5. Let’s see if we can reconstruct
 the succeeding layer of nodes manually, as in the following,
 ```
->>> y[x[:,1]>1.5] # first node on the rightarray([[1],
+>>> y[x[:,1]>1.5] # first node on the rightarray([ [1],
 ```
 [1],[1],
 [1],[1],
 [1],[1],
 ```
-[1]])
+[1] ])
 ```
 This obviously has a zero Gini coefficient. Likewise, the node on the left contains
 the following,
 ```
->>> y[x[:,1]<=1.5] # first node on the leftarray([[1],
+>>> y[x[:,1]<=1.5] # first node on the leftarray([ [1],
 ```
 [0],[0],
 [0],[0],
 [0],[0],
 ```
-[0]])
+[0] ])
 ```
 4.4 Decision Trees 229
 Fig. 4.18 Decision tree for contaminated data. Note that just one change in the training data caused
@@ -12974,11 +12974,11 @@ False, True, True, False, True, False, True], dtype=bool)
 ```
 with corresponding classes,
 ```
->>> y[np.logical_and(x[:,1]<=1.5,x[:,1]>0.5)]array([[0],
+>>> y[np.logical_and(x[:,1]<=1.5,x[:,1]>0.5)]array([ [0],
 ```
 [0],[0],
 ```
-[0]])
+[0] ])
 ```
 Programming Tip
 The logical_and in Numpy provides element-wise logical conjuction. It
@@ -13522,13 +13522,13 @@ convex optimization modules in Python that can help.
 >>> from cvxpy import Variable, Problem, Minimize, norm1, norm2>>> x=Variable(2,1,name=’x’)
 ```
 ```
->>> constr=[np.matrix([[1,2]])*x==1]>>> obj=Minimize(norm1(x))
+>>> constr=[np.matrix([ [1,2] ])*x==1]>>> obj=Minimize(norm1(x))
 ```
 ```
 >>> p= Problem(obj,constr)>>> p.solve()
 ```
 0.49999999996804073>>> print x.value
-[[ 6.20344267e-10][ 5.00000000e-01]]
+[ [ 6.20344267e-10][ 5.00000000e-01] ]
 4.6 Regularization 243
 Programming Tip
 The cvxy module provides a unified and accessible interface to the powerful
@@ -13546,13 +13546,13 @@ because they correspond to a substantially different L1 ball.
 To double-check our earlier L2 result, we can also use the cvxpy module to find
 the L2 solution as in the following code,
 ```
->>> constr=[np.matrix([[1,2]])*x==1]>>> obj=Minimize(norm2(x)) #L2 norm
+>>> constr=[np.matrix([ [1,2] ])*x==1]>>> obj=Minimize(norm2(x)) #L2 norm
 ```
 ```
 >>> p= Problem(obj,constr)>>> p.solve()
 ```
 0.4472135953578661>>> print x.value
-[[ 0.2][ 0.4]]
+[ [ 0.2][ 0.4] ]
 Fig. 4.28 The diamond is
 the L1 ball in two
 dimensions and the line is
@@ -13574,7 +13574,7 @@ The only change to the code is the L2 norm and we get the same solution as befor
 Let’s see what happens in higher dimensions for both L2 and L1 as we move from
 two dimensions to four dimensions.
 ```
->>> x=Variable(4,1,name=’x’)>>> constr=[np.matrix([[1,2,3,4]])*x==1]
+>>> x=Variable(4,1,name=’x’)>>> constr=[np.matrix([ [1,2,3,4] ])*x==1]
 ```
 ```
 >>> obj=Minimize(norm1(x))>>> p= Problem(obj,constr)
@@ -13582,19 +13582,19 @@ two dimensions to four dimensions.
 ```
 >>> p.solve()0.24999999913550727
 ```
->>> print x.value[[ 3.88487127e-10]
+>>> print x.value[ [ 3.88487127e-10]
 [ 8.33295433e-10][ 7.97158525e-10]
-[ 2.49999999e-01]]
+[ 2.49999999e-01] ]
 And also in the L2 case with the following code,
 ```
->>> constr=[np.matrix([[1,2,3,4]])*x==1]>>> obj=Minimize(norm2(x))
+>>> constr=[np.matrix([ [1,2,3,4] ])*x==1]>>> obj=Minimize(norm2(x))
 ```
 ```
 >>> p= Problem(obj,constr)>>> p.solve()
 ```
 0.18257418572129205>>> print x.value
-[[ 0.03333333][ 0.06666667]
-[ 0.1 ][ 0.13333333]]
+[ [ 0.03333333][ 0.06666667]
+[ 0.1 ][ 0.13333333] ]
 Note that the L1 solution has selected out only one dimension for the solution, as the
 other components are effectively zero. This is not so with the L2 solution, which has
 meaningful elements in multiple coordinates. This is because the L1 problem has
@@ -13627,14 +13627,14 @@ To make this concrete, let’s work this out using Sympy. First, let’s define 
 example X and y matrix,
 >>> import sympy as S>>> from sympy import Matrix
 ```
->>> X = Matrix([[1,2,3],... [3,4,5]])
+>>> X = Matrix([ [1,2,3],... [3,4,5] ])
 ```
 ```
->>> y = Matrix([[1,2]]).T
+>>> y = Matrix([ [1,2] ]).T
 ```
 Now, we can define our coefficient vector β using the following code,
 ```
->>> b0,b1,b2=S.symbols(’b:3’,real=True)>>> beta = Matrix([[b0,b1,b2]]).T # transpose
+>>> b0,b1,b2=S.symbols(’b:3’,real=True)>>> beta = Matrix([ [b0,b1,b2] ]).T # transpose
 ```
 Next, we define the objective function we are trying to minimize
 ```
@@ -13652,10 +13652,10 @@ objective function to zero.
 >>> sol=S.solve([obj.diff(i) for i in beta])>>> beta.subs(sol)
 ```
 ```
-Matrix([[ b2],
+Matrix([ [ b2],
 ```
 ```
-[-2*b2 + 1/2],[ b2]])
+[-2*b2 + 1/2],[ b2] ])
 ```
 Notice that the solution does not uniquely specify all the components of the beta
 variable. This is a consequence of the p < n nature of this problem where p = 2
@@ -13677,10 +13677,10 @@ This provides the solution of minimum length in the L2 sense,
 >>> betaL2=beta.subs(sol).subs(b2,S.Rational(1,6))>>> betaL2
 ```
 ```
-Matrix([[1/6],
+Matrix([ [1/6],
 ```
 ```
-[1/6],[1/6]])
+[1/6],[1/6] ])
 ```
 But what is so special about solutions of minimum length? For machine learning,
 driving the objective function to zero is symptomatic of overfitting the data. Usually,
@@ -13711,7 +13711,7 @@ Note that the alpha scales of the penalty for the ‖β‖2 . We set the fit_
 intercept=False argument to omit the extra offset term from our example.
 ```
 The corresponding solution is the following,
->>> print clf.coef_[[ 0.0428641 0.06113005 0.07939601]]
+>>> print clf.coef_[ [ 0.0428641 0.06113005 0.07939601] ]
 To double-check the solution, we can use some optimization tools from Scipy and
 our previous Sympy analysis, as in the following,
 ```
@@ -13735,17 +13735,17 @@ problem in one step using matrix algebra instead of calculus,
 >>> betaLS=X.T*(X*X.T).inv()*y>>> betaLS
 ```
 ```
-Matrix([[1/6],
+Matrix([ [1/6],
 ```
 ```
-[1/6],[1/6]])
+[1/6],[1/6] ])
 ```
 Notice that this solves the posited problem exactly,
 ```
 >>> X*betaLS-yMatrix([
 ```
 ```
-[0],[0]])
+[0],[0] ])
 ```
 This means that the first term in the objective function goes to zero,
 ‖y − XβL S ‖ = 0
@@ -13827,10 +13827,10 @@ minβ∈Rp ‖y − Xβ‖2 + α‖β‖1
 The interface in Scikit-learn is likewise the same. The following is the same problem
 as before using lasso instead of ridge regression,
 ```
->>> X = np.matrix([[1,2,3],... [3,4,5]])
+>>> X = np.matrix([ [1,2,3],... [3,4,5] ])
 ```
 ```
->>> y = np.matrix([[1,2]]).T>>> from sklearn.linear_model import Lasso
+>>> y = np.matrix([ [1,2] ]).T>>> from sklearn.linear_model import Lasso
 ```
 ```
 >>> lr = Lasso(alpha=1.0,fit_intercept=False)>>> _=lr.fit(X,y)
@@ -14353,10 +14353,10 @@ To make this concrete, let us simulate the situation with the following code,
 ```
 >>> S =c_[s1,s2,s3] # stack as columns
 ```
->>> # mixing matrix>>> A = matrix([[ 1, 1,1],
+>>> # mixing matrix>>> A = matrix([ [ 1, 1,1],
 ```
 ```
-... [0.5, -1,3],... [0.1, -2,8]])
+... [0.5, -1,3],... [0.1, -2,8] ])
 ```
 >>> X= S*A.T # do mixing
 ```

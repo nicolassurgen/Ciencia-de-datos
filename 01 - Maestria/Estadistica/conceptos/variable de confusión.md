@@ -38,6 +38,8 @@ Una variable de confusión no detectada es la causa más común de perder [[vali
 
 > [!info] A futuro: controlarla en un modelo
 > La forma numérica (no solo visual) de manejar esto es agregar la variable sospechosa **como predictora adicional** en un modelo de regresión múltiple: `smf.ols('calidad ~ proveedor + planta', data=df)` estima el efecto de `proveedor` *ya teniendo en cuenta* `planta`, en vez de mezclar ambos efectos. Ver [[02 - Regresion lineal (OLS y WLS)]] de statsmodels.
+>
+> Caso real citado en la bibliografía: al predecir el precio de venta de casas a partir solo de los metros cuadrados, **omitir el código postal** (una variable de confusión enorme en el mercado inmobiliario: la ubicación afecta tanto el tamaño típico de la casa como su precio) produce coeficientes contraintuitivos y difíciles de interpretar. Agregar el código postal al modelo es exactamente el mecanismo de "controlar" descripto arriba. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 4.*
 
 ## Relacionado
 - [[01 - Como dar sentido a los datos]]

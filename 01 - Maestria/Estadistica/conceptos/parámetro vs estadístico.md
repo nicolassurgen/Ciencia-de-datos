@@ -38,6 +38,9 @@ Esta distinción es el corazón de la **inferencia estadística**: casi todo lo 
 > [!important] Por qué importa
 > Cuando trabajamos con una muestra en lugar de un censo, no conocemos el parámetro: solo tenemos el estadístico. La inferencia estadística (intervalos de confianza, pruebas de hipótesis) se ocupa precisamente de **cuantificar qué tan bien** el estadístico estima al parámetro, y con qué margen de error.
 
+> [!tip] "Estimar" vs. "medir" — el mismo número, distinto énfasis según la disciplina
+> Un estadístico clásico suele decir que **estima** una medida (media, proporción): el foco está en la incertidumbre respecto del parámetro poblacional desconocido, que es justamente la distinción de esta nota. Un data scientist, trabajando con el mismo dato, suele decir que lo **mide**: el foco pasa a un objetivo de negocio concreto (¿cuánto vendimos?, ¿qué tasa de conversión tuvimos?), sin necesariamente preguntarse por la incertidumbre de generalizar a una población mayor. Es la misma cuenta, con un énfasis distinto según para qué se está usando. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 1.*
+
 > [!note] En código
 > `np.mean(muestra)`, `np.std(muestra, ddof=1)` (ver [[04 - Agregaciones y estadistica descriptiva]]) calculan el **estadístico**. El **parámetro** poblacional casi nunca se calcula — es lo que se busca estimar. Cuando llegue la inferencia formal (intervalos de confianza, pruebas de hipótesis), esas herramientas viven en [[06 - Tests de hipotesis - una y dos muestras]] y [[08 - Metodos de remuestreo]] de SciPy.
 

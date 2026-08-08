@@ -101,7 +101,12 @@ Gráficos apropiados para una cualitativa:
 - **Diagrama de Pareto** → barras **ordenadas de mayor a menor** + una **curva de frecuencia acumulada**.
 
 > [!example] El diagrama de Pareto y la regla 80/20
-> El Pareto ordena los motivos por frecuencia y superpone el porcentaje acumulado. Sirve para identificar los **"pocos vitales"**: las categorías que concentran la mayor parte del problema. Aquí, **Factura + Envases + Dimensiones** ya explican cerca del 70 % de las quejas → es donde conviene concentrar los esfuerzos de mejora. Es una de las herramientas clásicas de la gestión de la calidad. → [[diagrama de Pareto]]
+> El Pareto ordena los motivos por frecuencia y superpone el porcentaje acumulado. Sirve para identificar los **"pocos vitales"**: las categorías que concentran la mayor parte del problema. Aquí, **Factura + Envases + Dimensiones** ya explican cerca del 70 % de las quejas → es donde conviene concentrar los esfuerzos de mejora. Es una de las herramientas clásicas de la gestión de la calidad — junto con el histograma, el diagrama de Ishikawa, la estratificación y algunas otras que se van viendo en el curso, conforman las llamadas **"7 herramientas básicas de la calidad"**. → [[diagrama de Pareto]]
+>
+> Ojo: "frecuencia" no es la única forma de medir importancia en un Pareto — también se puede ordenar por **costo** o por **tiempo insumido**, y el resultado puede cambiar por completo qué categoría conviene priorizar. Ver el desarrollo de este matiz en [[diagrama de Pareto]].
+
+> [!tip] Evitar el gráfico de torta en la práctica
+> Aunque acá se lo menciona como opción, en la práctica profesional se tiende a **evitarlo**: comparar ángulos o áreas es más difícil visualmente que comparar la altura de barras alineadas. Un gráfico de barras casi siempre comunica lo mismo con menos ambigüedad.
 
 ### 3.2. Variable cuantitativa discreta — *Situación 2: imperfecciones por pieza*
 
@@ -118,7 +123,7 @@ Muestra aleatoria de $n = 50$ piezas metálicas; se contó el **número de imper
 Gráficos apropiados para una discreta:
 
 - **Diagrama de bastones** → un "palito" en cada valor entero, de altura igual a su frecuencia. **No** se usan barras anchas pegadas: los valores son puntos aislados, no intervalos.
-- **Función de distribución acumulada empírica** → gráfico **escalonado** que muestra $H_i$: para cada valor, qué proporción de datos es **menor o igual** a él. Salta en cada valor observado.
+- **Función de distribución acumulada empírica** → gráfico **escalonado** que muestra $H_i$: para cada valor, qué proporción de datos es **menor o igual** a él. Salta en cada valor observado. Desarrollo completo, con ejemplo de por qué es más fácil de leer que dos histogramas superpuestos al comparar grupos, en [[función de distribución acumulada (CDF empírica)]].
 
 ### 3.3. Variable cuantitativa continua — *Situación 3: diámetro de piezas*
 
@@ -139,11 +144,18 @@ Gráficos apropiados para una continua:
 
 - **Histograma** → barras **pegadas** (sin espacio entre ellas), porque los intervalos son contiguos. La superficie/altura representa la frecuencia de cada intervalo. Es el gráfico rey para ver la **forma** de la distribución.
 - **Polígono de frecuencias** → une los puntos medios de las cimas del histograma; ayuda a visualizar la silueta.
-- **Ojiva** (polígono de frecuencias acumuladas) → curva creciente de $H_i$; permite leer percentiles gráficamente.
-- **Diagrama de tallo y hoja (*stem-and-leaf*)** → muestra la forma **sin perder los datos originales**. La parte izquierda del "|" es el tallo (dígitos mayores) y la derecha son las hojas (último dígito). Es como un histograma acostado, pero conserva los valores.
+- **Ojiva** (polígono de frecuencias acumuladas) → curva creciente de $H_i$; permite leer percentiles gráficamente. Ver [[función de distribución acumulada (CDF empírica)]] para el desarrollo completo.
+- **Diagrama de tallo y hoja (*stem-and-leaf*)** → muestra la forma **sin perder los datos originales**. La parte izquierda del "|" es el tallo (dígitos mayores) y la derecha son las hojas (último dígito). Es como un histograma acostado, pero conserva los valores. Ver [[diagrama de tallo y hoja]] para la flexibilidad en cómo elegir tallo/hoja.
+- **Diagrama de puntos (dot plot)** → con pocas decenas de datos, cada observación se dibuja como un punto individual sobre una recta numérica, sin agrupar en absoluto — es el caso de los *dotplots* de diámetro y longitud usados más adelante para comparar las Máquinas 1 y 2 (sección 7). Ver [[diagrama de puntos (dot plot)]].
 
 > [!note] Ojo con la notación de intervalos
-> `(89, 92]` es **abierto a la izquierda y cerrado a la derecha**: incluye 92 pero no 89. Así cada dato cae en un único intervalo y no hay ambigüedad en los límites.
+> `(89, 92]` es **abierto a la izquierda y cerrado a la derecha**: incluye 92 pero no 89. Así cada dato cae en un único intervalo y no hay ambigüedad en los límites. Esta forma de definir los límites se llama **a límites nominales**; existe una alternativa, **a límites reales**, que usa intervalos abiertos con una cifra decimal extra (por ejemplo, `88,5 – 91,5`) para evitar depender de la convención de "abierto/cerrado" — ambas resuelven el mismo problema de ambigüedad, con notación distinta.
+
+> [!tip] ¿Cuántos intervalos usar? Una regla práctica
+> No hay una única respuesta correcta, pero una guía habitual es tomar la **raíz cuadrada** del número de datos como cantidad aproximada de intervalos: $k \approx \sqrt{n}$, y la amplitud de cada uno como $(y_{\max}-y_{\min})/k$, redondeada a un número "cómodo" para leer. Con muy pocos intervalos se pierde la forma de la distribución (todo cae en 2 o 3 barras); con demasiados, cada barra tiene tan pocos datos que el gráfico se vuelve ruidoso y deja de mostrar un patrón claro. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 2.*
+
+> [!warning] No borres los bins vacíos
+> Si un dato mucho más extremo que el resto obliga a usar intervalos de amplitud fija, pueden aparecer **bins sin ningún dato** antes de llegar a ese extremo. Son información real (muestran el salto entre el grueso de los datos y el valor atípico) y no deben eliminarse para que el gráfico se vea más prolijo.
 
 > [!note] En código
 > `sns.countplot()` / `sns.barplot()` para cualitativas, `sns.histplot(discrete=True)` para discretas, `sns.histplot()` / `sns.kdeplot()` para continuas — ver [[05 - Distribuciones (histplot, kdeplot, ecdfplot)]] y [[06 - Variables categoricas (boxplot, violinplot, barplot)]] de Seaborn. Todos parten de un DataFrame de Pandas, no de la tabla de frecuencias armada a mano.
@@ -158,6 +170,9 @@ Cuando la variable se registra **a lo largo del tiempo** y **no muestra un compo
 > El gráfico de mortalidad del ejército británico que mostró la profe (causas de muerte antes/después de la comisión sanitaria) es un ejemplo clásico: **es una serie de tiempo**, no una distribución de frecuencias. Lo relevante ahí es cómo **cae la mortalidad tras la intervención sanitaria**, algo que solo se ve respetando el eje temporal. (Es el mismo caso de Florence Nightingale que vimos en el Tema 1.) → [[series de tiempo]]
 
 **Regla práctica:** si hay tiempo y el proceso no es estable → **graficá contra el tiempo** (gráfico de secuencia/serie). Las distribuciones de frecuencias y las medidas de resumen que siguen suponen datos **sin estructura temporal** (o un proceso estable).
+
+> [!tip] Patrones típicos a buscar en una serie de tiempo
+> Al graficar contra el tiempo, conviene tener en mente algunas formas típicas que puede tomar el gráfico, porque cada una sugiere una causa distinta: **tendencia creciente o decreciente** sostenida, **comportamiento cíclico** (sube y baja de forma repetitiva), **cambio de nivel** (un salto puntual que se mantiene después), **cambio de variabilidad** (el proceso se vuelve más o menos disperso con el tiempo, aunque el centro no cambie), y **comportamiento estable** (sin ninguno de los patrones anteriores — el caso ideal si se busca un proceso bajo control). Un ejemplo de negocio moderno: las ventas trimestrales de un producto pueden mostrar a la vez una tendencia creciente año a año **y** un patrón estacional (una caída sistemática en el mismo trimestre de cada año) — dos patrones superpuestos en la misma serie. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 2.*
 
 ---
 
@@ -174,6 +189,9 @@ Volviendo a estudios **sin tiempo**, la **forma** del histograma (o del tallo y 
 
 También importa el **número de modas** (picos): unimodal (uno), bimodal (dos), etc. Un histograma bimodal suele ser señal de que hay **dos grupos mezclados** (ver estratificación abajo).
 
+> [!note] Un chequeo cuantitativo, no solo visual
+> En una distribución razonablemente simétrica, la mediana queda **equidistante** de $q_1$ y $q_3$ ($q_3 - \text{mediana} \approx \text{mediana} - q_1$); cuando esa igualdad se rompe para un lado, es una señal cuantitativa de asimetría. La descripción cualitativa de arriba ("cola a la derecha/izquierda") también se puede resumir en un solo número — ver [[coeficiente de asimetría (skewness)]].
+
 ---
 
 ## 6. La distribución frente a especificaciones (valores de referencia)
@@ -183,17 +201,22 @@ Un histograma cobra más sentido cuando se lo mira **contra lo que se pretende**
 > [!tip] Estratificar para encontrar la causa
 > Los "datos globales" pueden ocultar comportamientos distintos. Al **estratificar** (separar) los mismos pesos **por máquina**, aparece que cada máquina tiene su propio centro y dispersión. La estratificación es clave para pasar de "hay variabilidad" a "**esta** es la fuente de la variabilidad". → [[estratificación]]
 
+> [!important] Centrado y variabilidad, juntos, determinan si un proceso cumple
+> Cumplir una especificación no depende solo de la dispersión ni solo del centrado: depende de **ambos a la vez**. Un proceso puede estar perfectamente centrado en el valor objetivo pero tener tanta variabilidad que igual se salga de los límites; o tener muy poca variabilidad pero estar descentrado y quedar sistemáticamente corrido hacia un límite. Hay cuatro combinaciones posibles: (1) bien centrado y variabilidad aceptable → cumple; (2) mal centrado, variabilidad aceptable → no cumple, pero se arregla ajustando el centro del proceso; (3) bien centrado, variabilidad excesiva → no cumple, y hace falta reducir la dispersión (una intervención distinta, sobre las fuentes de variabilidad); (4) mal centrado y variabilidad excesiva → no cumple por las dos razones a la vez. Distinguir en cuál de los cuatro casos está un proceso real es lo que decide qué tipo de intervención corresponde.
+>
+> Una forma descriptiva de cuantificar "variabilidad aceptable": construir los intervalos $\bar y \pm k s$ para $k=1,2,3$ y ver qué proporción de los datos cae dentro de cada uno. En datos razonablemente simétricos y sin atípicos extremos suele encontrarse algo así como 66-70 % dentro de $\bar y \pm s$, 95-96 % dentro de $\bar y \pm 2s$, y prácticamente el 100 % dentro de $\bar y \pm 3s$ — con datos muy asimétricos estos porcentajes cambian, así que conviene verificarlos con los datos reales en vez de asumirlos. Desarrollo completo en [[medidas de dispersión]]. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 2.*
+
 ---
 
 ## 7. ¿En qué difieren dos conjuntos de datos?
 
-Al comparar varios conjuntos (los *dotplots* de diámetro y longitud de las Máquinas 1 y 2), conviene mirar **tres dimensiones**:
+Al comparar varios conjuntos (los [[diagrama de puntos (dot plot)|dotplots]] de diámetro y longitud de las Máquinas 1 y 2), conviene mirar **tres dimensiones**:
 
 1. **Centro / posición** → ¿alrededor de qué valor se ubican? (¿una máquina produce piezas sistemáticamente más grandes?)
 2. **Dispersión / variabilidad** → ¿qué tan concentrados o esparcidos están? (¿una máquina es más consistente que la otra?)
 3. **Forma** → ¿simétrica, asimétrica, con atípicos?
 
-Para cuantificar esto necesitamos **medidas de centrado** y **medidas de variabilidad**.
+Para cuantificar esto necesitamos **medidas de centrado** y **medidas de variabilidad**. Además del dotplot, la forma habitual de comparar grupos con un [[boxplot]] es dibujar uno **al lado del otro**, uno por grupo — ver [[boxplot]] para el detalle.
 
 ---
 
@@ -214,6 +237,12 @@ Para cuantificar esto necesitamos **medidas de centrado** y **medidas de variabi
 
 > [!definition] Moda
 > El valor o categoría **más frecuente**. Es la única medida de centro que también sirve para variables **cualitativas nominales**.
+>
+> Para una variable **cuantitativa continua sin agrupar**, la moda casi nunca es informativa: al no repetirse casi ningún valor exactamente, "el más frecuente" suele ser un artefacto de la precisión de medición. Ahí conviene agruparla en intervalos (sección 3.3) y hablar de la **clase modal**, o directamente mirar la forma con un histograma.
+
+> [!info] Ver también (no visto en clase) — Media geométrica
+> $$\bar{y}_G = \sqrt[n]{y_1 \cdot y_2 \cdots y_n}$$
+> Solo se define para valores positivos, y es menos sensible a atípicos que la media aritmética; se usa para promediar índices o tasas de crecimiento relativas, donde importa el efecto multiplicativo acumulado. Desarrollo completo en [[medidas de posición]].
 
 > [!note] ¿Qué medida puedo usar según la escala?
 > - **Nominal** → solo **moda**.
@@ -238,6 +267,11 @@ Con la **misma lógica de la mediana** se definen otros cortes de la distribuci�
 
 > [!warning] No siempre hay un valor exacto
 > Especialmente en **variables discretas**, puede no existir un dato que acumule *exactamente* ese porcentaje. Por eso hay **distintos métodos de interpolación** para estimar percentiles, y software distinto puede dar valores levemente distintos. Los percentiles se pueden calcular para variables de escala **ordinal o superior**.
+>
+> Uno de esos métodos, a modo de referencia: para el percentil de orden $\alpha$ sobre $n$ datos ordenados, se calcula $E=\alpha \cdot n$; si $E$ tiene parte decimal, el percentil es el dato en la posición $E$ redondeada hacia arriba; si $E$ es entero, se promedian los datos en las posiciones $E$ y $E+1$. Desarrollo completo (con ejemplo numérico paso a paso) en [[medidas de posición]].
+
+> [!note] Divisiones más finas: quintiles y deciles
+> La misma lógica de cuartiles/percentiles se aplica con **quintiles** (5 partes) y **deciles** (10 partes) — aparecen seguido al describir distribuciones de ingreso ("el quintil más rico", "el decil más pobre"), donde reportar solo la media tendría poco sentido por la asimetría típica de esos datos.
 
 ---
 
@@ -352,6 +386,9 @@ Resume la distribución con **cinco números** (el *five-number summary*, que en
 > [!example] En el ejemplo de las imperfecciones
 > `describe()`: Min 0 · Q1 0 · Mediana 1 · Media 0.84 · Q3 1 · Max 4; con [[03 - Estadistica descriptiva|`scipy.stats.iqr(x)`]] `= 1`. Como $q_3 + 1{,}5\cdot\text{RIQ} = 1 + 1{,}5 = 2{,}5$, las piezas con **3 y 4** imperfecciones aparecen como **atípicos** (los puntos por encima del bigote). El boxplot lo confirma visualmente. El comparar boxplot, tallo y hoja y diagrama de bastones del mismo conjunto muestra cómo cada gráfico ilumina algo distinto.
 
+> [!tip] El uso más frecuente: varios boxplots uno al lado del otro
+> Un solo boxplot ya sirve, pero donde más rinde es dibujando **uno por grupo** sobre el mismo eje — exactamente lo que hace falta para la pregunta de la sección 7 (¿en qué difieren la Máquina 1 y la Máquina 2?). Desarrollo completo, más la mención de un gráfico emparentado que muestra más detalle (el violin plot), en [[boxplot]].
+
 ---
 
 ## Mapa mental del tema
@@ -362,7 +399,8 @@ Resume la distribución con **cinco números** (el *five-number summary*, que en
 
 ## Conceptos para desarrollar en notas aparte
 - [[distribución de frecuencias]]
-- [[histograma]] · [[diagrama de tallo y hoja]] · [[boxplot]]
+- [[histograma]] · [[diagrama de tallo y hoja]] · [[boxplot]] · [[diagrama de puntos (dot plot)]]
+- [[función de distribución acumulada (CDF empírica)]] · [[coeficiente de asimetría (skewness)]]
 - [[diagrama de Pareto]] · [[diagrama de Ishikawa]]
 - [[medidas de posición]] · [[medidas de dispersión]]
 - [[robustez estadística]] · [[valores atípicos]]
@@ -375,6 +413,8 @@ Resume la distribución con **cinco números** (el *five-number summary*, que en
 3. ¿Por qué se divide por $n-1$ y no por $n$ al calcular la varianza muestral?
 4. En el ejemplo de las imperfecciones por pieza (Q1 = 0, Q3 = 1, RIQ = 1), ¿a partir de cuántas imperfecciones un dato se considera atípico según el criterio del boxplot?
 5. Si una distribución tiene atípicos, ¿por qué conviene describirla con mediana + RIQ en vez de media + desvío estándar?
+6. Un proceso puede estar perfectamente centrado en el valor objetivo y aun así no cumplir con la especificación — ¿cómo es posible? ¿Qué otra cosa hay que revisar además del centrado?
+7. ¿Qué diferencia hay entre agrupar datos en un histograma y agrupar percentiles? ¿Por qué un histograma y una tabla de percentiles no "cortan" los datos de la misma forma?
 
 ## Preguntas que me quedaron
 -

@@ -57,10 +57,32 @@ print(len(gentoos))    # 2
 
 También existen las versiones para diccionario (`{k: v for ...}`) y conjunto (`{v for ...}`), con la misma lógica.
 
+> [!example] Comprensión de diccionario como tabla de búsqueda
+> Un uso muy frecuente: convertir una lista en un diccionario que mapea cada valor a su posición, para poder preguntar "¿en qué posición está este dato?" en O(1) en vez de recorrer la lista entera (ver [[complejidad O(1) vs O(n)]]):
+> ```python
+> especies = ["Adelie", "Gentoo", "Chinstrap"]
+> posicion = {especie: i for i, especie in enumerate(especies)}
+> print(posicion)          # {'Adelie': 0, 'Gentoo': 1, 'Chinstrap': 2}
+> print(posicion["Gentoo"])  # 1  -> acceso directo, sin recorrer la lista
+> ```
+> *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+
+> [!tip] Comprensiones anidadas: aplanar una lista de listas
+> Cuando cada elemento de la colección es a su vez una colección, se puede recorrer ambos niveles en una sola comprensión, con dos `for` seguidos (se leen en el mismo orden en que se escribirían los `for` anidados):
+> ```python
+> grupos = [ ["Adelie", "Gentoo"], ["Chinstrap"], ["Adelie", "Adelie"] ]
+> aplanado = [especie for grupo in grupos for especie in grupo]
+> print(aplanado)   # ['Adelie', 'Gentoo', 'Chinstrap', 'Adelie', 'Adelie']
+> ```
+> Es exactamente el límite que menciona la regla práctica de abajo: dos niveles ya empiezan a costar de leer — a partir de ahí, casi siempre conviene el `for` explícito. *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+
 ## Cuándo usarla y cuándo no
 
 > [!tip] Regla práctica
 > Las comprensiones son ideales para **transformaciones simples de una línea**: aplicar una función, filtrar con una condición. Si hace falta más de una condición anidada, varios pasos, o un cuerpo largo, conviene escribir el `for` completo — el código corto no sirve de nada si nadie lo entiende a simple vista. Legibilidad por encima de compacidad.
+
+> [!info] A futuro: la versión que no guarda todo en memoria
+> Cambiar los corchetes por paréntesis, `(x**2 for x in range(100))`, da una **expresión generadora**: en vez de construir la lista completa de una vez, entrega los valores de a uno a medida que se piden. Útil cuando la colección es enorme y no hace falta tenerla completa en memoria al mismo tiempo. No se vio todavía en la materia — queda como referencia para cuando se trate `yield` y generadores en profundidad.
 
 ## Puente con Tecnologías
 

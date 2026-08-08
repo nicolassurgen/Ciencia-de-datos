@@ -37,6 +37,13 @@ fecha: 2026-08-03
 
 El boxplot se construye enteramente a partir de **percentiles**, que son medidas [[robustez estadística|robustas]]: no se distorsiona por la presencia de atípicos, a diferencia de un resumen basado en la media y el desvío estándar.
 
+## El uso más frecuente en la práctica: comparar grupos
+
+Un solo boxplot ya es útil, pero su valor real aparece al dibujar **varios uno al lado del otro**, uno por categoría, para comparar centro y dispersión entre grupos de un vistazo — por ejemplo, el porcentaje de vuelos demorados por aerolínea, o (como en la [[02 - El estudio de la variabilidad|clase 2]]) el diámetro de piezas producidas por la Máquina 1 vs. la Máquina 2. Es la forma gráfica natural de responder la pregunta "¿en qué difieren estos conjuntos de datos?", porque muestra a la vez si difieren en posición (cajas a distinta altura) y en dispersión (cajas de distinto tamaño).
+
+> [!tip] Un pariente que muestra más detalle: el violin plot
+> El boxplot resume la forma de la distribución en 5 números, lo cual puede **esconder** detalles como una distribución con dos picos (bimodal) o una fuerte concentración de datos en un punto. El **violin plot** dibuja la densidad completa de la distribución (como un histograma suavizado, espejado en ambos lados) en el mismo eje que usaría un boxplot, y puede revelar esas concentraciones que la caja no muestra. No se vio en clase, pero es el gráfico natural para cuando un boxplot "aplanado" deja dudas sobre la forma real de los datos — ver [[06 - Variables categoricas (boxplot, violinplot, barplot)]] de Seaborn.
+
 > [!note] En código
 > `sns.boxplot(data=df, x="grupo", y="valor")` en Seaborn (ver [[06 - Variables categoricas (boxplot, violinplot, barplot)]]) — el mismo criterio 1.5·RIQ de acá es el que usa para marcar los puntos como atípicos. `ax.boxplot()` en Matplotlib es la versión sin agrupar por categoría automáticamente. El RIQ que arma la caja se calcula directo con `scipy.stats.iqr(x)` (ver [[03 - Estadistica descriptiva]]).
 

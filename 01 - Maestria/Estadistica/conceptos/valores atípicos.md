@@ -40,6 +40,9 @@ Medidas como la **media** o la **varianza** usan **todos** los valores y los com
 
 No hay una regla única: depende de si el atípico es un error (se corrige o elimina, ver [[tratamiento primario]]) o un valor legítimo (se conserva, y conviene además reportar medidas robustas junto con las clásicas para no dar una imagen distorsionada).
 
+> [!example] Una fórmula no reemplaza el conocimiento del dominio
+> Con datos reales de duración de embarazo (en semanas), los valores más bajos observados fueron algo como `0, 4, 9, 13, 17, 18, 19, 20, 21, 22`. Aplicar mecánicamente 1.5·RIQ marcaría varios de ellos como atípicos, pero **no todos merecen el mismo tratamiento**: valores menores a 10 semanas son casi con certeza errores de carga (biológicamente no hay nacimiento posible); valores mayores a 30 semanas son casi con certeza partos prematuros reales, no errores; y el rango intermedio (10 a 30 semanas) es genuinamente ambiguo sin más contexto. En el extremo alto pasa algo parecido: un valor de 50 semanas es "médicamente improbable" y amerita revisión, aun si la fórmula no lo marcara como atípico. La conclusión práctica: el criterio 1.5·RIQ (o el z-score) es un **punto de partida para investigar**, no un veredicto automático — la decisión final de qué hacer con cada caso requiere conocimiento del dominio que la fórmula no tiene. *Fuente: [[Think Stats – Exploratory Data Analysis in Python]], cap. 2.*
+
 > [!note] En código
 > `sns.boxplot()` en Seaborn (ver [[06 - Variables categoricas (boxplot, violinplot, barplot)]]) ya marca los atípicos con el criterio 1.5·RIQ automáticamente.
 

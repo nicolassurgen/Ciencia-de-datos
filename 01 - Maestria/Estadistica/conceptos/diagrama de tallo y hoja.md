@@ -29,7 +29,11 @@ Cada fila es un "tallo" (por ejemplo, la decena) y cada dígito a la derecha es 
 
 A diferencia del histograma, que **agrupa y pierde el valor exacto** de cada dato dentro de su intervalo, el tallo y hoja conserva los **valores originales**: se puede reconstruir el conjunto de datos completo a partir del gráfico. Es especialmente útil para conjuntos de datos pequeños o medianos, donde perder el detalle no compensa.
 
+> [!tip] No hay una única forma de elegir tallo y hoja
+> La división en tallo/hoja del ejemplo (decenas | unidades) es solo una posibilidad. También puede tomarse la parte entera como tallo y el primer decimal como hoja, o centena/decena como tallo y unidad como hoja — la elección depende de la escala de los datos y de cuántos tallos distintos conviene mostrar. Si un mismo tallo termina concentrando demasiadas hojas (una fila muy larga que no deja ver la forma), se lo puede **partir en dos líneas** (por ejemplo, separando las hojas 0-4 de las 5-9 dentro del mismo tallo) para recuperar la resolución visual del gráfico.
+
 ## Relacionado
 - [[02 - El estudio de la variabilidad]]
 - [[histograma]]
+- [[diagrama de puntos (dot plot)]]
 - [[distribución de frecuencias]]

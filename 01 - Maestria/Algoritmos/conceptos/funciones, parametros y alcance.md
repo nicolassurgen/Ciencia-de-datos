@@ -94,10 +94,24 @@ print(f"{minimo:.1f} {maximo:.1f} {promedio:.1f}")   # 3300.0 4200.0 3750.0
 
 La función devuelve una **tupla**, que se reparte con el mismo desempaquetado visto en la clase 1 con listas y diccionarios.
 
+> [!tip] Alternativa: devolver un diccionario
+> Cuando son muchos los valores a devolver, una tupla obliga a recordar el **orden** exacto en el que se desempaquetan. Devolver un diccionario evita ese problema, a costa de un poco más de código al construirlo:
+> ```python
+> def resumir_dict(valores):
+>     return {"minimo": min(valores), "maximo": max(valores), "promedio": sum(valores)/len(valores)}
+>
+> r = resumir_dict([3750.0, 4200.0, 3300.0])
+> print(r["promedio"])   # 3750.0  <- se accede por nombre, no por posición
+> ```
+> *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+
 ## Alcance (*scope*): local vs. global
 
 - Las variables creadas **dentro** de una función son **locales**: nacen al invocarla y mueren al terminar. Afuera no existen.
 - Las creadas **fuera** son **globales**: la función puede **leerlas**, pero no modificarlas directamente.
+
+> [!note] El nombre completo: alcance LEGB
+> Python busca un nombre en cuatro niveles, en este orden: **L**ocal (dentro de la función actual) → **E**nclosing (si la función está anidada dentro de otra, el alcance de la función que la contiene) → **G**lobal (el módulo) → **B**uilt-in (funciones y nombres propios de Python, como `print` o `len`). Local y Global son los dos niveles que usan las funciones de esta nota; Enclosing aparece cuando una función se define dentro de otra (una función auxiliar interna, por ejemplo); Built-in es la razón por la que conviene evitar nombrar una variable propia `list` o `int` — taparía el nombre incorporado de Python en ese alcance. *Fuente: [[Data Structures and Algorithms with Python]], cap. 3.*
 
 ```python
 def calcular():
@@ -130,7 +144,17 @@ def incrementar_mal():
 incrementar_mal()   # UnboundLocalError: cannot access local variable 'contador'...
 ```
 
-Al **asignarle** un valor dentro de la función, Python considera a `contador` **local** en todo el cuerpo de la función — y entonces intenta leerla antes de que exista. Se puede forzar con `global contador`, pero casi nunca conviene: las funciones que modifican estado global son difíciles de seguir y de testear. La forma correcta es pasar el valor y devolverlo:
+Al **asignarle** un valor dentro de la función, Python considera a `contador` **local** en todo el cuerpo de la función — y entonces intenta leerla antes de que exista. Se puede forzar con `global contador`:
+
+```python
+contador = 0
+
+def incrementar_forzado():
+    global contador          # avisa: "contador de acá es la global, no una local nueva"
+    contador = contador + 1
+```
+
+pero casi nunca conviene — incluso la bibliografía lo desaconseja explícitamente: *"generalmente se desalienta el uso de `global`... puede ser señal de que hace falta una estructura distinta"*. Las funciones que modifican estado global son difíciles de seguir y de testear. La forma correcta es pasar el valor y devolverlo: *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
 
 ```python
 def incrementar_bien(valor):
@@ -141,6 +165,35 @@ contador = incrementar_bien(contador)
 contador = incrementar_bien(contador)
 print(contador)   # 2
 ```
+
+## Las funciones son objetos como cualquier otro
+
+En Python una función se puede guardar en una variable, meter en una lista, y pasar como argumento de otra función — igual que un número o un string:
+
+```python
+def sin_espacios(s):
+    return s.strip()
+
+def mayusculas(s):
+    return s.upper()
+
+operaciones = [sin_espacios, mayusculas]   # una lista de funciones, sin llamarlas (sin paréntesis)
+
+texto = "  hola  "
+for operacion in operaciones:
+    texto = operacion(texto)
+print(texto)   # HOLA
+```
+
+Esto abre la puerta a **funciones anónimas** (`lambda`) para casos de una sola línea, donde definir la función con `def` y ponerle nombre sería excesivo — típicamente como argumento de otra función:
+
+```python
+palabras = ["banana", "kiwi", "frutilla"]
+palabras.sort(key=lambda p: len(p))   # ordenar por longitud, sin escribir una función aparte
+print(palabras)   # ['kiwi', 'banana', 'frutilla']
+```
+
+`lambda p: len(p)` es equivalente a `def f(p): return len(p)`, pero sin nombre y en una sola expresión — no admite `if`/`for` completos ni varias líneas, solo una expresión que se evalúa y se devuelve. *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
 
 ## Puente con Estadística
 

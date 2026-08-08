@@ -72,6 +72,12 @@ if isla in ["Dream", "Torgersen"]:   # mismo resultado, más legible
     print("Isla chica")
 ```
 
+> [!tip] Evaluación de cortocircuito (*short-circuit*)
+> En `a or b`, si `a` ya es verdadero, Python **ni siquiera evalúa** `b` — el resultado ya está decidido. Lo mismo con `a and b`: si `a` es falso, `b` no se evalúa. Esto no es solo una curiosidad de rendimiento: permite escribir a propósito código como `dato is not None and dato > 0`, donde el segundo chequeo (`dato > 0`) solo se ejecuta si el primero ya garantizó que `dato` no es `None` — evitando así un error si se intentara comparar `None > 0`. *Fuente: [[Python-for-Data-Analysis]], cap. 2.*
+
+> [!note] Comparaciones encadenadas
+> Python permite escribir `3500 < masa < 4500` como una sola expresión, equivalente a `3500 < masa and masa < 4500` pero más legible — sintaxis propia de Python, no universal en otros lenguajes. *Fuente: [[Python-for-Data-Analysis]], cap. 2.*
+
 ## La trampa del truthy/falsy
 
 Dentro de un `if`, Python no exige literalmente `True`/`False`: convierte cualquier valor a un booleano implícito. Y varios valores "vacíos" cuentan como `False` aunque **no sean lo mismo que "falta el dato"**:
@@ -93,6 +99,16 @@ print(bool(0))                # False  <- entero cero
 > if masa is None:      # correcto: solo True cuando falta el dato
 >     ...
 > ```
+
+> [!note] `pass`: un bloque que no hace nada, a propósito
+> Como Python delimita bloques por sangría (no por llaves), un `if` no puede quedar con el cuerpo vacío — hace falta escribir algo. `pass` es una instrucción que literalmente no hace nada, y sirve para dejar un bloque "pendiente" mientras se decide qué va ahí, o para un caso que a propósito no requiere ninguna acción:
+> ```python
+> if masa is None:
+>     pass   # todavía no se decidió qué hacer con este caso
+> else:
+>     procesar(masa)
+> ```
+> *Fuente: [[Python-for-Data-Analysis]], cap. 2.*
 
 ## Puente con Estadística
 

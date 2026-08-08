@@ -40,7 +40,7 @@ print(a is b)  # True  -> son el mismo objeto
 print(a == b)  # True  -> además tienen el mismo contenido
 ```
 
-Si en cambio se copia con `b = a.copy()`, `a == b` sigue siendo `True` (mismo contenido) pero `a is b` pasa a ser `False` (son objetos distintos). Ver [[mutabilidad e inmutabilidad]] para el detalle de por qué esto importa con listas.
+Si en cambio se copia con `b = a.copy()`, `a == b` sigue siendo `True` (mismo contenido) pero `a is b` pasa a ser `False` (son objetos distintos). El fenómeno de que dos nombres compartan el mismo objeto (como `a` y `b` antes de copiar) tiene nombre propio: **aliasing** — ver [[mutabilidad e inmutabilidad]] para el detalle completo de por qué esto importa con listas.
 
 ## Regla práctica
 

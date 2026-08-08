@@ -33,16 +33,26 @@ fecha: 2026-08-03
 - **Cuantitativa discreta** → tabla por valor entero, con acumuladas. Gráficos: diagrama de bastones, función de distribución empírica.
 - **Cuantitativa continua** → los valores casi no se repiten, por lo que se agrupan en **intervalos de clase** (p. ej. `(89, 92]`, abierto a la izquierda y cerrado a la derecha, para que cada dato caiga en un único intervalo). Gráficos: [[histograma]], polígono de frecuencias, ojiva, [[diagrama de tallo y hoja]].
 
+> [!tip] En la práctica, se evita el gráfico de torta
+> Aunque es el más conocido para variables cualitativas, estadísticos y especialistas en visualización de datos tienden a **evitarlo**: comparar ángulos o áreas de porciones es visualmente más difícil que comparar la altura de barras alineadas sobre un mismo eje. Un gráfico de barras casi siempre comunica la misma información con menos ambigüedad. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 1.*
+
+> [!warning] El eje de frecuencias debe empezar en cero
+> Cortar el eje y de un gráfico de frecuencias/barras en un valor distinto de cero exagera visualmente las diferencias entre categorías o barras — dos valores que en realidad difieren poco pueden verse como si uno fuera varias veces más grande que el otro. Es una de las formas más comunes (y más fáciles de evitar) de generar una lectura distorsionada de los datos. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 2.*
+
 ## Cuándo NO usarla
 
 Si los datos tienen una **dimensión temporal** y el proceso no es estable, aplastar el tiempo en una distribución de frecuencias borra la información más relevante. En ese caso corresponde una [[series de tiempo|serie de tiempo]] en su lugar.
+
+> [!tip] Bins de igual tamaño vs. bins de igual conteo
+> Una tabla de frecuencias / [[histograma]] agrupa en intervalos de **igual amplitud** (y por lo tanto, distinta cantidad de datos en cada uno). Los [[medidas de posición|percentiles]] hacen exactamente lo opuesto: dividen los datos en grupos de **igual cantidad de observaciones** (cada percentil concentra la misma proporción de datos), lo que obliga a que los intervalos entre percentiles tengan **distinto ancho** — más angostos donde los datos se concentran, más anchos donde escasean. Son dos formas complementarias de "cortar" la misma distribución, y confundirlas lleva a esperar que un histograma y una tabla de percentiles corten los datos de la misma manera, cuando en general no es así.
 
 > [!note] En código
 > `df['columna'].value_counts()` en Pandas da la tabla de frecuencias absolutas de una variable cualitativa en una línea (`normalize=True` para relativas). Para graficarla: `sns.histplot()` (cuantitativas, ver [[05 - Distribuciones (histplot, kdeplot, ecdfplot)]]) o `sns.countplot()` (cualitativas, ver [[06 - Variables categoricas (boxplot, violinplot, barplot)]]) en Seaborn. Para las acumuladas por intervalo, `scipy.stats.cumfreq()` arma directo la columna $F_i$ agrupada en bins (ver [[04 - Frecuencias, cuantiles y percentiles]]).
 
 ## Relacionado
 - [[02 - El estudio de la variabilidad]]
-- [[histograma]] · [[diagrama de tallo y hoja]]
+- [[histograma]] · [[diagrama de tallo y hoja]] · [[diagrama de puntos (dot plot)]]
+- [[función de distribución acumulada (CDF empírica)]]
 - [[diagrama de Pareto]]
 - [[series de tiempo]]
 - [[05 - Distribuciones (histplot, kdeplot, ecdfplot)]]

@@ -5952,7 +5952,7 @@ Nevertheless, let’s use the model to make a prediction for the office pool. Su
 
 ```
 columns=['agepreg','hpagelb','birthord','race']
-new=pandas.DataFrame([[35,39,3,2]],columns=columns)
+new=pandas.DataFrame([ [35,39,3,2] ],columns=columns)
 =
 yresults.predict(new)
 ```
@@ -6108,7 +6108,7 @@ defGroupByDay(transactions,func=np.mean):
 
 ```
 =
-groupedtransactions[['date','ppg']].groupby('date')
+groupedtransactions[ ['date','ppg'] ].groupby('date')
 daily=grouped.aggregate(func)
 ```
 

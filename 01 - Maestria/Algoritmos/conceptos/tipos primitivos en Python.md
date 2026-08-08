@@ -28,6 +28,14 @@ fecha: 2026-08-03
 
 La función `type()` dice de qué tipo es un valor: `type(42)` → `int`, `type("Adelie")` → `str`, etc.
 
+> [!tip] En Python, `int` no tiene límite de tamaño
+> En muchos lenguajes (Java, C) un entero ocupa un tamaño fijo de memoria (por ejemplo 32 bits) y puede **desbordarse** (*overflow*) si el resultado de una cuenta supera ese límite, dando un resultado incorrecto sin avisar. El `int` de Python tiene **precisión arbitraria**: crece automáticamente para representar el número exacto, sin importar cuántos dígitos tenga.
+> ```python
+> print(17239871 ** 6)
+> # 26254519291092456596965462913230729701102721  <- exacto, 44 dígitos, sin overflow
+> ```
+> Es una comodidad que se da por sentada trabajando solo en Python, pero no es universal — vale la pena saber que existe el problema en otros lenguajes. *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1; [[Python-for-Data-Analysis]], cap. 2.*
+
 ## `int` vs `float`: por qué importa
 
 Un `int` es **exacto**; un `float` es una **aproximación** (la máquina guarda los decimales en una cantidad finita de bits — estándar **IEEE 754**), y de ahí salen sorpresas:

@@ -1033,8 +1033,8 @@ Feature 2<br>A A L]<br>A A A Aa a<br>L] AU Oo<br>A Training instances Oo<br>New 
 ```
 # Prepare the data
 country_stats=prepare_country_stats(oecd_bli, gdp_per_capita)
-X=np.c_[country_stats["GDP per capita"]]
-y=np.c_[country_stats["Life satisfaction"]]
+X=np.c_[country_stats["GDP per capita"] ]
+y=np.c_[country_stats["Life satisfaction"] ]
 ```
 
 ```
@@ -1055,8 +1055,8 @@ model.fit(X, y)
 
 ```
 # Make a prediction for Cyprus
-X_new= [[22587]]  # Cyprus's GDP per capita
-print(model.predict(X_new)) # outputs [[ 5.96242338]]
+X_new= [ [22587] ]  # Cyprus's GDP per capita
+print(model.predict(X_new)) # outputs [ [ 5.96242338] ]
 ```
 
 
@@ -1916,7 +1916,7 @@ So far we have only dealt with numerical attributes, but now let’s look at tex
 **Prepare the Data for Machine Learning Algorithms | 65** 
 
 ```
->>> housing_cat=housing[["ocean_proximity"]]
+>>> housing_cat=housing[ ["ocean_proximity"] ]
 >>> housing_cat.head(10)
       ocean_proximity
 17606       <1H OCEAN
@@ -1938,7 +1938,7 @@ It’s not arbitrary text: there are a limited number of possible values, each o
 >>> ordinal_encoder=OrdinalEncoder()
 >>> housing_cat_encoded=ordinal_encoder.fit_transform(housing_cat)
 >>> housing_cat_encoded[:10]
-array([[0.],
+array([ [0.],
        [0.],
        [4.],
        [1.],
@@ -1947,7 +1947,7 @@ array([[0.],
        [0.],
        [1.],
        [0.],
-       [0.]])
+       [0.] ])
 ```
 
 You can get the list of categories using the `categories_` instance variable. It is a list containing a 1D array of categories for each categorical attribute (in this case, a list containing a single array since there is just one categorical attribute): 
@@ -1979,13 +1979,13 @@ Notice that the output is a SciPy _sparse matrix_ , instead of a NumPy array. Th
 
 ```
 >>> housing_cat_1hot.toarray()
-array([[1., 0., 0., 0., 0.],
+array([ [1., 0., 0., 0., 0.],
        [1., 0., 0., 0., 0.],
        [0., 0., 0., 0., 1.],
        ...,
        [0., 1., 0., 0., 0.],
        [1., 0., 0., 0., 0.],
-       [0., 0., 0., 1., 0.]])
+       [0., 0., 0., 1., 0.] ])
 ```
 
 Once again, you can get the list of categories using the encoder’s `categories_` instance variable: 
@@ -2735,8 +2735,8 @@ Now you are ready to get the confusion matrix using the `confusion_matrix()` fun
 ```
 >>> fromsklearn.metricsimportconfusion_matrix
 >>> confusion_matrix(y_train_5, y_train_pred)
-array([[53057,  1522],
-       [ 1325,  4096]])
+array([ [53057,  1522],
+       [ 1325,  4096] ])
 ```
 
 Each row in a confusion matrix represents an _actual class_ , while each column repre‐ sents a _predicted class_ . The first row of this matrix considers non-5 images (the _nega‐ tive class_ ): 53,057 of them were correctly classified as non-5s (they are called _true negatives_ ), while the remaining 1,522 were wrongly classified as 5s ( _false positives_ ). The second row considers the images of 5s (the _positive class_ ): 1,325 were wrongly classified as non-5s ( _false negatives_ ), while the remaining 4,096 were correctly classi‐ fied as 5s ( _true positives_ ). A perfect classifier would have only true positives and true negatives, so its confusion matrix would have nonzero values only on its main diago‐ nal (top left to bottom right): 
@@ -2744,8 +2744,8 @@ Each row in a confusion matrix represents an _actual class_ , while each column 
 ```
 >>> y_train_perfect_predictions=y_train_5# pretend we reached perfection
 >>> confusion_matrix(y_train_5, y_train_perfect_predictions)
-array([[54579,     0],
-       [    0,  5421]])
+array([ [54579,     0],
+       [    0,  5421] ])
 ```
 
 The confusion matrix gives you a lot of information, but sometimes you may prefer a more concise metric. An interesting one to look at is the accuracy of the positive pre‐ dictions; this is called the _precision_ of the classifier (Equation 3-1). 
@@ -2901,8 +2901,8 @@ If you call the `decision_function()` method, you will see that it returns 10 sc
 ```
 >>> some_digit_scores=svm_clf.decision_function([some_digit])
 >>> some_digit_scores
-array([[ 2.92492871,  7.02307409,  3.93648529,  0.90117363,  5.96945908,
-         9.5       ,  1.90718593,  8.02755089, -0.13202708,  4.94216947]])
+array([ [ 2.92492871,  7.02307409,  3.93648529,  0.90117363,  5.96945908,
+         9.5       ,  1.90718593,  8.02755089, -0.13202708,  4.94216947] ])
 ```
 
 The highest score is indeed the one corresponding to class `5` : 
@@ -2955,8 +2955,8 @@ This time Scikit-Learn did not have to run OvR or OvO because SGD classifiers ca
 
 ```
 >>> sgd_clf.decision_function([some_digit])
-array([[-15955.22628, -38080.96296, -13326.66695,   573.52692, -17680.68466,
-          2412.53175, -25526.86498, -12290.15705, -7946.05205, -10631.35889]])
+array([ [-15955.22628, -38080.96296, -13326.66695,   573.52692, -17680.68466,
+          2412.53175, -25526.86498, -12290.15705, -7946.05205, -10631.35889] ])
 ```
 
 You can see that the classifier is fairly confident about its prediction: almost all scores are largely negative, while class `5` has a score of 2412.5. The model has a slight doubt regarding class `3` , which gets a score of 573.5. Now of course you want to evaluate this classifier. As usual, you can use cross-validation. Use the `cross_val_score()` func‐ tion to evaluate the `SGDClassifier` ’s accuracy: 
@@ -3024,7 +3024,7 @@ This code creates a `y_multilabel` array containing two target labels for each d
 
 ```
 >>> knn_clf.predict([some_digit])
-array([[False,  True]])
+array([ [False,  True] ])
 ```
 
 And it gets it right! The digit 5 is indeed not large ( `False` ) and odd ( `True` ). 
@@ -3223,8 +3223,8 @@ x
 
 ```
 >>> np.linalg.pinv(X_b).dot(y)
-array([[4.21509616],
-       [2.77011339]])
+array([ [4.21509616],
+       [2.77011339] ])
 ```
 
 The pseudoinverse itself is computed using a standard matrix factorization technique called _Singular Value Decomposition_ (SVD) that can decompose the training set matrix **X** into the matrix multiplication of three matrices **U Σ V**<sup>⊺</sup> (see `numpy.linalg.svd()` ). The pseudoinverse is computed as **X**<sup>+</sup> = **VΣ**<sup>+</sup> **U**<sup>⊺</sup> . To compute the matrix **Σ**<sup>+</sup> , the algorithm takes **Σ** and sets to zero all values smaller than a tiny threshold value, then it replaces all the nonzero values with their inverse, and finally it transposes the resulting matrix. This approach is more efficient than computing the Normal Equation, plus it handles edge cases nicely: indeed, the Normal Equation may not work if the matrix **X**<sup>⊺</sup> **X** is not invertible (i.e., singular), such as if _m_ < _n_ or if some features are redundant, but the pseudoinverse is always defined. 
@@ -3358,8 +3358,8 @@ By convention we iterate by rounds of _m_ iterations; each round is called an _e
 
 ```
 >>> theta
-array([[4.21076011],
-       [2.74856079]])
+array([ [4.21076011],
+       [2.74856079] ])
 ```
 
 Figure 4-10 shows the first 20 steps of training (notice how irregular the steps are). 
@@ -3524,8 +3524,8 @@ Here is how to perform Ridge Regression with Scikit-Learn using a closed-form so
 >>> fromsklearn.linear_modelimportRidge
 >>> ridge_reg=Ridge(alpha=1, solver="cholesky")
 >>> ridge_reg.fit(X, y)
->>> ridge_reg.predict([[1.5]])
-array([[1.55071465]])
+>>> ridge_reg.predict([ [1.5] ])
+array([ [1.55071465] ])
 ```
 
 And using Stochastic Gradient Descent:<sup>12</sup> 
@@ -3533,7 +3533,7 @@ And using Stochastic Gradient Descent:<sup>12</sup>
 ```
 >>> sgd_reg=SGDRegressor(penalty="l2")
 >>> sgd_reg.fit(X, y.ravel())
->>> sgd_reg.predict([[1.5]])
+>>> sgd_reg.predict([ [1.5] ])
 array([1.47012588])
 ```
 
@@ -3577,7 +3577,7 @@ Here is a small Scikit-Learn example using the `Lasso` class:
 >>> fromsklearn.linear_modelimportLasso
 >>> lasso_reg=Lasso(alpha=0.1)
 >>> lasso_reg.fit(X, y)
->>> lasso_reg.predict([[1.5]])
+>>> lasso_reg.predict([ [1.5] ])
 array([1.53788174])
 ```
 
@@ -3889,7 +3889,7 @@ The resulting model is represented on the left in Figure 5-4.
 Then, as usual, you can use the model to make predictions: 
 
 ```
->>> svm_clf.predict([[5.5, 1.7]])
+>>> svm_clf.predict([ [5.5, 1.7] ])
 array([1.])
 ```
 
@@ -4234,9 +4234,9 @@ Scikit-Learn uses the CART algorithm, which produces only _binary trees_ : nonle
 corresponding leaf node is the depth-2 left node, so the Decision Tree should output the following probabilities: 0% for _Iris setosa_ (0/54), 90.7% for _Iris versicolor_ (49/54), and 9.3% for _Iris virginica_ (5/54). And if you ask it to predict the class, it should out‐ put _Iris versicolor_ (class 1) because it has the highest probability. Let’s check this: 
 
 ```
->>> tree_clf.predict_proba([[5, 1.5]])
-array([[0.        , 0.90740741, 0.09259259]])
->>> tree_clf.predict([[5, 1.5]])
+>>> tree_clf.predict_proba([ [5, 1.5] ])
+array([ [0.        , 0.90740741, 0.09259259] ])
+>>> tree_clf.predict([ [5, 1.5] ])
 array([1])
 ```
 
@@ -4474,13 +4474,13 @@ The oob decision function for each training instance is also available through t
 
 ```
 >>> bag_clf.oob_decision_function_
-array([[0.31746032, 0.68253968],
+array([ [0.31746032, 0.68253968],
        [0.34117647, 0.65882353],
        [1.        , 0.        ],
        ...
        [1.        , 0.        ],
        [0.03108808, 0.96891192],
-       [0.57291667, 0.42708333]])
+       [0.57291667, 0.42708333] ])
 ```
 
 ##### **Random Patches and Random Subspaces** 
@@ -5213,7 +5213,7 @@ Solution 1 Solution 2 (with a different random init)<br>2.07 B-cacieaee’,. . o
 If you happen to know approximately where the centroids should be (e.g., if you ran another clustering algorithm earlier), then you can set the `init` hyperparameter to a NumPy array containing the list of centroids, and set `n_init` to `1` : 
 
 ```
-good_init=np.array([[-3, 3], [-3, 2], [-3, 1], [-1, 2], [0, 2]])
+good_init=np.array([ [-3, 3], [-3, 2], [-3, 1], [-1, 2], [0, 2] ])
 kmeans=KMeans(n_clusters=5, init=good_init, n_init=1)
 ```
 
@@ -5497,11 +5497,11 @@ The labels of all the instances are now available in the `labels_` instance vari
 >>> dbscan.core_sample_indices_
 array([ 0,  4,  5,  6,  7,  8, 10, 11, ..., 992, 993, 995, 997, 998, 999])
 >>> dbscan.components_
-array([[-0.02137124,  0.40618608],
+array([ [-0.02137124,  0.40618608],
        [-0.84192557,  0.53058695],
                   ...
        [-0.94355873,  0.3278936 ],
-       [ 0.79419406,  0.60777171]])
+       [ 0.79419406,  0.60777171] ])
 ```
 
 This clustering is represented in the lefthand plot of Figure 9-14. As you can see, it identified quite a lot of anomalies, plus seven different clusters. How disappointing! Fortunately, if we widen each instance’s neighborhood by increasing `eps` to 0.2, we get the clustering on the right, which looks perfect. Let’s continue with this model. 
@@ -5586,16 +5586,16 @@ Let’s look at the parameters that the algorithm estimated:
 >>> gm.weights_
 array([0.20965228, 0.4000662 , 0.39028152])
 >>> gm.means_
-array([[ 3.39909717,  1.05933727],
+array([ [ 3.39909717,  1.05933727],
        [-1.40763984,  1.42710194],
-       [ 0.05135313,  0.07524095]])
+       [ 0.05135313,  0.07524095] ])
 >>> gm.covariances_
-array([[[ 1.14807234, -0.03270354],
-        [-0.03270354,  0.95496237]],
-       [[ 0.63478101,  0.72969804],
-        [ 0.72969804,  1.1609872 ]],
-       [[ 0.68809572,  0.79608475],
-        [ 0.79608475,  1.21234145]]])
+array([ [ [ 1.14807234, -0.03270354],
+        [-0.03270354,  0.95496237] ],
+       [ [ 0.63478101,  0.72969804],
+        [ 0.72969804,  1.1609872 ] ],
+       [ [ 0.68809572,  0.79608475],
+        [ 0.79608475,  1.21234145] ] ])
 ```
 
 Great, it worked fine! Indeed, the weights that were used to generate the data were 0.2, 0.4, and 0.4; and similarly, the means and covariance matrices were very close to those found by the algorithm. But how? This class relies on the _ExpectationMaximization_ (EM) algorithm, which has many similarities with the K-Means algo‐ rithm: it also initializes the cluster parameters randomly, then it repeats two steps until convergence, first assigning instances to clusters (this is called the _expectation step_ ) and then updating the clusters (this is called the _maximization step_ ). Sounds familiar, right? In the context of clustering, you can think of EM as a generalization of K-Means that not only finds the cluster centers ( **μ**<sup>(1)</sup> to **μ**<sup>(</sup><sup>_k_)</sup> ), but also their size, shape, and orientation ( **Σ**<sup>(1)</sup> to **Σ**<sup>(</sup><sup>_k_)</sup> ), as well as their relative weights ( _ϕ_<sup>(1)</sup> to _ϕ_<sup>(</sup><sup>_k_)</sup> ). Unlike K- Means, though, EM uses soft cluster assignments, not hard assignments. For each instance, during the expectation step, the algorithm estimates the probability that it belongs to each cluster (based on the current cluster parameters). Then, during the maximization step, each cluster is updated using _all_ the instances in the dataset, with each instance weighted by the estimated probability that it belongs to that cluster. These probabilities are called the _responsibilities_ of the clusters for the instances. 
@@ -5623,13 +5623,13 @@ Now that you have an estimate of the location, size, shape, orientation, and rel
 >>> gm.predict(X)
 array([2, 2, 1, ..., 0, 0, 0])
 >>> gm.predict_proba(X)
-array([[2.32389467e-02, 6.77397850e-07, 9.76760376e-01],
+array([ [2.32389467e-02, 6.77397850e-07, 9.76760376e-01],
        [1.64685609e-02, 6.75361303e-04, 9.82856078e-01],
        [2.01535333e-06, 9.99923053e-01, 7.49319577e-05],
        ...,
        [9.99999571e-01, 2.13946075e-26, 4.28788333e-07],
        [1.00000000e+00, 1.46454409e-41, 5.12459171e-16],
-       [1.00000000e+00, 8.02006365e-41, 2.27626238e-15]])
+       [1.00000000e+00, 8.02006365e-41, 2.27626238e-15] ])
 ```
 
 A Gaussian mixture model is a _generative model_ , meaning you can sample new instances from it (note that they are ordered by cluster index): 
@@ -5637,12 +5637,12 @@ A Gaussian mixture model is a _generative model_ , meaning you can sample new in
 ```
 >>> X_new, y_new=gm.sample(6)
 >>> X_new
-array([[ 2.95400315,  2.63680992],
+array([ [ 2.95400315,  2.63680992],
        [-1.16654575,  1.62792705],
        [-1.39477712, -1.48511338],
        [ 0.27221525,  0.690366  ],
        [ 0.54095936,  0.48591934],
-       [ 0.38064009, -0.56240465]])
+       [ 0.38064009, -0.56240465] ])
 ```
 
 ```
@@ -5964,7 +5964,7 @@ per_clf.fit(X, y)
 ```
 
 ```
-y_pred=per_clf.predict([[2, 0.5]])
+y_pred=per_clf.predict([ [2, 0.5] ])
 ```
 
 > 8 Note that this solution is not unique: when data points are linearly separable, there is an infinity of hyper‐ planes that can separate them. 
@@ -6262,11 +6262,11 @@ All the parameters of a layer can be accessed using its `get_weights()` and `set
 ```
 >>> weights, biases=hidden1.get_weights()
 >>> weights
-array([[ 0.02448617, -0.00877795, -0.02189048, ..., -0.02766046,
+array([ [ 0.02448617, -0.00877795, -0.02189048, ..., -0.02766046,
          0.03859074, -0.06889391],
        ...,
        [-0.06022581,  0.01577859, -0.02585464, ..., -0.00527829,
-         0.00272203, -0.06793761]], dtype=float32)
+         0.00272203, -0.06793761] ], dtype=float32)
 >>> weights.shape
 (784, 300)
 >>> biases
@@ -6385,9 +6385,9 @@ Next, we can use the model’s `predict()` method to make predictions on new ins
 >>> X_new=X_test[:3]
 >>> y_proba=model.predict(X_new)
 >>> y_proba.round(2)
-array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.03, 0.  , 0.01, 0.  , 0.96],
+array([ [0.  , 0.  , 0.  , 0.  , 0.  , 0.03, 0.  , 0.01, 0.  , 0.96],
        [0.  , 0.  , 0.98, 0.  , 0.02, 0.  , 0.  , 0.  , 0.  , 0.  ],
-       [0.  , 1.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ]],
+       [0.  , 1.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ] ],
       dtype=float32)
 ```
 
@@ -7845,7 +7845,7 @@ dimension ( `axis=0` ), we get `y_proba` , an array of shape [10000, 10], like w
 
 ```
 >>> np.round(model.predict(X_test_scaled[:1]), 2)
-array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.01, 0.  , 0.99]],
+array([ [0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.01, 0.  , 0.99] ],
       dtype=float32)
 ```
 
@@ -7853,9 +7853,9 @@ The model seems almost certain that this image belongs to class 9 (ankle boot). 
 
 ```
 >>> np.round(y_probas[:, :1], 2)
-array([[[0.  , 0.  , 0.  , 0.  , 0.  , 0.14, 0.  , 0.17, 0.  , 0.68]],
-       [[0.  , 0.  , 0.  , 0.  , 0.  , 0.16, 0.  , 0.2 , 0.  , 0.64]],
-       [[0.  , 0.  , 0.  , 0.  , 0.  , 0.02, 0.  , 0.01, 0.  , 0.97]],
+array([ [ [0.  , 0.  , 0.  , 0.  , 0.  , 0.14, 0.  , 0.17, 0.  , 0.68] ],
+       [ [0.  , 0.  , 0.  , 0.  , 0.  , 0.16, 0.  , 0.2 , 0.  , 0.64] ],
+       [ [0.  , 0.  , 0.  , 0.  , 0.  , 0.02, 0.  , 0.01, 0.  , 0.97] ],
        [...]
 ```
 
@@ -7863,7 +7863,7 @@ This tells a very different story: apparently, when we activate dropout, the mod
 
 ```
 >>> np.round(y_proba[:1], 2)
-array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.22, 0.  , 0.16, 0.  , 0.62]],
+array([ [0.  , 0.  , 0.  , 0.  , 0.  , 0.22, 0.  , 0.16, 0.  , 0.62] ],
       dtype=float32)
 ```
 
@@ -7872,7 +7872,7 @@ The model still thinks this image belongs to class 9, but only with a 62% confid
 ```
 >>> y_std=y_probas.std(axis=0)
 >>> np.round(y_std[:1], 2)
-array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.28, 0.  , 0.21, 0.02, 0.32]],
+array([ [0.  , 0.  , 0.  , 0.  , 0.  , 0.28, 0.  , 0.21, 0.02, 0.32] ],
       dtype=float32)
 ```
 
@@ -8066,10 +8066,10 @@ TensorFlow’s API revolves around _tensors_ , which flow from operation to oper
 You can create a tensor with `tf.constant()` . For example, here is a tensor represent‐ ing a matrix with two rows and three columns of floats: 
 
 ```
->>> tf.constant([[1., 2., 3.], [4., 5., 6.]]) # matrix
+>>> tf.constant([ [1., 2., 3.], [4., 5., 6.] ]) # matrix
 <tf.Tensor: id=0, shape=(2, 3), dtype=float32, numpy=
-array([[1., 2., 3.],
-       [4., 5., 6.]], dtype=float32)>
+array([ [1., 2., 3.],
+       [4., 5., 6.] ], dtype=float32)>
 >>> tf.constant(42) # scalar
 <tf.Tensor: id=1, shape=(), dtype=int32, numpy=42>
 ```
@@ -8077,7 +8077,7 @@ array([[1., 2., 3.],
 Just like an `ndarray` , a `tf.Tensor` has a shape and a data type ( `dtype` ): 
 
 ```
->>> t=tf.constant([[1., 2., 3.], [4., 5., 6.]])
+>>> t=tf.constant([ [1., 2., 3.], [4., 5., 6.] ])
 >>> t.shape
 TensorShape([2, 3])
 >>> t.dtype
@@ -8089,12 +8089,12 @@ Indexing works much like in NumPy:
 ```
 >>> t[:, 1:]
 <tf.Tensor: id=5, shape=(2, 2), dtype=float32, numpy=
-array([[2., 3.],
-       [5., 6.]], dtype=float32)>
+array([ [2., 3.],
+       [5., 6.] ], dtype=float32)>
 >>> t[..., 1, tf.newaxis]
 <tf.Tensor: id=15, shape=(2, 1), dtype=float32, numpy=
-array([[2.],
-       [5.]], dtype=float32)>
+array([ [2.],
+       [5.] ], dtype=float32)>
 ```
 
 Most importantly, all sorts of tensor operations are available: 
@@ -8107,16 +8107,16 @@ Most importantly, all sorts of tensor operations are available:
 **Using TensorFlow like NumPy | 379** 
 
 ```
-array([[11., 12., 13.],
-       [14., 15., 16.]], dtype=float32)>
+array([ [11., 12., 13.],
+       [14., 15., 16.] ], dtype=float32)>
 >>> tf.square(t)
 <tf.Tensor: id=20, shape=(2, 3), dtype=float32, numpy=
-array([[ 1.,  4.,  9.],
-       [16., 25., 36.]], dtype=float32)>
+array([ [ 1.,  4.,  9.],
+       [16., 25., 36.] ], dtype=float32)>
 >>> t@tf.transpose(t)
 <tf.Tensor: id=24, shape=(2, 2), dtype=float32, numpy=
-array([[14., 32.],
-       [32., 77.]], dtype=float32)>
+array([ [14., 32.],
+       [32., 77.] ], dtype=float32)>
 ```
 
 Note that writing `t + 10` is equivalent to calling `tf.add(t, 10)` (indeed, Python calls the magic method `t.__add__(10)` , which just calls `tf.add(t, 10)` ). Other operators like `-` and `*` are also supported. The `@` operator was added in Python 3.5, for matrix multiplication: it is equivalent to calling the `tf.matmul()` function. 
@@ -8140,9 +8140,9 @@ The Keras API has its own low-level API, located in `keras.backend` . It include
 >>> K=keras.backend
 >>> K.square(K.transpose(t)) +10
 <tf.Tensor: id=39, shape=(3, 2), dtype=float32, numpy=
-array([[11., 26.],
+array([ [11., 26.],
        [14., 35.],
-       [19., 46.]], dtype=float32)>
+       [19., 46.] ], dtype=float32)>
 ```
 
 ###### **Tensors and NumPy** 
@@ -8154,13 +8154,13 @@ Tensors play nice with NumPy: you can create a tensor from a NumPy array, and vi
 >>> tf.constant(a)
 <tf.Tensor: id=111, shape=(3,), dtype=float64, numpy=array([2., 4., 5.])>
 >>> t.numpy() # or np.array(t)
-array([[1., 2., 3.],
-       [4., 5., 6.]], dtype=float32)
+array([ [1., 2., 3.],
+       [4., 5., 6.] ], dtype=float32)
 >>> tf.square(a)
 <tf.Tensor: id=116, shape=(3,), dtype=float64, numpy=array([4., 16., 25.])>
 >>> np.square(t)
-array([[ 1.,  4.,  9.],
-       [16., 25., 36.]], dtype=float32)
+array([ [ 1.,  4.,  9.],
+       [16., 25., 36.] ], dtype=float32)
 ```
 
 
@@ -8195,21 +8195,21 @@ This may be a bit annoying at first, but remember that it’s for a good cause! 
 The `tf.Tensor` values we’ve seen so far are immutable: you cannot modify them. This means that we cannot use regular tensors to implement weights in a neural network, since they need to be tweaked by backpropagation. Plus, other parameters may also need to change over time (e.g., a momentum optimizer keeps track of past gradients). What we need is a `tf.Variable` : 
 
 ```
->>> v=tf.Variable([[1., 2., 3.], [4., 5., 6.]])
+>>> v=tf.Variable([ [1., 2., 3.], [4., 5., 6.] ])
 >>> v
 <tf.Variable 'Variable:0' shape=(2, 3) dtype=float32, numpy=
-array([[1., 2., 3.],
-       [4., 5., 6.]], dtype=float32)>
+array([ [1., 2., 3.],
+       [4., 5., 6.] ], dtype=float32)>
 ```
 
 A `tf.Variable` acts much like a `tf.Tensor` : you can perform the same operations with it, it plays nicely with NumPy as well, and it is just as picky with types. But it can also be modified in place using the `assign()` method (or `assign_add()` or `assign_sub()` , which increment or decrement the variable by the given value). You can also modify individual cells (or slices), by using the cell’s (or slice’s) `assign()` method (direct item assignment will not work) or by using the `scatter_update()` or `scatter_nd_update()` methods: 
 
 ```
-v.assign(2*v)           # => [[2., 4., 6.], [8., 10., 12.]]
-v[0, 1].assign(42)        # => [[2., 42., 6.], [8., 10., 12.]]
-v[:, 2].assign([0., 1.])  # => [[2., 42., 0.], [8., 10., 1.]]
-v.scatter_nd_update(indices=[[0, 0], [1, 2]], updates=[100., 200.])
-# => [[100., 42., 0.], [8., 10., 200.]]
+v.assign(2*v)           # => [ [2., 4., 6.], [8., 10., 12.] ]
+v[0, 1].assign(42)        # => [ [2., 42., 6.], [8., 10., 12.] ]
+v[:, 2].assign([0., 1.])  # => [ [2., 42., 0.], [8., 10., 1.] ]
+v.scatter_nd_update(indices=[ [0, 0], [1, 2] ], updates=[100., 200.])
+# => [ [100., 42., 0.], [8., 10., 200.] ]
 ```
 
 **382 | Chapter 12: Custom Models and Training with TensorFlow** 
@@ -8240,7 +8240,7 @@ Are regular tensors of type `tf.string` . These represent byte strings, not Unic
 
 ###### _Sets_ 
 
-Are represented as regular tensors (or sparse tensors). For example, `tf.con stant([[1, 2], [3, 4]])` represents the two sets {1, 2} and {3, 4}. More gener‐ ally, each set is represented by a vector in the tensor’s last axis. You can manipulate sets using operations from the `tf.sets` package. 
+Are represented as regular tensors (or sparse tensors). For example, `tf.con stant([ [1, 2], [3, 4] ])` represents the two sets {1, 2} and {3, 4}. More gener‐ ally, each set is represented by a vector in the tensor’s last axis. You can manipulate sets using operations from the `tf.sets` package. 
 
 ###### _Queues_ 
 
@@ -9842,10 +9842,10 @@ Now let’s use the lookup table to encode a small batch of categorical features
 >>> cat_one_hot=tf.one_hot(cat_indices, depth=len(vocab) +num_oov_buckets)
 >>> cat_one_hot
 <tf.Tensor: id=524, shape=(4, 7), dtype=float32, numpy=
-array([[0., 0., 0., 1., 0., 0., 0.],
+array([ [0., 0., 0., 1., 0., 0., 0.],
        [0., 0., 0., 0., 0., 1., 0.],
        [0., 1., 0., 0., 0., 0., 0.],
-       [0., 1., 0., 0., 0., 0., 0.]], dtype=float32)>
+       [0., 1., 0., 0., 0., 0., 0.] ], dtype=float32)>
 ```
 
 As you can see, `"NEAR BAY"` was mapped to index 3, the unknown category `"DESERT"` was mapped to one of the two oov buckets (at index 5), and `"INLAND"` was mapped to 
@@ -9885,12 +9885,12 @@ This embedding matrix is a random 6 × 2 matrix, stored in a variable (so it can
 ```
 >>> embedding_matrix
 <tf.Variable 'Variable:0' shape=(6, 2) dtype=float32, numpy=
-array([[0.6645621 , 0.44100678],
+array([ [0.6645621 , 0.44100678],
        [0.3528825 , 0.46448255],
        [0.03366041, 0.68467236],
        [0.74011743, 0.8724445 ],
        [0.22632635, 0.22319686],
-       [0.3103881 , 0.7223358 ]], dtype=float32)>
+       [0.3103881 , 0.7223358 ] ], dtype=float32)>
 ```
 
 Now let’s encode the same batch of categorical features as earlier, but this time using these embeddings: 
@@ -9902,10 +9902,10 @@ Now let’s encode the same batch of categorical features as earlier, but this t
 <tf.Tensor: id=741, shape=(4,), dtype=int64, numpy=array([3, 5, 1, 1])>
 >>> tf.nn.embedding_lookup(embedding_matrix, cat_indices)
 <tf.Tensor: id=864, shape=(4, 2), dtype=float32, numpy=
-array([[0.74011743, 0.8724445 ],
+array([ [0.74011743, 0.8724445 ],
        [0.3103881 , 0.7223358 ],
        [0.3528825 , 0.46448255],
-       [0.3528825 , 0.46448255]], dtype=float32)>
+       [0.3528825 , 0.46448255] ], dtype=float32)>
 ```
 
 The `tf.nn.embedding_lookup()` function looks up the rows in the embedding matrix, at the given indices—that’s all it does. For example, the lookup table says that the `"INLAND"` category is at index 1, so the `tf.nn.embedding_lookup()` function returns the embedding at row 1 in the embedding matrix (twice): `[0.3528825, 0.46448255]` . 
@@ -9918,10 +9918,10 @@ Keras provides a `keras.layers.Embedding` layer that handles the embedding matri
 ...
 >>> embedding(cat_indices)
 <tf.Tensor: id=814, shape=(4, 2), dtype=float32, numpy=
-array([[ 0.02401174,  0.03724445],
+array([ [ 0.02401174,  0.03724445],
        [-0.01896119,  0.02223358],
        [-0.01471175, -0.00355174],
-       [-0.01471175, -0.00355174]], dtype=float32)>
+       [-0.01471175, -0.00355174] ], dtype=float32)>
 ```
 
 **436 | Chapter 13: Loading and Preprocessing Data with TensorFlow** 
@@ -10977,7 +10977,7 @@ Creates a convolutional layer for 3D inputs, such as 3D PET scans.
 
 ###### `dilation_rate` 
 
-Setting the `dilation_rate` hyperparameter of any convolutional layer to a value of 2 or more creates an _à-trous convolutional layer_ (“à trous” is French for “with holes”). This is equivalent to using a regular convolutional layer with a filter dila‐ ted by inserting rows and columns of zeros (i.e., holes). For example, a 1 × 3 filter equal to `[[1,2,3]]` may be dilated with a _dilation rate_ of 4, resulting in a _dilated filter_ of `[[1, 0, 0, 0, 2, 0, 0, 0, 3]]` . This lets the convolutional layer have a larger receptive field at no computational price and using no extra parameters. 
+Setting the `dilation_rate` hyperparameter of any convolutional layer to a value of 2 or more creates an _à-trous convolutional layer_ (“à trous” is French for “with holes”). This is equivalent to using a regular convolutional layer with a filter dila‐ ted by inserting rows and columns of zeros (i.e., holes). For example, a 1 × 3 filter equal to `[ [1,2,3] ]` may be dilated with a _dilation rate_ of 4, resulting in a _dilated filter_ of `[ [1, 0, 0, 0, 2, 0, 0, 0, 3] ]` . This lets the convolutional layer have a larger receptive field at no computational price and using no extra parameters. 
 
 ###### `tf.nn.depthwise_conv2d()` 
 
@@ -11572,8 +11572,8 @@ We set `char_level=True` to get character-level encoding rather than the default
 
 ```
 >>> tokenizer.texts_to_sequences(["First"])
-[[20, 6, 9, 8, 3]]
->>> tokenizer.sequences_to_texts([[20, 6, 9, 8, 3]])
+[ [20, 6, 9, 8, 3] ]
+>>> tokenizer.sequences_to_texts([ [20, 6, 9, 8, 3] ])
 ['f i r s t']
 >>> max_id=len(tokenizer.word_index) # number of distinct characters
 >>> dataset_size=tokenizer.document_count# total number of characters
@@ -11806,7 +11806,7 @@ Where are the movie reviews? Well, as you can see, the dataset is already prepro
 >>> forid_, tokeninenumerate(("<pad>", "<sos>", "<unk>")):
 ... id_to_word[id_] =token
 ...
->>> " ".join([id_to_word[id_] forid_inX_train[0][:10]])
+>>> " ".join([id_to_word[id_] forid_inX_train[0][:10] ])
 '<sos> this film was just brilliant casting location scenery story'
 ```
 
@@ -11885,7 +11885,7 @@ Great! We probably don’t need our model to know all the words in the dictionar
 ```
 vocab_size=10000
 truncated_vocabulary= [
-wordforword, countinvocabulary.most_common()[:vocab_size]]
+wordforword, countinvocabulary.most_common()[:vocab_size] ]
 ```
 
 Now we need to add a preprocessing step to replace each word with its ID (i.e., its index in the vocabulary). Just like we did in Chapter 13, we will create a lookup table for this, using 1,000 out-of-vocabulary (oov) buckets: 
@@ -11902,7 +11902,7 @@ We can then use this table to look up the IDs of a few words:
 
 ```
 >>> table.lookup(tf.constant([b"This movie was faaaaaantastic".split()]))
-<tf.Tensor: [...], dtype=int64, numpy=array([[   22,    12,    11, 10054]])>
+<tf.Tensor: [...], dtype=int64, numpy=array([ [   22,    12,    11, 10054] ])>
 ```
 
 Note that the words “this,” “movie,” and “was” were found in the table, so their IDs are lower than 10,000, while the word “faaaaaantastic” was not found, so it was map‐ ped to one of the oov buckets, with an ID greater than or equal to 10,000. 
@@ -12295,7 +12295,7 @@ pos_emb[0, :, 1::2] =np.cos(p/10000**(2*i/max_dims)).T
 self.positional_embedding=tf.constant(pos_emb.astype(self.dtype))
 defcall(self, inputs):
 shape=tf.shape(inputs)
-returninputs+self.positional_embedding[:, :shape[-2], :shape[-1]]
+returninputs+self.positional_embedding[:, :shape[-2], :shape[-1] ]
 ```
 
 Then we can create the first layers of the Transformer: 
@@ -12594,7 +12594,7 @@ self.activation=keras.activations.get(activation)
 super().__init__(**kwargs)
 defbuild(self, batch_input_shape):
 self.biases=self.add_weight(name="bias", initializer="zeros",
-shape=[self.dense.input_shape[-1]])
+shape=[self.dense.input_shape[-1] ])
 super().build(batch_input_shape)
 defcall(self, inputs):
 z=tf.matmul(inputs, self.dense.weights[0], transpose_b=True)
@@ -12965,12 +12965,12 @@ forX_batchindataset:
 noise=tf.random.normal(shape=[batch_size, codings_size])
 generated_images=generator(noise)
 X_fake_and_real=tf.concat([generated_images, X_batch], axis=0)
-y1=tf.constant([[0.]] *batch_size+ [[1.]] *batch_size)
+y1=tf.constant([ [0.] ] *batch_size+ [ [1.] ] *batch_size)
 discriminator.trainable=True
 discriminator.train_on_batch(X_fake_and_real, y1)
 # phase 2 - training the generator
 noise=tf.random.normal(shape=[batch_size, codings_size])
-y2=tf.constant([[1.]] *batch_size)
+y2=tf.constant([ [1.] ] *batch_size)
 discriminator.trainable=False
 gan.train_on_batch(noise, y2)
 ```
@@ -13405,7 +13405,7 @@ defplay_one_step(env, obs, model, loss_fn):
 withtf.GradientTape() astape:
 left_proba=model(obs[np.newaxis])
 action= (tf.random.uniform([1, 1]) >left_proba)
-y_target=tf.constant([[1.]]) -tf.cast(action, tf.float32)
+y_target=tf.constant([ [1.] ]) -tf.cast(action, tf.float32)
 loss=tf.reduce_mean(loss_fn(y_target, left_proba))
 grads=tape.gradient(loss, model.trainable_variables)
 obs, reward, done, info=env.step(int(action[0, 0].numpy()))
@@ -13481,7 +13481,7 @@ Let’s check that this works:
 ```
 >>> discount_rewards([10, 0, -50], discount_factor=0.8)
 array([-22, -40, -50])
->>> discount_and_normalize_rewards([[10, 0, -50], [10, 20]],
+>>> discount_and_normalize_rewards([ [10, 0, -50], [10, 20] ],
 ... discount_factor=0.8)
 ...
 [array([-0.28435071, -0.86597718, -1.18910299]),
@@ -13616,14 +13616,14 @@ Let’s apply this algorithm to the MDP represented in Figure 18-8. First, we ne
 
 ```
 transition_probabilities= [ # shape=[s, a, s']
-        [[0.7, 0.3, 0.0], [1.0, 0.0, 0.0], [0.8, 0.2, 0.0]],
-        [[0.0, 1.0, 0.0], None, [0.0, 0.0, 1.0]],
-        [None, [0.8, 0.1, 0.1], None]]
+        [ [0.7, 0.3, 0.0], [1.0, 0.0, 0.0], [0.8, 0.2, 0.0] ],
+        [ [0.0, 1.0, 0.0], None, [0.0, 0.0, 1.0] ],
+        [None, [0.8, 0.1, 0.1], None] ]
 rewards= [ # shape=[s, a, s']
-        [[+10, 0, 0], [0, 0, 0], [0, 0, 0]],
-        [[0, 0, 0], [0, 0, 0], [0, 0, -50]],
-        [[0, 0, 0], [+40, 0, 0], [0, 0, 0]]]
-possible_actions= [[0, 1, 2], [0, 2], [1]]
+        [ [+10, 0, 0], [0, 0, 0], [0, 0, 0] ],
+        [ [0, 0, 0], [0, 0, 0], [0, 0, -50] ],
+        [ [0, 0, 0], [+40, 0, 0], [0, 0, 0] ] ]
+possible_actions= [ [0, 1, 2], [0, 2], [1] ]
 ```
 
 For example, to know the transition probability from _s_ 2 to _s_ 0 after playing action _a_ 1, we will look up `transition_probabilities[2][1][0]` (which is 0.8). Similarly, to get the corresponding reward, we will look up `rewards[2][1][0]` (which is +40). And to get the list of possible actions in _s_ 2, we will look up `possible_actions[2]` (in this case, only action _a_ 1 is possible). Next, we must initialize all the Q-Values to 0 (except for the the impossible actions, for which we set the Q-Values to –∞): 
@@ -13657,9 +13657,9 @@ That’s it! The resulting Q-Values look like this:
 
 ```
 >>> Q_values
-array([[18.91891892, 17.02702702, 13.62162162],
+array([ [18.91891892, 17.02702702, 13.62162162],
        [ 0.        ,        -inf, -4.87971488],
-       [       -inf, 50.13365013,        -inf]])
+       [       -inf, 50.13365013,        -inf] ])
 ```
 
 For example, when the agent is in state _s_ 0 and it chooses action _a_ 1, the expected sum of discounted future rewards is approximately 17.0. 
@@ -13892,7 +13892,7 @@ Let’s go through this code:
 
 - Then we create the `training_step()` function. It starts by sampling a batch of experiences, then it uses the DQN to predict the Q-Value for each possible action in each experience’s next state. Since we assume that the agent will be playing optimally, we only keep the maximum Q-Value for each next state. Next, we use Equation 18-7 to compute the target Q-Value for each experience’s state-action pair. 
 
-- Next, we want to use the DQN to compute the Q-Value for each experienced state-action pair. However, the DQN will also output the Q-Values for the other possible actions, not just for the action that was actually chosen by the agent. So we need to mask out all the Q-Values we do not need. The `tf.one_hot()` func‐ tion makes it easy to convert an array of action indices into such a mask. For example, if the first three experiences contain actions 1, 1, 0, respectively, then the mask will start with `[[0, 1], [0, 1], [1, 0],...]` . We can then multiply the DQN’s output with this mask, and this will zero out all the Q-Values we do not want. We then sum over axis 1 to get rid of all the zeros, keeping only the Q- Values of the experienced state-action pairs. This gives us the `Q_values` tensor, containing one predicted Q-Value for each experience in the batch. 
+- Next, we want to use the DQN to compute the Q-Value for each experienced state-action pair. However, the DQN will also output the Q-Values for the other possible actions, not just for the action that was actually chosen by the agent. So we need to mask out all the Q-Values we do not need. The `tf.one_hot()` func‐ tion makes it easy to convert an array of action indices into such a mask. For example, if the first three experiences contain actions 1, 1, 0, respectively, then the mask will start with `[ [0, 1], [0, 1], [1, 0],...]` . We can then multiply the DQN’s output with this mask, and this will zero out all the Q-Values we do not want. We then sum over axis 1 to get rid of all the zeros, keeping only the Q- Values of the experienced state-action pairs. This gives us the `Q_values` tensor, containing one predicted Q-Value for each experience in the batch. 
 
 - Then we compute the loss: it is the mean squared error between the target and predicted Q-Values for the experienced state-action pairs. 
 
@@ -14059,7 +14059,7 @@ TF-Agents environments are very similar to OpenAI Gym environments, but there ar
 TimeStep(step_type=array(0, dtype=int32),
          reward=array(0., dtype=float32),
          discount=array(1., dtype=float32),
-         observation=array([[[0., 0., 0.], [0., 0., 0.],...]]], dtype=float32))
+         observation=array([ [ [0., 0., 0.], [0., 0., 0.],...] ] ], dtype=float32))
 ```
 
 The `step()` method returns a `TimeStep` object as well: 
@@ -14069,7 +14069,7 @@ The `step()` method returns a `TimeStep` object as well:
 TimeStep(step_type=array(1, dtype=int32),
          reward=array(0., dtype=float32),
          discount=array(1., dtype=float32),
-         observation=array([[[0., 0., 0.], [0., 0., 0.],...]]], dtype=float32))
+         observation=array([ [ [0., 0., 0.], [0., 0., 0.],...] ] ], dtype=float32))
 ```
 
 The `reward` and `observation` attributes are self-explanatory, and they are the same as for OpenAI Gym (except the `reward` is represented as a NumPy array). The `step_type` attribute is equal to 0 for the first time step in the episode, 1 for intermedi‐ ate time steps, and 2 for the final time step. You can call the time step’s `is_last()` method to check whether it is the final one or not. Lastly, the `discount` attribute indi‐ cates the discount factor to use at this time step. In this example it is equal to 1, so there will be no discount at all. You can define the discount factor by setting the `dis count` parameter when loading the environment. 
@@ -14087,8 +14087,8 @@ Conveniently, a TF-Agents environment provides the specifications of the observa
 ```
 >>> env.observation_spec()
 BoundedArraySpec(shape=(210, 160, 3), dtype=dtype('float32'), name=None,
-                 minimum=[[[0. 0. 0.], [0. 0. 0.],...]],
-                 maximum=[[[255., 255., 255.], [255., 255., 255.], ...]])
+                 minimum=[ [ [0. 0. 0.], [0. 0. 0.],...] ],
+                 maximum=[ [ [255., 255., 255.], [255., 255., 255.], ...] ])
 >>> env.action_spec()
 BoundedArraySpec(shape=(), dtype=dtype('int64'), name=None,
                  minimum=0, maximum=3)
@@ -14464,8 +14464,8 @@ To sample a batch of trajectories from the replay buffer, call its `get_next()` 
 >>> trajectories.observation.shape
 TensorShape([2, 3, 84, 84, 4])
 >>> trajectories.step_type.numpy()
-array([[1, 1, 1],
-       [1, 1, 1]], dtype=int32)
+array([ [1, 1, 1],
+       [1, 1, 1] ], dtype=int32)
 ```
 
 The `trajectories` object is a named tuple, with seven fields. Each field contains a tensor whose first two dimensions are 2 and 3 (since there are two trajectories, each with three steps). This explains why the shape of the `observation` field is [2, 3, 84, 84, 4]: that’s two trajectories, each with three steps, and each step’s observation is 84 × 84 × 4. Similarly, the `step_type` tensor has a shape of [2, 3]: in this example, both trajec‐ tories contain three consecutive steps in the middle on an episode (types 1, 1, 1). In the second trajectory, you can barely see the ball at the lower left of the first observa‐ tion, and it disappears in the next two observations, so the agent is about to lose a life, but the episode will not end immediately because it still has several lives left. 
@@ -14725,9 +14725,9 @@ $ saved_model_cli run --dir my_mnist_model/0001 --tag_set serve \
 
 ```
 [...] Result for output key dense_1:
-[[1.1739199e-04 1.1239604e-07 6.0210604e-04 [...] 3.9471846e-04]
+[ [1.1739199e-04 1.1239604e-07 6.0210604e-04 [...] 3.9471846e-04]
  [1.2294615e-03 2.9207937e-05 9.8599273e-01 [...] 1.1113169e-07]
- [6.4066830e-05 9.6359509e-01 9.0598064e-03 [...] 4.2495009e-04]]
+ [6.4066830e-05 9.6359509e-01 9.0598064e-03 [...] 4.2495009e-04] ]
 ```
 
 The tool’s output contains the 10 class probabilities of each of the 3 instances. Great! Now that you have a working SavedModel, the next step is to install TF Serving. 
@@ -14811,8 +14811,8 @@ Note that the JSON format is 100% text-based, so the `X_new` NumPy array had to 
 
 ```
 >>> input_data_json
-'{"signature_name": "serving_default", "instances": [[[0.0, 0.0, 0.0, [...]
-0.3294117647058824, 0.725490196078431, [...very long], 0.0, 0.0, 0.0, 0.0]]]}'
+'{"signature_name": "serving_default", "instances": [ [ [0.0, 0.0, 0.0, [...]
+0.3294117647058824, 0.725490196078431, [...very long], 0.0, 0.0, 0.0, 0.0] ] ]}'
 ```
 
 Now let’s send the input data to TF Serving by sending an HTTP POST request. This can be done easily using the `requests` library (it is not part of Python’s standard library, so you will need to install it first, e.g., using pip): 
@@ -14835,9 +14835,9 @@ The response is a dictionary containing a single `"predictions"` key. The corres
 ```
 >>> y_proba=np.array(response["predictions"])
 >>> y_proba.round(2)
-array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 1.  , 0.  , 0.  ],
+array([ [0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 1.  , 0.  , 0.  ],
        [0.  , 0.  , 0.99, 0.01, 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ],
-       [0.  , 0.96, 0.01, 0.  , 0.  , 0.  , 0.  , 0.01, 0.01, 0.  ]])
+       [0.  , 0.96, 0.01, 0.  , 0.  , 0.  , 0.  , 0.01, 0.01, 0.  ] ])
 ```
 
 Hurray, we have the predictions! The model is close to 100% confident that the first image is a 7, 99% confident that the second image is a 2, and 96% confident that the third image is a 1. 
@@ -15013,7 +15013,7 @@ request=ml_resource.predict(name=model_path, body=input_data_json)
 response=request.execute()
 if"error"inresponse:
 raiseRuntimeError(response["error"])
-returnnp.array([pred[output_name] forpredinresponse["predictions"]])
+returnnp.array([pred[output_name] forpredinresponse["predictions"] ])
 ```
 
 The function takes a NumPy array containing the input images and prepares a dictio‐ nary that the client library will convert to the JSON format (as we did earlier). Then it prepares a prediction request, and executes it; it raises an exception if the response contains an error, or else it extracts the predictions for each instance and bundles them in a NumPy array. Let’s see if it works: 
@@ -15021,9 +15021,9 @@ The function takes a NumPy array containing the input images and prepares a dict
 ```
 >>> Y_probas=predict(X_new)
 >>> np.round(Y_probas, 2)
-array([[0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 1.  , 0.  , 0.  ],
+array([ [0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 0.  , 1.  , 0.  , 0.  ],
        [0.  , 0.  , 0.99, 0.01, 0.  , 0.  , 0.  , 0.  , 0.  , 0.  ],
-       [0.  , 0.96, 0.01, 0.  , 0.  , 0.  , 0.  , 0.01, 0.01, 0.  ]])
+       [0.  , 0.96, 0.01, 0.  , 0.  , 0.  , 0.  , 0.01, 0.01, 0.  ] ])
 ```
 
 > 7 If you get an error saying that module `google.appengine` was not found, set `cache_discovery=False` in the call to the `build()` method; see _https://stackoverflow.com/q/55561354_ . 
@@ -16802,7 +16802,7 @@ The `tf.strings` package contains several functions to manipulate string tensors
 
 You can also manipulate tensors containing multiple strings: 
 
-**`>>>`** `p = tf.constant(["Café", "Coffee", "caffè", "` 咖啡 `"])` **`>>>`** `tf.strings.length(p, unit="UTF8_CHAR") <tf.Tensor: id=299, shape=(4,), dtype=int32, numpy=array([4, 6, 5, 2], dtype=int32)>` **`>>>`** `r = tf.strings.unicode_decode(p, "UTF8")` **`>>>`** `r tf.RaggedTensor(values=tf.Tensor( [   67    97   102   233    67   111   102   102   101   101    99    97 102   102   232 21654 21857], shape=(17,), dtype=int32), row_splits=tf.Tensor([ 0  4 10 15 17], shape=(5,), dtype=int64))` **`>>> print`** `(r) <tf.RaggedTensor [[67, 97, 102, 233], [67, 111, 102, 102, 101, 101], [99, 97, 102, 102, 232], [21654, 21857]]>` 
+**`>>>`** `p = tf.constant(["Café", "Coffee", "caffè", "` 咖啡 `"])` **`>>>`** `tf.strings.length(p, unit="UTF8_CHAR") <tf.Tensor: id=299, shape=(4,), dtype=int32, numpy=array([4, 6, 5, 2], dtype=int32)>` **`>>>`** `r = tf.strings.unicode_decode(p, "UTF8")` **`>>>`** `r tf.RaggedTensor(values=tf.Tensor( [   67    97   102   233    67   111   102   102   101   101    99    97 102   102   232 21654 21857], shape=(17,), dtype=int32), row_splits=tf.Tensor([ 0  4 10 15 17], shape=(5,), dtype=int64))` **`>>> print`** `(r) <tf.RaggedTensor [ [67, 97, 102, 233], [67, 111, 102, 102, 101, 101], [99, 97, 102, 102, 232], [21654, 21857] ]>` 
 
 Notice that the decoded strings are stored in a `RaggedTensor` . What is that? 
 
@@ -16822,19 +16822,19 @@ tf.Tensor([ 67 111 102 102 101 101], shape=(6,), dtype=int32)
 The `tf.ragged` package contains several functions to create and manipulate ragged tensors. Let’s create a second ragged tensor using `tf.ragged.constant()` and concat‐ enate it with the first ragged tensor, along axis 0: 
 
 ```
->>> r2=tf.ragged.constant([[65, 66], [], [67]])
+>>> r2=tf.ragged.constant([ [65, 66], [], [67] ])
 >>> print(tf.concat([r, r2], axis=0))
-<tf.RaggedTensor [[67, 97, 102, 233], [67, 111, 102, 102, 101, 101], [99, 97,
-102, 102, 232], [21654, 21857], [65, 66], [], [67]]>
+<tf.RaggedTensor [ [67, 97, 102, 233], [67, 111, 102, 102, 101, 101], [99, 97,
+102, 102, 232], [21654, 21857], [65, 66], [], [67] ]>
 ```
 
 The result is not too surprising: the tensors in `r2` were appended after the tensors in `r` along axis 0. But what if we concatenate `r` and another ragged tensor along axis 1? 
 
 ```
->>> r3=tf.ragged.constant([[68, 69, 70], [71], [], [72, 73]])
+>>> r3=tf.ragged.constant([ [68, 69, 70], [71], [], [72, 73] ])
 >>> print(tf.concat([r, r3], axis=1))
-<tf.RaggedTensor [[67, 97, 102, 233, 68, 69, 70], [67, 111, 102, 102, 101, 101,
-71], [99, 97, 102, 102, 232], [21654, 21857, 72, 73]]>
+<tf.RaggedTensor [ [67, 97, 102, 233, 68, 69, 70], [67, 111, 102, 102, 101, 101,
+71], [99, 97, 102, 102, 232], [21654, 21857, 72, 73] ]>
 ```
 
 This time, notice that the _i_<sup>th</sup> tensor in `r` and the _i_<sup>th</sup> tensor in `r3` were concatenated. Now that’s more unusual, since all of these tensors can have different lengths. 
@@ -16844,10 +16844,10 @@ If you call the `to_tensor()` method, it gets converted to a regular tensor, pad
 ```
 >>> r.to_tensor()
 <tf.Tensor: id=1056, shape=(4, 6), dtype=int32, numpy=
-array([[   67,    97,   102,   233,     0,     0],
+array([ [   67,    97,   102,   233,     0,     0],
        [   67,   111,   102,   102,   101,   101],
        [   99,    97,   102,   102,   232,     0],
-       [21654, 21857,     0,     0,     0,     0]], dtype=int32)>
+       [21654, 21857,     0,     0,     0,     0] ], dtype=int32)>
 ```
 
 Many TF operations support ragged tensors. For the full list, see the documentation of the `tf.RaggedTensor` class. 
@@ -16859,14 +16859,14 @@ TensorFlow can also efficiently represent _sparse tensors_ (i.e., tensors contai
 **Special Data Structures | 785** 
 
 ```
->>> s=tf.SparseTensor(indices=[[0, 1], [1, 0], [2, 3]],
+>>> s=tf.SparseTensor(indices=[ [0, 1], [1, 0], [2, 3] ],
                         values=[1., 2., 3.],
                         dense_shape=[3, 4])
 >>> tf.sparse.to_dense(s)
 <tf.Tensor: id=1074, shape=(3, 4), dtype=float32, numpy=
-array([[0., 1., 0., 0.],
+array([ [0., 1., 0., 0.],
        [2., 0., 0., 0.],
-       [0., 0., 0., 3.]], dtype=float32)>
+       [0., 0., 0., 3.] ], dtype=float32)>
 ```
 
 Note that sparse tensors do not support as many operations as dense tensors. For example, you can multiply a sparse tensor by any scalar value, and you get a new sparse tensor, but you cannot add a scalar value to a sparse tensor, as this would not return a sparse tensor: 
@@ -16905,44 +16905,44 @@ You can stack all the items into a regular tensor by calling the `stack()` metho
 ```
 >>> array.stack()
 <tf.Tensor: id=2110875, shape=(3, 2), dtype=float32, numpy=
-array([[1., 2.],
+array([ [1., 2.],
        [0., 0.],
-       [5., 7.]], dtype=float32)>
+       [5., 7.] ], dtype=float32)>
 ```
 
 ##### **Sets** 
 
-TensorFlow supports sets of integers or strings (but not floats). It represents them using regular tensors. For example, the set `{1, 5, 9}` is just represented as the tensor `[[1, 5, 9]]` . Note that the tensor must have at least two dimensions, and the sets must be in the last dimension. For example, `[[1, 5, 9], [2, 5, 11]]` is a tensor holding two independent sets: `{1, 5, 9}` and `{2, 5, 11}` . If some sets are shorter than others, you must pad them with a padding value (0 by default, but you can use any other value you prefer). 
+TensorFlow supports sets of integers or strings (but not floats). It represents them using regular tensors. For example, the set `{1, 5, 9}` is just represented as the tensor `[ [1, 5, 9] ]` . Note that the tensor must have at least two dimensions, and the sets must be in the last dimension. For example, `[ [1, 5, 9], [2, 5, 11] ]` is a tensor holding two independent sets: `{1, 5, 9}` and `{2, 5, 11}` . If some sets are shorter than others, you must pad them with a padding value (0 by default, but you can use any other value you prefer). 
 
 The `tf.sets` package contains several functions to manipulate sets. For example, let’s create two sets and compute their union (the result is a sparse tensor, so we call `to_dense()` to display it): 
 
 ```
->>> a=tf.constant([[1, 5, 9]])
->>> b=tf.constant([[5, 6, 9, 11]])
+>>> a=tf.constant([ [1, 5, 9] ])
+>>> b=tf.constant([ [5, 6, 9, 11] ])
 >>> u=tf.sets.union(a, b)
 >>> u
 <tensorflow.python.framework.sparse_tensor.SparseTensor at 0x132b60d30>
 >>> tf.sparse.to_dense(u)
-<tf.Tensor: [...] numpy=array([[ 1,  5,  6,  9, 11]], dtype=int32)>
+<tf.Tensor: [...] numpy=array([ [ 1,  5,  6,  9, 11] ], dtype=int32)>
 ```
 
 You can also compute the union of multiple pairs of sets simultaneously: 
 
 ```
->>> a=tf.constant([[1, 5, 9], [10, 0, 0]])
->>> b=tf.constant([[5, 6, 9, 11], [13, 0, 0, 0, 0]])
+>>> a=tf.constant([ [1, 5, 9], [10, 0, 0] ])
+>>> b=tf.constant([ [5, 6, 9, 11], [13, 0, 0, 0, 0] ])
 >>> u=tf.sets.union(a, b)
 >>> tf.sparse.to_dense(u)
-<tf.Tensor: [...] numpy=array([[ 1,  5,  6,  9, 11],
-                               [ 0, 10, 13,  0,  0]], dtype=int32)>
+<tf.Tensor: [...] numpy=array([ [ 1,  5,  6,  9, 11],
+                               [ 0, 10, 13,  0,  0] ], dtype=int32)>
 ```
 
 If you prefer to use a different padding value, you must set `default_value` when call‐ ing `to_dense()` : 
 
 ```
 >>> tf.sparse.to_dense(u, default_value=-1)
-<tf.Tensor: [...] numpy=array([[ 1,  5,  6,  9, 11],
-                               [ 0, 10, 13, -1, -1]], dtype=int32)>
+<tf.Tensor: [...] numpy=array([ [ 1,  5,  6,  9, 11],
+                               [ 0, 10, 13, -1, -1] ], dtype=int32)>
 ```
 
 
@@ -16973,7 +16973,7 @@ The simplest kind of queue is the first-in, first-out (FIFO) queue. To build it,
 It is also possible to enqueue and dequeue multiple records at once (the latter requires specifying the shapes when creating the queue): 
 
 ```
->>> q.enqueue_many([[13, 16], [b'cloudy', b'rainy']])
+>>> q.enqueue_many([ [13, 16], [b'cloudy', b'rainy'] ])
 >>> q.dequeue_many(3)
 [<tf.Tensor: [...] numpy=array([15, 13, 16], dtype=int32)>,
  <tf.Tensor: [...] numpy=array([b'sunny', b'cloudy', b'rainy'], dtype=object)>]
@@ -17013,7 +17013,7 @@ deftf_cube(x):
 returnx**3
 ```
 
-Every time you call a TF Function with a new combination of input types or shapes, it generates a new _concrete function_ , with its own graph specialized for this particular combination. Such a combination of argument types and shapes is called an _input sig‐ nature_ . If you call the TF Function with an input signature it has already seen before, it will reuse the concrete function it generated earlier. For example, if you call `tf_cube(tf.constant(3.0))` , the TF Function will reuse the same concrete function it used for `tf_cube(tf.constant(2.0))` (for float32 scalar tensors). But it will gener‐ ate a new concrete function if you call `tf_cube(tf.constant([2.0]))` or `tf_cube(tf.constant([3.0]))` (for float32 tensors of shape [1]), and yet another for `tf_cube(tf.constant([[1.0, 2.0], [3.0, 4.0]]))` (for float32 tensors of shape [2, 2]). You can get the concrete function for a particular combination of inputs by calling the TF Function’s `get_concrete_function()` method. It can then be called like a regular function, but it will only support one input signature (in this example, float32 scalar tensors): 
+Every time you call a TF Function with a new combination of input types or shapes, it generates a new _concrete function_ , with its own graph specialized for this particular combination. Such a combination of argument types and shapes is called an _input sig‐ nature_ . If you call the TF Function with an input signature it has already seen before, it will reuse the concrete function it generated earlier. For example, if you call `tf_cube(tf.constant(3.0))` , the TF Function will reuse the same concrete function it used for `tf_cube(tf.constant(2.0))` (for float32 scalar tensors). But it will gener‐ ate a new concrete function if you call `tf_cube(tf.constant([2.0]))` or `tf_cube(tf.constant([3.0]))` (for float32 tensors of shape [1]), and yet another for `tf_cube(tf.constant([ [1.0, 2.0], [3.0, 4.0] ]))` (for float32 tensors of shape [2, 2]). You can get the concrete function for a particular combination of inputs by calling the TF Function’s `get_concrete_function()` method. It can then be called like a regular function, but it will only support one input signature (in this example, float32 scalar tensors): 
 
 **791** 
 
@@ -17099,11 +17099,11 @@ But if we call `tf_cube()` with a tensor of a different type or shape, or with a
 x = 2
 >>> result=tf_cube(3) # new Python value: trace!
 x = 3
->>> result=tf_cube(tf.constant([[1., 2.]])) # New shape: trace!
+>>> result=tf_cube(tf.constant([ [1., 2.] ])) # New shape: trace!
 x = Tensor("x:0", shape=(1, 2), dtype=float32)
->>> result=tf_cube(tf.constant([[3., 4.], [5., 6.]])) # New shape: trace!
+>>> result=tf_cube(tf.constant([ [3., 4.], [5., 6.] ])) # New shape: trace!
 x = Tensor("x:0", shape=(None, 2), dtype=float32)
->>> result=tf_cube(tf.constant([[7., 8.], [9., 10.]])) # Same shape: no trace
+>>> result=tf_cube(tf.constant([ [7., 8.], [9., 10.] ])) # Same shape: no trace
 ```
 
 

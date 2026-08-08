@@ -91,6 +91,12 @@ Antes de recolectar nada, hay que responder: *¿qué unidades queremos estudiar?
 > [!definition] Unidad elemental
 > Cada uno de los elementos que componen la población. Es la "unidad de análisis" sobre la que medimos las variables.
 
+> [!tip] Unidades tangibles vs. intangibles
+> Las unidades elementales no siempre son objetos físicos: pueden ser **tangibles** (una persona, una pieza, una vivienda) o **intangibles** (una medición puntual, un período de tiempo, una transacción). Por ejemplo, si se estudia la precisión de un multímetro, cada **medición individual** que se le toma es una unidad intangible — la población no son multímetros, son mediciones. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1.*
+
+> [!important] Población vs. población estadística
+> Conviene distinguir dos ideas que se mezclan fácil: la **población** es el conjunto de unidades elementales (por ejemplo, todos los tornillos producidos en un turno); la **población estadística** es el conjunto de **valores** que toma la variable de interés al medirla en esa población (por ejemplo, todos los diámetros de esos tornillos). La misma población da lugar a poblaciones estadísticas distintas según qué variable se decida medir — es la razón por la que definir la población no alcanza: también hay que decidir qué se va a medir de ella. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1.*
+
 **¿Por qué importa definir bien la población?** Porque de eso depende la [[validez externa]] de las conclusiones: hasta qué grupo tengo derecho a extender lo que encontré.
 
 ---
@@ -118,6 +124,12 @@ Antes de recolectar nada, hay que responder: *¿qué unidades queremos estudiar?
 
 > [!tip] Regla mnemotécnica
 > **Cuento → discreta. Mido → continua.**
+
+> [!tip] Variable sustituta (proxy)
+> A veces la variable que realmente interesa es cara o imposible de medir directamente, y se mide en su lugar una **variable sustituta (proxy)** asociada a ella — por ejemplo, la presencia de grietas visibles como proxy de la dureza de una pieza, o la venta trimestral registrada como proxy de la demanda real (que incluye ventas perdidas por falta de stock, no observables directamente). Desarrollo completo en [[variables]]. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1.*
+
+> [!note] Un mismo concepto, distinto vocabulario según la disciplina
+> Estadística, ciencia de datos e ingeniería de software nombran lo mismo con palabras distintas: la variable que se usa como entrada se llama *predictor variable* (estadística), *feature* (data science) o *atributo* (ciencia de la computación); la variable de interés a explicar se llama *response/dependent variable* (estadística) o *target/outcome* (data science). Incluso la palabra "muestra" es ambigua entre disciplinas: para alguien de ciencias de la computación una *sample* suele ser **una fila** de datos; para un estadístico, **la muestra** es la colección completa de filas (el sentido que usa esta materia). Vale la pena tenerlo presente al leer documentación técnica en inglés. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 1.*
 
 ---
 
@@ -184,9 +196,17 @@ Planteadas las preguntas, surge el **diseño** del estudio. Principales clasific
 > - **Con reposición vs. sin reposición** → con reposición, una unidad elegida **vuelve** a la población y puede salir sorteada de nuevo; sin reposición, una vez elegida **queda afuera** del resto de las extracciones.
 >
 > Más muestra no arregla una muestra mal seleccionada: la encuesta de *Literary Digest* de 1936 (ver [[validez externa]]) encuestó a 10 millones de personas mal elegidas y predijo mal una elección que Gallup acertó con apenas 2.000 personas bien seleccionadas. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 2.*
+>
+> El opuesto de un buen muestreo aleatorio es la **muestra por conveniencia**: las unidades se incorporan porque se consiguen fácilmente, por voluntad propia del participante, etc. — es, en la práctica, el mecanismo concreto detrás del [[sesgo de autoselección]]. Otro caso instructivo: la Encuesta Nacional de Crecimiento Familiar de EE.UU. (NSFG) **sobremuestreó a propósito** ciertos subgrupos (adolescentes, hispanos, afroamericanos) para poder sacar conclusiones confiables también sobre ellos — un recordatorio de que "aleatorio" no es sinónimo de "en la misma proporción que la población" (desarrollo completo en [[población y muestra]]). *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1; [[Think Stats – Exploratory Data Analysis in Python]], cap. 1.*
 
 ### Experimento
 Se estudia el **efecto de uno o más factores** sobre variables de respuesta, **introduciendo cambios deliberados** en esos factores y tratando de **controlar** los factores no controlables. → [[diseño de experimentos]]
+
+> [!tip] Su contraparte: el estudio observacional
+> Un **estudio observacional** es el opuesto de un experimento: el investigador **no interviene**, solo observa y registra lo que ocurre naturalmente (sin asignar tratamientos). La distinción se refleja incluso en el nombre de la unidad de análisis: en un experimento se habla de **unidad experimental** (recibe un tratamiento asignado); en un estudio observacional, de **unidad observacional** (se la observa tal cual es, sin intervención). Esta distinción es clave para lo que se puede concluir después: un experimento bien diseñado permite hablar de causalidad con más confianza que un estudio observacional, precisamente porque en este último cualquier diferencia observada puede deberse a una [[variable de confusión]] no controlada. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1.*
+
+> [!example] Un experimento de ingeniería completo, con protocolo de aleatorización
+> Para comparar dos sembradoras de maíz: dos lotes de campo similares, sorteo de qué sembradora va a cada lote, bolsas de semilla del mismo peso asignadas también al azar, mismo día y mismo clima para ambos lotes — de modo que la única diferencia sistemática entre los grupos comparados sea, efectivamente, la sembradora. Es un ejemplo más concreto que el genérico "tratamiento A vs. B", desarrollado en detalle en [[diseño de experimentos]]. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1.*
 
 ### Transversal vs. longitudinal (según el tiempo)
 - **Transversal** → un **corte** en un momento del tiempo (una foto).
@@ -205,6 +225,9 @@ En esta etapa se **definen los instrumentos** de registro, se **entrena y superv
 
 > [!definition] Trazabilidad
 > Posibilidad de **identificar, rastrear y recuperar** las unidades de las que se extrajeron los datos (mediante códigos elaborados a tal fin). Permite recuperar características de interés: en qué horario se produjo, con qué máquina o lote de materia prima, con qué equipo se midió, etc.
+
+> [!tip] Dos instrumentos distintos: planilla de registro y planilla de volcado
+> Antes de llegar a la [[#10. La matriz de datos|matriz de datos]] final suele haber un paso intermedio: la **planilla de registro** (en papel o digital) es donde se anota el dato en el momento de tomarlo, muchas veces con controles de rango incorporados para evitar errores de carga evidentes (por ejemplo, que no se pueda ingresar una temperatura negativa donde no tiene sentido). La **planilla de volcado** es donde esos datos ya registrados se consolidan en la matriz final lista para analizar. Separar ambos pasos, y no registrar directamente en la matriz final, reduce errores de carga y facilita la trazabilidad de dónde vino cada valor. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1.*
 
 ---
 
@@ -272,6 +295,9 @@ Se habla de **validez** en dos sentidos:
 **Ejemplo para pensar la validez interna (¿la comparación es limpia?):**
 - Una empresa fabrica el mismo producto en dos plantas de **localidades distintas**. Usa materia prima del proveedor **A en una planta** y del **B en la otra**, y compara la calidad resultante. ¿Puede concluir que un proveedor es mejor? **No limpiamente**: la localidad, la maquinaria y otros factores están **confundidos** con el proveedor. La diferencia observada podría deberse a la planta, no a la materia prima. → [[variable de confusión]]
 
+> [!note] Dos familias de error, distintas entre sí
+> Al evaluar qué tan confiable es una conclusión conviene distinguir dos fuentes de error que suelen mezclarse: los **errores de muestreo** (el riesgo, cuantificable por el diseño del estudio, de que la muestra elegida no represente bien a la población — es lo que la inferencia estadística intenta acotar) y los **errores ajenos al muestreo** (un dato mal tomado, una variable mal registrada, un cálculo mal hecho — errores que pueden aparecer incluso en un censo completo, y que ninguna fórmula de inferencia corrige). El [[tratamiento primario]] ataca la segunda familia; el diseño muestral y la inferencia, la primera. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 1.*
+
 ---
 
 ## 13. Estudios exploratorios vs. confirmatorios
@@ -303,6 +329,7 @@ Luego, ya con hipótesis formuladas, un **estudio confirmatorio** —diseñado e
 - [[validez externa]] · [[validez interna]]
 - [[parámetro vs estadístico]]
 - [[escalas de medición]]
+- [[variables]]
 - [[sesgo de supervivencia]] · [[sesgo de autoselección]]
 - [[variable de confusión]]
 - [[diseño de experimentos]]
@@ -313,6 +340,8 @@ Luego, ya con hipótesis formuladas, un **estudio confirmatorio** —diseñado e
 3. ¿Cuál es la diferencia entre un parámetro y un estadístico, y por qué usan notaciones distintas (griega vs. latina)?
 4. Una encuesta de opinión sobre cursos de posgrado entrevista solo a alumnos del posgrado en Calidad — ¿qué tipo de validez está en juego, y por qué?
 5. ¿Por qué "más muestra" no arregla necesariamente una muestra mal seleccionada? (pensar en el caso *Literary Digest* vs. Gallup)
+6. ¿Qué diferencia hay entre "población" y "población estadística"? ¿Por qué la misma población puede dar lugar a distintas poblaciones estadísticas?
+7. ¿Por qué un estudio observacional permite hablar de causalidad con menos confianza que un experimento bien diseñado?
 
 ## Preguntas que me quedaron
 -

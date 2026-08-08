@@ -44,9 +44,18 @@ Reemplazando el 8 por un valor cada vez más extremo:
 
 | Robustas | No robustas |
 |---|---|
-| Mediana, promedio truncado (parcial), RIQ, MAD | Media, rango, varianza / desvío estándar |
+| Mediana, promedio truncado (parcial), RIQ, MAD, coeficiente de asimetría de Pearson | Media, rango, varianza / desvío estándar, tercer momento estandarizado (skewness "clásico") |
 
-Las medidas robustas suelen basarse en **percentiles** (mediana, cuartiles, RIQ) en lugar de en **sumas y promedios de todos los valores** (media, varianza), que dan igual peso a cada observación, incluidas las extremas. La [[medidas de dispersión|desviación absoluta mediana (MAD)]] es, de todas, la más resistente a atípicos: tolera hasta la mitad de los datos siendo extremos sin distorsionarse.
+Las medidas robustas suelen basarse en **percentiles** (mediana, cuartiles, RIQ) en lugar de en **sumas y promedios de todos los valores** (media, varianza), que dan igual peso a cada observación, incluidas las extremas. La [[medidas de dispersión|desviación absoluta mediana (MAD)]] es, de todas, la más resistente a atípicos: tolera hasta la mitad de los datos siendo extremos sin distorsionarse. La misma lógica se aplica más allá de centro y dispersión: incluso para medir la **forma** de una distribución hay una versión robusta y una no robusta — ver [[coeficiente de asimetría (skewness)]].
+
+## El porqué matemático: dos funciones de pérdida distintas
+
+Media y mediana no son dos formas intercambiables de "medir el centro": cada una es la solución a un problema de minimización distinto, y esa diferencia explica formalmente por qué una es robusta y la otra no.
+
+- La **media** es el valor $c$ que **minimiza la suma de errores al cuadrado**: $\bar y = \arg\min_c \sum_i (y_i - c)^2$ (la misma propiedad que fundamenta el $n-1$ en la varianza, ver [[grados de libertad]]).
+- La **mediana** es el valor $c$ que **minimiza la suma de errores absolutos**: $\text{mediana} = \arg\min_c \sum_i |y_i - c|$.
+
+Elevar al cuadrado penaliza fuertemente los errores grandes (el mismo argumento de la sección "Construyendo la varianza desde cero" en [[medidas de dispersión]]); el valor absoluto, en cambio, penaliza cada error en proporción directa a su tamaño, sin amplificar los extremos. Por eso la constante que minimiza el error cuadrático (la media) se deja arrastrar por un valor extremo mucho más que la que minimiza el error absoluto (la mediana): están resolviendo, literalmente, problemas distintos. *Fuente: [[The Elements of Statistical Learning]], cap. 2.*
 
 ## Por qué importa elegir bien
 
@@ -59,6 +68,9 @@ Si los datos tienen [[valores atípicos]] o vienen de una distribución asimétr
 - [[02 - El estudio de la variabilidad]]
 - [[valores atípicos]]
 - [[medidas de posición]]
+- [[medidas de dispersión]]
+- [[grados de libertad]]
+- [[coeficiente de asimetría (skewness)]]
 - [[tratamiento primario]]
 - [[04 - Agregaciones y estadistica descriptiva]]
 - [[03 - Estadistica descriptiva]]

@@ -32,6 +32,9 @@ La idea detrás (popularizada por Joseph Juran a partir del principio de Pareto)
 
 El ordenamiento decreciente es lo que hace visible **dónde está el "codo"**: el punto a partir del cual agregar más categorías aporta poco a la frecuencia acumulada. Es una herramienta clásica de la gestión de la calidad para priorizar sobre qué actuar primero.
 
+> [!important] "Más frecuente" no siempre es "más importante"
+> El Pareto se construye por defecto ordenando por **frecuencia**, pero esa no es la única forma de medir "importancia" de una categoría: también se puede ordenar por **costo** o por **tiempo insumido**, y el resultado puede cambiar por completo. En una fábrica de turbinas, el defecto más *frecuente* era un problema de pintura (62 % de los casos) — pero el más *costoso* era un rodete defectuoso, presente en solo el 4 % de los casos y responsable, sin embargo, del 36 % del costo total de los defectos. Un Pareto armado solo por frecuencia habría llevado a priorizar mal: el problema "poco vital" en cantidad de casos era, en plata, el más vital de todos. Antes de construir el diagrama conviene preguntarse explícitamente **qué variable de importancia es la relevante para la decisión que se quiere tomar**. *Fuente: [[Estadística para la resolución de problemas en Ingeniería]], cap. 2.*
+
 > [!note] En código
 > La curva acumulada que se superpone a las barras es la misma idea que `scipy.stats.cumfreq()` (ver [[04 - Frecuencias, cuantiles y percentiles]]), aplicada acá a categorías ya ordenadas en vez de a intervalos numéricos.
 

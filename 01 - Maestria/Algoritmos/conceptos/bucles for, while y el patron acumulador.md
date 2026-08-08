@@ -122,6 +122,19 @@ for i, p in enumerate(pinguinos):
 
 Ese patrón — recorrer hasta encontrar y frenar con `break` — es una **búsqueda lineal**, uno de los algoritmos que la clase 4 (Big-O y algoritmos de búsqueda) analiza formalmente.
 
+> [!warning] `break` solo corta el bucle más interno
+> Con bucles anidados (un `for` dentro de otro), `break` termina únicamente el bucle donde está escrito — el bucle de afuera sigue corriendo normalmente:
+> ```python
+> for isla in ["Torgersen", "Biscoe"]:
+>     for especie in ["Adelie", "Gentoo", "Chinstrap"]:
+>         if especie == "Gentoo":
+>             break            # corta SOLO el for de especies
+>         print(isla, especie)
+> # Torgersen Adelie
+> # Biscoe Adelie
+> ```
+> El `for` de `isla` sigue completando sus dos vueltas — `break` no tiene forma de cortar "todo de una", hay que usar una variable de control adicional o reestructurar el código si hace falta ese efecto. *Fuente: [[Python-for-Data-Analysis]], cap. 2.*
+
 ## `while`: repetir mientras una condición sea verdadera
 
 Se usa cuando no se sabe de antemano cuántas vueltas hacen falta.

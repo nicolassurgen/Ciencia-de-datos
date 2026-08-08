@@ -29,6 +29,19 @@ elemento in lista
 elemento in conjunto
 ```
 
+> [!tip] O(1) no es sinónimo de "usa hashing"
+> El hashing es la forma más común de lograr tiempo constante, pero no la única. Elegir el elemento del medio de una lista por posición fija (`lista[len(lista)//2]`) también es O(1): sin importar si la lista tiene 10 o 10 millones de elementos, acceder por índice tarda lo mismo, porque no hace falta recorrer nada — la posición en memoria se calcula directo. La idea general de O(1) es "cantidad fija de pasos, sin importar $n$", no "usa un diccionario". *Fuente: [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 1.*
+
+## Otras operaciones y su costo
+
+No solo "buscar" tiene un costo distinto según la estructura — **modificar** también:
+
+- `lista.append(x)` es O(1): agregar al final no requiere mover nada.
+- `lista.insert(0, x)` (insertar al principio, o en cualquier posición intermedia) es **O(n)**: hay que correr todos los elementos posteriores un lugar para hacer espacio. Si el programa inserta seguido al principio de una lista, conviene `collections.deque` (una estructura pensada para agregar/quitar rápido en ambos extremos) en vez de `list`.
+- `lista_a + lista_b` dentro de un `for` (recrear la lista completa en cada vuelta del patrón acumulador) es más caro que `lista_a.extend(lista_b)`: el operador `+` construye una lista **nueva** cada vez, copiando todo lo anterior, mientras que `.extend()` agrega en el lugar. Sobre pocos elementos no se nota; sobre un bucle con muchas iteraciones, la diferencia es real.
+
+*Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+
 ## Por qué importa en la práctica
 
 > [!important] Elegir la estructura es una decisión algorítmica

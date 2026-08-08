@@ -502,6 +502,9 @@ for p in pinguinos:
 # promedio por especie = suma[e] / conteo[e]
 ```
 
+> [!tip] El mismo patrón, más idiomático: `setdefault()` y `defaultdict`
+> `dict.get(clave, 0)` es la forma más explícita de "leer o usar un valor por defecto", pero no la única. `collections.defaultdict(int)` hace lo mismo automáticamente, sin repetir el `.get(..., 0)` en cada línea — desarrollo completo, con el mismo ejemplo llevado un paso más allá, en [[listas, tuplas, diccionarios y conjuntos]].
+
 Todo eso, en la **clase 5** con Pandas, es una línea:
 
 ```python

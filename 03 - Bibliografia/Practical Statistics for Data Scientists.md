@@ -488,25 +488,25 @@ _Table 1-2. A few rows of the data.frame state of population and murder rate by 
 
 > state <- read.csv(file="/Users/andrewbruce1/book/state.csv") 
 
-> mean(state[["Population"]]) 
+> mean(state[ ["Population"] ]) 
 
 - [1] 6162876 
 
-> mean(state[["Population"]], trim=0.1) 
+> mean(state[ ["Population"] ], trim=0.1) 
 
-[1] 4783697 > median(state[["Population"]]) [1] 4436370 
+[1] 4783697 > median(state[ ["Population"] ]) [1] 4436370 
 
 The mean is bigger than the trimmed mean, which is bigger than the median. 
 
 This is because the trimmed mean excludes the largest and smallest five states ( trim=0.1 drops 10% from each end). If we want to compute the average murder rate for the country, we need to use a weighted mean or median to account for different populations in the states. Since base R doesn’t have a function for weighted median, we need to install a package such as matrixStats : 
 
-> weighted.mean(state[["Murder.Rate"]], w=state[["Population"]]) 
+> weighted.mean(state[ ["Murder.Rate"] ], w=state[ ["Population"] ]) 
 
 [1] 4.445834 
 
 > library("matrixStats") 
 
-> weightedMedian(state[["Murder.Rate"]], w=state[["Population"]]) [1] 4.4 
+> weightedMedian(state[ ["Murder.Rate"] ], w=state[ ["Population"] ]) [1] 4.4 
 
 In this case, the weighted mean and median are about the same. 
 
@@ -647,7 +647,7 @@ _Table 1-3. A few rows of the data.frame state of population and murder rate by 
 
 Using R’s built-in functions for the standard deviation, interquartile range (IQR), and the median absolution deviation from the median (MAD), we can compute estimates of variability for the state population data: 
 
-> sd(state[["Population"]]) [1] 6848235 > IQR(state[["Population"]]) [1] 4847308 > mad(state[["Population"]]) [1] 3849870 
+> sd(state[ ["Population"] ]) [1] 6848235 > IQR(state[ ["Population"] ]) [1] 4847308 > mad(state[ ["Population"] ]) [1] 3849870 
 
 The standard deviation is almost twice as large as the MAD (in R, by default, the scale of the MAD is adjusted to be on the same scale as the mean). This is not surprising since the standard deviation is sensitive to outliers. 
 
@@ -695,7 +695,7 @@ In “Estimates Based on Percentiles”, we explored how percentiles can be used
 
 Table 1-4 displays some percentiles of the murder rate by state. In R, this would be produced by the quantile function: 
 
-quantile(state[["Murder.Rate"]], p=c(.05, .25, .5, .75, .95)) 5%   25%   50%   75%   95% 1.600 2.425 4.000 5.550 6.510 
+quantile(state[ ["Murder.Rate"] ], p=c(.05, .25, .5, .75, .95)) 5%   25%   50%   75%   95% 1.600 2.425 4.000 5.550 6.510 
 
 _Table 1-4. Percentiles of murder rate by state_ 5% 25% 50% 75% 95% 1.60 2.42 4.00 5.55 6.51 
 
@@ -703,7 +703,7 @@ The median is 4 murders per 100,000 people, although there is quite a bit of var
 
 _Boxplots_ , introduced by Tukey [Tukey-1977], are based on percentiles and give a quick way to visualize the distribution of data. Figure 1-2 shows a boxplot of the population by state produced by R: 
 
-boxplot(state[["Population"]]/1000000, ylab="Population (millions)") 
+boxplot(state[ ["Population"] ]/1000000, ylab="Population (millions)") 
 
 
 
@@ -718,7 +718,7 @@ The top and bottom of the box are the 75th and 25th percentiles, respectively. T
 
 A frequency table of a variable divides up the variable range into equally spaced segments, and tells us how many values fall in each segment. Table 1-5 shows a frequency table of the population by state computed in R: 
 
-breaks <- seq(from=min(state[["Population"]]), to=max(state[["Population"]]), length=11) pop_freq <- cut(state[["Population"]], breaks=breaks, right= **TRUE** , include.lowest = **TRUE** ) table(pop_freq) 
+breaks <- seq(from=min(state[ ["Population"] ]), to=max(state[ ["Population"] ]), length=11) pop_freq <- cut(state[ ["Population"] ], breaks=breaks, right= **TRUE** , include.lowest = **TRUE** ) table(pop_freq) 
 
 _Table 1-5. A frequency table of population by state_ 
 
@@ -768,7 +768,7 @@ In statistical theory, location and variability are referred to as the first and
 
 Related to the histogram is a density plot, which shows the distribution of data values as a continuous line. A density plot can be thought of as a smoothed histogram, although it is typically computed directly from the data through a _kernal density estimate_ (see [Duong-2001] for a short tutorial). Figure 1-4 displays a density estimate superposed on a histogram. In R, you can compute a density estimate using the density function: 
 
-hist(state[["Murder.Rate"]], freq= **FALSE** ) lines(density(state[["Murder.Rate"]]), lwd=3, col="blue") 
+hist(state[ ["Murder.Rate"] ], freq= **FALSE** ) lines(density(state[ ["Murder.Rate"] ]), lwd=3, col="blue") 
 
 A key distinction from the histogram plotted in Figure 1-3 is the scale of the y- axis: a density plot corresponds to plotting the histogram as a proportion rather than counts (you specify this in R using the argument freq=FALSE ). 
 
@@ -896,7 +896,7 @@ VZ 0.678 0.417 0.287 1.000 0.242 LVLT 0.279 0.287 0.260 0.242 1.000
 
 A table of correlations like Table 1-7 is commonly plotted to visually display the relationship between multiple variables. Figure 1-6 shows the correlation between the daily returns for major exchange traded funds (ETFs). In R, we can easily create this using the package corrplot : 
 
-etfs <- sp500_px[row.names(sp500_px)>"2012-07-01", sp500_sym[sp500_sym$sector=="etf", 'symbol']] library(corrplot) corrplot(cor(etfs), method = "ellipse") 
+etfs <- sp500_px[row.names(sp500_px)>"2012-07-01", sp500_sym[sp500_sym$sector=="etf", 'symbol'] ] library(corrplot) corrplot(cor(etfs), method = "ellipse") 
 
 The ETFs for the S&P 500 (SPY) and the Dow Jones Index (DIA) have a high correlation. Similary, the QQQ and the XLK, composed mostly of technology companies, are postively correlated. Defensive ETFs, such as those tracking gold prices (GLD), oil prices (USO), or market volatility (VXX) tend to be negatively correlated with the other ETFs. The orientation of the ellipse indicates whether two variables are positively correlated (ellipse is pointed right) or negatively correlated (ellipse is pointed left). The shading and width of the ellipse indicate the strength of the association: thinner and darker ellipses correspond to stronger relationships. 
 
@@ -3561,7 +3561,7 @@ house_98105 <- house[house$ZipCode == 98105,] lm_98105 <- lm(AdjSalePrice ~ SqFt
 
 We extract the standardized residuals using the rstandard function and obtain the index of the smallest residual using the order function: 
 
-sresid <- rstandard(lm_98105) idx <- order(sresid) sresid[idx[1]] 20431 -4.326732 
+sresid <- rstandard(lm_98105) idx <- order(sresid) sresid[idx[1] ] 20431 -4.326732 
 
 The biggest overestimate from the model is more than four standard errors above the regression line, corresponding to an overestimate of $757,753. The original data record corresponding to this outlier is as follows: 
 
@@ -6142,7 +6142,7 @@ df <- defaults[sample(nrow(defaults), 250), c('dti', 'payment_inc_ratio', 'home'
 
 The resulting dendrogram is shown in Figure 7-13. The individual records are not distinguishable on the x-axis, but we can examine the records in one of the subtrees (on the left, using a “cut” of 0.5), with this code: 
 
-> df[labels(dnd_cut$lower[[1]]),] _# A tibble: 9 × 4_ dti payment_inc_ratio home purpose <dbl>             <dbl> <fctr>  <fctr> 1 24.57 0.83550 RENT other 2 34.95 5.02763 RENT other 3 1.51 2.97784 RENT other 4 8.73 14.42070 RENT other 5 12.05 9.96750 RENT other 6 10.15 11.43180 RENT other 7 19.61 14.04420 RENT other 8 20.92 6.90123 RENT other 9 22.49 9.36000 RENT other 
+> df[labels(dnd_cut$lower[ [1] ]),] _# A tibble: 9 × 4_ dti payment_inc_ratio home purpose <dbl>             <dbl> <fctr>  <fctr> 1 24.57 0.83550 RENT other 2 34.95 5.02763 RENT other 3 1.51 2.97784 RENT other 4 8.73 14.42070 RENT other 5 12.05 9.96750 RENT other 6 10.15 11.43180 RENT other 7 19.61 14.04420 RENT other 8 20.92 6.90123 RENT other 9 22.49 9.36000 RENT other 
 
 This subtree entirely consists of renters with a loan purpose labeled as “other.” While strict separation is not true of all subtrees, this illustrates that the categorical variables tend to be grouped together in the clusters. 
 

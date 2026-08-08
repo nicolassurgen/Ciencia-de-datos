@@ -31,7 +31,7 @@ Este segundo argumento sí explica el sesgo, y parte de una propiedad de la medi
 
 $$\bar{y} = \arg\min_{c} \sum_{i=1}^{n} (y_i - c)^2$$
 
-(Es la misma idea de mínimos cuadrados que aparece en regresión lineal — ver [[02 - Matrices]].) Una consecuencia directa es que, para **cualquier** otra constante — en particular, la verdadera media poblacional $\mu$, que en general no coincide exactamente con $\bar{y}$ —, la suma de cuadrados no puede ser menor que la calculada con $\bar{y}$:
+(Es la misma idea de mínimos cuadrados que aparece en regresión lineal — ver [[02 - Matrices]]. Es también, no por casualidad, la misma propiedad que explica por qué la mediana es robusta y la media no: la mediana minimiza la suma de **errores absolutos** en vez de al cuadrado — ver [[robustez estadística]] para el desarrollo completo de ese paralelismo.) Una consecuencia directa es que, para **cualquier** otra constante — en particular, la verdadera media poblacional $\mu$, que en general no coincide exactamente con $\bar{y}$ —, la suma de cuadrados no puede ser menor que la calculada con $\bar{y}$:
 
 $$\sum_{i=1}^{n} (y_i - \bar{y})^2 \; \le \; \sum_{i=1}^{n} (y_i - \mu)^2$$
 
@@ -61,5 +61,6 @@ Cuando se trabaja con **toda** la población no hace falta corregir nada: no se 
 - [[02 - El estudio de la variabilidad]]
 - [[parámetro vs estadístico]]
 - [[medidas de dispersión]]
+- [[robustez estadística]]
 - [[04 - Agregaciones y estadistica descriptiva]]
 - [[06 - Tests de hipotesis - una y dos muestras]]
