@@ -13,18 +13,37 @@ fecha: 2026-08-08
 
 # Recursión y memoización
 
-Algunos problemas se definen de forma natural en términos de una versión más chica de sí mismos: el factorial de `n` se define usando el factorial de `n-1`; recorrer un árbol significa recorrer los subárboles de cada uno de sus hijos, que a su vez son árboles. Un `for`/`while` recorre secuencias lineales; para un problema que se ramifica o se reduce a sí mismo, forzarlo a un bucle suele terminar en código más enredado que el problema original. La recursión ofrece una forma de expresarlo directamente.
+## El problema, sin código todavía
+
+Imaginate una fila de personas, y querés saber en qué posición estás. Una forma es contarte a vos mismo. Otra, más rara, funciona así: le preguntás a la persona que tenés justo **adelante** "¿vos en qué posición estás?", y a lo que te responda le sumás 1.
+
+El problema es que esa persona tampoco sabe su posición de memoria — así que le hace la misma pregunta a quien tiene adelante suyo. Y esa persona, a la siguiente. Así hasta llegar a la primera persona de la fila, que **sí** puede responder sin preguntarle a nadie: *"yo soy la posición 1"*.
+
+Ahí la cadena empieza a volver: la persona 1 le contesta "1" a la persona 2. La persona 2 calcula 1+1=2 y se lo pasa a la persona 3. Y así, sumando 1 en cada paso, hasta que la respuesta te llega a vos.
+
+**Eso es recursión.** Nadie resolvió el problema completo de una sola vez. Cada persona resolvió una versión *idéntica pero más chica* del mismo problema — preguntarle a la de adelante — confiando en que esa persona iba a hacer exactamente lo mismo.
 
 > [!definition] Función recursiva
-> Una función que **se llama a sí misma**. Es la forma natural de resolver problemas que se definen en términos de sí mismos: si sé resolver el problema para un caso más chico, puedo resolver el grande.
+> Una función que **se llama a sí misma**, para resolver un problema reduciéndolo a una versión más chica del mismo problema — igual que cada persona de la fila resuelve "mi posición" preguntando la posición de quien tiene adelante.
+
+## Las dos piezas obligatorias
 
 Toda función recursiva necesita **dos** partes; si falta alguna, no funciona:
 
-1. **Caso base**: la situación tan simple que se resuelve directo, sin llamarse de nuevo. Es lo que hace que la cadena termine.
-2. **Caso recursivo**: reducir el problema a una versión más chica y llamarse a sí misma con esa versión.
+1. **Caso base**: la situación tan simple que se resuelve directo, sin llamarse de nuevo. Es lo que hace que la cadena termine. (*"Soy la primera persona de la fila: mi posición es 1."*)
+2. **Caso recursivo**: reducir el problema a una versión más chica y llamarse a sí misma con esa versión, confiando en que esa llamada más chica va a devolver la respuesta correcta. (*"Mi posición = 1 + la posición de quien tengo adelante."*)
+
+> [!tip] La "fe recursiva": no hace falta seguirle el rastro a toda la cadena
+> Lo que más cuesta al principio es la tentación de imaginarse mentalmente *toda* la fila de personas preguntando, paso a paso, antes de animarse a escribir la función. No hace falta. Alcanza con confiar en que la llamada recursiva **ya resuelve correctamente** la versión más chica del problema — el mismo salto de fe que hace la persona 5 al preguntarle a la persona 4, sin necesitar saber cómo hizo la persona 4 para averiguar la suya. Esta idea tiene nombre en la bibliografía: la *"leap of faith"* (salto de fe) al escribir el caso recursivo. *Fuente: [[Data Structures and Algorithms with Python]], cap. 3.*
 
 > [!tip] Una tercera regla, menos obvia: que los subproblemas no se solapen
-> Además de tener caso base y acercarse a él, conviene que las llamadas recursivas resuelvan **subproblemas independientes**, sin recalcular el mismo trabajo dos veces. Esta regla no hace que una recursión "funcione" o no (Fibonacci funciona igual sin respetarla), pero es la que separa una recursión **eficiente** de una que no lo es — es exactamente lo que falla en el Fibonacci ingenuo de más abajo, y lo que la memoización viene a corregir. *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1.*
+> Además de tener caso base y acercarse a él, conviene que las llamadas recursivas resuelvan **subproblemas independientes**, sin recalcular el mismo trabajo dos veces. Esta regla no hace que una recursión "funcione" o no (Fibonacci funciona igual sin respetarla, más abajo), pero es la que separa una recursión **eficiente** de una que no lo es. *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1.*
+
+## Por qué no se rompe la cadena: cada llamada "espera" a la anterior
+
+Cuando la persona 5 le pregunta a la persona 4, la persona 5 **no se va a ningún lado** — se queda parada, esperando la respuesta, con la cuenta "lo que me diga + 1" ya preparada para cuando llegue. Es exactamente como una **pila de bandejas en un comedor**: la última bandeja que se apiló es la primera que se saca. Cada persona de la fila funciona como una bandeja que se apila mientras la cadena "baja" preguntando, y recién se empieza a "sacar" (a responder) cuando se llega al fondo de la pila — el caso base.
+
+Esto no es solo una metáfora para entender: en la computadora es **literal**.
 
 ## Ejemplo: factorial
 
@@ -39,25 +58,25 @@ def factorial(n):
 print([factorial(i) for i in range(6)])   # [1, 1, 2, 6, 24, 120]
 ```
 
-### Cómo se ejecuta realmente: la pila de llamadas
-
-`factorial(4)` no se resuelve de una vez: se abre una cadena de llamadas que **baja** hasta el caso base y después **vuelve** multiplicando. Cada llamada queda "esperando" en memoria (en la **pila de llamadas**, *call stack*) a que la de adentro termine:
+Trazando `factorial(4)` con la misma lógica de la fila de personas — **primero baja preguntando, después sube respondiendo**:
 
 ```
-factorial(4)
-  -> 4 * factorial(3)
-       -> 3 * factorial(2)
-            -> 2 * factorial(1)
-                 -> 1              <- caso base, empieza la vuelta
-            -> 2 * 1 = 2
-       -> 3 * 2 = 6
-  -> 4 * 6 = 24
+factorial(4)   "no sé, preguntale a factorial(3) y multiplico por 4"
+  factorial(3)   "no sé, preguntale a factorial(2) y multiplico por 3"
+    factorial(2)   "no sé, preguntale a factorial(1) y multiplico por 2"
+      factorial(1)   "yo sé mi respuesta sin preguntar: 1"     <- CASO BASE, acá se da vuelta
+    factorial(2) recibe 1, calcula 2*1 = 2
+  factorial(3) recibe 2, calcula 3*2 = 6
+factorial(4) recibe 6, calcula 4*6 = 24
 ```
+
+Ningún nivel tuvo que entender el problema completo: `factorial(4)` solo resolvió una pregunta chiquita ("¿cuánto es 4 por lo que me diga `factorial(3)`?") y confió en la respuesta de abajo — la misma fe recursiva de la fila de personas.
+
+### La pila de llamadas es, literalmente, una pila (Stack, LIFO)
+
+Cada llamada activa queda reservada en una zona de memoria llamada **stack**, separada del **heap** (donde viven los objetos, listas, diccionarios). Cada llamada guarda ahí sus variables locales en un registro propio (un *activation record*), y esos registros se apilan y desapilan en orden **LIFO** (*last-in, first-out*: la última llamada en entrar es la primera en salir) — el mismo principio que define al TAD *Stack* que se ve más adelante en la materia, y la misma imagen de la pila de bandejas de arriba. El stack suele ser bastante más chico que el heap; por eso una recursión muy profunda puede agotarlo y terminar en `RecursionError` aunque sobre memoria "en general" (en el heap). *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1; [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 9.*
 
 Esto tiene un costo real: la memoria usada por la pila crece con la **profundidad** de la recursión.
-
-> [!tip] La pila de llamadas es, literalmente, una pila (Stack, LIFO)
-> No es una metáfora: el intérprete reserva cada llamada activa en una zona de memoria llamada **stack**, separada del **heap** (donde viven los objetos, listas, diccionarios). Cada llamada guarda ahí sus variables locales en un registro propio (un *activation record*), y esos registros se apilan y desapilan en orden **LIFO** (*last-in, first-out*: la última llamada en entrar es la primera en salir) — el mismo principio que define al TAD *Stack* que se ve más adelante en la materia. El stack suele ser bastante más chico que el heap; por eso una recursión muy profunda puede agotarlo y terminar en `RecursionError` aunque sobre memoria "en general" (en el heap). *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1; [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 9.*
 
 > [!danger] Sin caso base, o si el caso recursivo no se acerca a él: `RecursionError`
 > ```python
@@ -66,13 +85,13 @@ Esto tiene un costo real: la memoria usada por la pila crece con la **profundida
 >
 > factorial_roto(5)   # RecursionError: maximum recursion depth exceeded
 > ```
-> Python corta a las ~1000 llamadas para proteger la memoria; es el equivalente recursivo de un bucle `while` infinito. Antes de escribir una función recursiva, conviene verificar: *¿existe un caso base, y cada llamada me acerca a él?*
+> Python corta a las ~1000 llamadas para proteger la memoria; es el equivalente recursivo de un bucle `while` infinito — o, con la imagen de arriba, una fila **sin primera persona**: todos preguntando para atrás, eternamente, sin que nadie conteste nunca. Es la misma idea que dos espejos puestos uno frente al otro: el reflejo se repite para siempre porque no hay ningún punto donde "cortar". Antes de escribir una función recursiva, conviene verificar: *¿existe un caso base, y cada llamada me acerca a él?*
 >
 > Ojo con un descuido común: `if n <= 1: return 1` "arregla" silenciosamente el caso de un `n` negativo (nunca debería pedirse el factorial de `-5`), tratándolo igual que el caso base en vez de avisar del error. Es cómodo, pero esconde un uso incorrecto de la función en vez de reportarlo — vale la pena tenerlo presente como una decisión de diseño, no solo como un detalle técnico.
 
 ## No toda recursión es sobre números: recorrer secuencias
 
-Factorial reduce un **número**; la recursión también sirve para reducir una **secuencia** (lista, string), un dato ya conocido de la clase 1. El mismo patrón caso base/caso recursivo aplica igual:
+Factorial reduce un **número**; la recursión también sirve para reducir una **secuencia** (lista, string), un dato ya conocido de la clase 1. El mismo patrón caso base/caso recursivo aplica igual — y muestra que la idea de "un pedacito + el resto, que es el mismo problema más chico" no es exclusiva de los números:
 
 ```python
 def invertir(lista):
@@ -83,7 +102,16 @@ def invertir(lista):
 print(invertir([1, 2, 3, 4]))   # [4, 3, 2, 1]
 ```
 
-La misma función sirve, casi sin cambios, para invertir un string (`lista[1:]` y `lista[0:1]` funcionan igual sobre un `str`, porque comparten el protocolo de slicing de la clase 1). No es una coincidencia: cualquier estructura que se pueda "partir en primero + resto" es candidata natural a recorrerse recursivamente. *Fuente: [[Data Structures and Algorithms with Python]], cap. 3.*
+`invertir([1, 2, 3, 4])` se lee: *"invertir el resto de la lista, y poner el primer elemento al final"*. La misma función sirve, casi sin cambios, para invertir un string (`lista[1:]` y `lista[0:1]` funcionan igual sobre un `str`, porque comparten el protocolo de slicing de la clase 1). No es una coincidencia: cualquier estructura que se pueda "partir en primero + resto" es candidata natural a recorrerse recursivamente. *Fuente: [[Data Structures and Algorithms with Python]], cap. 3.*
+
+> [!tip] Checklist para escribir cualquier función recursiva
+> Cuatro preguntas que alcanzan siempre, combinando el criterio de Sedgewick y de *Data Structures and Algorithms with Python*:
+> 1. ¿Cuál es el caso **tan simple** que se puede responder directo, sin llamar de nuevo a la función?
+> 2. ¿Cómo se reduce el problema a una versión **más chica** del mismo problema?
+> 3. ¿Esa versión más chica **se acerca** al caso base en cada llamada (nunca se aleja ni se queda igual)?
+> 4. Al escribir la llamada recursiva, ¿se está **confiando** en que ya funciona para ese caso más chico (la fe recursiva de arriba), en vez de tratar de imaginarse toda la cadena de llamadas?
+>
+> Si las cuatro respuestas están claras, la función funciona — aunque al principio se sienta raro "confiar" en una función que todavía ni se terminó de escribir.
 
 ## Fibonacci y el costo oculto de la recursión
 
