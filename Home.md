@@ -24,6 +24,10 @@ Punto de entrada al vault. Desde acá se llega a las cuatro áreas y se puede ve
 **Tecnologías**
 - 🐳 **Docker**
 	- [[01 - Introduccion]] · [[02 - Imagen]] · [[03 - Contenedor]] · [[04 - Dockerfile]] · [[05 - DockerHub]]
+- 🔀 **Git**
+	- [[01 - Introduccion y control de versiones]] (índice del recorrido completo)
+- 🐙 **GitHub**
+	- [[01 - Introduccion y repositorios]] (índice del recorrido completo)
 - 📈 **Matplotlib**
 	- [[01 - Introduccion y primer grafico]] (índice del recorrido completo)
 - 🔢 **NumPy**
