@@ -416,6 +416,9 @@ Resume la distribución con **cinco números** (el *five-number summary*, que en
 6. Un proceso puede estar perfectamente centrado en el valor objetivo y aun así no cumplir con la especificación — ¿cómo es posible? ¿Qué otra cosa hay que revisar además del centrado?
 7. ¿Qué diferencia hay entre agrupar datos en un histograma y agrupar percentiles? ¿Por qué un histograma y una tabla de percentiles no "cortan" los datos de la misma forma?
 
+## Actividad
+La cátedra complementó esta clase con cuatro casos aplicados de ingeniería y gestión (viscosidad de un proceso, comparación de laboratorios, tiempo de resolución de reclamos, elección de un lote de producción) — resueltos en detalle, con datos reales y traducidos a Python, en [[02.1 - Casos aplicados]].
+
 ## Preguntas que me quedaron
 -
 -
