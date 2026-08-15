@@ -175,6 +175,9 @@ print(fibonacci_memo(30))    # 832040 -> mismo resultado, una sola pasada por ca
 print(f"{fibonacci_memo(100):,}")   # 354.224.848.179.261.915.075
 ```
 
+> [!warning] Por qué `memoria=None` y no directamente `memoria={}`
+> Parece más corto escribir `def fibonacci_memo(n, memoria={})` y ahorrarse las dos líneas del `if`. **No hacerlo nunca**: en Python, un valor por defecto como `{}` o `[]` se crea **una sola vez**, cuando Python lee la definición de la función — no una vez por cada llamada. Todas las llamadas que no pasen `memoria` explícitamente terminarían compartiendo el **mismo** diccionario, arrastrando entre sí resultados de llamadas anteriores sin darse cuenta (un bug real, difícil de detectar porque el código "funciona" hasta que dos llamadas distintas interfieren entre sí). El patrón `memoria=None` seguido de `if memoria is None: memoria = {}` evita esto: crea un diccionario **nuevo** en cada llamada que no reciba uno propio. Este patrón se repite varias veces más adelante (en `inorder` y en `dfs`) exactamente por esta misma razón — no es una preferencia de estilo, es la forma correcta de dar un valor mutable por defecto en Python. *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+
 Con memoización, cada valor de `n` se calcula **una sola vez**: el costo pasa de O(2ⁿ) a O(n). Es lo que permite calcular `F(100)` o `F(300)` al instante, valores que la versión directa jamás alcanzaría en un tiempo razonable. Esta técnica —cachear resultados en una estructura de acceso O(1)— es la misma idea que hace rápido a un diccionario o un `set` (ver [[hashing y hashabilidad]]).
 
 > [!tip] Una variante: el diccionario "afuera" en vez de como parámetro

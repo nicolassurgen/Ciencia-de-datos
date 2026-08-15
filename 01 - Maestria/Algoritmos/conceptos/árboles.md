@@ -39,7 +39,7 @@ Ya visto en clase: **nodo**, **raíz**, **hijo/padre**, **hoja**, **subárbol**,
 - **Árbol binario**: un árbol donde cada nodo tiene **como máximo dos** hijos (a diferencia del árbol de la clase, donde `hijos` puede tener cualquier cantidad de elementos). Es el caso particular más estudiado en la bibliografía de estructuras de datos, porque simplifica mucho el análisis.
 
 > [!tip] Una fórmula que cuantifica algo que ya calculaste en clase
-> Para un árbol binario con $N$ nodos, la cantidad de ramas (conexiones padre-hijo) es siempre $N - 1$ — cada nodo, salvo la raíz, aporta exactamente una rama hacia su padre. Es el mismo tipo de relación que ya viste al escribir `contar_nodos` y `contar_hojas`: la estructura del árbol determina de antemano ciertas cantidades, sin necesidad de recorrerlo. *Fuente: [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 10.*
+> Para cualquier árbol con $N$ nodos (binario o no — vale en general, no es una propiedad exclusiva del caso binario), la cantidad de ramas (conexiones padre-hijo) es siempre $N - 1$ — cada nodo, salvo la raíz, aporta exactamente una rama hacia su padre. Es el mismo tipo de relación que ya viste al escribir `contar_nodos` y `contar_hojas`: la estructura del árbol determina de antemano ciertas cantidades, sin necesidad de recorrerlo. *Fuente: [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 10.*
 
 ## Paso a paso: así se desenrolla la recursión sobre un árbol
 
@@ -181,7 +181,7 @@ bst = {
 }
 
 def inorder(nodo, resultado=None):
-    if resultado is None:
+    if resultado is None:      # NO usar resultado=[] directo — ver por qué en [[recursion y memoizacion]]
         resultado = []
     if nodo is None:                    # CASO BASE: rama vacía, no hay nada que agregar
         return resultado
@@ -323,6 +323,42 @@ Cada nivel no combina nada (no hay `+` ni `max` como en `contar_nodos`): simplem
 ## Cuánto cuesta operar sobre un árbol
 
 Todo lo anterior asumió implícitamente que recorrer un árbol tarda lo que tarda porque hay que visitar cada nodo una vez — proporcional a $N$. Pero hay una pregunta más fina, relevante en particular para un **árbol binario de búsqueda** (donde además cada nodo tiene un valor, y el hijo izquierdo tiene valores menores, el derecho mayores): ¿de qué depende el costo de **buscar** algo en el árbol, en vez de recorrerlo entero?
+
+A diferencia de `contar_nodos` o `inorder`, que tienen que visitar **todos** los nodos sí o sí, buscar en un BST aprovecha la regla de orden para **descartar la mitad del árbol en cada paso**, sin visitarla:
+
+```python
+def buscar(nodo, objetivo):
+    if nodo is None:                    # CASO BASE 1: llegué a una rama vacía, no está
+        return False
+    if nodo["valor"] == objetivo:       # CASO BASE 2: lo encontré
+        return True
+    if objetivo < nodo["valor"]:
+        return buscar(nodo["izq"], objetivo)   # descarto todo el subárbol derecho
+    return buscar(nodo["der"], objetivo)       # descarto todo el subárbol izquierdo
+
+print(buscar(bst, 4))   # True
+print(buscar(bst, 6))   # False
+```
+
+Trazando `buscar(bst, 4)` sobre el mismo BST de la sección de inorder:
+
+```
+buscar(5, objetivo=4)
+│  5 no es None, y 5 != 4 -> sigo
+│  ¿4 < 5? Sí -> voy a la izquierda, DESCARTO TODO el subárbol derecho (el 8 y lo que tenga)
+│  return buscar(3, objetivo=4)
+│
+└─ buscar(3, objetivo=4)
+   │  3 no es None, y 3 != 4 -> sigo
+   │  ¿4 < 3? No -> voy a la derecha, DESCARTO el subárbol izquierdo (el 2)
+   │  return buscar(4, objetivo=4)
+   │
+   └─ buscar(4, objetivo=4)
+      │  4 no es None, y 4 == 4  <- CASO BASE, lo encontré
+      └─ return True
+```
+
+Tres llamadas para un árbol de cinco nodos — nunca se tocó el 2 ni el 8. Esa es la diferencia concreta entre "recorrer todo" (siempre $O(N)$) y "buscar en un BST" (proporcional a la **altura**, no a $N$): en cada nivel se descarta una rama entera sin mirarla, así que el costo depende de cuántos niveles hay que bajar, no de cuántos nodos hay en total.
 
 > [!important] Todo depende de la altura, no de la cantidad de nodos
 > En un árbol binario de búsqueda, buscar, insertar o borrar cuesta tiempo proporcional a la **altura** del árbol, no a la cantidad de nodos. Con $N$ nodos, dos casos extremos son posibles:

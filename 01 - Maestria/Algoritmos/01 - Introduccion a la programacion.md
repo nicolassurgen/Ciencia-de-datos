@@ -88,7 +88,7 @@ print(round(0.1 + 0.2, 10) == 0.3)   # True -> la forma correcta de comparar
 ```
 
 > [!important] Regla práctica con reales
-> **Nunca compares dos `float` con `==`.** Compará si su diferencia es menor a una tolerancia chica. Esto reaparece al evaluar modelos. (El motivo profundo es la representación binaria de punto flotante, estándar **IEEE 754**: números como 0.1 no tienen representación exacta en base 2.)
+> **Nunca compares dos `float` con `==`.** Compará si su diferencia es menor a una tolerancia chica. Esto reaparece al evaluar modelos. (El motivo profundo es la representación binaria de punto flotante, estándar **IEEE 754**: números como 0.1 no tienen representación exacta en base 2 — el mecanismo completo, con la analogía de por qué esto ya pasa en base 10 con 1/3, está en [[tipos primitivos en Python]].)
 
 ### Operaciones aritméticas
 
@@ -177,6 +177,8 @@ especie, largo = "Adelie", 39.1
 print(f"El pingüino {especie} tiene un pico de {largo} mm")
 print(f"Redondeado: {largo:.1f} mm")   # :.1f = un decimal
 ```
+
+Después de `:` va el **especificador de formato**: `.1f` significa "número decimal (`f`, de *float*) con 1 dígito después de la coma" — `.2f` daría dos dígitos, `.0f` ninguno (redondeado a entero). También se usa para separar miles (`:,` — ver el ejemplo de `promedio` más abajo) o para alinear texto en columnas (`:10s`, diez espacios de ancho). No hace falta memorizar todas las variantes: alcanza con reconocer el patrón `{valor:especificador}` y buscar el especificador puntual que haga falta cuando aparezca.
 
 ### Comparaciones y valores lógicos
 
@@ -485,6 +487,15 @@ faltantes = sum(1 for p in pinguinos if p["masa_g"] is None)
 masas = [p["masa_g"] for p in pinguinos if p["masa_g"] is not None]
 promedio = sum(masas) / len(masas)
 ```
+
+> [!note] Adelanto de sintaxis: esto es una comprensión
+> La forma `[algo for elemento in coleccion if condicion]` (y su versión con `{ }` para conjuntos) se llama **comprensión** — una forma compacta de "recorrer y filtrar" en una sola línea. Se explica en detalle recién en la clase 2, en [[comprensiones de listas]]; acá se usa un poco antes porque es, con diferencia, la forma más natural de responder este tipo de pregunta sobre los datos. Si por ahora resulta más clara escrita como un `for` de toda la vida, es exactamente equivalente:
+> ```python
+> masas = []
+> for p in pinguinos:
+>     if p["masa_g"] is not None:
+>         masas.append(p["masa_g"])
+> ```
 
 > [!important] Decisión del analista, no de la herramienta
 > El promedio se calcula sobre las mediciones **válidas**. Si se tratara a los faltantes como cero, el promedio bajaría **artificialmente**. Qué hacer con los faltantes es una decisión **del analista**. (Enlaza con el [[tratamiento primario]] de Estadística.)

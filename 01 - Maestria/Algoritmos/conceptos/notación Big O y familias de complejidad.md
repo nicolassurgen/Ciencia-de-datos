@@ -24,7 +24,16 @@ Esta nota generaliza [[complejidad O(1) vs O(n)]] (que quedó centrada en el con
 Todo lo de esta sección es **ampliación matemática opcional**: sirve para leer bibliografía que la use, pero ninguna nota del resto del vault depende de entenderla. La idea completa ya quedó dicha en criollo más arriba ("cómo crece el tiempo cuando crecen los datos, ignorando constantes y entradas chicas") — lo que sigue es esa misma idea, pero escrita con el lenguaje que usan los libros de texto: en vez de decir "para $n$ chico esto puede fallar, pero de cierto punto en adelante siempre se cumple", la convención matemática es nombrar ese "cierto punto" con una letra ($n_0$) y decir formalmente "para todo $n$ mayor o igual a $n_0$".
 
 > [!definition] O(g(n))
-> Una función $f(n)$ es $O(g(n))$ si existen constantes $c$ y $n_0$ tales que $f(n) \le c \cdot g(n)$ para todo $n \ge n_0$. En criollo: a partir de cierto tamaño de entrada ($n_0$ en adelante), el costo real ($f$) nunca supera a una versión escalada de $g$ — $g$ es una **cota superior** de cómo crece $f$, ignorando lo que pase con entradas chicas y ignorando constantes multiplicativas. *Fuente: [[Data Structures and Algorithms with Python]], sec. 2.4; [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1.4.*
+> Una función $f(n)$ es $O(g(n))$ si existen constantes $c > 0$ y $n_0 \ge 0$ (números reales positivos) tales que $f(n) \le c \cdot g(n)$ para todo $n \ge n_0$. En criollo: a partir de cierto tamaño de entrada ($n_0$ en adelante), el costo real ($f$) nunca supera a una versión escalada de $g$ — $g$ es una **cota superior** de cómo crece $f$, ignorando lo que pase con entradas chicas y ignorando constantes multiplicativas. *Fuente: [[Data Structures and Algorithms with Python]], sec. 2.4; [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1.4.*
+
+> [!example] Un ejemplo resuelto con números, no solo con letras
+> ¿Es $f(n) = 3n + 5$ un $O(n)$? Hay que encontrar **algún** $c$ y **algún** $n_0$ que hagan cumplir $3n+5 \le c\cdot n$ para todo $n \ge n_0$ — no hace falta el mejor par posible, alcanza con que exista uno.
+>
+> Probando $c = 4$: la desigualdad $3n + 5 \le 4n$ es lo mismo que $5 \le n$. Así que con $n_0 = 5$ se cumple siempre: en $n=5$, $f(5)=20$ y $4\cdot 5=20$ (empatan, `≤` los deja pasar); en $n=6$, $f(6)=23 \le 24$; y sigue así para adelante. Para $n=4$ (menor a $n_0$) no se cumple ($f(4)=17$, mayor que $4\cdot 4=16$) — y no hace falta que se cumpla ahí, la definición solo exige la desigualdad **a partir de** $n_0$.
+>
+> Encontrado un par $(c, n_0) = (4, 5)$ que funciona, queda demostrado: $f(n) = 3n+5$ es $O(n)$.
+
+> [!tip] Dos primas de O que vas a encontrar en la bibliografía
 
 Las reglas prácticas que ya usa la clase (descartar constantes, quedarse con el término dominante, sumar bucles secuenciales, multiplicar bucles anidados, analizar el peor caso) son consecuencia directa de esta definición — no reglas separadas para memorizar, sino la forma de aplicarla sin tener que encontrar $c$ y $n_0$ a mano cada vez.
 

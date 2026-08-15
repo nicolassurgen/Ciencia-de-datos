@@ -35,7 +35,7 @@ Por eso las **tuplas** sirven como clave de diccionario y las **listas** no.
 `hash()` es la función que calcula ese código:
 
 ```python
-hash(45)                # 45      -> los enteros chicos son su propio hash
+hash(45)                # 45      -> en CPython, un entero es su propio hash (para cualquier tamaño práctico)
 hash(45.0)               # 45      -> 45 y 45.0 hashean IGUAL (se comparan como iguales con ==)
 hash(True)                # 1
 hash((1, 2, (2, 3)))     # funciona: tupla de elementos hasheables

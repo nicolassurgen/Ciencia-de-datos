@@ -159,7 +159,7 @@ def camino_mas_corto(grafo, origen, destino):
 > **DFS**: para explorar todo, detectar ciclos, encontrar componentes conexas. **BFS**: cuando importa la distancia — camino más corto en saltos, "amigos de amigos", grados de separación. Los dos visitan cada nodo y cada arista una sola vez; cambia el orden, no el costo.
 
 > [!tip] Ampliación — por qué ambos cuestan lo mismo, y el mismo ejemplo en la bibliografía
-> El costo de ambos es $O(V+E)$: se marca cada nodo una vez y, para cada uno, se recorre su lista de vecinos completa — sumadas todas, dan $2E$. Y el ejemplo de la clase (rutas aéreas, BFS para menos escalas) no es una elección arbitraria: es prácticamente el ejemplo canónico de la bibliografía, bajo el nombre "Degrees of Separation" — el mismo patrón detrás del número de Erdős en matemática y el "juego de Kevin Bacon". Desarrollo completo en [[grafos y recorridos (DFS, BFS)]].
+> El costo de ambos es $O(V+E)$: se marca cada nodo una vez y, para cada uno, se recorre su lista de vecinos completa — sumadas todas, dan $2E$. (Salvedad técnica: esto vale para `dfs` tal cual, pero no exactamente para `camino_mas_corto` de más arriba, que copia el camino completo en cada paso — detalle completo, con la versión que sí es O(V+E), en [[grafos y recorridos (DFS, BFS)]].) Y el ejemplo de la clase (rutas aéreas, BFS para menos escalas) no es una elección arbitraria: es prácticamente el ejemplo canónico de la bibliografía, bajo el nombre "Degrees of Separation" — el mismo patrón detrás del número de Erdős en matemática y el "juego de Kevin Bacon". Desarrollo completo en [[grafos y recorridos (DFS, BFS)]].
 
 Un grafo construido desde datos, no a mano: dos islas quedan conectadas si comparten alguna especie de pingüino, usando la **intersección de conjuntos** (`&`) de la clase 1:
 
@@ -239,13 +239,15 @@ Ahora las dos versiones de "buscar duplicados": la teoría dice `O(n)` contra `O
 
 ![[Duplicados On2 vs On.png]]
 
-| n | O(n²) (ms) | O(n) (ms) | razón vs. anterior |
+| n | O(n²) (ms) | O(n) (ms) | razón vs. anterior (n se duplica) |
 |---|---|---|---|
 | 200 | 0,21 | 0,003 | — |
-| 800 | 5,09 | 0,011 | ~4,4× |
-| 3.200 | 78,85 | 0,052 | ~4,1× |
+| 400 | 1,16 | 0,006 | 5,5× |
+| 800 | 5,09 | 0,011 | 4,4× |
+| 1.600 | 19,39 | 0,024 | 3,8× |
+| 3.200 | 78,85 | 0,052 | 4,1× |
 
-Al duplicarse `n`, el tiempo de la versión cuadrática se **cuadruplica** ($2^2=4$) — la firma inconfundible de `O(n²)`. Y la ventaja de la versión con conjunto no es constante, **crece con $n$**: con 200 elementos la diferencia es modesta, con 3.200 ya es de tres órdenes de magnitud. Por eso los algoritmos malos no se detectan en pruebas chicas: se detectan en producción.
+Al duplicarse `n`, el tiempo de la versión cuadrática se **cuadruplica** ($2^2=4$, con el ruido normal de una medición real oscilando entre 3,8× y 5,5×) — la firma inconfundible de `O(n²)`. Y la ventaja de la versión con conjunto no es constante, **crece con $n$**: con 200 elementos la diferencia es modesta, con 3.200 ya es de tres órdenes de magnitud. Por eso los algoritmos malos no se detectan en pruebas chicas: se detectan en producción.
 
 > [!tip] Cómo reconocer la complejidad midiendo
 > Duplicá `n` y mirá qué le pasa al tiempo. Si no cambia, es `O(1)`. Si se duplica, `O(n)`. Si se cuadruplica, `O(n²)`. Si apenas sube, `O(log n)`.

@@ -17,7 +17,7 @@ fecha: 2026-08-03
 > Pregunta si dos valores **son iguales** (mismo contenido), aunque sean objetos distintos en memoria.
 
 > [!definition] `is` — identidad
-> Pregunta si dos nombres apuntan **al mismo objeto** en memoria (mismo `id()`), no solo a valores iguales.
+> Pregunta si dos nombres apuntan **al mismo objeto** en memoria, no solo a valores iguales. Python le asigna a cada objeto un identificador numérico único mientras existe (consultable con la función `id(objeto)`, que devuelve ese número); `is` compara justamente ese `id()` de ambos lados, sin necesidad de escribirlo explícitamente.
 
 ## Por qué `None` se compara con `is`
 
@@ -27,7 +27,7 @@ print(sexo is None)    # True  -> forma recomendada
 print(sexo == None)    # funciona, pero NO es lo recomendado
 ```
 
-`None` es **único**: existe una sola vez en todo el programa, así que preguntar por identidad (`is None`) es más directo y es la convención de la comunidad Python (`PEP 8`).
+`None` es **único**: existe una sola vez en todo el programa (es garantía del lenguaje, no un detalle de implementación), así que preguntar por identidad (`is None`) es más directo y es la convención de la comunidad Python, documentada en la **PEP 8** — la "PEP" (*Python Enhancement Proposal*) que fija la guía de estilo oficial del lenguaje, algo así como el manual de buenas prácticas al que la comunidad adhiere por consenso.
 
 ## Donde la diferencia se vuelve visible: la copia compartida de listas
 

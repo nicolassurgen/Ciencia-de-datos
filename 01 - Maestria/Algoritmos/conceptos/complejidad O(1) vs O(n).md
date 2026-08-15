@@ -39,7 +39,7 @@ elemento in conjunto
 
 No solo "buscar" tiene un costo distinto según la estructura — **modificar** también:
 
-- `lista.append(x)` es O(1): agregar al final no requiere mover nada.
+- `lista.append(x)` es O(1) — más precisamente, "O(1) **amortizado**": Python reserva de antemano un poco más de espacio del que usa una lista, así que casi todos los `append()` van directo a un lugar ya reservado (O(1) real). De vez en cuando, cuando ese espacio extra se agota, Python tiene que pedir un bloque de memoria más grande y copiar todos los elementos existentes ahí (un evento O(n), pero infrecuente). "Amortizado" significa que, promediando el costo de esas copias ocasionales entre todos los `append()` hechos, el promedio por operación sigue siendo O(1) — es el término exacto que se va a encontrar en cualquier libro de estructuras de datos para este mismo caso, y vale la pena tenerlo en el vocabulario aunque en la práctica alcance con recordar "es O(1)".
 - `lista.insert(0, x)` (insertar al principio, o en cualquier posición intermedia) es **O(n)**: hay que correr todos los elementos posteriores un lugar para hacer espacio. Si el programa inserta seguido al principio de una lista, conviene `collections.deque` (una estructura pensada para agregar/quitar rápido en ambos extremos) en vez de `list`.
 - `lista_a + lista_b` dentro de un `for` (recrear la lista completa en cada vuelta del patrón acumulador) es más caro que `lista_a.extend(lista_b)`: el operador `+` construye una lista **nueva** cada vez, copiando todo lo anterior, mientras que `.extend()` agrega en el lugar. Sobre pocos elementos no se nota; sobre un bucle con muchas iteraciones, la diferencia es real.
 

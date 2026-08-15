@@ -46,7 +46,7 @@ Como una lista, pero no se puede modificar tras crearla. Sirve para un **registr
 
 Resuelve el problema de acceder "por posición" (`tabla[2][3]`, hay que recordar qué es la columna 3): en un diccionario se accede **por nombre** (`pinguino["masa_g"]`). Las claves deben ser **únicas e inmutables** (ver [[hashing y hashabilidad]]); los valores pueden ser cualquier cosa. `.get()` es la forma segura de acceder sin arriesgarse a un `KeyError`.
 
-`dict(zip(claves, valores))` construye un diccionario a partir de dos listas paralelas — el mismo `zip()` ya visto para recorrer dos secuencias a la vez, aplicado a construir en vez de iterar:
+`dict(zip(claves, valores))` construye un diccionario a partir de dos listas paralelas. `zip()` empareja dos secuencias elemento a elemento (el primero con el primero, el segundo con el segundo...) — acá se usa para construir de una sola vez, y va a reaparecer en la clase 2 para *recorrer* dos secuencias a la vez con un `for` (ver [[bucles for, while y el patron acumulador]]):
 ```python
 especies = ["Adelie", "Gentoo", "Chinstrap"]
 conteos = [152, 124, 68]

@@ -46,6 +46,9 @@ print(0.1 + 0.2 == 0.3)              # False (!)
 print(round(0.1 + 0.2, 10) == 0.3)   # True -> la forma correcta de comparar
 ```
 
+> [!tip] Por qué pasa esto, no solo que pasa
+> La misma situación existe en base 10, y ahí resulta obvia: 1/3 no se puede escribir con una cantidad finita de decimales (0,3333... se repite para siempre), así que cualquier calculadora que solo guarde, digamos, 10 dígitos, en realidad está guardando 0,3333333333 — una aproximación redondeada, no el 1/3 exacto. La computadora tiene el mismo problema, pero en **base 2** (binario) en vez de base 10: ahí los números que se pueden escribir con una cantidad finita de dígitos no son los mismos que en base 10. 0,1 en decimal es, en binario, un número periódico (como 1/3 en decimal) — no importa cuántos bits se usen, siempre queda un resto sin representar. Por eso `0.1 + 0.2` no da exactamente `0.3`: cada uno de los tres números ya venía redondeado desde el momento en que se escribió, antes incluso de sumarlos.
+
 > [!important] Regla práctica con reales
 > **Nunca compares dos `float` con `==`.** Compará si su diferencia es menor a una tolerancia chica. Números como 0.1 no tienen representación exacta en base 2.
 

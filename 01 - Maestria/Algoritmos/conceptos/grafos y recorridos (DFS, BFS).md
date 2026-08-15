@@ -22,6 +22,9 @@ Un árbol alcanza mientras la relación entre los datos sea estrictamente jerár
 
 Un árbol es, formalmente, un caso particular de grafo: uno **conexo** (se puede llegar de cualquier vértice a cualquier otro) y **sin ciclos**. Todo lo que ya sabés de árboles sigue valiendo — nodos, aristas, recorrido recursivo — pero un grafo general no impone esas dos restricciones, y esa libertad es justamente lo que obliga a repensar cómo se recorre.
 
+> [!note] Esta nota trabaja con grafos no dirigidos
+> Todo lo que sigue —incluido el grafo de rutas de la clase— asume que las conexiones son **simétricas**: si A conecta con B, B conecta con A (como una amistad, o un vuelo de ida y vuelta). Eso es un **grafo no dirigido**. Existen también los **grafos dirigidos**, donde una arista va en un solo sentido (por ejemplo, "la página A tiene un link a la página B" no implica que B tenga un link a A) — un grafo de dependencias entre tareas o de enlaces web suele ser de este tipo. La lógica de DFS/BFS es la misma, cambiando solo cómo se define la lista de adyacencia; queda fuera del alcance de esta clase introductoria.
+
 ## Vocabulario
 
 - **Grado de un vértice**: la cantidad de aristas que llegan a él. `avgDegree = 2·E / V` (cada arista suma 1 al grado de sus dos extremos, así que la suma de todos los grados es siempre el doble de la cantidad de aristas). *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 4.1.*
@@ -53,7 +56,7 @@ Esta es la recursión más difícil de las que aparecen en la clase, porque comb
 
 ```python
 def dfs(grafo, nodo, visitados=None):
-    if visitados is None:
+    if visitados is None:      # NO usar visitados=set() directo — ver por qué en [[recursion y memoizacion]]
         visitados = set()
     if nodo in visitados:        # CASO BASE: ya pasé por acá, corto
         return visitados
@@ -163,6 +166,32 @@ Tres cosas para notar, en contraste directo con la traza de DFS de arriba:
 ### Por qué ambos cuestan $O(V+E)$
 
 Ni DFS ni BFS visitan ningún vértice dos veces (el conjunto de visitados lo evita), así que el costo total tiene dos partes: marcar cada vértice una vez ($V$ pasos) y, para cada vértice marcado, recorrer completa su lista de vecinos. Sumar la longitud de **todas** las listas de vecinos del grafo da exactamente $2E$ (cada arista aparece dos veces: una en la lista de cada uno de sus dos extremos) — de ahí que el costo total sea proporcional a $V + E$, sin importar si el recorrido es en profundidad o en anchura. *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 4.1 (Proposiciones A y B).*
+
+> [!warning] Con una salvedad: `dfs` sí es O(V+E), pero `camino_mas_corto` tal como está escrito, no
+> `dfs` cumple exactamente el análisis de arriba. `camino_mas_corto`, en cambio, encola **caminos completos** (`cola.append(nuevo)`, con `nuevo = camino + [vecino]`) — esa concatenación copia toda la lista existente en cada paso, un costo proporcional a la longitud del camino (hasta $O(V)$). Sumado sobre todas las aristas exploradas, esta implementación puntual puede llegar a $O(V \cdot E)$ en el peor caso, no $O(V+E)$: el resultado que devuelve sigue siendo correcto (el camino más corto), pero la garantía de costo de BFS "de libro" no aplica tal cual a este código concreto.
+>
+> La versión que sí logra $O(V+E)$ guarda, para cada nodo, quién fue el primero en descubrirlo (un diccionario `nodo → padre`), y reconstruye el camino **una sola vez** al final, caminando hacia atrás desde el destino:
+> ```python
+> def camino_mas_corto_eficiente(grafo, origen, destino):
+>     if origen == destino:
+>         return [origen]
+>     padres = {origen: None}
+>     cola = deque([origen])
+>     while cola:
+>         nodo = cola.popleft()
+>         for vecino in grafo[nodo]:
+>             if vecino in padres:          # "in padres" hace de chequeo de visitados
+>                 continue
+>             padres[vecino] = nodo
+>             if vecino == destino:
+>                 camino = [destino]
+>                 while padres[camino[-1]] is not None:
+>                     camino.append(padres[camino[-1]])
+>                 return camino[::-1]
+>             cola.append(vecino)
+>     return None
+> ```
+> Sobre el mismo grafo de rutas, da exactamente el mismo resultado: `['Rosario', 'Córdoba', 'Salta']`. La diferencia no es *qué* calcula, es *cuánto* copia en el camino.
 
 > [!tip] BFS y la distancia más corta, demostrado por inducción
 > Que el primer camino que BFS encuentra a un vértice sea el más corto (en cantidad de saltos) no es casualidad: en cualquier momento del recorrido, la cola contiene primero todos los vértices a distancia $k$ de la fuente y después todos los de distancia $k+1$ — nunca se mezclan fuera de orden, porque cada vértice nuevo que entra a la cola está exactamente un salto más lejos que el vértice que lo agregó. *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 4.1 (Proposición B).*
