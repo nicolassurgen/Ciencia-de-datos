@@ -21,6 +21,9 @@ fecha: 2026-08-03
 - **O(1) — tiempo constante**: la operación tarda **lo mismo** sin importar cuántos elementos haya. Buscar una clave en un **diccionario** o un elemento en un **conjunto** es O(1), gracias al [[hashing y hashabilidad|hashing]].
 - **O(n) — tiempo lineal**: el costo **crece proporcional** a $n$. Buscar un elemento en una **lista** es O(n): en el peor caso hay que recorrerla entera.
 
+> [!note] La misma idea, en palabras de la bibliografía
+> *"Checking whether a list contains a value is a lot slower than doing so with dictionaries and sets [...], as Python makes a linear scan across the values of the list, whereas it can check the others (based on hash tables) in constant time."* *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+
 ```python
 # Buscar en una lista -> O(n): en el peor caso recorre TODOS los elementos
 elemento in lista
@@ -54,6 +57,9 @@ Esta es la razón práctica detrás de la elección entre estructuras vista en [
 ## Puente con Tecnologías
 
 Esta es, en el fondo, la razón de ser de NumPy: un `for` en Python puro recorriendo un array es lento no por ser O(n) en sí, sino porque cada paso paga el costo extra de ser código interpretado. Vectorizar con [[03 - Ufuncs y operaciones vectorizadas|ufuncs]] no cambia la complejidad (sigue siendo O(n) internamente), pero ejecuta ese recorrido en código compilado — de ahí la diferencia de velocidad real entre "hacerlo a mano" (esta clase) y `np.sum(x)`.
+
+> [!example] La diferencia es de constante, no de complejidad
+> Multiplicar por 2 un array de un millón de enteros: `my_arr * 2` (NumPy) tarda ~715 µs; el equivalente con comprensión de lista en Python puro, ~48,8 ms — unas **68 veces más lento**, siendo las dos soluciones igual de O(n). *"NumPy-based algorithms are generally 10 to 100 times faster (or more) than their pure Python counterparts."* *Fuente: [[Python-for-Data-Analysis]], cap. 4.*
 
 ## Relacionado
 - [[01 - Introduccion a la programacion]]
