@@ -38,6 +38,10 @@ Es la herramienta natural para conjuntos de datos **chicos** (unas pocas decenas
 > [!tip] Puente con la clase
 > El caso de los diámetros de piezas de la Máquina 1 y la Máquina 2 en [[02 - El estudio de la variabilidad|la clase 2]] se presentó justamente como un dot plot: dos columnas de puntos, una por máquina, comparadas sobre el mismo eje de diámetro — la forma más directa de ver a ojo si una máquina produce piezas más dispersas o más centradas que la otra, antes incluso de calcular ninguna medida de resumen.
 
+![[Dotplot diametro por maquina.png]]
+
+Con los datos reales (Máquina 1: 98, 99, 99, 100, 100, 101, 101, 102 mm; Máquina 2: 99, 100, 101, 101, 102, 102, 103, 104 mm) se ve a simple vista que la Máquina 2 queda corrida hacia la derecha — produce piezas de diámetro más grande — sin necesidad de calcular todavía ni la media ni el desvío estándar de cada una.
+
 ## Relación con otros gráficos
 
 | Gráfico | Agrupa los datos | Conserva el valor exacto |

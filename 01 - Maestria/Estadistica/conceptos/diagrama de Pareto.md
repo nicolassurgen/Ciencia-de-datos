@@ -20,6 +20,10 @@ fecha: 2026-08-03
 > [!example] Ejemplo — quejas de una ferretería
 > Con 350 quejas registradas y motivos ordenados por frecuencia, **Factura + Envases + Dimensiones** ya explican cerca del 70 % de las quejas. El Pareto permite identificar los **"pocos vitales"**: las pocas categorías que concentran la mayor parte del problema, donde conviene concentrar los esfuerzos de mejora.
 
+![[Pareto de quejas de ferreteria.png]]
+
+Con las barras ordenadas de mayor a menor (Factura 115, Envases 76, Dimensiones 58, Manchas/poros 40, Golpes/abolladuras 25, Envío no coincidente 21, Retraso 15) y la curva de frecuencia acumulada superpuesta, se ve con claridad dónde está el "codo": después de las primeras tres categorías, la curva empieza a aplanarse — agregar las cuatro categorías restantes suma apenas alrededor del 30 % restante.
+
 La idea detrás (popularizada por Joseph Juran a partir del principio de Pareto) es que en muchos fenómenos, una minoría de las categorías explica la mayoría del efecto total — de ahí el nombre informal "regla 80/20".
 
 ## Construcción

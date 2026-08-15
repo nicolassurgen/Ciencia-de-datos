@@ -34,6 +34,11 @@ Es el gráfico de referencia para ver la **forma** de la distribución de una va
 >
 > *Fuentes: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 1-2; [[Think Stats – Exploratory Data Analysis in Python]], cap. 2, datos de la encuesta NSFG.*
 
+> [!example] Asimetría a la derecha con datos propios del curso
+> El tiempo de resolución de 50 reclamos (Caso 3 de [[02.1 - Casos aplicados]]) es un ejemplo real y verificado de la misma forma que el ingreso de los hogares: la mayoría de los reclamos se resuelve rápido, pero una cola de casos demorados estira la distribución hacia la derecha, con la media (más alta) claramente por encima de la mediana.
+
+![[Distribucion del tiempo de resolucion.png]]
+
 > [!warning] No borres los bins vacíos
 > Cuando un dato mucho más extremo que el resto obliga a usar intervalos de amplitud fija, pueden aparecer **bins sin ningún dato adentro** (huecos en el histograma) antes de llegar al valor extremo. Esos bins vacíos son información real — muestran que hay un salto grande entre el grueso de los datos y el valor atípico — y no deben eliminarse ni "acomodarse" para que el gráfico se vea más prolijo.
 

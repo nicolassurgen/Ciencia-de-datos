@@ -46,6 +46,8 @@ for val in [99, 100, 101, 102]:
 # 102 1.000 0.750
 ```
 
+![[ECDF diametro por maquina.png]]
+
 En cada valor de diámetro, la proporción acumulada de la Máquina 1 es **mayor** que la de la Máquina 2 (0.375 vs. 0.125 en 99 mm; 0.875 vs. 0.5 en 101 mm). Eso significa que la curva de la Máquina 1 queda sistemáticamente **a la izquierda** de la curva de la Máquina 2: la Máquina 1 produce piezas de diámetro **más chico**, en todo el rango de valores, no solo en el promedio (100.0 mm contra 101.5 mm). Esta lectura —una curva completa corrida respecto de la otra— es más difícil de apreciar comparando dos histogramas de 8 datos cada uno, donde el ruido de los intervalos puede tapar el patrón.
 
 > [!important] La CDF no pierde información al no agrupar
