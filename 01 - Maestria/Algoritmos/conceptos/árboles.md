@@ -25,7 +25,7 @@ Lo que sí tienen estos tres ejemplos es una propiedad más sutil: **cada parte 
 Vale la pena tener a mano la definición recursiva explícita, porque es literalmente lo que ya está escrito en el diccionario anidado de la clase:
 
 > [!definition] Definición recursiva de árbol
-> Un árbol es, o bien un único nodo raíz, o bien un nodo raíz conectado a una o más colecciones de árboles más chicos (sus subárboles). *"You can recursively define a tree to be either: a single root node — or a root node connected by branches to one or more smaller trees."* *Fuente: [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 10.*
+> Un árbol es, o bien un único nodo raíz, o bien un nodo raíz conectado a una o más colecciones de árboles más chicos (sus subárboles). *"Se puede definir un árbol recursivamente como: un único nodo raíz — o un nodo raíz conectado por ramas a uno o más árboles más chicos."* *Fuente: [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 10.*
 
 Esto no es una curiosidad teórica: es la razón exacta por la que `arbol["hijos"][0]` en el código de la clase **es un árbol completo** con la misma forma que el original, y por la que la receta de recorrido (procesar el nodo, después repetir lo mismo con cada hijo) funciona sin tener que saber de antemano cuántos niveles tiene el árbol.
 
@@ -33,7 +33,7 @@ Esto no es una curiosidad teórica: es la razón exacta por la que `arbol["hijos
 
 Ya visto en clase: **nodo**, **raíz**, **hijo/padre**, **hoja**, **subárbol**, **altura** (cantidad de niveles). Cuatro términos más, de uso constante en cualquier lectura futura sobre árboles:
 
-- **Nivel / profundidad**: la distancia desde un nodo hasta la raíz. La raíz está en el nivel 0. *"A node's level or depth in the tree is the distance from the node to the root."* *Fuente: [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 10.*
+- **Nivel / profundidad**: la distancia desde un nodo hasta la raíz. La raíz está en el nivel 0. *"El nivel o profundidad de un nodo en el árbol es la distancia desde el nodo hasta la raíz."* *Fuente: [[Essential Algorithms A Practical Approach to Computer Algorithms]], cap. 10.*
 - **Ancestro / descendiente**: los hijos de un nodo, los hijos de sus hijos, etc., son sus **descendientes**; el padre de un nodo, el padre de su padre, etc., hasta la raíz, son sus **ancestros**.
 - **Grado de un nodo**: la cantidad de hijos que tiene. El grado del árbol es el máximo grado entre todos sus nodos.
 - **Árbol binario**: un árbol donde cada nodo tiene **como máximo dos** hijos (a diferencia del árbol de la clase, donde `hijos` puede tener cualquier cantidad de elementos). Es el caso particular más estudiado en la bibliografía de estructuras de datos, porque simplifica mucho el análisis.
@@ -113,7 +113,7 @@ def altura(nodo):
 
 La clase ya recorrió árboles con esta receta: procesar el nodo, después repetir con cada hijo. Eso tiene nombre — es un recorrido **preorder** (primero el nodo, después los hijos). Pero no es la única forma de recorrer un árbol, y **cuándo** procesás el nodo respecto de sus hijos no es un detalle menor: cambia qué preguntas podés responder.
 
-La forma más clara de ver la diferencia es con un árbol que representa una expresión aritmética. Cada nodo interno es una operación, cada hoja es un número:
+La forma más clara de ver la diferencia es con un árbol que representa una expresión aritmética. Cada nodo interno es una operación (con dos hijos, `izq` y `der`), cada hoja es un número — mismo estilo de diccionario anidado que ya usa toda la clase, sin ningún concepto nuevo:
 
 ```
 Expresión: (5 + 4) * 6 + 3
@@ -128,39 +128,138 @@ Expresión: (5 + 4) * 6 + 3
 ```
 
 ```python
-class NodoSuma:
-    def __init__(self, izq, der):
-        self.izq, self.der = izq, der
-    def evaluar(self):
-        return self.izq.evaluar() + self.der.evaluar()
+expr = {
+    "op": "+",
+    "izq": {
+        "op": "*",
+        "izq": {"op": "+", "izq": {"valor": 5}, "der": {"valor": 4}},
+        "der": {"valor": 6},
+    },
+    "der": {"valor": 3},
+}
 
-class NodoProducto:
-    def __init__(self, izq, der):
-        self.izq, self.der = izq, der
-    def evaluar(self):
-        return self.izq.evaluar() * self.der.evaluar()
+def evaluar(nodo):
+    if "valor" in nodo:                # CASO BASE: es una hoja, ya tengo el número
+        return nodo["valor"]
+    izq = evaluar(nodo["izq"])         # 1. resuelvo TODO el subárbol izquierdo
+    der = evaluar(nodo["der"])         # 2. resuelvo TODO el subárbol derecho
+    if nodo["op"] == "+":              # 3. recién ahora combino ambos resultados
+        return izq + der
+    return izq * der
 
-class NodoNumero:
-    def __init__(self, valor):
-        self.valor = valor
-    def evaluar(self):
-        return self.valor
-
-expr = NodoSuma(NodoProducto(NodoSuma(NodoNumero(5), NodoNumero(4)), NodoNumero(6)), NodoNumero(3))
-print(expr.evaluar())   # 57
+print(evaluar(expr))   # 57
 ```
 
 > [!important] Por qué evaluar la expresión ES un recorrido postorder
-> Para calcular el valor de un nodo `+` o `*`, hace falta conocer **primero** el valor de sus dos hijos — no hay forma de "procesar" la suma antes de haber bajado a ambos subárboles y vuelto con sus resultados. Esa es la diferencia exacta entre preorder y postorder: no cambia el camino que recorre la recursión, cambia **en qué momento** se procesa el nodo actual respecto de sus hijos. *Fuente: [[Data Structures and Algorithms with Python]], cap. 6.*
+> Fijate el orden de las líneas 1, 2, 3 dentro de `evaluar`: primero se resuelven **los dos hijos por completo** (líneas 1 y 2), y **recién al final** se hace algo con el nodo actual —sumar o multiplicar— en la línea 3. Eso es exactamente lo opuesto de `contar_nodos` o `predecir`, donde lo primero que pasa es mirar el nodo actual. No hay forma de calcular la suma antes de saber cuánto valen sus dos hijos — no es una elección de estilo, es una necesidad: por eso el resultado de un nodo depende de sus hijos, y hay que esperarlos antes de "procesar" (acá, calcular) el nodo. Esa es la diferencia exacta entre preorder y postorder: no cambia el camino que recorre la recursión, cambia **en qué momento**, dentro de esas mismas líneas, se hace algo con el nodo actual respecto de sus hijos. *Fuente: [[Data Structures and Algorithms with Python]], cap. 6.*
+
+> [!note] Tres formas de "leer" la misma expresión, según cuándo se anota el operador
+> Si en vez de sumar/multiplicar cada recorrido solo fuera anotando los símbolos que encuentra (el operador o el número), preorder, inorder y postorder dan tres escrituras distintas de la misma cuenta:
+> - **Preorder** (operador antes que sus operandos): `+ * + 5 4 6 3` — la llamada **notación prefija**.
+> - **Inorder** (operador entre sus dos operandos, como se escribe a mano): `((5 + 4) * 6) + 3` — la **notación infija** de siempre, con paréntesis para no perder el orden de las operaciones.
+> - **Postorder** (operador después de sus operandos): `5 4 + 6 * 3 +` — la **notación postfija**, la que usan por dentro algunas calculadoras porque se puede evaluar con una pila, sin necesitar paréntesis nunca.
 
 | Recorrido | Orden | Sobre el árbol de arriba | Cuándo se procesa el nodo |
 |---|---|---|---|
-| **Preorder** | nodo → hijos | `+ * + 5 4 6 3` (notación prefija) | Antes de bajar a los hijos — es lo que ya hace la clase |
-| **Postorder** | hijos → nodo | `5 4 + 6 * 3 +` (notación postfija) | Después de haber procesado ambos hijos — necesario cuando el resultado de un nodo depende de sus hijos |
-| **Inorder** | hijo izq. → nodo → hijo der. | `((5 + 4) * 6) + 3` (notación infija) | Entre ambos hijos — solo tiene sentido en árboles binarios, donde "izquierda" y "derecha" están definidas |
+| **Preorder** | nodo → hijos | `+ * + 5 4 6 3` (prefija) | Antes de bajar a los hijos — es lo que ya hace la clase |
+| **Postorder** | hijos → nodo | `5 4 + 6 * 3 +` (postfija) | Después de haber procesado ambos hijos — necesario cuando el resultado de un nodo depende de sus hijos |
+| **Inorder** | hijo izq. → nodo → hijo der. | `((5 + 4) * 6) + 3` (infija) | Entre ambos hijos — solo tiene sentido en árboles binarios, donde "izquierda" y "derecha" están definidas |
 | **Level-order** | nivel por nivel | `+, *, 3, +, 6, 5, 4` | Ancho antes que profundo — necesita una **cola**, no recursión |
 
-El primer tramo de la tabla (preorder/postorder/inorder) se recorre igual que ya lo hace la clase, cambiando solo el lugar de la línea que "procesa" el nodo respecto del bucle sobre los hijos. El último (**level-order**) es distinto de raíz: en vez de bajar todo lo posible por una rama antes de retroceder, primero visita todos los nodos de un nivel y recién después pasa al siguiente — necesita una cola (`collections.deque`), no una llamada recursiva. Esta misma idea —recorrer "por niveles" con una cola en vez de "en profundidad" con recursión— reaparece en la próxima nota con otro nombre: **BFS**, ver [[grafos y recorridos (DFS, BFS)]].
+El primer tramo de la tabla (preorder/postorder/inorder) se recorre igual que ya lo hace la clase, cambiando solo el lugar de la línea que "procesa" el nodo respecto del bucle sobre los hijos.
+
+### Paso a paso: inorder, y por qué existe (no es solo "la tercera opción")
+
+Inorder solo tiene sentido en un **árbol binario** (necesita saber cuál hijo es "izquierdo" y cuál "derecho"), y su gracia aparece justo sobre un **árbol binario de búsqueda** (o **BST**, por *binary search tree*: un árbol binario donde, en cada nodo, todo lo que está en su subárbol izquierdo es **menor** que él, y todo lo que está en su subárbol derecho es **mayor**): recorrerlo inorder devuelve las claves **ordenadas de menor a mayor**, sin ordenar nada explícitamente — el orden sale solo de la estructura.
+
+```python
+bst = {
+    "valor": 5,
+    "izq": {"valor": 3, "izq": {"valor": 2, "izq": None, "der": None},
+                          "der": {"valor": 4, "izq": None, "der": None}},
+    "der": {"valor": 8, "izq": None, "der": None},
+}
+
+def inorder(nodo, resultado=None):
+    if resultado is None:
+        resultado = []
+    if nodo is None:                    # CASO BASE: rama vacía, no hay nada que agregar
+        return resultado
+    inorder(nodo["izq"], resultado)     # 1. todo el subárbol izquierdo primero
+    resultado.append(nodo["valor"])     # 2. recién ahora el nodo actual
+    inorder(nodo["der"], resultado)     # 3. todo el subárbol derecho al final
+    return resultado
+
+print(inorder(bst))   # [2, 3, 4, 5, 8]
+```
+
+```
+        5
+       / \
+      3   8
+     / \
+    2   4
+```
+
+```
+inorder(5)
+│  1. inorder(3)                      -> bajo por izquierda antes de tocar el 5
+│  │  1. inorder(2)                   -> bajo por izquierda antes de tocar el 3
+│  │  │  1. inorder(None)  CASO BASE  -> resultado sigue []
+│  │  │  2. append(2)                 -> resultado = [2]
+│  │  │  3. inorder(None)  CASO BASE  -> resultado sigue [2]
+│  │  2. append(3)                    -> resultado = [2, 3]
+│  │  3. inorder(4)
+│  │     1. inorder(None)  CASO BASE  -> resultado sigue [2, 3]
+│  │     2. append(4)                 -> resultado = [2, 3, 4]
+│  │     3. inorder(None)  CASO BASE  -> resultado sigue [2, 3, 4]
+│  2. append(5)                       -> resultado = [2, 3, 4, 5]
+│  3. inorder(8)
+│     1. inorder(None)  CASO BASE     -> resultado sigue [2, 3, 4, 5]
+│     2. append(8)                    -> resultado = [2, 3, 4, 5, 8]
+│     3. inorder(None)  CASO BASE     -> resultado sigue [2, 3, 4, 5, 8]
+
+resultado final: [2, 3, 4, 5, 8]   <- ordenado, sin haber ordenado nada explícitamente
+```
+
+El truco es la **definición misma de BST**: todo lo que está a la izquierda de un nodo es menor, todo lo que está a la derecha es mayor. Recorrer "izquierda, yo, derecha" respeta exactamente esa regla en cada nivel, así que el resultado sale ordenado como efecto colateral de la estructura — no porque el algoritmo "sepa ordenar".
+
+### Paso a paso: level-order (recorrido por niveles, sin recursión)
+
+A diferencia de los tres anteriores, level-order **no usa recursión** — usa una **cola**: una lista donde siempre se saca primero el elemento que entró primero (FIFO, *first-in first-out*), como la fila del banco — el primero que llega es el primero que atienden. Es el mecanismo que va a reaparecer como BFS en la próxima nota. Sobre el árbol chico A/B/C/D de la sección anterior:
+
+```python
+from collections import deque
+
+def level_order(raiz):
+    resultado = []
+    cola = deque([raiz])
+    while cola:
+        nodo = cola.popleft()           # saco el más antiguo -> por niveles
+        resultado.append(nodo["nombre"])
+        for hijo in nodo["hijos"]:
+            cola.append(hijo)           # los hijos entran al final, se procesan después
+    return resultado
+
+print(level_order(arbol_chico))   # ['A', 'B', 'C', 'D']
+```
+
+| Iteración | Cola al empezar | Nodo que saco | `resultado` | Cola al terminar (agrego hijos) |
+|---|---|---|---|---|
+| 1 | `[A]` | A | `[A]` | `[B, C]` |
+| 2 | `[B, C]` | B | `[A, B]` | `[C, D]` |
+| 3 | `[C, D]` | C | `[A, B, C]` | `[D]` (C no tiene hijos) |
+| 4 | `[D]` | D | `[A, B, C, D]` | `[]` (D no tiene hijos) |
+
+Con la cola vacía, el `while` termina. Compará esto con la traza de `contar_nodos` de más arriba: ahí la recursión bajaba **todo lo posible por una rama** (A→B→D) antes de volver a C; acá, en cambio, se procesan **todos los nodos de un nivel** (A; después B y C; después D) antes de bajar al siguiente. Ni "mejor" ni "peor" — cuando lo que importa es la distancia a la raíz (por ejemplo, "¿a cuántos niveles está el nodo más profundo?"), level-order lo da directo; cuando lo que importa es explorar una rama completa antes de las otras, preorder/postorder alcanzan.
+
+> [!tip] Resumen — cuál usar según qué necesitás
+> - **Preorder**: cuando hace falta el nodo **antes** que sus hijos (imprimir una jerarquía con sangría, copiar un árbol).
+> - **Postorder**: cuando el resultado de un nodo **depende** del de sus hijos (evaluar una expresión, calcular el tamaño de una carpeta sumando subcarpetas).
+> - **Inorder**: solo en árboles binarios, cuando hace falta el orden — típicamente, leer un BST de menor a mayor.
+> - **Level-order**: cuando importa la **distancia a la raíz** (nivel), no el orden de profundidad — el equivalente en árboles de BFS.
+
+Esta misma idea —recorrer "por niveles" con una cola en vez de "en profundidad" con recursión— reaparece en la próxima nota con otro nombre: **BFS**, ver [[grafos y recorridos (DFS, BFS)]].
 
 ## El árbol de decisión
 
@@ -234,7 +333,7 @@ Todo lo anterior asumió implícitamente que recorrer un árbol tarda lo que tar
 > | Altura | $O(\log N)$ | $O(N)$ |
 > | Buscar / insertar | $O(\log N)$ | $O(N)$ |
 >
-> El caso degenerado no es hipotético: insertar valores **ya ordenados** (1, 2, 3, 4...) en un árbol binario de búsqueda produce exactamente esa forma de "palo" extendido hacia un solo lado. *"When the tree is a stick or even close to being a stick, the efficiency characteristics of a binary search tree are no better than that of a linked list."* *Fuente: [[Data Structures and Algorithms with Python]], cap. 6 y 10.*
+> El caso degenerado no es hipotético: insertar valores **ya ordenados** (1, 2, 3, 4...) en un árbol binario de búsqueda produce exactamente esa forma de "palo" extendido hacia un solo lado. *"Cuando el árbol es un palo, o incluso se acerca a serlo, las características de eficiencia de un árbol binario de búsqueda no son mejores que las de una lista enlazada."* *Fuente: [[Data Structures and Algorithms with Python]], cap. 6 y 10.*
 
 Dato adicional para dimensionar el caso típico (no el peor, el promedio): construyendo un árbol binario de búsqueda con $N$ claves en orden aleatorio, la altura promedio se acerca a $2{,}99 \lg N$ — sigue siendo logarítmica, muy lejos del caso degenerado. *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 3.2 (resultado de L. Devroye).*
 

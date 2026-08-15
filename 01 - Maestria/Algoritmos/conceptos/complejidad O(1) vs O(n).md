@@ -22,7 +22,7 @@ fecha: 2026-08-03
 - **O(n) — tiempo lineal**: el costo **crece proporcional** a $n$. Buscar un elemento en una **lista** es O(n): en el peor caso hay que recorrerla entera.
 
 > [!note] La misma idea, en palabras de la bibliografía
-> *"Checking whether a list contains a value is a lot slower than doing so with dictionaries and sets [...], as Python makes a linear scan across the values of the list, whereas it can check the others (based on hash tables) in constant time."* *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
+> *"Comprobar si una lista contiene un valor es mucho más lento que hacerlo con diccionarios y conjuntos [...], porque Python hace un recorrido lineal sobre los valores de la lista, mientras que puede verificar los otros (basados en tablas hash) en tiempo constante."* *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
 
 ```python
 # Buscar en una lista -> O(n): en el peor caso recorre TODOS los elementos
@@ -59,7 +59,7 @@ Esta es la razón práctica detrás de la elección entre estructuras vista en [
 Esta es, en el fondo, la razón de ser de NumPy: un `for` en Python puro recorriendo un array es lento no por ser O(n) en sí, sino porque cada paso paga el costo extra de ser código interpretado. Vectorizar con [[03 - Ufuncs y operaciones vectorizadas|ufuncs]] no cambia la complejidad (sigue siendo O(n) internamente), pero ejecuta ese recorrido en código compilado — de ahí la diferencia de velocidad real entre "hacerlo a mano" (esta clase) y `np.sum(x)`.
 
 > [!example] La diferencia es de constante, no de complejidad
-> Multiplicar por 2 un array de un millón de enteros: `my_arr * 2` (NumPy) tarda ~715 µs; el equivalente con comprensión de lista en Python puro, ~48,8 ms — unas **68 veces más lento**, siendo las dos soluciones igual de O(n). *"NumPy-based algorithms are generally 10 to 100 times faster (or more) than their pure Python counterparts."* *Fuente: [[Python-for-Data-Analysis]], cap. 4.*
+> Multiplicar por 2 un array de un millón de enteros: `my_arr * 2` (NumPy) tarda ~715 µs; el equivalente con comprensión de lista en Python puro, ~48,8 ms — unas **68 veces más lento**, siendo las dos soluciones igual de O(n). *"Los algoritmos basados en NumPy son, en general, entre 10 y 100 veces más rápidos (o más) que sus equivalentes en Python puro."* *Fuente: [[Python-for-Data-Analysis]], cap. 4.*
 
 ## Relacionado
 - [[01 - Introduccion a la programacion]]

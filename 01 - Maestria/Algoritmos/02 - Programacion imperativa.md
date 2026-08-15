@@ -153,7 +153,7 @@ def factorial(n):
 print([factorial(i) for i in range(6)])   # [1, 1, 2, 6, 24, 120]
 ```
 
-Cada llamada queda "esperando" en la **pila de llamadas** hasta que la de adentro termine; sin caso base (o si el caso recursivo no se acerca a él), Python corta a las ~1000 llamadas con `RecursionError` — el equivalente recursivo de un `while` infinito.
+Cada llamada queda "esperando" —apilada, como una bandeja sobre otra— hasta que la de adentro termine; esa zona de memoria donde se apilan se llama **pila de llamadas** (desarrollo completo de esta metáfora en [[recursion y memoizacion]]). Sin caso base (o si el caso recursivo no se acerca a él), Python corta a las ~1000 llamadas con `RecursionError` — el equivalente recursivo de un `while` infinito.
 
 **Fibonacci** ilustra el problema central de la recursión "ingenua": la versión directa recalcula el mismo valor una y otra vez, con un costo que crece **exponencialmente** (para `F(30)`, casi 2,7 millones de llamadas). La solución es la **memoización**: guardar cada resultado ya calculado en un diccionario, para no repetirlo.
 

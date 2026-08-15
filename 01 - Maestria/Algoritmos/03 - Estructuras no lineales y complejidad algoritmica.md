@@ -193,7 +193,7 @@ Con un millón de datos: un algoritmo **O(n)** termina en 1 milisegundo; **O(n l
 
 > Un dato que ordena las prioridades: pasar de O(n²) a O(n log n) da más ganancia que comprar una máquina mil veces más rápida.
 
-Analizando código de clases anteriores con este vocabulario nuevo: buscar en una **lista** es `O(n)` (peor caso: recorrer los n elementos); buscar en un **conjunto** es `O(1)` (el hashing va directo). Con un millón de elementos, la lista hace en promedio 500.000 comparaciones contra 1 del conjunto — de ahí la diferencia de miles de veces ya medida en la clase 1. Ya no es una observación empírica: es una predicción.
+Analizando código de clases anteriores con este vocabulario nuevo: buscar en una **lista** es `O(n)` (peor caso: recorrer los n elementos); buscar en un **conjunto** es `O(1)` (el [[hashing y hashabilidad|hashing]] va directo a la posición, sin tener que recorrer nada — desarrollo completo de cómo en esa nota). Con un millón de elementos, la lista hace en promedio 500.000 comparaciones contra 1 del conjunto — de ahí la diferencia de miles de veces ya medida en la clase 1. Ya no es una observación empírica: es una predicción.
 
 ```python
 def hay_duplicados_lento(lista):     # O(n²): compara todos contra todos

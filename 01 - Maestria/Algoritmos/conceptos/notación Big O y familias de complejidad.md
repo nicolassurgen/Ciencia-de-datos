@@ -21,6 +21,8 @@ Esta nota generaliza [[complejidad O(1) vs O(n)]] (que quedó centrada en el con
 
 ## Definición formal
 
+Todo lo de esta sección es **ampliación matemática opcional**: sirve para leer bibliografía que la use, pero ninguna nota del resto del vault depende de entenderla. La idea completa ya quedó dicha en criollo más arriba ("cómo crece el tiempo cuando crecen los datos, ignorando constantes y entradas chicas") — lo que sigue es esa misma idea, pero escrita con el lenguaje que usan los libros de texto: en vez de decir "para $n$ chico esto puede fallar, pero de cierto punto en adelante siempre se cumple", la convención matemática es nombrar ese "cierto punto" con una letra ($n_0$) y decir formalmente "para todo $n$ mayor o igual a $n_0$".
+
 > [!definition] O(g(n))
 > Una función $f(n)$ es $O(g(n))$ si existen constantes $c$ y $n_0$ tales que $f(n) \le c \cdot g(n)$ para todo $n \ge n_0$. En criollo: a partir de cierto tamaño de entrada ($n_0$ en adelante), el costo real ($f$) nunca supera a una versión escalada de $g$ — $g$ es una **cota superior** de cómo crece $f$, ignorando lo que pase con entradas chicas y ignorando constantes multiplicativas. *Fuente: [[Data Structures and Algorithms with Python]], sec. 2.4; [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1.4.*
 
@@ -61,7 +63,7 @@ La clase ya aclaró la convención ("se analiza el peor caso, salvo que se diga 
 *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 2.1 (Proposición B).* La intuición: cada elemento nuevo "retrocede" hasta encontrar su lugar entre los ya insertados. Si el array ya viene ordenado, retrocede cero pasos siempre ($n-1$ comparaciones en total). Si viene al revés, cada elemento nuevo tiene que retroceder hasta el principio ($1+2+\dots+n \approx n^2/2$). En promedio, cada elemento retrocede "la mitad del camino" — de ahí el $n^2/4$. Los tres casos son $O(n)$ o $O(n^2)$ según cómo vengan los datos: la misma línea de código, tres comportamientos.
 
 > [!example] Peor caso vs. caso promedio, en una herramienta que ya usás
-> `np.sort()` puede usar distintos algoritmos internamente, y sus garantías de peor caso no son todas iguales:
+> `np.sort()` puede usar distintos algoritmos internamente, y sus garantías de peor caso no son todas iguales. ("Estable" quiere decir que, si dos elementos tienen el mismo valor, el ordenamiento respeta el orden en que aparecían originalmente entre ellos — no los mezcla al azar; importa, por ejemplo, si ya se ordenó una tabla por una columna y ahora se quiere ordenar por otra sin perder el primer orden.)
 >
 > | Algoritmo | Peor caso | Estable |
 > |---|---|---|
