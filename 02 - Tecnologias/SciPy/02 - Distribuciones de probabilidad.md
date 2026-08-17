@@ -43,6 +43,8 @@ normal.rvs(size=100, random_state=42)   # 100 valores simulados con esa distribu
 > | `cdf(x)` | ¿Qué proporción de la distribución queda **por debajo** de `x`? |
 > | `ppf(q)` | ¿Qué valor `x` acumula la proporción `q`? (la inversa de `cdf`) |
 > | `rvs(size)` | Generame `size` valores simulados con esta distribución |
+>
+> `cdf` **es**, por definición, el área bajo la curva de `pdf` desde $-\infty$ hasta `x` — una integral. El desarrollo completo de esa relación (y por qué el área total bajo cualquier `pdf` siempre da 1) está en [[05 - Integrales]] de Matemática.
 
 > [!tip] `ppf` es exactamente un percentil teórico
 > `normal.ppf(0.75)` responde la misma pregunta que un [[medidas de posición|percentil]] de Estadística ($q_3$: el valor que acumula el 75 % de los datos) — la diferencia es que acá el 75 % se calcula sobre la **curva teórica**, no contando datos de una muestra.
@@ -85,7 +87,7 @@ datos = [39.1, 39.5, 40.3, 36.7, 39.3, 38.9, 39.2]
 media, desvio = stats.norm.fit(datos)   # estima los parámetros por máxima verosimilitud
 ```
 
-`fit()` busca los parámetros que hacen más probable haber observado justo estos datos — es el puente entre una distribución teórica y un conjunto de datos concreto. Se profundiza en [[09 - Estimacion de densidad y ajuste de distribuciones]].
+`fit()` busca los parámetros que hacen más probable haber observado justo estos datos — es el puente entre una distribución teórica y un conjunto de datos concreto, resolviendo por dentro un problema de **máxima verosimilitud** (ver [[06 - Verosimilitud y estimación por máxima verosimilitud]] de Matemática para el mecanismo completo). Se profundiza en [[09 - Estimacion de densidad y ajuste de distribuciones]].
 
 ## Relacionado
 - [[01 - Introduccion a SciPy.stats]]

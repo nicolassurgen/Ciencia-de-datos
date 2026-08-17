@@ -29,7 +29,7 @@ En criollo: si transformás dos vectores y después los sumás, da lo mismo que 
 > [!important] El resultado central del álgebra lineal
 > Toda transformación lineal entre espacios de dimensión finita se puede representar como la multiplicación por una **[[02 - Matrices|matriz]]**:
 > $$T(\mathbf{x}) = A\mathbf{x}$$
-> Aplicar la transformación $T$ a un vector es, ni más ni menos, multiplicar la matriz $A$ por ese vector.
+> Aplicar la transformación $T$ a un vector es, ni más ni menos, multiplicar la matriz $A$ por ese vector. *Fuente: [[mml-book]], cap. 2.7 (Mapeos lineales).*
 
 Esto significa que **estudiar transformaciones lineales es estudiar matrices**: cada columna de $A$ es la imagen de un vector de la base canónica bajo $T$.
 

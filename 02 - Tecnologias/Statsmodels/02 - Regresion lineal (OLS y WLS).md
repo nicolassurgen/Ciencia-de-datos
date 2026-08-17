@@ -37,7 +37,7 @@ largo_pico_mm       181.9       29.6      6.148      0.000      121.9     241.9
 ==============================================================================
 ```
 
-`OLS` (*Ordinary Least Squares*) ajusta la recta que minimiza la suma de los residuos al cuadrado. Leyendo la tabla: por cada mm extra de largo de pico, el modelo estima **+181.9 g** de masa (`coef`), y ese efecto es significativo (`P>|t| = 0.000`, muy por debajo de 0.05). El `R-squared = 0.418` dice que el largo del pico explica el 42% de la variabilidad de la masa — el resto es ruido u otras variables no incluidas.
+`OLS` (*Ordinary Least Squares*) ajusta la recta que minimiza la suma de los residuos al cuadrado — no probando pendientes al azar, sino resolviendo la fórmula cerrada $\hat\beta=(X^TX)^{-1}X^Ty$ (con $X$ la matriz de diseño: una fila por observación, una columna por predictora), desarrollada en [[02 - Matrices]] y [[03 - Optimizacion]] de Matemática. Leyendo la tabla: por cada mm extra de largo de pico, el modelo estima **+181.9 g** de masa (`coef`), y ese efecto es significativo (`P>|t| = 0.000`, muy por debajo de 0.05). El `R-squared = 0.418` dice que el largo del pico explica el 42% de la variabilidad de la masa — el resto es ruido u otras variables no incluidas.
 
 ## Por qué esto resuelve lo que Seaborn no resuelve
 

@@ -160,6 +160,23 @@ Ejemplos de transformaciones que sí tienen inversa: la rotación, el mapeo de c
 > [!tip] Aplicación práctica clave
 > La inversa de una matriz aparece en la solución analítica de la regresión lineal por mínimos cuadrados, en el cálculo de la matriz de covarianza inversa (usada en Mahalanobis distance), y conceptualmente en la idea de "deshacer" una transformación de datos (por ejemplo, revertir una normalización lineal). En la práctica de ML rara vez se calcula la inversa explícitamente por costo computacional y estabilidad numérica; se prefieren métodos como la descomposición LU, QR o SVD.
 
+> [!note] De dónde sale $(X^TX)^{-1}X^T$: la pseudo-inversa
+> Cuando un sistema $A\mathbf{x}=\mathbf{b}$ tiene más ecuaciones que incógnitas (más filas que columnas en $A$) y no hay solución exacta, $(A^TA)^{-1}A^T$ es la **pseudo-inversa de Moore-Penrose** de $A$: la matriz que da la mejor aproximación posible en vez de una solución exacta que no existe. Es exactamente lo que resuelve $\hat\beta=(X^TX)^{-1}X^Ty$ en regresión — desarrollo completo, con la derivación de dónde sale, en [[04 - Sistemas de ecuaciones lineales]] y [[05 - Proyecciones ortogonales]]. *Fuente: [[mml-book]], cap. 2.3.4.*
+
+## Independencia lineal
+
+Antes de seguir con el determinante, hace falta precisar una expresión que ya se usó de pasada: dos filas o columnas de una matriz son **linealmente dependientes** cuando una se puede escribir como [[01 - Vectores|combinación lineal]] de las otras (por ejemplo, una es simplemente el doble de la otra, o la suma de las demás).
+
+> [!definition] Independencia lineal
+> Un conjunto de vectores $\{\mathbf v_1, \dots, \mathbf v_k\}$ es **linealmente independiente** si la única forma de combinarlos para obtener el vector nulo es con todos los coeficientes en cero:
+> $$c_1\mathbf v_1 + c_2\mathbf v_2 + \dots + c_k\mathbf v_k = \mathbf 0 \quad \Longrightarrow \quad c_1=c_2=\dots=c_k=0$$
+> Si existe alguna combinación con coeficientes **no todos cero** que da el vector nulo, el conjunto es **linealmente dependiente** — significa que al menos uno de los vectores es redundante: se puede reconstruir a partir de los demás y no aporta ninguna dirección nueva. *Fuente: [[mml-book]], cap. 2.5.*
+
+**Ejemplo**: $\mathbf v_1=(1,2)$, $\mathbf v_2=(2,4)$ son linealmente dependientes ($\mathbf v_2 = 2\mathbf v_1$, o $2\mathbf v_1 - \mathbf v_2 = \mathbf 0$ con coeficientes no nulos) — apuntan en la misma dirección, uno es redundante. En cambio $\mathbf v_1=(1,2)$, $\mathbf v_3=(3,1)$ son independientes: ninguna combinación no trivial de ellos da $\mathbf 0$.
+
+> [!important] Por qué esto le importa a una matriz
+> Si dos columnas de una matriz son linealmente dependientes, la matriz **pierde información**: esas dos columnas, juntas, no aportan más que lo que aportaría una sola. Esa es la razón algebraica exacta detrás de la **multicolinealidad** en regresión — cuando dos predictoras están muy correlacionadas, sus columnas en la matriz de diseño $X$ están cerca de ser linealmente dependientes, $X^TX$ queda cerca de ser singular, y $(X^TX)^{-1}$ se vuelve numéricamente inestable (coeficientes que cambian mucho ante pequeños cambios en los datos). Es exactamente el problema que reporta el **VIF** (*Variance Inflation Factor*) en [[04 - Diagnostico de modelos]] de Statsmodels, sin nombrar nunca la causa algebraica de fondo.
+
 ## Determinante
 
 El **determinante** de una matriz cuadrada $M$, anotado $\det(M)$ o $|M|$, es un valor escalar que resume ciertas propiedades de la matriz (como si la transformación que representa conserva o invierte la orientación del espacio, y en qué factor escala el volumen).
@@ -190,16 +207,52 @@ Resultado final:
 
 $$ |M| = 1\times(-48) - 2\times(-42) + 3\times(-3) = -48 + 84 - 9 = 27 $$
 
-Como $|M| = 27 \neq 0$, esta matriz **es invertible**: representa una transformación que no colapsa el espacio a una dimensión menor (por ejemplo, no aplasta el plano 3D sobre un plano o una recta), y $M^{-1}$ existe. El signo positivo además indica que la transformación conserva la orientación del espacio.
+Como $|M| = 27 \neq 0$, esta matriz **es invertible**: representa una transformación que no colapsa el espacio a una dimensión menor (por ejemplo, no aplasta el plano 3D sobre un plano o una recta), y $M^{-1}$ existe. El signo positivo además indica que la transformación conserva la orientación del espacio. *Fuente: [[mml-book]], cap. 4.1 (Determinante y traza).*
 
 ### Propiedades clave del determinante
 
 - $\det(M) = 0$ ⟺ la matriz **no tiene inversa** (es singular) ⟺ las filas/columnas son linealmente dependientes.
 - $\det(M) \neq 0$ ⟺ la transformación que representa $M$ **no colapsa** el espacio (no pierde dimensiones).
 - El signo del determinante indica si la transformación **invierte la orientación** del espacio (determinante negativo) o no.
+- $\det(AB) = \det(A)\det(B)$ — el determinante de una composición de transformaciones es el producto de los determinantes (verificado: con $A=\begin{bmatrix}2&1\\1&3\end{bmatrix}$, $B=\begin{bmatrix}1&0\\2&1\end{bmatrix}$, ambos lados dan 5).
+- $\det(A^T) = \det(A)$ — trasponer no cambia el determinante.
+- $\det(A^{-1}) = 1/\det(A)$ — consistente con que $AA^{-1}=I$ y $\det(I)=1$.
+- El determinante de una matriz **triangular** (todos los elementos de un lado de la diagonal son cero) es simplemente el producto de la diagonal — mucho más rápido que la expansión recursiva, y la razón práctica por la que los métodos numéricos calculan el determinante factorizando la matriz primero.
+
+*Fuente: [[mml-book]], cap. 4.1.*
 
 > [!tip] Aplicación práctica
 > El determinante se usa para verificar si una matriz es invertible antes de intentar calcular $M^{-1}$, y aparece en el cálculo de la función de densidad de la distribución normal multivariada, muy usada en modelos probabilísticos.
+
+## Traza
+
+La **traza** de una matriz cuadrada $M$, anotada $\text{tr}(M)$, es la suma de los elementos de su diagonal principal:
+
+$$\text{tr}(M) = \sum_{i=1}^{n} M_{i,i}$$
+
+Igual que el determinante, es un **invariante** de la matriz: un número que resume una propiedad de la transformación sin depender de los detalles de cada elemento. Dos propiedades centrales:
+
+- **Linealidad**: $\text{tr}(A+B) = \text{tr}(A) + \text{tr}(B)$.
+- $\text{tr}(AB) = \text{tr}(BA)$ — aunque $AB \neq BA$ en general (la multiplicación de matrices no es conmutativa, ver más arriba), sus trazas **sí** coinciden (verificado numéricamente: ambas dan 7 para las matrices $A$, $B$ del ejemplo de arriba).
+
+*Fuente: [[mml-book]], cap. 4.1.*
+
+> [!tip] Dónde aparece
+> La traza aparece en la fórmula de la varianza total de un conjunto de variables (la suma de las varianzas individuales es la traza de la matriz de covarianza, ver más abajo), y en el cálculo de la divergencia KL entre distribuciones gaussianas multivariadas — ambos, temas de clases futuras.
+
+## Matriz de covarianza
+
+Un caso especial de matriz cuadrada que va a reaparecer constantemente en Estadística multivariada: dado un conjunto de $D$ variables, la **matriz de covarianza** $\Sigma$ (de tamaño $D\times D$) agrupa la varianza de cada variable consigo misma (en la diagonal) y la covarianza entre cada par de variables (fuera de la diagonal):
+
+$$\Sigma_{i,j} = \text{Cov}(X_i, X_j) \qquad \Sigma_{i,i} = \text{Var}(X_i)$$
+
+*Fuente: [[mml-book]], cap. 6.4.1.* Dos propiedades estructurales, consecuencia directa de cómo se define:
+
+- **Es simétrica**: $\Sigma_{i,j}=\Sigma_{j,i}$, porque $\text{Cov}(X_i,X_j)=\text{Cov}(X_j,X_i)$ — covariar es una relación de a pares, sin un orden privilegiado.
+- **Es semidefinida positiva**: $\mathbf{a}^T\Sigma\mathbf{a} \ge 0$ para cualquier vector $\mathbf a$ — consecuencia de que es, de fondo, la varianza de una combinación lineal de las variables, y una varianza nunca es negativa.
+
+> [!note] Dónde se calcula, dónde se usa
+> El **cálculo** de la matriz de covarianza a partir de datos (`np.cov`, `.corr()`) y su **interpretación estadística** (qué significa que dos variables covaríen) son temas de Estadística — no se desarrollan acá. Esta nota solo define el objeto **como matriz**: por qué es simétrica, por qué es semidefinida positiva, y por qué eso garantiza que $\Sigma^{-1}$ (usada en la distancia de Mahalanobis y en la densidad de la normal multivariada) existe siempre que $\Sigma$ sea definida positiva estricta.
 
 ## Por qué esto importa para Data Science y MLOps
 
@@ -214,6 +267,8 @@ Como $|M| = 27 \neq 0$, esta matriz **es invertible**: representa una transforma
 
 - [[01 - Vectores]] — la base sobre la que se construyen las matrices (filas y columnas son vectores).
 - [[03 - Transformaciones lineales]] — cómo las matrices ejecutan rotaciones, escalados y proyecciones.
+- [[04 - Sistemas de ecuaciones lineales]] — la forma $A\mathbf x=\mathbf b$ y qué hacer cuando no hay solución exacta.
+- [[05 - Proyecciones ortogonales]] — por qué $(X^TX)^{-1}X^T$ da la mejor aproximación posible.
 - [[01 - Funciones]] — generalización del concepto de matriz a mapeos no necesariamente lineales.
 - [[02 - Derivadas]] — el gradiente y el Hessiano como vectores/matrices de derivadas.
 - [[03 - Optimizacion]] — uso de matrices (Hessiano, matrices de covarianza) en algoritmos de entrenamiento.

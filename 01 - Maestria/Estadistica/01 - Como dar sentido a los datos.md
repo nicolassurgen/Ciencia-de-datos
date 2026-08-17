@@ -233,7 +233,7 @@ En esta etapa se **definen los instrumentos** de registro, se **entrena y superv
 
 ## 10. La matriz de datos
 
-Terminada la recolección, se cuenta con una **matriz de datos**: los **individuos en las filas** y las **variables en las columnas**.
+Terminada la recolección, se cuenta con una **matriz de datos**: los **individuos en las filas** y las **variables en las columnas** — la misma estructura rectangular (filas × columnas) que define una [[02 - Matrices|matriz]] en álgebra lineal.
 
 |  | Var. X | Var. Y | … | Var. Z |
 |---|---|---|---|---|

@@ -31,7 +31,7 @@ Este segundo argumento sí explica el sesgo, y parte de una propiedad de la medi
 
 $$\bar{y} = \arg\min_{c} \sum_{i=1}^{n} (y_i - c)^2$$
 
-(Es la misma idea de mínimos cuadrados que aparece en regresión lineal — ver [[02 - Matrices]]. Es también, no por casualidad, la misma propiedad que explica por qué la mediana es robusta y la media no: la mediana minimiza la suma de **errores absolutos** en vez de al cuadrado — ver [[robustez estadística]] para el desarrollo completo de ese paralelismo.) Una consecuencia directa es que, para **cualquier** otra constante — en particular, la verdadera media poblacional $\mu$, que en general no coincide exactamente con $\bar{y}$ —, la suma de cuadrados no puede ser menor que la calculada con $\bar{y}$:
+(Es un problema de minimización sin restricciones —un $\arg\min$— en el mismo sentido formal que [[03 - Optimizacion]] de Matemática; derivando la suma respecto de $c$ e igualando a cero (ver [[02 - Derivadas]]) se llega directo a que el minimizador es $c=\bar y$. Es la misma idea de mínimos cuadrados que aparece en regresión lineal — ver [[02 - Matrices]]. Es también, no por casualidad, la misma propiedad que explica por qué la mediana es robusta y la media no: la mediana minimiza la suma de **errores absolutos** en vez de al cuadrado — ver [[robustez estadística]] para el desarrollo completo de ese paralelismo.) Una consecuencia directa es que, para **cualquier** otra constante — en particular, la verdadera media poblacional $\mu$, que en general no coincide exactamente con $\bar{y}$ —, la suma de cuadrados no puede ser menor que la calculada con $\bar{y}$:
 
 $$\sum_{i=1}^{n} (y_i - \bar{y})^2 \; \le \; \sum_{i=1}^{n} (y_i - \mu)^2$$
 

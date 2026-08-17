@@ -29,7 +29,7 @@ Esto funciona, pero es **lento** sobre arrays grandes: cada vuelta del loop paga
 ## La solución: ufuncs (*universal functions*)
 
 > [!definition] Ufunc
-> Una función de NumPy que aplica una operación **elemento a elemento** sobre un array completo, ejecutando el loop en código compilado (no en Python). Es la forma **vectorizada** de escribir lo mismo:
+> Una función de NumPy que aplica una operación **elemento a elemento** sobre un array completo, ejecutando el loop en código compilado (no en Python). Es la forma **vectorizada** de escribir lo mismo — computacionalmente, es la misma operación "elemento a elemento" que define la suma de [[01 - Vectores|vectores]] en Matemática (`u + v = [u₁+v₁, u₂+v₂, ...]`), solo que ejecutada en C compilado en vez de a mano:
 
 ```python
 1.0 / valores    # hace exactamente lo mismo que la función de arriba, pero mucho más rápido

@@ -96,7 +96,7 @@ La **norma** de un vector 𝐮, anotada ‖𝐮‖, mide su longitud o magnitud.
 
 $$||u|| = \sqrt{\sum_i u_i^2}$$
 
-Es decir, la raíz cuadrada de la suma de los cuadrados de sus componentes (generalización del teorema de Pitágoras a n dimensiones).
+Es decir, la raíz cuadrada de la suma de los cuadrados de sus componentes (generalización del teorema de Pitágoras a n dimensiones). *Fuente: [[mml-book]], cap. 3.1 (Normas) y cap. 3.2 (Producto interno).*
 
 > [!note] Otras normas usadas en la práctica
 > Existen otras normas muy usadas en la práctica que conviene tener mapeadas aunque no se hayan visto formalmente todavía:
@@ -165,6 +165,11 @@ u · v = Σᵢ uᵢ × vᵢ
 - Si `u · v = 0` → los vectores son **ortogonales** (perpendiculares).
 - El signo del producto escalar indica si el ángulo entre vectores es agudo (positivo), obtuso (negativo) o recto (cero).
 - Es la operación base detrás de la **similitud coseno**, ampliamente usada para comparar embeddings de texto, usuarios o productos.
+
+> [!important] La fórmula que conecta ambas lecturas: el ángulo entre dos vectores
+> Despejando $\cos\theta$ de la forma geométrica del producto escalar ($u\cdot v = \|u\|\,\|v\|\cos\theta$):
+> $$\cos\theta = \frac{u\cdot v}{\|u\|\,\|v\|}$$
+> Esta es, literalmente, la **similitud coseno**: el coseno del ángulo entre dos vectores, sin importar su longitud (por eso dos embeddings "apuntan en la misma dirección" — se parecen — aunque uno tenga norma mucho más grande que el otro). Verificado con $u=(1,0)$, $v=(1,1)$: $\cos\theta = \frac{1}{\sqrt2}\approx0{,}71$, que corresponde a $\theta=45°$ — el ángulo real entre ambos vectores. Cuando $\theta=90°$ (vectores ortogonales), $\cos\theta=0$, consistente con "$u\cdot v=0$ ⟺ ortogonales" de arriba: son la misma propiedad, mirada desde dos ángulos distintos. *Fuente: [[mml-book]], cap. 3.4.*
 
 > [!tip] Conexión clave con MLOps/ML
 > El producto escalar es el "ladrillo" con el que se construye la multiplicación de [[02 - Matrices|matrices]]. Cuando una red neuronal calcula `W·x + b`, en el fondo está haciendo un producto escalar entre cada fila de la matriz de pesos `W` y el vector de entrada `x`. Esto es, en esencia, una [[03 - Transformaciones lineales|transformación lineal]] aplicada al vector de entrada.

@@ -62,10 +62,10 @@ Una aplicación muy común de `heatmap()` en análisis exploratorio: ver de un v
 ```python
 import numpy as np
 
-corr = df.select_dtypes("number").corr()   # matriz de correlación, ver [[06 - Agregacion y groupby|Pandas]]
+corr = df.select_dtypes("number").corr()   # matriz de correlación, ver [[07 - Correlacion y tests de asociacion|SciPy]]
 sns.heatmap(corr, annot=True, cmap="coolwarm", center=0)
 ```
-**Qué genera:** una grilla cuadrada de celdas coloreadas (rojo para correlación positiva, azul para negativa, blanco cerca de 0 — ver [[09 - Colorbars y mapas de color]] de Matplotlib) con el valor numérico de cada correlación escrito adentro de la celda (`annot=True`).
+**Qué genera:** una grilla cuadrada de celdas coloreadas (rojo para correlación positiva, azul para negativa, blanco cerca de 0 — ver [[09 - Colorbars y mapas de color]] de Matplotlib) con el valor numérico de cada correlación escrito adentro de la celda (`annot=True`). No es casualidad que la grilla sea cuadrada y simétrica respecto de la diagonal: `corr` es, como objeto matemático, una [[02 - Matrices|matriz]] cuadrada simétrica con unos en la diagonal (cada variable correlaciona perfecto consigo misma) — la misma estructura que la matriz de covarianza.
 
 > [!tip] Por qué `center=0` importa acá
 > Una correlación va de $-1$ a $1$, con $0$ como punto neutro genuino (sin relación lineal). Usar una paleta **divergente** centrada en 0 (ver [[09 - Estilo, paletas de color y temas]]) es lo que hace que el heatmap se lea de un vistazo: los tonos cálidos y fríos separan visualmente correlación positiva de negativa, y el centro pálido resalta lo que **no** está relacionado.

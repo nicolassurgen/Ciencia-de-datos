@@ -50,7 +50,7 @@ Las medidas robustas suelen basarse en **percentiles** (mediana, cuartiles, RIQ)
 
 ## El porqué matemático: dos funciones de pérdida distintas
 
-Media y mediana no son dos formas intercambiables de "medir el centro": cada una es la solución a un problema de minimización distinto, y esa diferencia explica formalmente por qué una es robusta y la otra no.
+Media y mediana no son dos formas intercambiables de "medir el centro": cada una es la solución a un problema de minimización distinto (un $\arg\min$, en el mismo sentido formal que desarrolla [[03 - Optimizacion]] de Matemática), y esa diferencia explica formalmente por qué una es robusta y la otra no.
 
 - La **media** es el valor $c$ que **minimiza la suma de errores al cuadrado**: $\bar y = \arg\min_c \sum_i (y_i - c)^2$ (la misma propiedad que fundamenta el $n-1$ en la varianza, ver [[grados de libertad]]).
 - La **mediana** es el valor $c$ que **minimiza la suma de errores absolutos**: $\text{mediana} = \arg\min_c \sum_i |y_i - c|$.

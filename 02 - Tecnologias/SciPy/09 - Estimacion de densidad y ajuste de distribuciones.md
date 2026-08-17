@@ -43,7 +43,7 @@ media, desvio = stats.norm.fit(largos_pico)
 # media=38.86, desvio=1.18 -> la normal N(38.86, 1.18) es la que mejor explica estos 7 datos
 ```
 
-`fit()` encuentra los parámetros de una distribución teórica (ver [[02 - Distribuciones de probabilidad]]) que mejor explican los datos observados, por máxima verosimilitud. Es el paso que conecta "tengo un [[histograma]] con cierta forma" con "puedo modelar esto como una distribución normal/gamma/exponencial con estos parámetros exactos" — el punto de partida habitual antes de simular datos nuevos o calcular probabilidades fuera del rango observado.
+`fit()` encuentra los parámetros de una distribución teórica (ver [[02 - Distribuciones de probabilidad]]) que mejor explican los datos observados, por máxima verosimilitud (ver [[06 - Verosimilitud y estimación por máxima verosimilitud]] de Matemática para el mecanismo completo, con un ejemplo trabajado a mano). Es el paso que conecta "tengo un [[histograma]] con cierta forma" con "puedo modelar esto como una distribución normal/gamma/exponencial con estos parámetros exactos" — el punto de partida habitual antes de simular datos nuevos o calcular probabilidades fuera del rango observado.
 
 ## Relacionado
 - [[01 - Introduccion a SciPy.stats]]

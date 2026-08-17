@@ -30,6 +30,9 @@ modelo = smf.glm('exito ~ dosis', data=df, family=sm.families.Binomial()).fit()
 
 `GLM` generaliza `OLS` permitiendo elegir una **familia** de distribución (`Binomial`, `Poisson`, `Gamma`, …) y una **función de enlace** que conecta el predictor lineal con la escala de la respuesta. Es el marco general del que `Logit` y `Poisson` (abajo) son casos particulares con nombre propio.
 
+> [!note] Cómo se ajusta, por dentro
+> A diferencia de `OLS` (que tiene una fórmula cerrada, $\hat\beta=(X^TX)^{-1}X^Ty$), acá `.fit()` no puede despejar los parámetros algebraicamente: itera numéricamente (por defecto con **IRLS**, *Iteratively Reweighted Least Squares*) hasta encontrar los parámetros que maximizan la **verosimilitud** de haber observado justo estos datos — ver [[06 - Verosimilitud y estimación por máxima verosimilitud]] de Matemática para el mecanismo completo, y [[03 - Optimizacion]] para por qué hace falta un método iterativo cuando no hay forma cerrada.
+
 ## Logit: respuesta binaria
 
 ```python

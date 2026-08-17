@@ -25,7 +25,7 @@ Esto ya lo veías como algo natural:
 np.array([1, 2, 3]) + 5   # array([6, 7, 8])
 ```
 
-En el fondo, es broadcasting: el `5` (shape `()`, un escalar) se "estira" para comportarse como `[5, 5, 5]` y así poder sumarse elemento a elemento. La gracia es que esto se generaliza a formas mucho más complejas.
+En el fondo, es broadcasting: el `5` (shape `()`, un escalar) se "estira" para comportarse como `[5, 5, 5]` y así poder sumarse elemento a elemento — exactamente la operación "vector + escalar" / "escalar × vector" que define [[01 - Vectores]] de Matemática, generalizada a formas de cualquier cantidad de dimensiones. La gracia es que esto se generaliza a formas mucho más complejas.
 
 ![[Broadcasting.png]]
 

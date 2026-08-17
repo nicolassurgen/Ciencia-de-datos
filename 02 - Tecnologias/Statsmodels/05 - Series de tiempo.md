@@ -75,6 +75,9 @@ modelo.forecast(steps=3)
 
 `ARIMA` combina autoregresión (el valor depende de valores pasados), diferenciación (para volver estacionaria una serie que no lo es) y promedio móvil de errores pasados. `ExponentialSmoothing` y `AutoReg` son alternativas más simples cuando no hace falta tanta flexibilidad.
 
+> [!tip] La diferenciación es una derivada discreta
+> $y_t - y_{t-1}$ (la diferenciación de la serie) es la misma idea que la tasa de cambio promedio $\frac{f(x+h)-f(x)}{h}$ de [[02 - Derivadas]], con $h=1$ (un período) en vez de $h\to0$: mide cuánto cambió la serie de un momento al siguiente. Por eso diferenciar "quita tendencia" — una serie que crece en línea recta tiene una diferencia casi constante, igual que la derivada de una función lineal es una constante.
+
 ## Relacionado
 - [[01 - Introduccion a statsmodels]]
 - [[series de tiempo]]

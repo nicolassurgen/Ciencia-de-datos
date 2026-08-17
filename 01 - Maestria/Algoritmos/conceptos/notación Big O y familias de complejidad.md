@@ -33,8 +33,6 @@ Todo lo de esta sección es **ampliación matemática opcional**: sirve para lee
 >
 > Encontrado un par $(c, n_0) = (4, 5)$ que funciona, queda demostrado: $f(n) = 3n+5$ es $O(n)$.
 
-> [!tip] Dos primas de O que vas a encontrar en la bibliografía
-
 Las reglas prácticas que ya usa la clase (descartar constantes, quedarse con el término dominante, sumar bucles secuenciales, multiplicar bucles anidados, analizar el peor caso) son consecuencia directa de esta definición — no reglas separadas para memorizar, sino la forma de aplicarla sin tener que encontrar $c$ y $n_0$ a mano cada vez.
 
 > [!tip] Dos primas de O que vas a encontrar en la bibliografía
@@ -47,7 +45,7 @@ La tabla de la clase tiene una familia menos de las que suele listar la bibliogr
 | Familia | Notación | Código típico | Ejemplo |
 |---|---|---|---|
 | Constante | $O(1)$ | `a = b + c` | Acceder a `lista[5]`, buscar en un `set` |
-| Logarítmica | $O(\log n)$ | dividir a la mitad en cada paso | Búsqueda binaria |
+| Logarítmica | $O(\log n)$ | dividir a la mitad en cada paso | Búsqueda binaria — ver [[04 - Funciones exponenciales y logaritmicas|Funciones exponenciales y logaritmicas]] para qué es un logaritmo |
 | Lineal | $O(n)$ | un `for` | Recorrer una lista |
 | Linealogarítmica | $O(n \log n)$ | divide y conquistarás | Los buenos algoritmos de ordenamiento |
 | Cuadrática | $O(n^2)$ | dos `for` anidados | Comparar todos los pares |
@@ -91,7 +89,7 @@ La clase ya tiene una regla práctica para medir y adivinar la familia: "duplic�
 > $$\frac{T(2n)}{T(n)} \to 2^b \qquad \Longrightarrow \qquad b = \log_2\left(\frac{T(2n)}{T(n)}\right)$$
 > *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1.4 (Proposición C).*
 
-Esto es exactamente la regla de la clase, pero generalizada: la razón no solo dice "se duplicó" o "se cuadruplicó" — su logaritmo en base 2 **es** el exponente $b$, sirva 2, 3, 0,5 o cualquier otro número. Aplicado a la comparación `hay_duplicados_lento` (O(n²)) vs. `hay_duplicados_rapido` (O(n)) que ya mide la clase, con tiempos reales medidos en este mismo entorno:
+Esto es exactamente la regla de la clase, pero generalizada: la razón no solo dice "se duplicó" o "se cuadruplicó" — su logaritmo en base 2 **es** el exponente $b$, sirva 2, 3, 0,5 o cualquier otro número (qué es exactamente un logaritmo, y por qué "deshace" una potencia, en [[04 - Funciones exponenciales y logaritmicas|Funciones exponenciales y logaritmicas]]). Aplicado a la comparación `hay_duplicados_lento` (O(n²)) vs. `hay_duplicados_rapido` (O(n)) que ya mide la clase, con tiempos reales medidos en este mismo entorno:
 
 | $n$ | $O(n^2)$ (ms) | razón vs. anterior | $b = \log_2(\text{razón})$ |
 |---|---|---|---|
