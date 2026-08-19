@@ -35,6 +35,7 @@ La pregunta de si "conviene" tratar los datos como una distribución de frecuenc
 > `DatetimeIndex` + `.resample()` en Pandas (ver [[08 - Series de tiempo]]) es la herramienta central para esto: agrupa por intervalos de tiempo en vez de por categoría, y `.rolling()` calcula el promedio móvil que separa la tendencia del ruido de corto plazo. Cuando haga falta ir más allá de describir la serie y **modelarla** (pronosticar, testear si es estacionaria, separar tendencia/estacionalidad formalmente), esa es la función de `statsmodels.tsa` — ver [[05 - Series de tiempo]] de statsmodels.
 
 ## Relacionado
+- [[estabilidad de un proceso]]
 - [[02 - El estudio de la variabilidad]]
 - [[distribución de frecuencias]]
 - [[causas comunes y causas especiales]]

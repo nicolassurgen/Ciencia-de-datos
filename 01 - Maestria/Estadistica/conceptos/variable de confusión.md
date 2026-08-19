@@ -42,6 +42,7 @@ Una variable de confusión no detectada es la causa más común de perder [[vali
 > Caso real citado en la bibliografía: al predecir el precio de venta de casas a partir solo de los metros cuadrados, **omitir el código postal** (una variable de confusión enorme en el mercado inmobiliario: la ubicación afecta tanto el tamaño típico de la casa como su precio) produce coeficientes contraintuitivos y difíciles de interpretar. Agregar el código postal al modelo es exactamente el mecanismo de "controlar" descripto arriba. *Fuente: [[Practical Statistics for Data Scientists]] (Bruce & Bruce), cap. 4.*
 
 ## Relacionado
+- [[causalidad vs asociación]]
 - [[01 - Como dar sentido a los datos]]
 - [[validez interna]]
 - [[diseño de experimentos]]

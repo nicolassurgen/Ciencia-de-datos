@@ -63,6 +63,8 @@ fecha: 2026-08-03
 > Ver [[06 - Tests de hipotesis - una y dos muestras]].
 
 ## Relacionado
+- [[estudio observacional vs experimental]]
+- [[causalidad vs asociación]]
 - [[01 - Como dar sentido a los datos]]
 - [[variable de confusión]]
 - [[validez interna]]

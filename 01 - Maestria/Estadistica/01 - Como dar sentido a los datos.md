@@ -325,14 +325,20 @@ Luego, ya con hipótesis formuladas, un **estudio confirmatorio** —diseñado e
 ---
 
 ## Conceptos para desarrollar en notas aparte
-- [[población y muestra]]
+- [[población y muestra]] · [[muestreo y diseño muestral]]
 - [[validez externa]] · [[validez interna]]
 - [[parámetro vs estadístico]]
 - [[escalas de medición]]
 - [[variables]]
-- [[sesgo de supervivencia]] · [[sesgo de autoselección]]
-- [[variable de confusión]]
-- [[diseño de experimentos]]
+- [[sesgo de supervivencia]] · [[sesgo de autoselección]] · [[sesgos en datos y muestreo]]
+- [[variable de confusión]] · [[causalidad vs asociación]]
+- [[diseño de experimentos]] · [[estudio observacional vs experimental]]
+- [[error muestral y error no muestral]]
+- [[estadística descriptiva vs inferencial]]
+- [[análisis exploratorio vs confirmatorio]]
+- [[estudios transversales y longitudinales]]
+- [[matriz de datos]] · [[trazabilidad de datos]]
+- [[fuentes de datos primarias y secundarias]]
 
 ## Preguntas de repaso
 1. ¿Por qué el ciclo PPDAC se dibuja como circular y no como una lista de 5 pasos que se hacen una sola vez?

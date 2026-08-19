@@ -51,6 +51,8 @@ Si los datos tienen una **dimensión temporal** y el proceso no es estable, apla
 
 ## Relacionado
 - [[02 - El estudio de la variabilidad]]
+- [[distribución estadística]]
+- [[gráfico de barras]] · [[diagrama de bastones]]
 - [[histograma]] · [[diagrama de tallo y hoja]] · [[diagrama de puntos (dot plot)]]
 - [[función de distribución acumulada (CDF empírica)]]
 - [[diagrama de Pareto]]

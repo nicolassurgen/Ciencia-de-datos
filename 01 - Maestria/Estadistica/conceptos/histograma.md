@@ -60,6 +60,7 @@ La asimetría descripta arriba de forma cualitativa se puede **cuantificar** con
 
 ## Relacionado
 - [[02 - El estudio de la variabilidad]]
+- [[forma de una distribución]]
 - [[distribución de frecuencias]]
 - [[diagrama de tallo y hoja]] · [[boxplot]] · [[diagrama de puntos (dot plot)]]
 - [[función de distribución acumulada (CDF empírica)]]

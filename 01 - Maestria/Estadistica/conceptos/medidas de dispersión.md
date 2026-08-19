@@ -79,6 +79,7 @@ Si a cada dato se le aplica $x_i = a + b\,y_i$ (la misma **función lineal** $f(
 > `np.std(x, ddof=1)`, `np.var(x, ddof=1)` (ver [[04 - Agregaciones y estadistica descriptiva]] de NumPy) calculan estas medidas — ojo con `ddof=1` para la varianza **muestral**. El RIQ tiene función propia en [[03 - Estadistica descriptiva|`scipy.stats.iqr(x)`]], que ya usa la clase 2 sin desarrollar. `df.describe()` de Pandas ya incluye desvío estándar y cuartiles por columna. El MAD se calcula con `scipy.stats.median_abs_deviation(x)`.
 
 ## Relacionado
+- [[variabilidad estadística]]
 - [[02 - El estudio de la variabilidad]]
 - [[medidas de posición]]
 - [[coeficiente de variación]]

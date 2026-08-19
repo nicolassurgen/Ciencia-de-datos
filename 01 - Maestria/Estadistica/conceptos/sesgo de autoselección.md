@@ -55,4 +55,5 @@ Las reseñas de restaurantes, hoteles o productos en sitios como Yelp o Google e
 - [[validez externa]]
 - [[población y muestra]]
 - [[sesgo de supervivencia]]
+- [[sesgos en datos y muestreo]]
 - [[Practical Statistics for Data Scientists]]

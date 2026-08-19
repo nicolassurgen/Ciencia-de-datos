@@ -33,6 +33,7 @@ Esta separación explica por qué más adelante importa si los datos muestran o 
 En un [[diseño de experimentos|experimento]], la **replicación** permite estimar la variabilidad por causas comunes (el "ruido" de fondo), de modo que un efecto atribuible a un factor manipulado (una causa especial introducida deliberadamente) pueda distinguirse de esa variabilidad natural.
 
 ## Relacionado
+- [[estabilidad de un proceso]]
 - [[02 - El estudio de la variabilidad]]
 - [[diagrama de Ishikawa]]
 - [[series de tiempo]]

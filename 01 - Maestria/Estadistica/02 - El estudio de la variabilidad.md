@@ -399,14 +399,18 @@ Resume la distribución con **cinco números** (el *five-number summary*, que en
 ---
 
 ## Conceptos para desarrollar en notas aparte
+- [[variabilidad estadística]] · [[distribución estadística]]
 - [[distribución de frecuencias]]
 - [[histograma]] · [[diagrama de tallo y hoja]] · [[boxplot]] · [[diagrama de puntos (dot plot)]]
+- [[gráfico de barras]] · [[diagrama de bastones]]
 - [[función de distribución acumulada (CDF empírica)]] · [[coeficiente de asimetría (skewness)]]
+- [[forma de una distribución]]
 - [[diagrama de Pareto]] · [[diagrama de Ishikawa]]
 - [[medidas de posición]] · [[medidas de dispersión]]
 - [[robustez estadística]] · [[valores atípicos]]
 - [[coeficiente de variación]]
-- [[causas comunes y causas especiales]]
+- [[causas comunes y causas especiales]] · [[estabilidad de un proceso]]
+- [[límites de especificación y valor objetivo]]
 
 ## Preguntas de repaso
 1. ¿Por qué no tiene sentido construir una distribución de frecuencias para datos que vienen a través del tiempo y no son estables?

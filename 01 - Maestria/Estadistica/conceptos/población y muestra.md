@@ -45,8 +45,13 @@ fecha: 2026-08-03
 
 De la definición de la población depende la [[validez externa]] de las conclusiones: hasta qué grupo se tiene derecho a extender lo encontrado en la muestra. Una muestra puede ser perfectamente representativa de una población mal delimitada, y aun así llevar a conclusiones que no generalizan al grupo que realmente interesaba.
 
+> [!info] El "cómo" de la muestra tiene nota propia
+> Esta nota se enfoca en **qué son** población y muestra. El desarrollo de **cómo** se obtiene una buena muestra (tipos de muestreo, representatividad, ponderación) está en [[muestreo y diseño muestral]].
+
 ## Relacionado
 - [[01 - Como dar sentido a los datos]]
 - [[parámetro vs estadístico]]
 - [[validez externa]] · [[sesgo de autoselección]]
+- [[muestreo y diseño muestral]]
+- [[error muestral y error no muestral]]
 - [[08 - Metodos de remuestreo]]

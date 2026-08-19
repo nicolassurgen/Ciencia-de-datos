@@ -51,6 +51,8 @@ Cualquier medida de resumen (media, desvío estándar, etc.) o gráfico que se c
 ## Relacionado
 - [[02 - El estudio de la variabilidad]]
 - [[el ciclo estadístico (PPDAC)]]
+- [[trazabilidad de datos]]
+- [[fuentes de datos primarias y secundarias]]
 - [[valores atípicos]]
 - [[robustez estadística]]
 - [[04 - Datos faltantes]]

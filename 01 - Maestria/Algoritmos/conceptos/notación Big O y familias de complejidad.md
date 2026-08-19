@@ -42,15 +42,15 @@ Las reglas prácticas que ya usa la clase (descartar constantes, quedarse con el
 
 La tabla de la clase tiene una familia menos de las que suele listar la bibliografía: falta la **cúbica**, $O(n^3)$, típica de tres bucles anidados (comparar todas las triplas posibles de $n$ elementos, por ejemplo).
 
-| Familia | Notación | Código típico | Ejemplo |
-|---|---|---|---|
-| Constante | $O(1)$ | `a = b + c` | Acceder a `lista[5]`, buscar en un `set` |
-| Logarítmica | $O(\log n)$ | dividir a la mitad en cada paso | Búsqueda binaria — ver [[04 - Funciones exponenciales y logaritmicas|Funciones exponenciales y logaritmicas]] para qué es un logaritmo |
-| Lineal | $O(n)$ | un `for` | Recorrer una lista |
-| Linealogarítmica | $O(n \log n)$ | divide y conquistarás | Los buenos algoritmos de ordenamiento |
-| Cuadrática | $O(n^2)$ | dos `for` anidados | Comparar todos los pares |
-| Cúbica | $O(n^3)$ | tres `for` anidados | Comparar todas las triplas |
-| Exponencial | $O(2^n)$ | ramifica en 2 en cada paso | Fibonacci recursivo, fuerza bruta |
+| Familia          | Notación      | Código típico                   | Ejemplo                                                              |                                                                   |
+| ---------------- | ------------- | ------------------------------- | -------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| Constante        | $O(1)$        | `a = b + c`                     | Acceder a `lista[5]`, buscar en un `set`                             |                                                                   |
+| Logarítmica      | $O(\log n)$   | dividir a la mitad en cada paso | Búsqueda binaria — ver [[04 - Funciones exponenciales y logaritmicas | Funciones exponenciales y logaritmicas]] para qué es un logaritmo |
+| Lineal           | $O(n)$        | un `for`                        | Recorrer una lista                                                   |                                                                   |
+| Linealogarítmica | $O(n \log n)$ | divide y conquistarás           | Los buenos algoritmos de ordenamiento                                |                                                                   |
+| Cuadrática       | $O(n^2)$      | dos `for` anidados              | Comparar todos los pares                                             |                                                                   |
+| Cúbica           | $O(n^3)$      | tres `for` anidados             | Comparar todas las triplas                                           |                                                                   |
+| Exponencial      | $O(2^n)$      | ramifica en 2 en cada paso      | Fibonacci recursivo, fuerza bruta                                    |                                                                   |
 
 *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 1.4.* El propio Sedgewick aclara que esta lista **no es exhaustiva** — un algoritmo real puede tener un costo como $O(n^2 \log n)$ o $O(n^{3/2})$, formas intermedias que no encajan en ninguna fila prolija de la tabla; las seis-siete familias de arriba son simplemente las que más aparecen en la práctica.
 
