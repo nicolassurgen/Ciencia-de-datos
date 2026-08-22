@@ -32,19 +32,31 @@ def busqueda_lineal(lista, objetivo):
     return -1
 ```
 
-### Paso a paso, con un ejemplo chico
+### El "diálogo interno" del algoritmo, línea por línea
 
-Buscar el **91** en `[45, 12, 78, 3, 91, 27, 56]` (sin ordenar), verificado en este entorno:
+La función tiene una sola variable que cambia mientras corre: `i`, el índice que se está mirando en este instante. En cada vuelta del `for`, el algoritmo se hace la misma pregunta chiquita, una y otra vez: *"¿`lista[i]` es igual a `objetivo`? Si no, avanzo `i` en uno y vuelvo a preguntar."* No hay memoria de lo que pasó antes, no hay ninguna decisión más compleja que esa — es la razón por la que es el algoritmo más fácil de programar, y también el más lento.
 
-| Paso | Índice revisado | Valor en ese índice | ¿Coincide con 91? |
+Buscando el **91** en `[45, 12, 78, 3, 91, 27, 56]` (sin ordenar), así se ve ese diálogo, vuelta por vuelta:
+
+```
+i=0: lista[0]=45.  ¿45 == 91?  No.  Avanzo.
+i=1: lista[1]=12.  ¿12 == 91?  No.  Avanzo.
+i=2: lista[2]=78.  ¿78 == 91?  No.  Avanzo.
+i=3: lista[3]=3.   ¿3 == 91?   No.  Avanzo.
+i=4: lista[4]=91.  ¿91 == 91?  Sí.  return 4   <- se corta el for, termina acá
+```
+
+Nada de lo que pasó en `i=0`, `i=1`, `i=2` o `i=3` quedó "guardado" para ayudar en `i=4` — cada vuelta es una pregunta nueva, independiente de las anteriores, sobre el siguiente elemento de la lista. Esa es la característica que define a la búsqueda lineal: **no usa ninguna información sobre cómo están organizados los datos**, porque no asume que estén organizados de ninguna forma. Resumido en tabla:
+
+| Paso | Índice revisado (`i`) | Valor en ese índice | ¿Coincide con 91? |
 |---:|---:|---:|:---:|
 | 1 | 0 | 45 | No |
 | 2 | 1 | 12 | No |
 | 3 | 2 | 78 | No |
 | 4 | 3 | 3 | No |
-| 5 | 4 | **91** | **Sí — encontrado** |
+| 5 | 4 | **91** | **Sí — `return 4`** |
 
-Cinco pasos para encontrar un valor que está en la quinta posición: la búsqueda lineal necesita **exactamente tantos pasos como posiciones tiene que revisar**, ni uno menos. Si el 91 no estuviera en la lista, haría falta agotar las 7 posiciones para poder afirmarlo con seguridad — recién después de mirar la última se puede estar seguro de que un valor no está.
+Cinco pasos para encontrar un valor que está en la quinta posición: la búsqueda lineal necesita **exactamente tantos pasos como posiciones tiene que revisar**, ni uno menos. Si en cambio se buscara el **99** (que no está en la lista), el diálogo interno seguiría idéntico hasta `i=6` (el último índice), y al no encontrar coincidencia en ninguna vuelta, el `for` terminaría de forma natural y se ejecutaría el `return -1` final — recién ahí, después de revisar las 7 posiciones, el algoritmo puede afirmar con seguridad que el valor no está.
 
 Su análisis de complejidad no tiene secretos: en el peor caso (el dato está al final, o no está) hay que revisar los `n` elementos → **O(n)**. En el caso promedio, si el dato está en una posición cualquiera, se revisan en promedio `n/2` elementos — que sigue siendo O(n), porque la notación Big O descarta constantes (ver [[notación Big O y familias de complejidad]]).
 
@@ -74,9 +86,26 @@ def busqueda_binaria(lista, objetivo):
     return -1
 ```
 
-### Paso a paso, con un ejemplo chico
+### El "diálogo interno" del algoritmo, línea por línea
 
-Buscar el **91** en `[3, 12, 27, 45, 56, 78, 91]` (ordenada), verificado en este entorno:
+Acá hay **tres** variables que cambian: `izq` y `der` (los dos extremos de lo que todavía sigue en carrera) y `medio` (el punto donde se mira en cada vuelta, siempre el del centro entre `izq` y `der`). El diálogo interno, en cada vuelta del `while`, es: *"¿`lista[medio]` es igual, menor o mayor que `objetivo`? Si es igual, listo. Si es menor, todo lo que hay entre `izq` y `medio` (incluido `medio`) queda descartado, porque en una lista ordenada nada ahí puede ser el objetivo — muevo `izq` justo después de `medio`. Si es mayor, pasa lo simétrico del otro lado."*
+
+Buscando el **91** en `[3, 12, 27, 45, 56, 78, 91]` (índices 0 a 6, ordenada), así se ve ese diálogo, vuelta por vuelta:
+
+```
+izq=0, der=6: medio=(0+6)//2=3.  lista[3]=45.  ¿45 == 91? No. ¿45 < 91? Sí.
+              -> todo entre izq=0 y medio=3 queda descartado (son todos <= 45, y busco 91)
+              -> izq pasa a ser medio+1 = 4
+
+izq=4, der=6: medio=(4+6)//2=5.  lista[5]=78.  ¿78 == 91? No. ¿78 < 91? Sí.
+              -> todo entre izq=4 y medio=5 queda descartado
+              -> izq pasa a ser medio+1 = 6
+
+izq=6, der=6: medio=(6+6)//2=6.  lista[6]=91.  ¿91 == 91? Sí.
+              -> return 6   <- termina acá
+```
+
+Fijate qué significa, en la práctica, "descartar una mitad": en la primera vuelta, `lista[3]=45` es menor al 91 que se busca — y como la lista está **ordenada**, eso garantiza que los índices 0, 1, 2 y 3 (todo lo que es menor o igual a 45) tampoco puede ser el 91. No hace falta mirarlos ni uno por uno ni de ninguna otra forma: la comparación contra el único elemento del medio certifica, de un solo golpe, que cuatro posiciones enteras quedan fuera de carrera. Eso es lo que la búsqueda lineal no puede hacer — ella solo puede descartar **una** posición por comparación, nunca un bloque entero.
 
 | Paso | Candidatos que quedan | izq | der | medio | Valor en el medio | Decisión |
 |---:|---|---:|---:|---:|---:|---|
@@ -84,12 +113,23 @@ Buscar el **91** en `[3, 12, 27, 45, 56, 78, 91]` (ordenada), verificado en este
 | 2 | `[56, 78, 91]` | 4 | 6 | 5 | 78 | 78 < 91 → descarto la mitad **izquierda** de nuevo |
 | 3 | `[91]` | 6 | 6 | 6 | **91** | **Encontrado** |
 
-Tres pasos, contra los cinco que necesitó la búsqueda lineal para el mismo valor. Mirá la columna "candidatos que quedan": arranca con los 7 elementos originales, en el paso 2 ya quedaron solo 3 (`[56, 78, 91]` — todo lo que era menor a 45 se descartó de un saque, sin mirarlo), y en el paso 3 queda uno solo. `izq` y `der` son simplemente los índices que **delimitan** ese grupo de candidatos que todavía sigue en carrera — no hace falta copiar de verdad ese pedazo de la lista, con guardar dos números (dónde empieza y dónde termina) alcanza. Para ver también el sentido opuesto de descarte, buscar el **12** en la misma lista:
+Tres pasos, contra los cinco que necesitó la búsqueda lineal para el mismo valor. Para ver el sentido **opuesto** de descarte (cuando el valor del medio es *mayor* al buscado), buscar el **12** en la misma lista:
+
+```
+izq=0, der=6: medio=3.  lista[3]=45.  ¿45 == 12? No. ¿45 < 12? No (45 es mayor).
+              -> todo entre medio=3 y der=6 queda descartado (son todos >= 45, y busco 12)
+              -> der pasa a ser medio-1 = 2
+
+izq=0, der=2: medio=(0+2)//2=1.  lista[1]=12.  ¿12 == 12? Sí.
+              -> return 1   <- termina acá
+```
 
 | Paso | Candidatos que quedan | izq | der | medio | Valor en el medio | Decisión |
 |---:|---|---:|---:|---:|---:|---|
 | 1 | `[3, 12, 27, 45, 56, 78, 91]` | 0 | 6 | 3 | 45 | 45 > 12 → descarto la mitad **derecha** |
 | 2 | `[3, 12, 27]` | 0 | 2 | 1 | **12** | **Encontrado** |
+
+Comparando ambos ejemplos se ve el patrón completo: la decisión de mover `izq` o mover `der` depende **únicamente** de si `lista[medio]` quedó por debajo o por arriba del objetivo — nunca de nada más —, y esa única comparación por vuelta es la que le permite al algoritmo descartar la mitad completa de lo que quedaba, en vez de un elemento a la vez.
 
 ### Por qué es logarítmica
 

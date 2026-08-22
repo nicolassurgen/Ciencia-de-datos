@@ -42,7 +42,26 @@ def burbuja(lista):
 
 Cada pasada completa "empuja" el elemento más grande de lo que queda hasta el final — de ahí que, después de la pasada `i`, los últimos `i` elementos ya estén en su posición definitiva y no haga falta volver a mirarlos (`range(n - 1 - i)`).
 
-### Paso a paso: cada comparación de la primera pasada
+### El "diálogo interno" del algoritmo, línea por línea
+
+Hay **dos** bucles anidados, y conviene separar bien qué hace cada uno. El de afuera (`i`) cuenta **pasadas**: cuántas veces se recorre la lista de punta a punta. El de adentro (`j`) es el que hace el trabajo real en cada pasada: recorre posiciones adyacentes, y en cada una se pregunta *"¿el de acá (`a[j]`) es más grande que el de al lado (`a[j+1]`)? Si sí, los cambio de lugar."* — nada más complejo que eso, repetido una y otra vez.
+
+Con `[64, 34, 25, 12, 22, 11, 90]`, así se ve la **primera pasada** (`i=0`) por dentro, vuelta por vuelta del `j`:
+
+```
+j=0: ¿a[0]=64 > a[1]=34? Sí.  Intercambio.  Lista: [34, 64, 25, 12, 22, 11, 90]
+j=1: ¿a[1]=64 > a[2]=25? Sí.  Intercambio.  Lista: [34, 25, 64, 12, 22, 11, 90]
+j=2: ¿a[2]=64 > a[3]=12? Sí.  Intercambio.  Lista: [34, 25, 12, 64, 22, 11, 90]
+j=3: ¿a[3]=64 > a[4]=22? Sí.  Intercambio.  Lista: [34, 25, 12, 22, 64, 11, 90]
+j=4: ¿a[4]=64 > a[5]=11? Sí.  Intercambio.  Lista: [34, 25, 12, 22, 11, 64, 90]
+j=5: ¿a[5]=64 > a[6]=90? No. Sin cambios.   Lista: [34, 25, 12, 22, 11, 64, 90]
+```
+
+Mirá lo que pasó con el 64: entró a la pasada en la posición 0, y **cada vez que gana una comparación se muda un lugar a la derecha junto con el `j`** — no porque el algoritmo "decida" moverlo, sino porque es, literalmente, lo que hace `a[j], a[j+1] = a[j+1], a[j]` cuando `a[j]` es el más grande de los dos: el más grande siempre termina en la posición `j+1`, así que en la próxima vuelta (`j+1`) ese mismo valor vuelve a ser el candidato a comparar. Recién se "suelta" cuando se topa con algo todavía más grande que él (el 90) — ahí pierde la comparación y se queda quieto por el resto de la pasada. Ese desplazamiento progresivo, comparación tras comparación, es literalmente la "burbuja" que le da nombre al algoritmo.
+
+Una vez que termina la pasada `i=0` (el `j` llegó al final), arranca la pasada `i=1` — otra vez `j` desde 0, pero ahora hasta `n-1-1` en vez de `n-1-0`, porque la posición 6 (donde quedó el 90) ya se sabe que está bien ubicada y no hace falta revisarla de nuevo. Así, pasada tras pasada, el rango que recorre `j` se va achicando por la derecha.
+
+### Tabla resumen: cada comparación de la primera pasada
 
 Ordenando `[64, 34, 25, 12, 22, 11, 90]`, mirando **cada comparación individual** de la primera pasada (verificado en este entorno):
 
@@ -109,9 +128,28 @@ def seleccion(lista):
     return a
 ```
 
-### Paso a paso: cómo se encuentra el mínimo, y los pasos completos
+### El "diálogo interno" del algoritmo, línea por línea
 
-Sobre la misma lista `[64, 34, 25, 12, 22, 11, 90]`, así se encuentra el mínimo en el **primer** paso — recorriendo todo, quedándose siempre con el candidato más chico visto hasta el momento (verificado en este entorno):
+También hay dos bucles anidados, pero cumplen un rol distinto al de la burbuja. El de afuera (`i`) recorre, una por una, **las posiciones que hay que llenar**: primero la 0, después la 1, y así. El de adentro (`j`) no compara vecinos — recorre **todo lo que falta** buscando el mínimo, guardando en `pos_min` la mejor posición vista hasta el momento, y solo al final (fuera del `for` de adentro) hace **un único intercambio** para poner ese mínimo en su lugar. Esa es la diferencia estructural con la burbuja: la burbuja intercambia **muchas veces** dentro del bucle de adentro; selección intercambia **una sola vez**, después de que el bucle de adentro ya terminó de decidir.
+
+Con `[64, 34, 25, 12, 22, 11, 90]`, así se ve el `i=0` por dentro:
+
+```
+i=0: pos_min arranca en 0 (el candidato es a[0]=64, todavía no se comparó con nadie)
+  j=1: ¿a[1]=34 < a[pos_min]=64? Sí. pos_min pasa a ser 1.
+  j=2: ¿a[2]=25 < a[pos_min]=34? Sí. pos_min pasa a ser 2.
+  j=3: ¿a[3]=12 < a[pos_min]=25? Sí. pos_min pasa a ser 3.
+  j=4: ¿a[4]=22 < a[pos_min]=12? No. pos_min sigue siendo 3.
+  j=5: ¿a[5]=11 < a[pos_min]=12? Sí. pos_min pasa a ser 5.
+  j=6: ¿a[6]=90 < a[pos_min]=11? No. pos_min sigue siendo 5.
+-- el for de adentro terminó: pos_min quedó en 5 (el valor 11) --
+  intercambio único: a[0] y a[5] cambian de lugar
+  Lista: [11, 34, 25, 12, 22, 64, 90]
+```
+
+Notá algo importante: durante **todo** el recorrido del `j`, la lista **no se tocó ni una vez** — `pos_min` es apenas un número que se va actualizando en la cabeza del algoritmo, ningún elemento cambia de lugar hasta el intercambio final. Es exactamente lo opuesto de la burbuja, que intercambia (potencialmente) en cada vuelta del `j`. Por eso selección hace, como mucho, un intercambio por pasada — `n-1` en total —, mientras que la burbuja puede hacer muchísimos más.
+
+Sobre la misma lista, así se encuentra el mínimo en el **primer** paso — recorriendo todo, quedándose siempre con el candidato más chico visto hasta el momento (verificado en este entorno):
 
 | Se compara contra | Valor | ¿Mejora al mínimo actual? | Mínimo actual tras esta comparación |
 |---|---:|:---:|---:|
@@ -172,9 +210,35 @@ def insercion(lista):
     return a
 ```
 
-### Paso a paso
+### El "diálogo interno" del algoritmo, línea por línea
 
-Sobre la misma lista `[64, 34, 25, 12, 22, 11, 90]`, insertando un elemento a la vez en la parte ya ordenada (verificado en este entorno):
+Acá el bucle de afuera (`i`) recorre los elementos **de izquierda a derecha**, uno por uno, y en cada vuelta guarda ese elemento en `actual` — es "la carta que se acaba de levantar del mazo". El bucle de adentro no es un `for` sino un `while`, y **mira hacia atrás**, no hacia adelante: empieza en `j = i - 1` (el vecino inmediato a la izquierda) y se pregunta, vuelta a vuelta, *"¿el de acá (`a[j]`) es más grande que `actual`? Si sí, no es su lugar — lo corro un lugar a la derecha y sigo mirando más atrás. Si no, ya encontré dónde va `actual`."*
+
+Con `[64, 34, 25, 12, 22, 11, 90]`, así se ve `i=1` (la primera inserción, la más simple posible):
+
+```
+i=1: actual = a[1] = 34.  j arranca en i-1 = 0.
+  j=0: ¿a[0]=64 > actual=34? Sí.  Corro el 64 a la posición 1.  j pasa a -1.
+-- el while termina porque j=-1 (ya no hay más para comparar a la izquierda) --
+  a[0] = actual (34)
+  Lista: [34, 64, 25, 12, 22, 11, 90]
+```
+
+Y así se ve `i=4` (insertar el 22, un caso con más recorrido hacia atrás):
+
+```
+i=4: actual = a[4] = 22.  j arranca en i-1 = 3.  Lista antes: [12, 25, 34, 64, 22, 11, 90]
+  j=3: ¿a[3]=64 > actual=22? Sí.  Corro el 64 a la posición 4.  j pasa a 2.
+  j=2: ¿a[2]=34 > actual=22? Sí.  Corro el 34 a la posición 3.  j pasa a 1.
+  j=1: ¿a[1]=25 > actual=22? Sí.  Corro el 25 a la posición 2.  j pasa a 0.
+  j=0: ¿a[0]=12 > actual=22? No. El while para acá (j se queda en 0).
+  a[1] = actual (22)   <- se inserta en j+1 = 1
+  Lista: [12, 22, 25, 34, 64, 11, 90]
+```
+
+La diferencia con la burbuja y la selección salta a la vista: acá el bucle de adentro **no recorre toda la lista** ni compara contra un mínimo acumulado — recorre **solo hacia atrás, y solo hasta donde haga falta**, deteniéndose apenas encuentra un valor que ya es menor que `actual`. Por eso, cuando `actual` ya es más grande que todo lo que está a su izquierda (como el 90 al final), el `while` ni siquiera entra una vez: es el mecanismo exacto detrás de que inserción sea O(n) en el mejor caso.
+
+Sobre la misma lista, insertando un elemento a la vez en la parte ya ordenada, el resultado de cada paso (verificado en este entorno):
 
 | Elemento a insertar | Corrimientos necesarios | Posición final | Lista después de este paso |
 |---:|---:|---:|---|
@@ -202,6 +266,27 @@ La parte ya ordenada (a la izquierda) crece de a uno en cada paso. En el último
 
 > [!important] Por qué inserción es "el mejor de los tres" en la práctica: las inversiones
 > La cantidad de intercambios que hace insertion sort es exactamente igual a la cantidad de **inversiones** de la lista de entrada — pares de elementos que están fuera de orden entre sí (por ejemplo, en `[3, 1, 2]`, el par `(3,1)` y el par `(3,2)` son inversiones, dos en total). Una lista con pocas inversiones se llama **parcialmente ordenada**, y son extremadamente comunes con datos reales: una tabla que ya viene casi ordenada de otra fuente, un archivo al que solo se le agregaron unas pocas filas nuevas al final. Sobre ese tipo de datos, insertion sort la ordena casi al costo de recorrerla una vez, muy lejos de su peor caso teórico. *Fuente: [[Algorithms-4th-Edition-By-Robert Sedgewick and Kevin Wayne]], cap. 2.1 (Proposición C).*
+
+## Por qué se diferencian entre sí: la misma lista, la misma "primera pasada", tres lógicas distintas
+
+Ya se vio el diálogo interno de cada uno por separado — acá están los tres, uno al lado del otro, actuando sobre la **misma** lista `[64, 34, 25, 12, 22, 11, 90]`, para que la diferencia de fondo quede a la vista de un vistazo:
+
+| | Qué mira en cada vuelta del bucle de adentro | Cuándo intercambia/mueve | Qué queda resuelto al final de la primera pasada |
+|---|---|---|---|
+| **Burbuja** | Un par de **vecinos** (`a[j]` y `a[j+1]`) | En **cada** vuelta que estén al revés — potencialmente muchas veces por pasada | El elemento más grande de toda la lista (el que más veces "gana" comparaciones seguidas) queda al final |
+| **Selección** | El candidato actual contra el **mejor mínimo visto hasta ahora** (`a[pos_min]`) | **Una sola vez**, recién cuando termina de recorrer todo lo que falta | El elemento más chico (11) queda al principio |
+| **Inserción** | El elemento nuevo (`actual`) contra lo que ya está **ordenado a su izquierda** | Tantas veces como haga falta correr, pero solo **mirando hacia atrás** desde donde entró | El elemento en la posición `i` queda bien ubicado **respecto de todo lo que ya se procesó**, no de toda la lista |
+
+Tres preguntas para fijar la diferencia:
+
+> [!important] ¿En qué dirección "crece" lo que ya está resuelto?
+> Burbuja y selección construyen la parte ordenada **de atrás para adelante** (burbuja fija el final, selección fija el principio) mirando **toda la lista completa** en cada pasada. Inserción construye la parte ordenada **de adelante para atrás**, pero solo necesita mirar la porción **ya procesada** — nunca los elementos que todavía no llegó a tocar. Esa es la razón estructural por la que inserción puede ser rápida en datos parcialmente ordenados y las otras dos, no: inserción literalmente ignora la mitad de la lista que sabe que todavía no importa.
+
+> [!important] ¿Cuántos intercambios hace por cada elemento que "encuentra su lugar"?
+> Burbuja puede necesitar **muchos** intercambios chiquitos (un vecino a la vez) para mover un valor lejos de donde está. Selección hace **un único** intercambio, sin importar qué tan lejos tenga que viajar el mínimo. Inserción hace **tantos corrimientos como haga falta**, pero cada uno mueve un solo elemento un solo lugar — parecido a la burbuja en el costo por movimiento, pero mirando en la dirección opuesta (hacia atrás, no hacia adelante) y solo dentro de la porción ya ordenada.
+
+> [!important] ¿El algoritmo "sabe" cuándo puede dejar de trabajar?
+> Selección **nunca** lo sabe de antemano: siempre recorre todo lo que falta, encuentre rápido el mínimo o no. Burbuja **sí** puede saberlo, con la bandera de la versión optimizada (si una pasada no intercambió nada, ya está). Inserción lo sabe **en cada elemento individual**: en cuanto el `while` encuentra un valor menor, para ahí mismo, sin necesidad de terminar de revisar toda la parte ordenada. Es la razón por la que, de los tres, inserción es el único que reacciona bien tanto a "la lista entera ya está ordenada" como a "una porción chica de la lista no lo está".
 
 ## Comparación directa
 
