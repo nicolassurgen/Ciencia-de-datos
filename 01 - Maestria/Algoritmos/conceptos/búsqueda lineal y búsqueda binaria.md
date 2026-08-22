@@ -32,6 +32,20 @@ def busqueda_lineal(lista, objetivo):
     return -1
 ```
 
+### Paso a paso, con un ejemplo chico
+
+Buscar el **91** en `[45, 12, 78, 3, 91, 27, 56]` (sin ordenar), verificado en este entorno:
+
+| Paso | Índice revisado | Valor en ese índice | ¿Coincide con 91? |
+|---:|---:|---:|:---:|
+| 1 | 0 | 45 | No |
+| 2 | 1 | 12 | No |
+| 3 | 2 | 78 | No |
+| 4 | 3 | 3 | No |
+| 5 | 4 | **91** | **Sí — encontrado** |
+
+Cinco pasos para encontrar un valor que está en la quinta posición: la búsqueda lineal necesita **exactamente tantos pasos como posiciones tiene que revisar**, ni uno menos. Si el 91 no estuviera en la lista, haría falta agotar las 7 posiciones para poder afirmarlo con seguridad — recién después de mirar la última se puede estar seguro de que un valor no está.
+
 Su análisis de complejidad no tiene secretos: en el peor caso (el dato está al final, o no está) hay que revisar los `n` elementos → **O(n)**. En el caso promedio, si el dato está en una posición cualquiera, se revisan en promedio `n/2` elementos — que sigue siendo O(n), porque la notación Big O descarta constantes (ver [[notación Big O y familias de complejidad]]).
 
 > [!important] Su virtud: no exige nada
@@ -60,7 +74,24 @@ def busqueda_binaria(lista, objetivo):
     return -1
 ```
 
-### Por qué es logarítmica, paso a paso
+### Paso a paso, con un ejemplo chico
+
+Buscar el **91** en `[3, 12, 27, 45, 56, 78, 91]` (ordenada), verificado en este entorno:
+
+| Paso | izq | der | medio | Valor en el medio | Decisión |
+|---:|---:|---:|---:|---:|---|
+| 1 | 0 | 6 | 3 | 45 | 45 < 91 → descarto la mitad **izquierda** |
+| 2 | 4 | 6 | 5 | 78 | 78 < 91 → descarto la mitad **izquierda** de nuevo |
+| 3 | 6 | 6 | 6 | **91** | **Encontrado** |
+
+Tres pasos, contra los cinco que necesitó la búsqueda lineal para el mismo valor. Fijate el patrón: en cada paso, el rango `[izq, der]` se **reduce a la mitad** — de 7 candidatos posibles a 3, de 3 a 1. Para ver también el sentido opuesto de descarte, buscar el **12** en la misma lista:
+
+| Paso | izq | der | medio | Valor en el medio | Decisión |
+|---:|---:|---:|---:|---:|---|
+| 1 | 0 | 6 | 3 | 45 | 45 > 12 → descarto la mitad **derecha** |
+| 2 | 0 | 2 | 1 | **12** | **Encontrado** |
+
+### Por qué es logarítmica
 
 Partiendo de `n` candidatos, cada paso descarta la mitad:
 

@@ -42,6 +42,32 @@ def burbuja(lista):
 
 Cada pasada completa "empuja" el elemento más grande de lo que queda hasta el final — de ahí que, después de la pasada `i`, los últimos `i` elementos ya estén en su posición definitiva y no haga falta volver a mirarlos (`range(n - 1 - i)`).
 
+### Paso a paso: cada comparación de la primera pasada
+
+Ordenando `[64, 34, 25, 12, 22, 11, 90]`, mirando **cada comparación individual** de la primera pasada (verificado en este entorno):
+
+| Comparación | Par comparado | ¿Fuera de orden? | Acción | Lista después de esta comparación |
+|---:|---|:---:|---|---|
+| 1 | (64, 34) | Sí | Intercambio | `[34, 64, 25, 12, 22, 11, 90]` |
+| 2 | (64, 25) | Sí | Intercambio | `[34, 25, 64, 12, 22, 11, 90]` |
+| 3 | (64, 12) | Sí | Intercambio | `[34, 25, 12, 64, 22, 11, 90]` |
+| 4 | (64, 22) | Sí | Intercambio | `[34, 25, 12, 22, 64, 11, 90]` |
+| 5 | (64, 11) | Sí | Intercambio | `[34, 25, 12, 22, 11, 64, 90]` |
+| 6 | (64, 90) | No | Sin cambios | `[34, 25, 12, 22, 11, 64, 90]` |
+
+El 64 (el valor con el que arrancó la pasada) fue "ganando" cada comparación contra su vecino de la derecha y **avanzando una posición cada vez**, hasta toparse con el 90 —más grande que él— y quedarse ahí. Es, literalmente, el fenómeno que le da nombre al algoritmo: en cada pasada, el elemento más grande "burbujea" hacia el final, una posición por comparación.
+
+Repitiendo esto pasada tras pasada, hasta que una pasada completa no encuentre nada para intercambiar:
+
+| Pasada | Resultado parcial | Intercambios en esta pasada |
+|---:|---|---:|
+| 1 | `[34, 25, 12, 22, 11, 64, 90]` | 5 |
+| 2 | `[25, 12, 22, 11, 34, 64, 90]` | 4 |
+| 3 | `[12, 22, 11, 25, 34, 64, 90]` | 3 |
+| 4 | `[12, 11, 22, 25, 34, 64, 90]` | 1 |
+| 5 | `[11, 12, 22, 25, 34, 64, 90]` | 1 |
+| 6 | `[11, 12, 22, 25, 34, 64, 90]` | 0 → ya está ordenada, corta acá |
+
 **Análisis:** peor caso (lista al revés) y caso promedio hacen `n(n-1)/2` comparaciones → **O(n²)**. El mejor caso (ya ordenada), en esta versión, también da todas las vueltas igual → sigue siendo O(n²), aunque no haga ningún intercambio.
 
 > [!important] La optimización que cambia todo: cortar cuando ya está ordenada
@@ -83,6 +109,35 @@ def seleccion(lista):
     return a
 ```
 
+### Paso a paso: cómo se encuentra el mínimo, y los pasos completos
+
+Sobre la misma lista `[64, 34, 25, 12, 22, 11, 90]`, así se encuentra el mínimo en el **primer** paso — recorriendo todo, quedándose siempre con el candidato más chico visto hasta el momento (verificado en este entorno):
+
+| Se compara contra | Valor | ¿Mejora al mínimo actual? | Mínimo actual tras esta comparación |
+|---|---:|:---:|---:|
+| (candidato inicial) | 64 | — | 64 |
+| 34 | 34 | Sí | 34 |
+| 25 | 25 | Sí | 25 |
+| 12 | 12 | Sí | 12 |
+| 22 | 22 | No (22 > 12) | 12 |
+| 11 | 11 | Sí | 11 |
+| 90 | 90 | No (90 > 11) | 11 |
+
+El mínimo de toda la lista es **11**, y recién se lo confirma después de comparar contra **todos** los demás elementos — a diferencia de la burbuja, acá no hay forma de "cortar antes": hay que revisar el resto completo para estar seguro.
+
+Los 6 pasos completos, cada uno intercambiando el mínimo encontrado con la posición que le corresponde:
+
+| Paso | Mínimo encontrado | Posición original del mínimo | Lista después del intercambio |
+|---:|---:|---:|---|
+| 1 | 11 | 5 | `[11, 34, 25, 12, 22, 64, 90]` |
+| 2 | 12 | 3 | `[11, 12, 25, 34, 22, 64, 90]` |
+| 3 | 22 | 4 | `[11, 12, 22, 34, 25, 64, 90]` |
+| 4 | 25 | 4 | `[11, 12, 22, 25, 34, 64, 90]` |
+| 5 | 34 | 4 | `[11, 12, 22, 25, 34, 64, 90]` |
+| 6 | 64 | 5 | `[11, 12, 22, 25, 34, 64, 90]` |
+
+Fijate que los pasos 4 y 5 "intercambian" un elemento consigo mismo (ya estaba en su lugar) — el algoritmo no tiene forma de saberlo de antemano, así que igual busca el mínimo en todo el resto. Es la contracara exacta de la propiedad de "insensible al orden de entrada": no hay atajo posible, encuentre o no algo para mover.
+
 **Análisis:** siempre hace `n(n-1)/2` comparaciones, **sin importar el orden de entrada** — peor caso, promedio y mejor caso son los tres O(n²). No admite la optimización de "cortar antes" que sí tiene la burbuja.
 
 > [!important] Dos propiedades que la distinguen, aunque comparta la misma Big O que las otras
@@ -105,6 +160,21 @@ def insercion(lista):
         a[j + 1] = actual
     return a
 ```
+
+### Paso a paso
+
+Sobre la misma lista `[64, 34, 25, 12, 22, 11, 90]`, insertando un elemento a la vez en la parte ya ordenada (verificado en este entorno):
+
+| Elemento a insertar | Corrimientos necesarios | Posición final | Lista después de este paso |
+|---:|---:|---:|---|
+| 34 | 1 | 0 | `[34, 64, 25, 12, 22, 11, 90]` |
+| 25 | 2 | 0 | `[25, 34, 64, 12, 22, 11, 90]` |
+| 12 | 3 | 0 | `[12, 25, 34, 64, 22, 11, 90]` |
+| 22 | 3 | 1 | `[12, 22, 25, 34, 64, 11, 90]` |
+| 11 | 5 | 0 | `[11, 12, 22, 25, 34, 64, 90]` |
+| 90 | 0 | 6 | `[11, 12, 22, 25, 34, 64, 90]` |
+
+La parte ya ordenada (a la izquierda) crece de a uno en cada paso. En el último renglón, al llegar el 90, no hace falta correr **nada** — ya es más grande que todo lo que está a su izquierda. En el anteúltimo, el 11 tiene que correrse **5 posiciones** hasta el principio, porque es más chico que todos los que ya estaban ordenados. Esa diferencia enorme entre "0 corrimientos" y "5 corrimientos" según el valor es, exactamente, lo que hace que insertion sort sea rápido en datos casi ordenados y lento en datos al revés.
 
 **Análisis:** peor caso (al revés) → **O(n²)**; caso promedio → **O(n²)**; mejor caso (ya ordenada, el `while` nunca entra) → **O(n)**. La cifra exacta ya está desarrollada en [[notación Big O y familias de complejidad]]: mejor caso $n-1$ comparaciones, promedio $\sim n^2/4$, peor caso $\sim n^2/2$.
 
