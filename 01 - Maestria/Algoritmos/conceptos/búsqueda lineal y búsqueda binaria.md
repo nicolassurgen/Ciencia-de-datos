@@ -78,18 +78,18 @@ def busqueda_binaria(lista, objetivo):
 
 Buscar el **91** en `[3, 12, 27, 45, 56, 78, 91]` (ordenada), verificado en este entorno:
 
-| Paso | izq | der | medio | Valor en el medio | Decisión |
-|---:|---:|---:|---:|---:|---|
-| 1 | 0 | 6 | 3 | 45 | 45 < 91 → descarto la mitad **izquierda** |
-| 2 | 4 | 6 | 5 | 78 | 78 < 91 → descarto la mitad **izquierda** de nuevo |
-| 3 | 6 | 6 | 6 | **91** | **Encontrado** |
+| Paso | Candidatos que quedan | izq | der | medio | Valor en el medio | Decisión |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `[3, 12, 27, 45, 56, 78, 91]` | 0 | 6 | 3 | 45 | 45 < 91 → descarto la mitad **izquierda** |
+| 2 | `[56, 78, 91]` | 4 | 6 | 5 | 78 | 78 < 91 → descarto la mitad **izquierda** de nuevo |
+| 3 | `[91]` | 6 | 6 | 6 | **91** | **Encontrado** |
 
-Tres pasos, contra los cinco que necesitó la búsqueda lineal para el mismo valor. Fijate el patrón: en cada paso, el rango `[izq, der]` se **reduce a la mitad** — de 7 candidatos posibles a 3, de 3 a 1. Para ver también el sentido opuesto de descarte, buscar el **12** en la misma lista:
+Tres pasos, contra los cinco que necesitó la búsqueda lineal para el mismo valor. Mirá la columna "candidatos que quedan": arranca con los 7 elementos originales, en el paso 2 ya quedaron solo 3 (`[56, 78, 91]` — todo lo que era menor a 45 se descartó de un saque, sin mirarlo), y en el paso 3 queda uno solo. `izq` y `der` son simplemente los índices que **delimitan** ese grupo de candidatos que todavía sigue en carrera — no hace falta copiar de verdad ese pedazo de la lista, con guardar dos números (dónde empieza y dónde termina) alcanza. Para ver también el sentido opuesto de descarte, buscar el **12** en la misma lista:
 
-| Paso | izq | der | medio | Valor en el medio | Decisión |
-|---:|---:|---:|---:|---:|---|
-| 1 | 0 | 6 | 3 | 45 | 45 > 12 → descarto la mitad **derecha** |
-| 2 | 0 | 2 | 1 | **12** | **Encontrado** |
+| Paso | Candidatos que quedan | izq | der | medio | Valor en el medio | Decisión |
+|---:|---|---:|---:|---:|---:|---|
+| 1 | `[3, 12, 27, 45, 56, 78, 91]` | 0 | 6 | 3 | 45 | 45 > 12 → descarto la mitad **derecha** |
+| 2 | `[3, 12, 27]` | 0 | 2 | 1 | **12** | **Encontrado** |
 
 ### Por qué es logarítmica
 

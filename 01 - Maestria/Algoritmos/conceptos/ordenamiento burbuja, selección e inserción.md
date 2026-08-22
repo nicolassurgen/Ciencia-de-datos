@@ -125,7 +125,18 @@ Sobre la misma lista `[64, 34, 25, 12, 22, 11, 90]`, así se encuentra el mínim
 
 El mínimo de toda la lista es **11**, y recién se lo confirma después de comparar contra **todos** los demás elementos — a diferencia de la burbuja, acá no hay forma de "cortar antes": hay que revisar el resto completo para estar seguro.
 
-Los 6 pasos completos, cada uno intercambiando el mínimo encontrado con la posición que le corresponde:
+Tras ese intercambio, la lista queda `[11, 34, 25, 12, 22, 64, 90]` — el 11 ya en su lugar (posición 0), y el resto (posiciones 1 a 6) todavía sin tocar. El **paso 2** repite exactamente el mismo mecanismo, pero ahora buscando el mínimo solamente entre lo que queda:
+
+| Se compara contra | Valor | ¿Mejora al mínimo actual? | Mínimo actual tras esta comparación |
+|---|---:|:---:|---:|
+| (candidato inicial, posición 1) | 34 | — | 34 |
+| 25 | 25 | Sí | 25 |
+| 12 | 12 | Sí | 12 |
+| 22 | 22 | No (22 > 12) | 12 |
+| 64 | 64 | No (64 > 12) | 12 |
+| 90 | 90 | No (90 > 12) | 12 |
+
+El mínimo de lo que quedaba es **12**, en la posición 3 — se lo intercambia con la posición 1 (la primera todavía sin resolver), y la lista pasa a `[11, 12, 25, 34, 22, 64, 90]`. Este mismo procedimiento —recorrer todo lo que falta, quedarse con el más chico, intercambiarlo al frente— se repite, cada vez sobre una porción más chica de la lista, hasta terminar. Los 6 pasos completos, con el resultado de cada uno:
 
 | Paso | Mínimo encontrado | Posición original del mínimo | Lista después del intercambio |
 |---:|---:|---:|---|
@@ -173,6 +184,17 @@ Sobre la misma lista `[64, 34, 25, 12, 22, 11, 90]`, insertando un elemento a la
 | 22 | 3 | 1 | `[12, 22, 25, 34, 64, 11, 90]` |
 | 11 | 5 | 0 | `[11, 12, 22, 25, 34, 64, 90]` |
 | 90 | 0 | 6 | `[11, 12, 22, 25, 34, 64, 90]` |
+
+¿De dónde salen exactamente esos "3 corrimientos" al insertar el 22? Es la parte que la tabla resume en un número — acá está desarmada, comparación por comparación. Justo antes de este paso, la lista es `[12, 25, 34, 64, 22, 11, 90]` (ya se insertaron 34, 25 y 12; el 22 todavía está en su posición original, la 4):
+
+| Comparación | ¿El vecino de la izquierda es mayor que 22? | Acción |
+|---:|---|---|
+| 1 | ¿64 > 22? Sí | Corro el 64 una posición a la derecha |
+| 2 | ¿34 > 22? Sí | Corro el 34 una posición a la derecha |
+| 3 | ¿25 > 22? Sí | Corro el 25 una posición a la derecha |
+| 4 | ¿12 > 22? **No** | Paro acá: el 22 va justo después del 12 |
+
+Tres corrimientos (64, 34 y 25 se movieron un lugar cada uno) y una cuarta comparación que no corrió nada, pero fue la que le indicó al algoritmo dónde parar. El resultado es `[12, 22, 25, 34, 64, 11, 90]` — exactamente la fila de la tabla de arriba. Es el mismo mecanismo del `while` del código: "mientras el vecino de la izquierda sea mayor, corrélo y seguí mirando más a la izquierda".
 
 La parte ya ordenada (a la izquierda) crece de a uno en cada paso. En el último renglón, al llegar el 90, no hace falta correr **nada** — ya es más grande que todo lo que está a su izquierda. En el anteúltimo, el 11 tiene que correrse **5 posiciones** hasta el principio, porque es más chico que todos los que ya estaban ordenados. Esa diferencia enorme entre "0 corrimientos" y "5 corrimientos" según el valor es, exactamente, lo que hace que insertion sort sea rápido en datos casi ordenados y lento en datos al revés.
 
