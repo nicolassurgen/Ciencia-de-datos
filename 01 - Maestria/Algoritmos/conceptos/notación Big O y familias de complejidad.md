@@ -122,4 +122,8 @@ El mismo intercambio aparece en cualquier tabla precalculada (un índice de base
 - [[grafos y recorridos (DFS, BFS)]]
 - [[recursion y memoizacion]]
 - [[hashing y hashabilidad]]
+- [[búsqueda lineal y búsqueda binaria]]
+- [[ordenamiento burbuja, selección e inserción]]
+- [[estabilidad de un ordenamiento]]
 - [[02 - Programacion imperativa]]
+- [[04 - Busqueda y ordenamiento]]

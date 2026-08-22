@@ -195,6 +195,9 @@ print(palabras)   # ['kiwi', 'banana', 'frutilla']
 
 `lambda p: len(p)` es equivalente a `def f(p): return len(p)`, pero sin nombre y en una sola expresión — no admite `if`/`for` completos ni varias líneas, solo una expresión que se evalúa y se devuelve. *Fuente: [[Python-for-Data-Analysis]], cap. 3.*
 
+> [!info] Desarrollo completo de este patrón
+> El uso de `lambda` como `key` de `sorted()` —incluyendo orden descendente, criterios múltiples con tuplas y por qué depende de la estabilidad del ordenamiento— tiene nota propia en [[ordenar con key, lambda y criterios múltiples]].
+
 ## Puente con Estadística
 
 `resumen_por(registros, clave_grupo, clave_valor)` — una función que agrupa y agrega, escrita a mano con diccionarios y el patrón acumulador de [[bucles for, while y el patron acumulador]] — es exactamente lo que hace un `group by`: la misma pregunta ("¿cómo varía esta medida entre grupos?") que estructura buena parte de [[02 - El estudio de la variabilidad]]. En Pandas, la misma idea es `df.groupby(...)` (ver [[06 - Agregacion y groupby]]); acá se ve qué hace por dentro.

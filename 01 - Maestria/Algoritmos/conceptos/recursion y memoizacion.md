@@ -207,6 +207,7 @@ Por qué el bucle suele ganar en velocidad, más allá de no consumir pila: cada
 La memoización es el mismo principio de fondo que hace útil el *caching* ("guardar en caché": conservar un resultado ya calculado a mano, en vez de rehacer el cálculo) en librerías de cómputo — por ejemplo, resultados intermedios que scikit-learn o statsmodels evitan recalcular. Y el diagnóstico "el código elegante no es necesariamente el eficiente" es la razón exacta por la que existe NumPy: comparar `fibonacci` (recursión directa) contra `fibonacci_memo` es, en miniatura, la misma comparación que un bucle en Python puro contra una operación vectorizada — ver [[complejidad O(1) vs O(n)]].
 
 ## Relacionado
+- [[búsqueda lineal y búsqueda binaria]]
 - [[02 - Programacion imperativa]]
 - [[funciones, parametros y alcance]]
 - [[complejidad O(1) vs O(n)]]
