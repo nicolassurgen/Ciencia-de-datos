@@ -196,14 +196,27 @@ posicion = bisect.bisect_left(masas, 4000)   # primera posición donde podría i
 > [!tip] La primera aparición de un valor repetido
 > La búsqueda binaria básica encuentra **una** posición donde está el valor, pero si hay repetidos no garantiza que sea la primera. La forma de resolverlo sin perder la complejidad O(log n): cuando se encuentra una coincidencia, no cortar — guardar esa posición como la mejor candidata hasta ahora y seguir buscando en la mitad **izquierda**, por si hay una coincidencia todavía más temprana. Es exactamente lo que hace `bisect.bisect_left` internamente.
 
-## Cuándo usar cada una
+## Cómo elegir en un caso concreto
+
+No es una elección de gusto — cada pregunta de abajo, respondida en orden, lleva casi sola a la respuesta correcta.
+
+> [!question] 1. ¿Los datos están ordenados, o se puede pagar el costo de ordenarlos?
+> **No, y no vale la pena ordenarlos** (se van a usar una sola vez, o cambian todo el tiempo) → **búsqueda lineal**, sin dar más vueltas. No hay otra opción posible sin ordenar primero.
+>
+> **Sí** (ya vienen ordenados, o se los va a consultar muchas veces y ordenar una vez se amortiza — ver la Sección 1.3 de [[04 - Busqueda y ordenamiento]]) → seguir a la pregunta 2.
+
+> [!question] 2. ¿Se puede acceder directamente a "el elemento del medio" sin recorrer nada?
+> Esto es automático en una lista de Python (`lista[medio]` es instantáneo, O(1)), pero **no** en una lista enlazada, donde llegar al medio exige recorrerla desde el principio. Si la estructura no da acceso directo por posición → **búsqueda lineal**, aunque los datos estén ordenados (la binaria no tiene forma de "saltar" al medio sin ese acceso). Si sí lo da (el caso normal trabajando con listas o arrays) → **búsqueda binaria**.
 
 | | Búsqueda lineal | Búsqueda binaria |
 |---|---|---|
-| Requisito | Ninguno | Datos ordenados |
+| Requisito | Ninguno | Datos ordenados + acceso directo por posición |
 | Complejidad | O(n) | O(log n) |
-| Funciona sobre listas enlazadas | Sí | No (necesita acceso directo a una posición) |
-| Conviene cuando | Se busca una sola vez, o los datos cambian todo el tiempo | Se busca muchas veces sobre los mismos datos |
+| Funciona sobre listas enlazadas | Sí | No |
+| Conviene cuando | Se busca una sola vez, o los datos cambian todo el tiempo | Se busca muchas veces sobre los mismos datos ya ordenados |
+
+> [!tip] En la práctica, casi nunca hay que decidir a mano
+> Si los datos ya están en una lista de Python ordenada, la decisión ya está tomada por la biblioteca estándar: usar `bisect.bisect_left()` (ver la sección de arriba) en vez de escribir cualquiera de las dos funciones a mano. La pregunta real del día a día no es "¿cuál implemento?" sino "¿me conviene ordenar esta lista antes de buscar en ella?" — y esa es exactamente la cuenta de la Sección 1.3 de [[04 - Busqueda y ordenamiento]].
 
 ## Relacionado
 - [[04 - Busqueda y ordenamiento]]

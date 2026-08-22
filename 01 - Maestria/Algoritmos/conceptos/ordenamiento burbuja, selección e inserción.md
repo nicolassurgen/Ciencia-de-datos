@@ -301,6 +301,32 @@ Tres preguntas para fijar la diferencia:
 > [!tip] Misma Big O, comportamiento distinto — la lección de fondo
 > Los tres son O(n²) en el peor caso, y sin embargo, medido en este entorno sobre datos reales (ver [[04 - Busqueda y ordenamiento]]), se comportan de forma muy distinta según cómo vengan los datos: la selección tarda igual siempre, la inserción y la burbuja optimizada son casi instantáneas con datos ya ordenados. **La notación Big O describe el crecimiento en el peor caso, no todos los matices del comportamiento real** — dos algoritmos con la misma Big O pueden ser muy distintos en la práctica.
 
+## Cómo elegir entre los tres, en un caso concreto
+
+Suponiendo que hubiera que elegir uno de los tres elementales para implementar a mano (algo que en un trabajo real casi nunca hace falta — ver el cierre de esta sección), estas son las preguntas que deciden cuál:
+
+> [!question] 1. ¿Cuánto "desorden" real tienen los datos?
+> **Ya vienen ordenados, o casi** (una tabla que se actualiza agregando filas al final, un archivo con pocas correcciones tardías) → **inserción**. Es la única de las tres que se adapta al desorden real de los datos en vez de tratarlos siempre como si fueran aleatorios — ver [[04.1 - Casos aplicados|el Caso 3, verificado con inversiones]].
+>
+> **Completamente al azar, o no se sabe** → seguir a la pregunta 2.
+
+> [!question] 2. ¿Mover (copiar/escribir) cada elemento es costoso?
+> Esto importa cuando cada "elemento" no es un número suelto sino algo pesado de mover — un registro grande, una fila que hay que reescribir en disco. **Si mover es caro** → **selección**: es la única que garantiza como máximo `n − 1` movimientos totales, sin importar el desorden de entrada (ver [[04.1 - Casos aplicados|el Caso 4, verificado]]). **Si mover es barato** (números, referencias) → seguir a la pregunta 3.
+
+> [!question] 3. ¿Hace falta que el ordenamiento sea estable?
+> Si más adelante se va a ordenar por más de un criterio, en pasadas separadas (ver [[estabilidad de un ordenamiento]]) → **burbuja o inserción** (ambas estables), nunca selección (no lo es). Entre esas dos, inserción vuelve a ganar salvo que se sepa de antemano que los datos vienen muy desordenados y son chicos, donde la diferencia práctica es mínima.
+
+| Escenario | Elegir |
+|---|---|
+| Datos ya casi ordenados | **Inserción** |
+| Mover cada elemento es costoso | **Selección** |
+| Se necesita estabilidad, sin saber el desorden de antemano | **Inserción** (o burbuja) |
+| Lista chica (unos pocos elementos), cualquier orden | Cualquiera — la diferencia de milisegundos no importa |
+| Cualquier caso real, en un programa que no es de aprendizaje | **Ninguno de los tres** — usar `sorted()`/`.sort()` |
+
+> [!important] La respuesta que casi siempre es correcta en la práctica
+> Estas tres preguntas sirven para **entender** el criterio de diseño detrás de cada algoritmo — no para decidir qué usar en un programa real. Timsort (desarrollado abajo) ya incorpora lo mejor de burbuja/inserción (rápido en datos parcialmente ordenados) con una garantía de peor caso muchísimo mejor que las tres (O(n log n) en vez de O(n²)). La única razón real para implementar alguno de los tres a mano es aprender cómo funciona un ordenamiento por dentro — la misma idea que cierra esta nota.
+
 ## El ordenamiento real: Timsort
 
 Ninguno de los tres elementales es lo que usa Python. `sorted()` y `list.sort()` corren **Timsort**, diseñado por Tim Peters en 2002 para CPython — hoy también lo usan Java, Android, Swift y V8.
